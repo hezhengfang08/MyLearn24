@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MySelf.QOSM.Common\MySelf.QOSM.Common.csproj" />
+    <ProjectReference Include="..\MySelf.QOSM.IServices\MySelf.QOSM.IServices.csproj" />
+    <ProjectReference Include="..\MySelf.QOSM.Models\MySelf.QOSM.Models.csproj" />
+  </ItemGroup>
+
+</Project>

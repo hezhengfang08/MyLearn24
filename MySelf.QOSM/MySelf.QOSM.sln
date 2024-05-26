@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34902.65
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.QOSM.QuickOrderAPP", "MySelf.QOSM.QuickOrderAPP\MySelf.QOSM.QuickOrderAPP.csproj", "{71C96C05-E38B-475F-98C2-B6C68AD575DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.QOSM.Common", "MySelf.QOSM.Common\MySelf.QOSM.Common.csproj", "{DA90F505-87F8-42AB-A381-DF525E201F0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.QOSM.BLLFactory", "MySelf.QOSM.BLLFactory\MySelf.QOSM.BLLFactory.csproj", "{75435406-4478-45F4-9FC1-690C847B3AC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.QOSM.Models", "MySelf.QOSM.Models\MySelf.QOSM.Models.csproj", "{98360139-A714-4746-B0B6-C37E2666E117}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.QOSM.IServices", "MySelf.QOSM.IServices\MySelf.QOSM.IServices.csproj", "{6CCE1518-79BD-4FEF-B665-FDEEB029F813}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.QOSM.Services", "MySelf.QOSM.Services\MySelf.QOSM.Services.csproj", "{B8917FFD-68D4-4D56-A90D-BBCBD5E513EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{71C96C05-E38B-475F-98C2-B6C68AD575DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71C96C05-E38B-475F-98C2-B6C68AD575DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71C96C05-E38B-475F-98C2-B6C68AD575DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71C96C05-E38B-475F-98C2-B6C68AD575DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA90F505-87F8-42AB-A381-DF525E201F0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA90F505-87F8-42AB-A381-DF525E201F0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA90F505-87F8-42AB-A381-DF525E201F0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA90F505-87F8-42AB-A381-DF525E201F0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75435406-4478-45F4-9FC1-690C847B3AC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75435406-4478-45F4-9FC1-690C847B3AC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75435406-4478-45F4-9FC1-690C847B3AC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75435406-4478-45F4-9FC1-690C847B3AC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98360139-A714-4746-B0B6-C37E2666E117}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98360139-A714-4746-B0B6-C37E2666E117}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98360139-A714-4746-B0B6-C37E2666E117}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98360139-A714-4746-B0B6-C37E2666E117}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CCE1518-79BD-4FEF-B665-FDEEB029F813}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CCE1518-79BD-4FEF-B665-FDEEB029F813}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CCE1518-79BD-4FEF-B665-FDEEB029F813}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CCE1518-79BD-4FEF-B665-FDEEB029F813}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8917FFD-68D4-4D56-A90D-BBCBD5E513EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8917FFD-68D4-4D56-A90D-BBCBD5E513EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8917FFD-68D4-4D56-A90D-BBCBD5E513EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8917FFD-68D4-4D56-A90D-BBCBD5E513EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7B05CC8E-7A13-4B6D-BAFE-AAB2FCE8CF0F}
+	EndGlobalSection
+EndGlobal
