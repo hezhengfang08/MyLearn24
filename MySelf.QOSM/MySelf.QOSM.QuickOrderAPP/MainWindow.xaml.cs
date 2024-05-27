@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using MySelf.QOSM.Common;
+using MySelf.QOSM.Models.Context;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -18,6 +21,7 @@ namespace MySelf.QOSM.QuickOrderAPP
     {
         public MainWindow()
         {
+             var settings = ConfigHelper.GetAppSettings<AppSettings>("AppSettings");
             InitializeComponent();
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MySelf.QOSM.Common;
 using MySelf.QOSM.Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -36,9 +37,10 @@ namespace MySelf.QOSM.Models.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            var settings = ConfigHelper.GetAppSettings<AppSettings>("AppSettings");
             if (!optionsBuilder.IsConfigured)
             {
-                string connStr = "Data Source=.;Initial Catalog=QuickOrderSystem;User ID=sa;Password=hzf0804.";
+                string connStr = settings.SqlServerConnection;
                 optionsBuilder.UseSqlServer(connStr);
             }
         }
