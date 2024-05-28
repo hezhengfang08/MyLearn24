@@ -17,11 +17,11 @@ namespace MySelf.QOSM.QuickOrderAPP
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class QuickOrderingMain : Window
     {
-        public MainWindow()
+        public QuickOrderingMain()
         {
-             var settings = ConfigHelper.GetAppSettings<AppSettings>("AppSettings");
+            
             InitializeComponent();
         }
     }

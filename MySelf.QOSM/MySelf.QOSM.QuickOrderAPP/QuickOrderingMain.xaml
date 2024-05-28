@@ -1,0 +1,92 @@
+﻿<Window x:Class="MySelf.QOSM.QuickOrderAPP.QuickOrderingMain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:utils="clr-namespace:MySelf.QOSM.QuickOrderAPP.Utils" 
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+xmlns:local="clr-namespace:MySelf.QOSM.QuickOrderAPP"
+        mc:Ignorable="d"
+        Title="快捷点餐管理系统" Height="600" Width="1000" Name="mainWindow" WindowState="{Binding WinState}" Style="{StaticResource noneBorderyWindowStyle}">
+    <Window.Resources>
+        <utils:FalseConverter x:Key="falseConverter" />
+        <utils:TrueConverter x:Key="trueConverter" />
+    </Window.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Load">
+            <i:InvokeCommandAction Command="{Binding SetWindowSizeCmd}" CommandParameter="{Binding ElementName=mainWindow, Path=Content}" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="StateChange">
+            <i:InvokeCommandAction Command="{Binding ChangeIconBlinkCmd}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Border Style="{StaticResource windowBorderStyle}">
+        <DockPanel>
+            <Grid DockPanel.Dock="Top" Height="60" Background="#996423">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding MoveWindowCmd}" CommandParameter="{Binding ElementName=mainWindow}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <Image Source="imgs/logo.png" Width="25" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0"/>
+                <TextBlock Text="点餐系统" Style="{StaticResource TextBlockTitleBold}" Foreground="{StaticResource DarkDefaultBrush}" HorizontalAlignment="Left" Margin="80,0">
+                </TextBlock>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,100,5" Visibility="{Binding ShowWelcome}">
+                    <TextBlock Text="{Binding LoginName}" Style="{StaticResource TextBlockSubTitle}" Foreground="{StaticResource WarningBrush}" />
+                    <TextBlock Text="欢迎使用点餐系统！" Style="{StaticResource TextBlockSubTitle}" Foreground="White"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,5" Visibility="{Binding ShowWelcome}">
+                    <Button Style="{StaticResource ButtonCustom}" Width="20" Height="20" hc:BackgroundSwitchElement.MouseHoverBackground="#996423"
+                            Command="{Binding ShowCustLoginBtn}">
+                        <Image Source="imgs/cust_denglu.png"/>
+                    </Button>
+                    <Button Style="{StaticResource ButtonCustom}" Width="20" Height="20" hc:BackgroundSwitchElement.MouseHoverBackground="#996423"
+         Command="{Binding ShowAdminLoginBtn}">
+                        <Image Source="imgs/denglu.png"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+            <Grid DockPanel.Dock="left" Width="60" Background="White" >
+                <ListBox ItemsSource="{Binding NavName}" ItemTemplate="{DynamicResource leftItemTemplate}" ItemContainerStyle="{DynamicResource mainMenuItemStyle}"
+                         Background="Transparent" SelectionMode="Single" SelectedItem="{Binding SelectMenu}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window},Path=DataContext.SelectItemCmd}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+            </Grid>
+            <Grid Background="WhiteSmoke">
+                <CheckBox x:Name="chkShow" Visibility="Collapsed" IsChecked="{Binding isShowManage}" />
+                <Border BorderBrush="{StaticResource BorderBrush}" BorderThickness="0" Margin="5">
+                    <Grid>
+                        <!--用户控件ManagePage  呈现子页部分-->
+                        <!--<ucontrols:ManagePage Visibility="{Binding Source={x:Reference chkShow},Path=IsChecked,Converter={StaticResource falseConverter}}" DataContext="{Binding CurrentPageObj}"/>-->
+                        <!--Frame 子页导航呈现-->
+                        <Frame Source="{Binding CurrentPageURL}" NavigationUIVisibility="Hidden" Visibility="{Binding Source={x:Reference chkShow},Path=IsChecked,Converter={StaticResource trueConverter}}" BorderThickness="0"/>
+                    </Grid>
+                </Border>
+                <!--显示提示信息区域-->
+                <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                    <StackPanel  VerticalAlignment="Bottom">
+                        <StackPanel Margin="5" hc:Growl.GrowlParent="True"></StackPanel>
+                        <StackPanel Margin="10" hc:Growl.GrowlParent="True" hc:Growl.Token="SucMes"></StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+                <hc:NotifyIcon Name="foodIcon" Text="快捷点餐系统" IsBlink="{Binding IconBlink}" Visibility="Visible" Icon="/MySelf.QOSM.QuickOrderAPP;component/imgs/logo.png" >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding IconClickCmd}" CommandParameter="{Binding ElementName=mainWindow}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </hc:NotifyIcon>
+            </Grid>
+        </DockPanel>
+    </Border>
+</Window>
