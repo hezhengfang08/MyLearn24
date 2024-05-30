@@ -35,7 +35,7 @@ namespace MySelf.QOSM.QuickOrderAPP.Utils
             registerT.Add(key, type);   
             }
         }
-        public static  void ShowWindow(string key, string objVM, bool isDialog)
+        public static  void ShowWindow(string key, object objVM, bool isDialog)
         {
             if(!registerT.ContainsKey(key))
             {

@@ -34,7 +34,6 @@
     <Folder Include="Food\" />
     <Folder Include="Order\" />
     <Folder Include="Stat\" />
-    <Folder Include="ViewModels\" />
     <Folder Include="UControls\" />
     <Folder Include="SM\" />
     <Folder Include="Center\" />
