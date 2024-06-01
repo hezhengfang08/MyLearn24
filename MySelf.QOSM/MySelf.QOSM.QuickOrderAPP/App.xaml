@@ -8,8 +8,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml" />
-
                 <ResourceDictionary Source="/res/common_res.xaml" />
+                <ResourceDictionary Source="/res/main_res.xaml" />
+                <ResourceDictionary Source="/res/login_res.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

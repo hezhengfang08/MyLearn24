@@ -16,5 +16,6 @@ namespace MySelf.QOSM.Models.Entities
         public DateTime CreateTime { get; set; }
         public bool UserState { get; set; }
         public bool IsDeleted { get; set; }
+        public RoleInfo Role { get; set; }
     }
 }

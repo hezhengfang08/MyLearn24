@@ -1,0 +1,72 @@
+﻿<Window x:Class="MySelf.QOSM.QuickOrderAPP.CustomerLoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:utils="clr-namespace:MySelf.QOSM.QuickOrderAPP.Utils"
+        xmlns:local="clr-namespace:MySelf.QOSM.QuickOrderAPP"
+        mc:Ignorable="d"
+        Title="客户登录窗口" Height="470" Width="700" Style="{StaticResource noneBorderyWindowStyle}" WindowStartupLocation="CenterScreen" Name="custLoginWindow">
+
+    <Border Style="{StaticResource windowBorderStyle}">
+        <Border.Background>
+            <ImageBrush ImageSource="imgs/cust_login_bg.jpg"/>
+        </Border.Background>
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="MouseLeftButtonDown">
+                <i:InvokeCommandAction Command="{Binding MoveWindowCmd}" CommandParameter="{Binding ElementName=custLoginWindow}"/>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+        <DockPanel >
+            <Grid DockPanel.Dock="Top">
+                <StackPanel Margin="10">
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,5,3">
+                        <Button Content="0" Style="{StaticResource controlBtnStyle}" Command="{Binding MinWindowCmd}" CommandParameter="{Binding ElementName=custLoginWindow}"/>
+                        <Button Content="r" Style="{StaticResource controlBtnStyle}" Command="{Binding CloseWindowCmd}" CommandParameter="{Binding ElementName=custLoginWindow}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <Grid>
+                <Border Margin="40,20,40,50" Background="#66FFFFFF" CornerRadius="15">
+                    <StackPanel Margin="10">
+                        <TextBlock Text="快捷点餐用户登录" Style="{StaticResource loginTitleStyle}"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
+                            <TextBlock Text="账号" Style="{StaticResource TextBlockDefaultBold}" Foreground="White"/>
+                            <hc:TextBox Text="{Binding CustomerNo,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="400" HorizontalAlignment="Center"
+                                        Margin="15,8" Style="{StaticResource TextBoxExtend}" hc:InfoElement.Placeholder="请输入账号" hc:BorderElement.CornerRadius="15"
+                                        Padding="20,0">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="TextChanged" >
+                                        <i:InvokeCommandAction Command="{Binding CheckIsLogin}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </hc:TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
+                            <TextBlock Text="秘密" Style="{StaticResource TextBlockDefaultBold}" Foreground="White"/>
+                            <PasswordBox utils:PasswordBoxHelper.Password="{Binding CustomerPwd,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="400" HorizontalAlignment="Center"
+                Margin="15,8" Style="{StaticResource PasswordBoxExtend}" hc:InfoElement.Placeholder="请输入秘密" hc:BorderElement.CornerRadius="15"
+                Padding="20,0">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PasswordChanged" >
+                                        <i:InvokeCommandAction Command="{Binding CheckIsLogin}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <i:Interaction.Behaviors>
+                                    <utils:PasswordBoxBehavior/>
+                                </i:Interaction.Behaviors>
+                            </PasswordBox>
+                        </StackPanel>
+                        <TextBlock Text="{Binding ErrorMsg}" Foreground="red" HorizontalAlignment="Left" Margin="70,0" Visibility="{Binding ShowErrorMsg}"/>
+                        <Button Content="登录" Style="{StaticResource loginBtnStyle}" Command="{Binding CustLoginCmd}" CommandParameter="{Binding ElementName=custLoginWindow}"/>
+                        <Button Content="用户注册" HorizontalAlignment="Right" Margin="0,10,10,5" FontSize="12" FontWeight="Bold" Background="Transparent" Foreground="White" BorderThickness="0" Command="{Binding ShowRegisterCmd}"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </DockPanel>
+
+    </Border>
+</Window>

@@ -1,0 +1,45 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:hc="https://handyorg.github.io/handycontrol">
+
+   <!--登录页标题样式-->
+    <Style TargetType="TextBlock" x:Key="loginTitleStyle" BasedOn="{StaticResource TextBlockLargeBold}">
+        <Setter Property="Foreground" Value="white"/>
+        <Setter Property="FontSize" Value="48"/>
+        <Setter Property="Margin" Value="0,15"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect ShadowDepth="4" Direction="315" Color="Gray"/>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+    <!--登录按钮样式-->
+    <Style TargetType="Button" x:Key="loginBtnStyle" BasedOn="{StaticResource ButtonDefault}">
+        <Setter Property="Width" Value="150"/>
+        <Setter Property="Height" Value="45"/>
+        <Setter Property="Foreground"  Value="White"/>
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Margin" Value="0,10"/>
+        <Setter Property="Background" Value="#FF955D23"/>
+        <Setter Property="hc:BorderElement.CornerRadius" Value="8"/>
+        <Setter Property="BorderThickness" Value="0"/>
+
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFB1773D" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <!--后台登录按钮-->
+    <Style x:Key="adminLoginBtnStyle" TargetType="Button" BasedOn="{StaticResource loginBtnStyle}">
+        <Setter Property="Background" Value="#FFA40000"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFAC2424" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

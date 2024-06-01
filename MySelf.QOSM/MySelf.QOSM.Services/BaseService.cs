@@ -40,10 +40,32 @@ namespace MySelf.QOSM.Services
                 //dbContext.Remove(t);
             }
         }
+        public void DetachList<T>(List<T> list) where T : class
+        {
+            if (dbContext.Entry(list[0]).State != EntityState.Detached)
+            {
+                foreach (var t in list)
+                {
+                    Detach(t);
+                }
+            }
+        }
         public void DeleteById<T>(long id) where T : class
         {
             T t = Find<T>(id);
             if (t == null) { throw new Exception($"{t} is null"); }
+            dbContext.Set<T>().Remove(t);
+            Commit();
+        }
+
+        public void Delete<T>(T t) where T: class
+        {
+            if(t==null)
+            {
+                throw new Exception($"{t} is null");
+               
+            }
+            dbContext.Set<T>().Attach(t);
             dbContext.Set<T>().Remove(t);
             Commit();
         }

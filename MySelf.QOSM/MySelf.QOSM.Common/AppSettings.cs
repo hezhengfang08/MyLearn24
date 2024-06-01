@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MySelf.QOSM.Models.Context
+namespace MySelf.QOSM.Common
 {
     public class AppSettings
     {
         public string SqlServerConnection { get; set; }
+        public string ResetPwd { get; set; } = "123456";
     }
 }

@@ -17,6 +17,8 @@ namespace MySelf.QOSM.Models.Entities
         public string Address { get; set; } = null!;
         public bool? CustomerState { get; set; }
         public DateTime CreateTime { get; set; }
+        public DateTime? LogInTime { get; set; }
+        public bool IsLogin { get; set; }
         public DateTime? LogOffTime { get; set; }
         public bool IsDeleted { get; set; }
     }
