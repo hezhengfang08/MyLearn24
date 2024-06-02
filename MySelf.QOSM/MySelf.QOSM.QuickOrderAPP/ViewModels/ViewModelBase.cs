@@ -66,9 +66,9 @@ namespace MySelf.QOSM.QuickOrderAPP.ViewModels
         {
             HandyControl.Controls.MessageBox.Error(msg, title);
         }
-        public void ShowQuestion(string msg, string title = "询问提示", MessageBoxButton button = MessageBoxButton.OKCancel)
+        public MessageBoxResult ShowQuestion(string msg, string title = "询问提示", MessageBoxButton button = MessageBoxButton.OKCancel)
         {
-            HandyControl.Controls.MessageBox.Ask(msg, title);
+            return HandyControl.Controls.MessageBox.Ask(msg, title);
 
         }
         public ICommand MinWindowCmd { get; set; }

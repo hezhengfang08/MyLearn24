@@ -1,23 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MySelf.QOSM.IServices;
-using MySelf.QOSM.Models.Entities;
-using MySelf.QOSM.Models.UIModels;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MySelf.QOSM.IServices;
+using MySelf.QOSM.Models.Entities;
+using MySelf.QOSM.Models.UIModels;
 
 namespace MySelf.QOSM.Services
 {
     public class UserService :BaseService, IUserService
     {
-        public UserInfo AdminLogin(string username, string password)
+        public UserInfo AdminLogin(string userName, string password)
         {
-           string enPwd = GetMD5Str(password);  
-            var users = Query<UserInfo>(u=>u.UserName == username && u.UserPwd == enPwd && u.IsDeleted == false).Include(u=>u.Role).ToList();
-            if(users.Any())
+            string enPwd = GetMD5Str(password);
+
+            var users = Query<UserInfo>(u => u.UserName == userName && u.UserPwd == enPwd && u.IsDeleted == false).Include(u => u.Role).ToList();
+            if (users.Any())
             {
                 UserInfo userInfo = users[0];
                 return userInfo;

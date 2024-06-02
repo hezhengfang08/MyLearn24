@@ -10,7 +10,7 @@ namespace MySelf.QOSM.Models.UIModels
     public class CboMenu
     {
         public int MenuId { get; set; }
-        public int MenuName { get; set; }
+        public string MenuName { get; set; }
         public int ParentId { get; set; }
     }
 

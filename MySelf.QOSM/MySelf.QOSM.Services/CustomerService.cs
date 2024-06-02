@@ -56,6 +56,11 @@ namespace MySelf.QOSM.Services
             return Find<CustomerInfo>(customerId);
         }
 
+        public CustomerInfo GetCustomerInfo(string customerId)
+        {
+            throw new NotImplementedException();
+        }
+
         public PageModel<CustomerInfo> GetCustomerList(string keywords, bool showDel, int startIndex, int pageSize)
         {
             PageModel<CustomerInfo> res = new PageModel<CustomerInfo>();

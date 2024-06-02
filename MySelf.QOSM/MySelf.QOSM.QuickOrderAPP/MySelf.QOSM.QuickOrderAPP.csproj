@@ -8,6 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="imgs\admin_login_bg.jpg" />
+    <None Remove="imgs\cust_login_bg.jpg" />
+    <None Remove="imgs\logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="HandyControl" Version="3.4.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
       <PrivateAssets>all</PrivateAssets>
@@ -19,7 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MySelf.QOSM.BLLFactory\MySelf.QOSM.BLLFactory.csproj" />
     <ProjectReference Include="..\MySelf.QOSM.Common\MySelf.QOSM.Common.csproj" />
+    <ProjectReference Include="..\MySelf.QOSM.IServices\MySelf.QOSM.IServices.csproj" />
     <ProjectReference Include="..\MySelf.QOSM.Models\MySelf.QOSM.Models.csproj" />
   </ItemGroup>
 
@@ -34,10 +42,18 @@
     <Folder Include="Food\" />
     <Folder Include="Order\" />
     <Folder Include="Stat\" />
-    <Folder Include="UControls\" />
-    <Folder Include="SM\" />
     <Folder Include="Center\" />
     <Folder Include="BM\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="imgs\admin_login_bg.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="imgs\cust_login_bg.jpg" />
+    <Resource Include="imgs\logo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

@@ -14,9 +14,9 @@ namespace MySelf.QOSM.QuickOrderAPP.ViewModels
    public class ListVMBase:ViewModelBase
     {
         #region 属性
-        private int keyWords;
+        private string keyWords;
 
-        public int KeyWords
+        public string KeyWords
         {
             get { return keyWords; }
             set { keyWords = value;

@@ -1,0 +1,71 @@
+﻿<Page x:Class="MySelf.QOSM.QuickOrderAPP.SM.MenuListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:uc="clr-namespace:MySelf.QOSM.QuickOrderAPP.UControls"
+      xmlns:vm="clr-namespace:MySelf.QOSM.QuickOrderAPP.ViewModels.SM"
+      xmlns:local="clr-namespace:MySelf.QOSM.QuickOrderAPP.SM"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="1000"
+      Title="菜单列表">
+    <Page.DataContext>
+        <vm:MenuListViewModel />
+    </Page.DataContext>
+    <Grid Background="{StaticResource BackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="White" CornerRadius="5" Margin="10">
+            <Grid>
+                <Button Style="{StaticResource btnAddStyle}" Command="{Binding AddItemCmd}"/>
+                <hc:TextBox Text="{Binding KeyWords}" Width="300" HorizontalAlignment="Left" Margin="130,5,0,5" hc:TitleElement.Title="关键字" 
+                            hc:InfoElement.Placeholder="菜单名/父菜单" hc:TitleElement.TitlePlacement="Left"/>
+                <Button Style="{StaticResource btnSearchStyle}" Command="{Binding FindDataListCmd}" HorizontalAlignment="Left" Margin="450,5,0,5" />
+                <hc:ButtonGroup Style="{StaticResource ButtonGroupSolid}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0">
+                    <RadioButton Content="未删除" IsChecked="{Binding ShowUnDel}" Command="{Binding FindDataListCmd}" />
+                    <RadioButton Content="已删除" IsChecked="{Binding ShowDeleted}" Command="{Binding FindDataListCmd}" />
+                </hc:ButtonGroup>
+            </Grid>
+        </Border>
+        <DataGrid Name="dgMenuList" Grid.Row="1" Style="{StaticResource dgStyle}" ItemsSource="{Binding MenuList}"  BorderThickness="1" HorizontalAlignment="Stretch">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="编号" ElementStyle="{StaticResource textColStyleCenter}" Binding="{Binding Menu.MenuId}" IsReadOnly="True" Width="0.8*" />
+                <DataGridTextColumn Header="菜单名称" ElementStyle="{StaticResource textColStyleCenter}" Binding="{Binding Menu.MenuName}" IsReadOnly="True" Width="*" />
+                <DataGridTextColumn Header="父菜单" ElementStyle="{StaticResource textColStyleCenter}" Binding="{Binding Menu.ParentName}" IsReadOnly="True" Width="*" />
+                <DataGridTemplateColumn Header="图标" Width="0.5*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding MenuIconCode}"  Style="{StaticResource iFont}" Foreground="{StaticResource InfoBrush}" FontSize="16" HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="页面地址" ElementStyle="{StaticResource textColStyleLeft}" Binding="{Binding Menu.MenuUrl}" IsReadOnly="True" Width="2*" />
+                <DataGridTemplateColumn Header="系统菜单"  Width="0.8*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding Menu.IsSysMenu}" Style="{StaticResource CheckBoxBaseStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="排序号" ElementStyle="{StaticResource textColStyleLeft}" Binding="{Binding Menu.MenuOrder}" IsReadOnly="True" Width="0.6*" />
+                <DataGridTemplateColumn Header="操作" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Button Content="修改" Style="{StaticResource itemBtnStyle}"  Command="{Binding DataContext.EditItemCmd,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Page}}}" CommandParameter="{Binding Menu}" Visibility="{Binding ShowEdit}"/>
+                                <Button Content="删除" Style="{StaticResource itemBtnStyle}"  Command="{Binding DataContext.DelItemCmd,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Page}}}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self},Path=DataContext}" Visibility="{Binding ShowDel}" IsEnabled="{Binding IsDel}"/>
+                                <Button Content="恢复" Style="{StaticResource itemBtnStyle}"  Command="{Binding DataContext.RecoveryItemCmd,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Page}}}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self},Path=DataContext}" Visibility="{Binding ShowRecover}"/>
+                                <Button Content="移除" Style="{StaticResource itemBtnStyle}"  Command="{Binding DataContext.RemoveItemCmd,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Page}}}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self},Path=DataContext}" Visibility="{Binding ShowRemove}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <uc:UPager Grid.Row="2" Margin="20,0" HorizontalAlignment="Stretch" DataContext="{Binding PageInofVM}" />   
+    </Grid>
+</Page>
