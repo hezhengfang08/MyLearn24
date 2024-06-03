@@ -6,12 +6,16 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <!--HandControl--> 
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml" />
+                 <!--自定义-->
                 <ResourceDictionary Source="/res/common_res.xaml" />
                 <ResourceDictionary Source="/res/main_res.xaml" />
                 <ResourceDictionary Source="/res/login_res.xaml" />
                 <ResourceDictionary Source="/res/datagrid_res.xaml" />
+                <ResourceDictionary Source="/res/info_res.xaml" />
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
