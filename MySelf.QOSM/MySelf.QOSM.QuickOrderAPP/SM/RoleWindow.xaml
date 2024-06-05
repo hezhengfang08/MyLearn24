@@ -1,0 +1,29 @@
+﻿<Window x:Class="MySelf.QOSM.QuickOrderAPP.SM.RoleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MySelf.QOSM.QuickOrderAPP.SM"
+        mc:Ignorable="d"
+        Title="角色信息" Height="350" Width="500" Name="roleWindow" Style="{StaticResource noneBorderyWindowStyle}">
+    <Border Style="{StaticResource infoWindowBorderStyle }">
+        <StackPanel Style="{StaticResource infoPageSpStyle}">
+            <Border Style="{StaticResource infoTitleBgStyle}">
+                <TextBlock Text="角色信息" Style="{StaticResource infoTextStyle}"/>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding MoveWindowCmd}" CommandParameter="{Binding ElementName=roleWindow}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Border>
+            <TextBox Text="{Binding RoleName}"  Margin="20,20,0,0" Style="{StaticResource TextBoxExtend}" Width="300"  HorizontalAlignment="Left" hc:TitleElement.Title="角色名称"
+                     hc:InfoElement.Placeholder="请输入角色名称"  hc:InfoElement.Necessary="{Binding IsRequired}"/>
+            <Label Visibility="{Binding ShowRNameError}" Content="该角色名称已经存在" Style="{StaticResource lblErrorStyle}"/>
+            <TextBox Text="{Binding RoleRemark}" Width="300" Height="100" HorizontalAlignment="Left" Margin="20,10"  Style="{StaticResource TextBoxExtend}" hc:TitleElement.Title="角色描述"
+                     hc:InfoElement.Placeholder="请输入角色描述" TextWrapping="Wrap" VerticalContentAlignment="Top"/>
+        </StackPanel>
+        
+    </Border>
+</Window>
