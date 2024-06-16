@@ -26,7 +26,7 @@ namespace MySelf.QOSM.IServices
         bool ResetCustomerPwd(CustomerInfo customerInfo);
 
         bool ClearAllLogoffCustomer();
-        CustomerInfo GetCustomerInfo(string customerId);
+        CustomerInfo GetCustomerInfo(int customerId);
 
         bool UpdateCustomer(CustomerInfo customerInfo);
 

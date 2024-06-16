@@ -17,6 +17,9 @@ namespace MySelf.QOSM.QuickOrderAPP
         {
             base.OnStartup(e);
             ConfigHelper.Init("appsettings.json");
+            //访问appsettings.json 文件的方法测试
+            //string serviceTypeName = ConfigHelper.GetSectionKeyValue("AppSettings:ServicesMapping", "IRoleService");
+            //var serviceTypeName = ConfigHelper.GetSectionClassValue<AppSettings>("AppSettings").ServicesMapping;
         }
     }
 

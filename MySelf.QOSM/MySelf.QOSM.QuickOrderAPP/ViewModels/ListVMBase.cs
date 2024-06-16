@@ -23,12 +23,12 @@ namespace MySelf.QOSM.QuickOrderAPP.ViewModels
                 OnPropertyChanged();
             }
         }
-        private UPagerViewModel pageInofVM;
+        private UPagerViewModel pageInfoVM;
 
-        public UPagerViewModel PageInofVM
+        public UPagerViewModel PageInfoVM
         {
-            get { return pageInofVM; }
-            set { pageInofVM = value; }
+            get { return pageInfoVM; }
+            set { pageInfoVM = value; }
         }
         /// <summary>
         /// 已经删除

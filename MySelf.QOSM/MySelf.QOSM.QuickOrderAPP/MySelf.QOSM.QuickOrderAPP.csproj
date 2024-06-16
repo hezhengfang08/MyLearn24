@@ -38,12 +38,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Customer\" />
     <Folder Include="Food\" />
     <Folder Include="Order\" />
     <Folder Include="Stat\" />
-    <Folder Include="Center\" />
-    <Folder Include="BM\" />
   </ItemGroup>
 
   <ItemGroup>

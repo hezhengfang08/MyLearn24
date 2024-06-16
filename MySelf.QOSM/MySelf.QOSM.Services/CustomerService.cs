@@ -107,7 +107,7 @@ namespace MySelf.QOSM.Services
             var res = false;
             if(customerInfo != null)
             {
-                var settings = ConfigHelper.GetAppSettings<AppSettings>("AppSettings");
+                var settings = ConfigHelper.GetSectionClassValue<AppSettings>("AppSettings");
                 string endPwd = GetMD5Str(settings.ResetPwd);
                 customerInfo.CustomerPwd = endPwd;
                 Update(customerInfo);

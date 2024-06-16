@@ -10,7 +10,7 @@ namespace MySelf.QOSM.IServices
 {
     public interface IFoodTypeService
     {
-        PageModel<FoodTypeInfo> GetFoodType(string keywords,bool showDel,int startIndex, int pageSize);
+        PageModel<FoodTypeInfo> GetFoodTypeList(string keywords,bool showDel,int startIndex, int pageSize);
         List<UIFType> GetCboFType();
         bool DeleteFType(FoodTypeInfo foodTypeInfo);
         bool RecoveryFType(FoodTypeInfo foodTypeInfo);  

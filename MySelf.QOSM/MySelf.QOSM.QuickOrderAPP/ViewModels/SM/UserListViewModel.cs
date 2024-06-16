@@ -23,9 +23,9 @@ namespace MySelf.QOSM.QuickOrderAPP.ViewModels.SM
         {
             ShowDeleted = true;
             ShowDeleted = false;
-            PageInofVM = new UControl.UPagerViewModel();
-            PageInofVM.PageSize = 10;
-            PageInofVM.PageChanged += (o, e) => LoadUserList();
+            PageInfoVM = new UControl.UPagerViewModel();
+            PageInfoVM.PageSize = 10;
+            PageInfoVM.PageChanged += (o, e) => LoadUserList();
             LoadUserList();
             InitCommands();
 
@@ -56,21 +56,21 @@ namespace MySelf.QOSM.QuickOrderAPP.ViewModels.SM
             ObservableCollection<UserModel> users = new ObservableCollection<UserModel>();
             if(HasDeleted != oldShowDel)
             {
-                PageInofVM.CurrentPage = 1;
+                PageInfoVM.CurrentPage = 1;
                 oldShowDel = HasDeleted;
             }
-            PageModel<ViewUserInfo> res = userService.GetUserList(KeyWords, HasDeleted, PageInofVM.StartIndex, PageInofVM.PageSize);
+            PageModel<ViewUserInfo> res = userService.GetUserList(KeyWords, HasDeleted, PageInfoVM.StartIndex, PageInfoVM.PageSize);
             if(res != null) {
                 List<ViewUserInfo> userData = null;
                 if (res.DataList.Count > 0)
                 {
                     userData = res.DataList;
-                    PageInofVM.TotalCount = res.TotalCount;
+                    PageInfoVM.TotalCount = res.TotalCount;
                     userData.ForEach( u=> users.Add(new UserModel(u)));
                 }
                 else
                 {
-                    PageInofVM.TotalCount =0 ;
+                    PageInfoVM.TotalCount =0 ;
                 }
             }
             UserList = users;
@@ -85,7 +85,7 @@ namespace MySelf.QOSM.QuickOrderAPP.ViewModels.SM
         {
             if(e != null)
             {
-                if(e.ActType == 1 && UserList.Count < PageInofVM.PageCount) {
+                if(e.ActType == 1 && UserList.Count < PageInfoVM.PageCount) {
                     UserList.Add(new UserModel(e.Info));
                 }
                 else if(e.ActType == 2)

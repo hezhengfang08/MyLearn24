@@ -1,0 +1,53 @@
+﻿<Page x:Class="MySelf.QOSM.QuickOrderAPP.BM.FoodTypeListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:uc="clr-namespace:MySelf.QOSM.QuickOrderAPP.UControls"
+      xmlns:vm="clr-namespace:MySelf.QOSM.QuickOrderAPP.ViewModels.BM"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MySelf.QOSM.QuickOrderAPP.BM"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="菜品类别列表">
+    <Page.DataContext>
+        <vm:FoodTypeListViewModel/>
+    </Page.DataContext>
+    <Grid Background="{StaticResource BackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition />
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="White" CornerRadius="5" Margin="10">
+            <Grid>
+                <Button Style="{StaticResource btnAddStyle}" Command="{Binding AddItemCmd}"/>
+                <hc:SearchBar Margin="130,0,0,0" Style="{StaticResource SearchBarExtend}" HorizontalAlignment="Left" VerticalAlignment="Center" hc:TitleElement.TitlePlacement="Left" hc:TitleElement.Title="关键字" hc:InfoElement.Placeholder="类别名\描述" Text="{Binding KeyWords }"/>
+                <hc:ButtonGroup Style="{StaticResource ButtonGroupSolid}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0">
+                    <RadioButton Content="未删除" IsChecked="{Binding ShowUnDel}" Command="{Binding FindDataListCmd}"/>
+                    <RadioButton Content="已删除" IsChecked="{Binding ShowDeleted}" Command="{Binding FindDataListCmd}"/>
+                </hc:ButtonGroup>
+            </Grid>
+        </Border>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding FoodTypeList}" Name="dgFTypeList" Style="{StaticResource dgStyle }" BorderThickness="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="编号" EditingElementStyle="{StaticResource  textColStyleCenter}" Binding="{Binding FType.FtypeId}" Width="0.8*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="类别名称" EditingElementStyle="{StaticResource  textColStyleCenter}" Binding="{Binding FType.FtypeName}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="描述" EditingElementStyle="{StaticResource  textColStyleCenter}" Binding="{Binding FType.Remark}" Width="3*" IsReadOnly="True"/>
+                <DataGridTemplateColumn Header="操作" Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Button Content="修改" Style="{StaticResource itemBtnStyle}"  Command="{Binding DataContext.EditItemCmd,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Page}}}" CommandParameter="{Binding FType}" Visibility="{Binding ShowEdit}"/>
+                                <Button Content="删除" Style="{StaticResource itemBtnStyle}"  Command="{Binding DataContext.DeleteItemCmd,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Page}}}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self},Path=DataContext}" Visibility="{Binding ShowDel}"/>
+                                <Button Content="恢复" Style="{StaticResource itemBtnStyle}"  Command="{Binding DataContext.RecoveryItemCmd,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Page}}}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self},Path=DataContext}" Visibility="{Binding ShowRecovery}"/>
+                                <Button Content="移除" Style="{StaticResource itemBtnStyle}"  Command="{Binding DataContext.RemoveItemCmd,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Page}}}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self},Path=DataContext}" Visibility="{Binding ShowRemove}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <uc:UPager DataContext="{Binding PageInfoVM}" Margin="20,10"  Grid.Row="2" HorizontalAlignment="Stretch"/>
+    </Grid>
+</Page>

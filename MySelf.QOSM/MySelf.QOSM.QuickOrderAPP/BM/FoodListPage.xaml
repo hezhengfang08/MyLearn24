@@ -1,0 +1,96 @@
+﻿<Page x:Class="MySelf.QOSM.QuickOrderAPP.BM.FoodListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:uc="clr-namespace:MySelf.QOSM.QuickOrderAPP.UControls"
+      xmlns:vm="clr-namespace:MySelf.QOSM.QuickOrderAPP.ViewModels.BM"
+      xmlns:local="clr-namespace:MySelf.QOSM.QuickOrderAPP.BM"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="1000"
+      Title="菜品列表">
+    <Page.DataContext>
+        <vm:FoodListViewModel/>
+    </Page.DataContext>
+    <Grid Background="{StaticResource BackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Margin="10" Background="White" CornerRadius="5">
+            <Grid >
+                <Button Style="{StaticResource btnAddStyle}" Command="{Binding AddItemCmd}"/>
+                <hc:SearchBar Margin="80,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding KeyWords}" hc:TitleElement.Title="关键字:" hc:InfoElement.Placeholder="请输入"
+                        BorderBrush="{StaticResource InfoBrush }"      Style="{StaticResource SearchBarExtend}" hc:TitleElement.TitlePlacement="Left" hc:InfoElement.ContentHeight="30" Width="300" Command="{Binding FindDataListCmd}"/>
+                <ComboBox  Style="{StaticResource ComboBoxMediumStyle}" Width=" 180" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="400,0,0,0" hc:TitleElement.Title="类别:" hc:TitleElement.TitlePlacement="Left" ItemsSource="{Binding FTypeList}" SelectedValue="{Binding FtypeId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="{Binding FtypeId}" DisplayMemberPath="{Binding FtypeName}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="slectionChanged">
+                            <i:InvokeCommandAction Command="{Binding FindDataListCmd }"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+                <hc:ButtonGroup  Style="{StaticResource  ButtonGroupSolid}" VerticalContentAlignment="Center" HorizontalAlignment="Right" Margin=" 0,0,150,0">
+                    <RadioButton Content="未删除" Style="{StaticResource RadioButtonBaseStyle}" IsChecked="{Binding ShowUnDel }" Command="{Binding FindDataListCmd }"/>
+                    <RadioButton Content="已删除" Style="{StaticResource RadioButtonBaseStyle}" IsChecked="{Binding ShowDeleted  }" Command="{Binding FindDataListCmd }"/>
+                </hc:ButtonGroup>
+                <StackPanel   Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0">
+                    <Button  Style="{StaticResource ButtonDanger}" Command="{Binding OnFoodsCmd }" Content="上架"/>
+                    <Button  Style="{StaticResource ButtonDanger}" Background="LightGray" BorderBrush="Gray"  Command="{Binding DownFoodsCmd  }" Content="下架" Margin=" 10,0,0,0"/>
+                </StackPanel>
+
+            </Grid>
+        </Border>
+        <DataGrid Name="dgFoodList" Grid.Row="1" BorderThickness="1" Style="{StaticResource dgStyle}" ItemsSource="{Binding FoodList}">
+            <DataGrid.Columns >
+                <DataGridTemplateColumn Width="100">
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <CheckBox Content="全选" VerticalAlignment="Center" IsChecked="{Binding DataContext.IsCheckAll,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Page}}}" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Page}},Path=DataContext.CheckAllCmd}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox VerticalAlignment="Center" IsChecked="{Binding IsCheck,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Page}},Path=DataContext.CheckItemCmd}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self},Path=DataContext}" HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="编号" ElementStyle="{StaticResource textColStyleCenter}" Binding="{Binding Food.FoodId}" IsReadOnly="True" Width="0.5*"/>
+                <DataGridTextColumn Header="菜品名称" ElementStyle="{StaticResource textColStyleCenter}" Binding="{Binding Food.FoodName}" IsReadOnly="True" Width="1.2*"/>
+                <DataGridTextColumn Header="类别" ElementStyle="{StaticResource textColStyleCenter}" Binding="{Binding Food.FtypeName}" IsReadOnly="True" Width="1*"/>
+                <DataGridTextColumn Header="价格" ElementStyle="{StaticResource textColStyleCenter}" Binding="{Binding Food.FoodPrice,StringFormat={}{0:N2}}"  IsReadOnly="True" Width="0.8*"/>
+                <DataGridTextColumn Header="打包费" ElementStyle="{StaticResource textColStyleCenter}" Binding="{Binding Food.PackAmount,StringFormat={}{0:N2}}" IsReadOnly="True" Width="0.8*"/>
+                <DataGridTemplateColumn Header="图片" Width="2*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image  Source="{Binding Food.FoodImg}" VerticalAlignment="Center" HorizontalAlignment="Center"  Width="80" Height="40" Stretch="Uniform"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="上架" Width="0.5*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox Style="{StaticResource CheckBoxBaseStyle}" IsChecked="{Binding IsOn}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="菜品描述" EditingElementStyle="{StaticResource textColStyleLeftWrap}" Binding="{Binding  Food.Remark }" IsReadOnly="True" Width=" 2*" />
+                <DataGridTemplateColumn Header="操作" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Button Style="{StaticResource ButtonBaseStyle}" Content="修改" Command="{Binding DataContext.EditItemCmd, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Page }}}" CommandParameter="{Binding Food}" Visibility="{Binding ShowEdit}"/>
+                                <Button Style="{StaticResource ButtonBaseStyle}" Content="删除" Command="{Binding DataContext.DeleteItemCmd, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Page }}}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self},Path=DataContext }" Visibility="{Binding ShowDel}"/>
+                                <Button Style="{StaticResource ButtonBaseStyle}" Content="恢复" Command="{Binding DataContext.RecoveryItemCmd, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Page }}}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self},Path=DataContext}" Visibility="{Binding ShowRecovery}"/>
+                                <Button Style="{StaticResource ButtonBaseStyle}" Content="移除" Command="{Binding DataContext.RemoveItemCmd, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Page }}}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self},Path=DataContext}" Visibility="{Binding ShowRemove}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns> 
+        </DataGrid>
+        <uc:UPager Margin="20,0" Grid.Row="2" DataContext="{Binding PageInfoVM}"/>
+    </Grid>
+</Page>

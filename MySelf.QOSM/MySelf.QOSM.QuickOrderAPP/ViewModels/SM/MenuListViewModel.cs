@@ -50,7 +50,7 @@ namespace MySelf.QOSM.QuickOrderAPP.ViewModels.SM
         {
             if (e != null)
             {
-                if (e.ActType == 1 && MenuList.Count < PageInofVM.PageSize)
+                if (e.ActType == 1 && MenuList.Count < PageInfoVM.PageSize)
                 {
                     MenuList.Add(new MenuModel(e.Info));
                 }
@@ -67,22 +67,22 @@ namespace MySelf.QOSM.QuickOrderAPP.ViewModels.SM
             //如果改变了删除状态选择，重新从第一页开始呈现
             if (HasDeleted != oldShowDel)
             {
-                PageInofVM.CurrentPage = 1;
+                PageInfoVM.CurrentPage = 1;
                 oldShowDel = HasDeleted;
             }
-            PageModel<ViewMenuInfo> result = menuService.GetMenuList(KeyWords, HasDeleted, PageInofVM.StartIndex, PageInofVM.PageSize);
+            PageModel<ViewMenuInfo> result = menuService.GetMenuList(KeyWords, HasDeleted, PageInfoVM.StartIndex, PageInfoVM.PageSize);
             if (result != null)
             {
                 List<ViewMenuInfo> menuData = null;
                 if(result.DataList.Count > 0)
                 {
                     menuData = result.DataList;
-                    PageInofVM.TotalCount = result.TotalCount;
+                    PageInfoVM.TotalCount = result.TotalCount;
                     menuData.ForEach(item=>list.Add(new MenuModel(item)));  
                 }
                 else
                 {
-                    PageInofVM.TotalCount = 0;
+                    PageInfoVM.TotalCount = 0;
                 }
             }
             MenuList = list;

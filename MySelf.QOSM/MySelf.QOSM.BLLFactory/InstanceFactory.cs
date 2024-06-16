@@ -1,4 +1,5 @@
 
+using MySelf.QOSM.Common;
 using System.Configuration;
 using System.Reflection;
 
@@ -7,11 +8,13 @@ namespace MySelf.QOSM.BLLFactory
     public class InstanceFactory
     {
         //实现层程序集名称
-        private static readonly string serviceName = ConfigurationManager.AppSettings["ServicesName"] + string.Empty;
+        //private static readonly string serviceName = ConfigHelper.GetAppSettings<AppSettings>("AppSettings");
+        private static readonly string serviceName=  ConfigHelper.GetSectionClassValue<AppSettings>("AppSettings").ServicesName;
         public static T CreateInstance<T>()
         {
             string interfaceName = typeof(T).Name;//接口名称
-            string serviceTypeName = ConfigurationManager.AppSettings[interfaceName] +string.Empty; //实现类名称
+            //string serviceTypeName = ConfigurationManager.AppSettings[interfaceName] +string.Empty; //实现类名称
+            string serviceTypeName = ConfigHelper.GetSectionKeyValue("AppSettings:ServicesMapping", interfaceName); //实现类名称
             string fullTypeName = serviceName + "." + serviceTypeName; //实现类 全名称
             Assembly assembly = Assembly.Load(serviceName);//动态加载程序集
             Type type = assembly.GetType(fullTypeName);//实现类类型

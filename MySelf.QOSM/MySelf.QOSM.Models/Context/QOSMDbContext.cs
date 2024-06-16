@@ -37,7 +37,7 @@ namespace MySelf.QOSM.Models.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var settings = ConfigHelper.GetAppSettings<AppSettings>("AppSettings");
+            var settings = ConfigHelper.GetSectionClassValue<AppSettings>("AppSettings");
             if (!optionsBuilder.IsConfigured)
             {
                 string connStr = settings.SqlServerConnection;

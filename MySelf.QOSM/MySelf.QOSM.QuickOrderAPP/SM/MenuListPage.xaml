@@ -66,6 +66,6 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <uc:UPager Grid.Row="2" Margin="20,0" HorizontalAlignment="Stretch" DataContext="{Binding PageInofVM}" />   
+        <uc:UPager Grid.Row="2" Margin="20,0" HorizontalAlignment="Stretch" DataContext="{Binding PageInfoVM}" />   
     </Grid>
 </Page>

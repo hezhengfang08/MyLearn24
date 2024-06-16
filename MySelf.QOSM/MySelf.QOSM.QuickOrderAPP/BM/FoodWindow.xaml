@@ -1,0 +1,48 @@
+﻿<Window x:Class="MySelf.QOSM.QuickOrderAPP.BM.FoodWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MySelf.QOSM.QuickOrderAPP.BM"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        Title="菜品信息" Height="570" Width="500" Style="{StaticResource noneBorderyWindowStyle}">
+    <Border Style="{StaticResource infoWindowBorderStyle}">
+        <StackPanel Style="{StaticResource infoPageSpStyle}">
+            <Border Style="{StaticResource infoTitleBgStyle}">
+                <TextBlock Text="菜品信息" Style="{StaticResource infoTextStyle}" Name="foodWindow"/>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding MoveWindowCmd}" CommandParameter="{Binding ElementName=foodWindow}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Border>
+            <StackPanel Orientation="Horizontal" Margin="20,30,20,10">
+                <TextBox Text="{Binding FoodName}" Width="300" Style="{StaticResource TextBoxExtend}" hc:TitleElement.Title="菜品名称" hc:InfoElement.Placeholder="请输入菜品名称"
+                         hc:InfoElement.Necessary="{Binding IsRequired}"/>
+                <Label Style="{StaticResource lblErrorStyle}" Content="菜品名称已经存在" Margin="20,0" Visibility="{Binding ShowFNameError}"/>
+            </StackPanel>
+            <ComboBox Margin="20,10" Style="{StaticResource ComboBoxExtend}" HorizontalAlignment="Left" hc:InfoElement.Placeholder="菜品类别" ItemsSource="{Binding FTypeList}" DisplayMemberPath="FTypeName" SelectedValuePath="FTypeId"/>
+            <TextBox Margin="20,10" HorizontalAlignment="Left" Style="{StaticResource TextBoxExtend}" Text="{Binding FoodPrice}" hc:TitleElement.Title="菜品单价" hc:InfoElement.Placeholder="请输入菜品单价" Width="300"/>
+            <TextBox Margin="20,10" HorizontalAlignment="Left" Style="{StaticResource TextBoxExtend}" Text="{Binding PackAmount}" hc:TitleElement.Title="打包费用" hc:InfoElement.Placeholder="请输入打包费用" Width="300"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="菜品图片" Style="{StaticResource TextBlockDefault }" Margin="20,10,10,5" VerticalAlignment="Center"/>
+                <Border Width="100" Height="80" Style="{StaticResource BorderRegion}" Margin="10,5,10,5">
+                    <Image Source="{Binding FoodImg}" Stretch="Fill"/>
+                </Border>
+                <Button Style="{StaticResource ButtonIconCircular.Small}" hc:IconElement.Geometry="{StaticResource AddGeometry}" Foreground="#996423" BorderBrush="#FFABAAAA" VerticalAlignment="Center" Margin="10,0" Command="{Binding ChooseImgCmd}"/>
+                <TextBlock Text="是否上架" Style="{StaticResource TextBlockDefault}" VerticalAlignment="Center" Margin="30,0"/>
+                <CheckBox Content="上架" Foreground="{StaticResource WarningBrush}" Width="50" FontSize="14" IsChecked="{Binding IsNoLine}"/>
+            </StackPanel>
+            <TextBox Text="{Binding FoodRemark}" Style="{StaticResource TextBoxExtend}" Width="300" Height="100" TextWrapping="Wrap" hc:TitleElement.Title="菜品描述" hc:InfoElement.Placeholder="请输入菜品描述" HorizontalAlignment="Left"
+                     Margin="20,10" VerticalContentAlignment="Top" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+                <Button Style="{StaticResource submitBtnBase}" Command="{Binding ConfirmCmd}" Content="{Binding SubmitText}" CommandParameter="{Binding ElementName=foodWindow}" HorizontalAlignment="Left"/>
+                <Button Style="{StaticResource btnCloseGray}" Command="{Binding CloseWindowCmd}" Content="关闭" CommandParameter="{Binding ElementName=foodWindow}" HorizontalAlignment="Left" Margin="20,0,0,0"/>
+
+            </StackPanel>
+
+        </StackPanel>
+    </Border>
+</Window>
