@@ -2,6 +2,6 @@
 {
     public static class UserConstant
     {
-        public const string UserSignIn = "user:sign-in";
+        public const string UserSignIn = "user:sign-in:";
     }
 }
