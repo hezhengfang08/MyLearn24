@@ -1,13 +1,14 @@
 import axios from "axios";
 import { ElMessage } from "element-plus";
-import userToken from '@/utils/sessionstorage'
+import {userToken} from '@/utils/sessionstorage'
+import {commonConsts} from '@/utils/commonConsts'
 var {getToken} = userToken();
-axios.defaults.baseURL = "http://49.235.128.49:5059/api/";
-const succesCode = 20000;  //成功码
+axios.defaults.baseURL = "http://124.223.161.17:5059/api/";
+const {apiSuccesCode} = commonConsts();  //成功码
 //这里怎样适配多个api呢
-const service = baseURL=> axios.create({
-    timeout:5000,
-    baseURL:baseURL||axios.defaults.baseURL
+const service =  axios.create({
+    timeout:5000
+    
 })
 service.interceptors.request.use(
     config=>{
@@ -18,7 +19,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
     res =>{ 
         let {code,msg} = res.data;
-        if(code !== succesCode){
+        if(code !== apiSuccesCode){
             ElMessage({
                 message:msg||'warning,this is a warning message',
                 type:'warning',

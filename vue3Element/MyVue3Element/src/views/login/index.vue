@@ -1,11 +1,20 @@
 <script setup>
 import { ref, reactive } from 'vue'
 import { Connection, MessageBox } from '@element-plus/icons-vue'
-
-const ruleFormRef = ref(null);
+import {login}  from '@/xhra/api'
+import service  from '@/xhra/index'
+import {userToken} from '@/utils/sessionstorage'
+import {useCount} from '@/utils/useCount'
+import {commonConsts} from '@/utils/commonConsts'
+import router from   '@/router/index'
+import md5 from 'md5'
+const ruleFormRef = ref();
+const {apiSuccesCode} = commonConsts();
+const {setToken} = userToken();
+const {count:n,set,reset,increase,decrease} = useCount(100);
 const ruleForm = reactive({
     account: 'admin',
-    password: ''
+    password: 'admin@123'
 });
 const rules = reactive({
     account: [
@@ -17,10 +26,19 @@ const rules = reactive({
         { min: 3, max: 18, message: 'Length should be 3 to 18', trigger: 'blur' },
     ],
 })
-function submitForm(ruleForm) {
-    ruleForm.validate(valid => {
+function submitForm(formEl) {
+    formEl.validate(async valid => {
         if (valid) {
-            console.log('submit validSuccesss');
+
+            ruleForm.password = md5(ruleForm.password);
+           
+            let res = await  login(ruleForm);
+            let {code,data:{token}} = res.data;
+            if(code===apiSuccesCode)
+            {
+                setToken(token);
+                router.push('/home');
+            }
         }
         else {
             console.log('submit! faile');
@@ -59,6 +77,29 @@ function submitForm(ruleForm) {
                 <el-form-item>
                     <el-button type="primary" @click="submitForm(ruleFormRef)">登录</el-button>
                 </el-form-item>
+                   <el-form-item>
+                        <el-input v-model="n" />
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="success" @click="increase">
+                            添加
+                        </el-button>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="success" @click="decrease">
+                            减少
+                        </el-button>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="success" @click="set(77)">
+                            设置
+                        </el-button>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="success" @click="reset">
+                            重置
+                        </el-button>
+                    </el-form-item>
             </el-form>
         </div>
             <div class="login-item login-box">
