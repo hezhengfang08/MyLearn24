@@ -26,7 +26,7 @@ namespace MyRedis01.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateTags(long id, string tags)
         {
-           await redis.SetAddAllAsync(ArticleConstant.ArticleTags, StackExchange.Redis.CommandFlags.None,tags.Split(","));
+           await redis.SetAddAllAsync(ArticleConstant.ArticleTags+id, StackExchange.Redis.CommandFlags.None,tags.Split(","));
             return Ok();
            
            

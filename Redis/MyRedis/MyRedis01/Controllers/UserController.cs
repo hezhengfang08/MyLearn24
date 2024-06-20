@@ -12,9 +12,10 @@ namespace MyRedis01.Controllers
         private readonly IRedisDatabase redis;
         public UserController(IRedisDatabase redis)
         {
-                this.redis = redis;
+            this.redis = redis;
         }
-      public async Task<ActionResult> CreateSign(long id)
+        [HttpPost]
+        public async Task<ActionResult> CreateSign(long id)
         {
             var month = DateTime.Now.ToString("yyyyMM");
             var key = $"{UserConstant.UserSignIn}{id}:{month} ";
@@ -22,11 +23,12 @@ namespace MyRedis01.Controllers
             return Ok();
 
         }
+        [HttpGet]
         public async Task<ActionResult> GetSign(long id, string month)
         {
             var key = $"{UserConstant.UserSignIn}{id}:{month}";
             var res = await redis.Database.StringGetBitAsync(key, DateTime.Now.Day - 1);
-            return Ok(res); 
+            return Ok(res);
         }
 
     }
