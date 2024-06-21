@@ -77,7 +77,7 @@ function submitForm(formEl) {
                 <el-form-item>
                     <el-button type="primary" @click="submitForm(ruleFormRef)">登录</el-button>
                 </el-form-item>
-                   <el-form-item>
+                   <!-- <el-form-item>
                         <el-input v-model="n" />
                     </el-form-item>
                     <el-form-item>
@@ -99,7 +99,7 @@ function submitForm(formEl) {
                         <el-button type="success" @click="reset">
                             重置
                         </el-button>
-                    </el-form-item>
+                    </el-form-item> -->
             </el-form>
         </div>
             <div class="login-item login-box">
