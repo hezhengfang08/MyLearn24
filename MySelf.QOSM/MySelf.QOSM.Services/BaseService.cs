@@ -57,7 +57,16 @@ namespace MySelf.QOSM.Services
             dbContext.Set<T>().Remove(t);
             Commit();
         }
-
+        //批量删除
+        public void Delete<T>(IEnumerable<T> tList) where T : class
+        {
+            foreach (var t in tList)
+            {
+                dbContext.Set<T>().Attach(t);
+            }
+            dbContext.Set<T>().RemoveRange(tList);
+            Commit();
+        }
         public void Delete<T>(T t) where T: class
         {
             if(t==null)
