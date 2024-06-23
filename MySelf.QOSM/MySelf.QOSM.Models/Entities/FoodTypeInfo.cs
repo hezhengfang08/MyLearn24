@@ -12,5 +12,6 @@ namespace MySelf.QOSM.Models.Entities
         public string FtypeName { get; set; } = null!;
         public string? Remark { get; set; }
         public bool IsDeleted { get; set; }
+        public List<FoodInfo> Foods { get; set; } = new List<FoodInfo>();
     }
 }

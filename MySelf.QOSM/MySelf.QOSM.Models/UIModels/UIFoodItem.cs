@@ -13,6 +13,7 @@ namespace MySelf.QOSM.Models.UIModels
         public int FTypeId { get; set; }
         public decimal FoodPrice { get; set; }
         public decimal FoodAmount { get; set; }
+        public decimal PackAmount { get; set; }
         public string FoodImg { get; set; }
 
     }

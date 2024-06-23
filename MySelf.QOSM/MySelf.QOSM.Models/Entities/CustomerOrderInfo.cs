@@ -14,6 +14,9 @@ namespace MySelf.QOSM.Models.Entities
         public int OrderCount { get; set; }
         public decimal Amount { get; set; }
         public string? OrderRemark { get; set; }
+        public FoodOrderInfo Order { get; set; }
+        public FoodInfo Food { get; set; }
     }
 }
+
 

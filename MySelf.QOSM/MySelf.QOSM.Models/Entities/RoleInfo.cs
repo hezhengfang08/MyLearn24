@@ -13,6 +13,8 @@ namespace MySelf.QOSM.Models.Entities
         public bool IsAdmin { get; set; }
         public string? Remark { get; set; }
         public bool IsDeleted { get; set; }
+        public List<MenuInfo> Menus { get; set; } = new List<MenuInfo>();
+        public List<UserInfo> Users { get; set; } = new List<UserInfo>();
     }
 }
 

@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MySelf.QOSM.QuickOrderAPP.Stat"
       xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       xmlns:uimodel ="clr-namespace:MySelf.QOSM.Models.UIModels;assembly=MySelf.QOSM.Models"
       xmlns:vm="clr-namespace:MySelf.QOSM.QuickOrderAPP.ViewModels.Stat"
       
@@ -40,10 +41,137 @@
 
                     </StackPanel>
                 </hc:DashedBorder>
+                <ItemsControl ItemsSource="{Binding StatisticsAmounts}" Margin="0">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type vm:StatisticsAmountItem}">
+                            <Border x:Name="br" Width="200" Margin="10,0,5,0" Background="{StaticResource PrimaryBrush}" CornerRadius="5" Opacity="0.9">
+                                <Canvas ClipToBounds="True">
+                                    <StackPanel Width="120" Canvas.Left="10" Canvas.Top="10" Panel.ZIndex="1">
+                                        <TextBlock Text="{Binding PayWayText}" Style="{StaticResource TextBlockSubTitle}" FontSize="13" Foreground="White" HorizontalAlignment="Left"/>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,10">
+                                            <TextBlock Text="￥" Style="{StaticResource TextBlockDefault}" FontSize="14" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,4"/>
+                                            <TextBlock Text="{Binding Amount,StringFormat={}{0:N2}}" Style="{StaticResource TextBlockLarge}" FontSize="24" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,10">
+                                            <TextBlock Text="笔数" Style="{StaticResource TextBlockDefault}" FontSize="13" HorizontalAlignment="Left" Foreground="White"/>
+                                            <TextBlock Text="{Binding PayCount}" Style="{StaticResource TextBlockDefaultBold}" HorizontalAlignment="Left" Foreground="White" Margin="5,0"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <TextBlock x:Name="txtIconLarge" Text="&#xe607;" Style="{StaticResource iFont_Food}" FontSize="60" Canvas.Bottom="-3" Canvas.Right="0" Foreground="WhiteSmoke" Opacity="0.2"/>
+                                    <TextBlock x:Name="txtIconMiddle" Text="&#xe607;" Style="{StaticResource iFont_Food}" FontSize="30" Canvas.Bottom="-8" Canvas.Right="40" Foreground="WhiteSmoke" Opacity="0.2"/>
+                                    <TextBlock x:Name="txtIconSmall" Text="&#xe607;" Style="{StaticResource iFont_Food}" FontSize="10" Canvas.Bottom="-8" Canvas.Right="50" Foreground="WhiteSmoke" Opacity="0.2" Panel.ZIndex="0"/>
+                                </Canvas>
+                            </Border>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding PayWay}" Value="1">
+                                    <Setter TargetName="txtIconSmall" Property="Visibility" Value="Hidden"/>
+                                    <Setter TargetName="txtIconLarge" Property="Text" Value="&#xe63c;"/>
+                                    <Setter TargetName="txtIconMiddle" Property="Text" Value="&#xe63c;"/>
+                                    <Setter TargetName="txtIconLarge" Property="Opacity" Value="0.3"/>
+                                    <Setter TargetName="txtIconMiddle" Property="Opacity" Value="0.2"/>
+                                    <Setter TargetName="br" Property="Background" Value="{StaticResource InfoBrush}"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding PayWay}" Value="2">
+                                    <Setter TargetName="txtIconSmall" Property="Visibility" Value="Hidden"/>
+                                    <Setter TargetName="txtIconLarge" Property="Text" Value="&#xe608;"/>
+                                    <Setter TargetName="txtIconMiddle" Property="Text" Value="&#xe608;"/>
+                                    <Setter TargetName="txtIconLarge" Property="Opacity" Value="0.2"/>
+                                    <Setter TargetName="txtIconMiddle" Property="Opacity" Value="0.1"/>
+                                    <Setter TargetName="br" Property="Background" Value="{StaticResource SuccessBrush}"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding PayWay}" Value="3">
+                                    <Setter TargetName="txtIconLarge" Property="Text" Value="&#xe607;"/>
+                                    <Setter TargetName="txtIconMiddle" Property="Text" Value="&#xe607;"/>
+                                    <Setter TargetName="txtIconSmall" Property="Text" Value="&#xe607;"/>
+                                    <Setter TargetName="txtIconLarge" Property="Opacity" Value="0.2"/>
+                                    <Setter TargetName="txtIconMiddle" Property="Opacity" Value="0.1"/>
+                                    <Setter TargetName="txtIconSmall" Property="Opacity" Value="0.1"/>
+                                    <Setter TargetName="br" Property="Background" Value="{StaticResource PrimaryBrush}"/>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </StackPanel>
         </Border>
-        <Border Grid.Row="2" Background="White" CornerRadius="3" Margin="10,15">
+        <Border Grid.Row="2" Background="White" CornerRadius="3" Margin="10,5">
+            <StackPanel Margin="30">
+                <StackPanel Orientation="Horizontal" Margin="0">
+                    <TextBlock Text="菜品销量(份)：" Style="{StaticResource TextBlockLarge}"/>
+                    <ListBox ItemsSource="{Binding FoodTypeStatList}" SelectedItem="{Binding SelType}" Padding="5,0" BorderThickness="0">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Margin" Value="0,2"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListBoxItem">
+                                            <Border x:Name="br" CornerRadius="2">
+                                                <ContentPresenter VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter Property="Background" TargetName="br" Value="{StaticResource InfoBrush}"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="{x:Type uimodel:UIFTypeStatItem}">
+                                <StackPanel Orientation="Horizontal" Margin="10,0">
+                                    <TextBlock Text="{Binding FtypeName}" x:Name="typeName" Style="{StaticResource TextBlockSubTitle}" Foreground="Gray"/>
+                                    <TextBlock Text="{Binding SaleCount}" x:Name="count"  Style="{StaticResource TextBlockSubTitle}" Margin="10,0" Foreground="Gray"/>
+                                </StackPanel>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ListBoxItem},Path=IsSelected}" Value="True">
+                                        <Setter TargetName="typeName" Property="Foreground" Value="White"/>
+                                        <Setter TargetName="count" Property="Foreground" Value="White"/>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Page},Path=DataContext.FindStatTypeFoodListCmd}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListBox>
+                </StackPanel>
+                <ListView ItemsSource="{Binding StatFoodList}" Margin="0,15" Padding="3" ItemContainerStyle="{StaticResource lvItemStyle }" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="White" BorderThickness="0" Name="lvFoodList">
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="{x:Type uimodel:UIFoodCountItem}">
+                            <Border CornerRadius="5,5,0,0" Width="200" Height="150" x:Name="br" Padding="0" Margin="5" Style="{StaticResource BorderRegion}" BorderBrush="LightGray">
+                                <Canvas>
+                                    <Image Panel.ZIndex="0" Canvas.Left="5" Canvas.Top="5" Width="188" Height="138" Source="{Binding FoodImg}" Stretch="Fill"/>
+                                    <Path Panel.ZIndex="1" Canvas.Right="5" Canvas.Top="5" Fill="{StaticResource DangerBrush}" Data="M0,0 L50,0 50,35"/>
+                                    <TextBlock Text="{Binding Count}" Panel.ZIndex="2" Canvas.Right="10" Canvas.Top="10" FontSize="12" Foreground="White" FontWeight="Bold"/>
+                                    <Border Height="25" Width="188" Canvas.Bottom="5" Canvas.Left="5" Background="{StaticResource DangerBrush}" Opacity="0.8">
+                                        <TextBlock Text="{Binding FoodName}" FontSize="14" FontWeight="Bold" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </Canvas>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" Width="{Binding ElementName=lvFoodList,Path=ActualWidth}" Height="{Binding ElementName=lvFoodList,Path=ActualHeight}" />
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                </ListView>
 
+            </StackPanel>
         </Border>
     </Grid>
 </Page>

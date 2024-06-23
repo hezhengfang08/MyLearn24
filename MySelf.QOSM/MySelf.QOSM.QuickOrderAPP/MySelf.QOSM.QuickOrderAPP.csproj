@@ -38,8 +38,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Food\" />
-    <Folder Include="Order\" />
     <Folder Include="Stat\" />
   </ItemGroup>
 
