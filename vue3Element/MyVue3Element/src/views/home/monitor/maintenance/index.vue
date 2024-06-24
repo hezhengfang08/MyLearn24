@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 
-const msg = ref('首页')
+const msg = ref('车辆维保')
 </script>
 
 <template>

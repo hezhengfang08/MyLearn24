@@ -6,18 +6,17 @@ import {
   Location,
   Setting,
 } from '@element-plus/icons-vue'
-import {get} from '@/store/tagStore'
+import {tagStore} from '@/store/tag'
 import { storeToRefs } from 'pinia';
 
-const store = tagSotre();
+const store = tagStore();
 const {getTagList} = storeToRefs(store);
 
- const handTag = tag => {
-   if(getTagList.any(v=>v.menu_url=== tag.menu_url ))
-   {
-    return;
-   }
-    store.add(tag)
+const handTag = item =>{
+    //添加判断，去重
+    let repeat = getTagList.value.some(v=>v.menu_url==item.menu_url);
+    if(repeat) return;
+    store.addTag(item);
 }
 const { item } = defineProps(
     {
@@ -27,7 +26,7 @@ const { item } = defineProps(
 </script>
 <template>
     <!-- nosubitem -->
-    <el-menu-item :index="item.menu_url" v-if="!item.children">
+    <el-menu-item :index="item.menu_url" v-if="!item.children" @click="handTag(item)">
         <el-icon><icon-menu /></el-icon>
         <span>{{ item.menu_name }}</span>
     </el-menu-item>
