@@ -1,7 +1,15 @@
 <script setup>
 import { ref } from 'vue'
 import { NavMenu, Tag, Breadcrumb } from './components/index'
+import {useRouter} from 'vue-router'
+const router = useRouter();
 const msg = ref("首页");
+
+async function logout()
+{
+alert(1);
+router.push('/login')
+}
 </script>
 <template>
     <div id="module">
@@ -12,7 +20,7 @@ const msg = ref("首页");
                 <el-header>
                     <!-- 面包屑 -->
                     <Breadcrumb />
-                    <el-button class="exit" type="primary">退出</el-button>
+                    <el-button class="exit" type="primary" @click="logout">退出</el-button>
                     <!-- 多页签导航 -->
                     <Tag />
                 </el-header>

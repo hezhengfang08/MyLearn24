@@ -10,8 +10,10 @@ export const tagStore = defineStore('tag',{
         delTag(i){this.tagList.splice(i,1)}
     },
     persist:{
-       enable:true,
-      
+       key:'tag',
+       storage:localStorage, //默认会话存在改称localstorage存储
+       
+     
 
     }
 })
