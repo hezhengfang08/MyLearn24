@@ -31,8 +31,8 @@ const confirm = ()=>{
         <slot ><p>弹框内容</p></slot>
         <template #footer>
             <div class="dialog-footer">
-                <el-button @click="cancel = false">取消</el-button>
-                <el-button type="primary" @click="confirm = false">
+                <el-button @click="cancel">取消</el-button>
+                <el-button type="primary" @click="confirm">
                   {{props.btnText}}
                 </el-button>
             </div>
