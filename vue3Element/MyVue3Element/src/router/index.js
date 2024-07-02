@@ -54,6 +54,32 @@ const routes = [
                     },
                 ]
             },
+            {
+                path: '/powerManage',//权限管理
+                name: 'powerManage',
+                meta:{title:'权限管理'},
+                component: () => import('../views/home/powerManage/index.vue'),
+                children:[
+                    {
+                        path: '/powerManage/addOperator',//创建操作员
+                        name: 'addOperator',
+                        meta:{title:'创建操作员'},
+                        component: () => import('../views/home/powerManage/addOperator/index.vue')
+                    },
+                    {
+                        path: '/powerManage/operatorList',//操作员列表
+                        name: 'operatorList',
+                        meta:{title:'操作员列表'},
+                        component: () => import('../views/home/powerManage/operatorList/index.vue')
+                    },
+                    {
+                        path: 'operatorPermission',//操作员权限
+                        name: 'operatorPermission',
+                        meta:{title:'操作员权限'},
+                        component: () => import('../views/home/powerManage/operatorPermission/index.vue')
+                    },
+                ]
+            },
         ]
     }
 ]

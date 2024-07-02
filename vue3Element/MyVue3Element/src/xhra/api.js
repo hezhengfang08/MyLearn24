@@ -12,3 +12,12 @@ export const isExistCarNumber = data =>http.get('car/isExist',data);
 
 //车辆列表-删除
 export const deleteCarInfo = id =>http.delete(`car/delete/${id}`);
+
+//权限管理-添加操作员
+export const createUser = data =>http.post('user/createUser',data);
+
+//权限管理-操作员列表
+export const userList = data =>http.get('user/list',data);
+
+//权限管理-删除操作员
+export const removeUser = id =>http.delete(`user/removeUser/${id}`);
