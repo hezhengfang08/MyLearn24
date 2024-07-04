@@ -21,3 +21,8 @@ export const userList = data =>http.get('user/list',data);
 
 //权限管理-删除操作员
 export const removeUser = id =>http.delete(`user/removeUser/${id}`);
+//权限管理-查找所有目录
+export const findModules = data =>http.get('permission/findModules',data);
+
+//权限管理-获取所有操作员
+export const getOpers = data =>http.get('user/opers',data);
