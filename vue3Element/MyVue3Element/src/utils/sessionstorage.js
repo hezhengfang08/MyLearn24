@@ -1,4 +1,4 @@
-//token 专用
+//token 专用 hooks
 //闭包
 export const userToken = function()
 {

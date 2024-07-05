@@ -26,3 +26,12 @@ export const findModules = data =>http.get('permission/findModules',data);
 
 //权限管理-获取所有操作员
 export const getOpers = data =>http.get('user/opers',data);
+
+//通过操作员查看目录
+export const findModulesByUid = data =>http.get('permission/findModulesByUid',data);
+
+//权限管理-操作员权限-修改权限
+export const updatePermission = data =>http.post('permission/updateModulesPermByUid',data);
+
+//退出
+export const logout = data =>http.post('user/logout',data);

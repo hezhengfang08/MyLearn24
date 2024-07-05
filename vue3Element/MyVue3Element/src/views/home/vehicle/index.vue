@@ -7,8 +7,10 @@ import myDialog from '@/components/dialog/index.vue'
 import myPagination from '@/components/pagination/index.vue'
 import { ElNotification } from 'element-plus'
 import {commonConsts} from '@/utils/commonConsts'
+import useMenuPermission from '@/utils/useMenuPermission'  //vue-hooks
 
 const {apiSuccesCode} = commonConsts();
+const {menuStatus} = useMenuPermission();
 const carList = ref([]);
 let category = ref('')
 let total = ref(1);
@@ -85,7 +87,7 @@ async function showDeleteCarInfo(row){
 
 <template>
   <el-card class="el-card marginBottom">
-    <el-button type="success" @click="handleCarInfo('add', '')">新增车辆</el-button>
+    <el-button type="success" @click="handleCarInfo('add', '')" :disabled="menuStatus('新增车辆')" >新增车辆</el-button>
   </el-card>
   <el-card class="box-card">
     <el-table :data="carList" style="width: 100%" :row-class-name="tableRowClassName">
@@ -103,8 +105,8 @@ async function showDeleteCarInfo(row){
       </el-table-column>
       <el-table-column label="操作">
         <template #default="{row}">
-          <el-button type="primary" @click="handleCarInfo('update',row)">编辑</el-button>
-          <el-button type="danger" @click="showDeleteCarInfo(row)">删除</el-button>
+          <el-button type="primary" @click="handleCarInfo('update',row)" :disabled="menuStatus('编辑')">编辑</el-button>
+          <el-button type="danger" @click="showDeleteCarInfo(row)"  :disabled="menuStatus('删除')" >删除</el-button>
         </template>
       </el-table-column>
     </el-table>

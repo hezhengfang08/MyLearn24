@@ -7,10 +7,12 @@ import {userToken} from '@/utils/sessionstorage'
 import {useCount} from '@/utils/useCount'
 import {commonConsts} from '@/utils/commonConsts'
 import router from   '@/router/index'
+import {userStore} from '@/store/user'
 import md5 from 'md5'
 const ruleFormRef = ref();
 const {apiSuccesCode} = commonConsts();
 const {setToken} = userToken();
+const useUserStore= userStore();
 const {count:n,set,reset,increase,decrease} = useCount(100);
 const ruleForm = reactive({
     account: 'admin',
@@ -33,10 +35,11 @@ function submitForm(formEl) {
             ruleForm.password = md5(ruleForm.password);
            
             let res = await  login(ruleForm);
-            let {code,data:{token}} = res.data;
+            let {code,data:{token,id}} = res.data;
             if(code===apiSuccesCode)
             {
                 setToken(token);
+                useUserStore.setUid(id);
                 router.push('/home');
             }
         }
