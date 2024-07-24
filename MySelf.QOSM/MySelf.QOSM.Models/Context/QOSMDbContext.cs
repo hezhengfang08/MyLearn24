@@ -37,12 +37,19 @@ namespace MySelf.QOSM.Models.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            //读取配置文件中的值
             var settings = ConfigHelper.GetSectionClassValue<AppSettings>("AppSettings");
             if (!optionsBuilder.IsConfigured)
             {
                 string connStr = settings.SqlServerConnection;
                 optionsBuilder.UseSqlServer(connStr);
             }
+            ////数据迁移时，不可以用上面的写法
+            //if (!optionsBuilder.IsConfigured)
+            //{
+               
+            //    optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS01;Database=QuickOrderSystem;User ID=sa;Password=123456;");
+            //}
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
