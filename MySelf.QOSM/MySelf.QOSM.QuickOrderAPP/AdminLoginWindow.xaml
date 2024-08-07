@@ -7,8 +7,12 @@
         xmlns:utils="clr-namespace:MySelf.QOSM.QuickOrderAPP.Utils"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:MySelf.QOSM.QuickOrderAPP"
+        xmlns:vm="clr-namespace:MySelf.QOSM.QuickOrderAPP.ViewModels"
         mc:Ignorable="d"
         Title="后台用户登录" Height="460" Width="700" Style="{StaticResource noneBorderyWindowStyle}" WindowStartupLocation="CenterScreen" Name="adminLoginWindow">
+    <Window.DataContext>
+        <vm:AdminLoginViewModel/>
+    </Window.DataContext>
     <Border Style="{StaticResource windowBorderStyle}">
         <Border.Background>
             <ImageBrush ImageSource="imgs/admin_login_bg.jpg"/>
@@ -24,8 +28,6 @@
                     <Button Content="0" Style="{StaticResource controlBtnStyle}" Command="{Binding MinWindowCmd}" CommandParameter="{Binding ElementName=adminLoginWindow}"></Button>
                     <Button Content="r" Style="{StaticResource controlBtnStyle}" Command="{Binding CloseWindowCmd}" CommandParameter="{Binding ElementName=adminLoginWindow}"></Button>
                 </StackPanel>
-                
-
             </Grid>
             <Grid>
                 <Border Margin="40,20,40,50" Background="#66FFFFFF"    CornerRadius="15">
