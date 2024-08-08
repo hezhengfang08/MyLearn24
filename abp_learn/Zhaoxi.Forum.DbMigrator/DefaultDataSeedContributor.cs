@@ -1,6 +1,7 @@
 ﻿using Magicodes.ExporterAndImporter.Core;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
+using System.Linq;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Zhaoxi.Forum.Application.Contracts;
@@ -16,9 +17,10 @@ public class DefaultDataSeedContributor : IDataSeedContributor, ITransientDepend
 
     public DefaultDataSeedContributor(IImporter importer,
         ICategoryAppService categoryAppService,
+        ILogger<DefaultDataSeedContributor> logger,
         ITopicAppService topicAppService)
     {
-        _logger = NullLogger<DefaultDataSeedContributor>.Instance;
+        _logger = logger;
         _importer = importer;
         _categoryAppService = categoryAppService;
         _topicAppService = topicAppService;
@@ -43,10 +45,23 @@ public class DefaultDataSeedContributor : IDataSeedContributor, ITransientDepend
     {
         var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Files", "category.xlsx");
         var import = _importer.Import<CategoryImportDto>(filePath);
-        if (import.IsCompleted && import.Result != null)
+        if (import.IsCompleted && import.Result != null && !import.Result.HasError)
         {
             var importDtos = import.Result.Data;
             await _categoryAppService.ImportAsync(importDtos);
+        }
+        else
+        {
+            var errMsgs = "";
+            foreach(var row in import.Result.RowErrors)
+            {
+                foreach(var item in row.FieldErrors )
+                {
+                    errMsgs += item.Key + ":" + item.Value;
+                }
+            }
+            var test =import?.Result?.RowErrors[0].FieldErrors?.FirstOrDefault().Key+import?.Result?.RowErrors[0].FieldErrors?.FirstOrDefault().Value;
+            _logger.LogError($"导入报错了,{errMsgs}");
         }
     }
 
