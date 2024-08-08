@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
+using Zhaoxi.Forum.Domain;
 using Zhaoxi.Forum.Domain.Entities;
 using Zhaoxi.Forum.EntityFrameworkCore.ModelConfigurations;
 
@@ -18,8 +19,10 @@ public class ForumDbContext : AbpDbContext<ForumDbContext>
     {
         base.OnModelCreating(builder);
 
-        builder.ApplyConfiguration(new CategoryDbMapping())
-            .ApplyConfiguration(new TopicDbMapping());
+        builder.ApplyConfigurationsFromAssembly(typeof(ForumDbContext).Assembly);
+        //builder.ApplyConfiguration(new CategoryDbMapping())
+        //    .ApplyConfiguration(new TopicDbMapping())
+        //    .ApplyConfiguration(new UserDbMapping());
     }
 
     public DbSet<CategoryEntity> Categories { get; set; }

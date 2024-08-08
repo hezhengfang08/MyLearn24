@@ -1,9 +1,8 @@
 ﻿using Volo.Abp.Modularity;
 
-namespace Zhaoxi.Forum.Domain.Entities
-{
-    public class ForumDomainModule : AbpModule
-    {
+namespace Zhaoxi.Forum.Domain;
 
-    }
+public class ForumDomainModule : AbpModule
+{
+
 }

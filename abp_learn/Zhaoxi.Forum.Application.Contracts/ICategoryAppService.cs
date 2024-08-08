@@ -2,6 +2,7 @@
 using Volo.Abp.Application.Services;
 using Zhaoxi.Forum.Domain.Entities;
 
+
 namespace Zhaoxi.Forum.Application.Contracts;
 
 public interface ICategoryAppService : IApplicationService

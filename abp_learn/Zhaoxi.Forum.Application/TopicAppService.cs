@@ -1,6 +1,7 @@
 ﻿using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Zhaoxi.Forum.Application.Contracts;
+using Zhaoxi.Forum.Domain;
 using Zhaoxi.Forum.Domain.Entities;
 using Zhaoxi.Forum.Domain.Repositories;
 
@@ -9,17 +10,17 @@ namespace Zhaoxi.Forum.Application;
 public class TopicAppService : ApplicationService, ITopicAppService
 {
     private readonly ITopicRepository _topicRepository;
-    private readonly ICategoryAppService _categoryRepositroy;
+    private readonly ICategoryRepositroy _categoryRepositroy;
+
+    public TopicAppService(ITopicRepository topicRepository, ICategoryRepositroy categoryRepositroy)
+    {
+        _topicRepository = topicRepository;
+        _categoryRepositroy = categoryRepositroy;
+    }
 
     public async Task<bool> AnyAsync()
     {
         return await _topicRepository.GetCountAsync() > 0;
-    }
-
-    public TopicAppService(ITopicRepository topicRepository, ICategoryAppService categoryRepositroy)
-    {
-        _topicRepository = topicRepository;
-        _categoryRepositroy = categoryRepositroy;
     }
     public async Task ImportAsync(IEnumerable<TopicImportDto> importDtos)
     {

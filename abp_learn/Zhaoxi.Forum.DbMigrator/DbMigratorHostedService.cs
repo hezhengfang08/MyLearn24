@@ -23,8 +23,8 @@ IConfiguration configuration)
     {
         using (var application = AbpApplicationFactory.Create<ForumDbMigratorModule>(options =>
         {
-            options.Services.ReplaceConfiguration(_configuration);
             options.UseAutofac();
+            options.Services.ReplaceConfiguration(_configuration);
             options.Services.AddLogging(c => c.AddSerilog());
         }))
         {
@@ -36,7 +36,7 @@ IConfiguration configuration)
             //    .Migrate();
             await application
                 .ServiceProvider
-                .GetRequiredService<IDataSeedContributor>()
+                .GetRequiredService<DefaultDataSeedContributor>()
                 .SeedAsync(new DataSeedContext());
 
 

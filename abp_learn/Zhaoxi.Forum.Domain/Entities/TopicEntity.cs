@@ -1,4 +1,8 @@
-﻿namespace Zhaoxi.Forum.Domain.Entities;
+﻿
+
+using Zhaoxi.Forum.Domain.Entities;
+
+namespace Zhaoxi.Forum.Domain;
 
 /// <summary>
 /// 主题/帖子

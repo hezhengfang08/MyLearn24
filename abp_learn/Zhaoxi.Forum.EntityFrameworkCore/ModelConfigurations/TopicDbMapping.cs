@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Zhaoxi.Forum.Domain;
 using Zhaoxi.Forum.Domain.Entities;
 
 namespace Zhaoxi.Forum.EntityFrameworkCore.ModelConfigurations;
