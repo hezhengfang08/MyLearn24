@@ -1,8 +1,7 @@
 ﻿using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 using Zhaoxi.Forum.Domain;
-using Zhaoxi.Forum.Domain.Entities;
-using Zhaoxi.Forum.Domain.Repositories;
+using Zhaoxi.Forum.Domain.Topic;
 
 namespace Zhaoxi.Forum.EntityFrameworkCore;
 

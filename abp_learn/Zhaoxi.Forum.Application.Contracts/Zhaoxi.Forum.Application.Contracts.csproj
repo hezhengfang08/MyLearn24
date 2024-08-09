@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Zhaoxi.Forum.Domain.Shared\Zhaoxi.Forum.Domain.Shared.csproj" />
     <ProjectReference Include="..\Zhaoxi.Forum.Domain\Zhaoxi.Forum.Domain.csproj" />
   </ItemGroup>
 

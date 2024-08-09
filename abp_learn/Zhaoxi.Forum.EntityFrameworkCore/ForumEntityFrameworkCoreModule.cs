@@ -3,7 +3,7 @@ using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.MySQL;
 using Volo.Abp.Modularity;
 using Zhaoxi.Forum.Domain;
-using Zhaoxi.Forum.Domain.Entities;
+
 
 namespace Zhaoxi.Forum.EntityFrameworkCore;
 

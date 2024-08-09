@@ -2,8 +2,8 @@
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
 using Zhaoxi.Forum.Application.Contracts;
+using Zhaoxi.Forum.Application.Contracts.Auth;
 using Zhaoxi.Forum.Domain;
-using Zhaoxi.Forum.Domain.Entities;
 
 namespace Zhaoxi.Forum.Application;
 
@@ -20,6 +20,8 @@ public class ForumApplicationModule : AbpModule
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         var services = context.Services;
+        //注入
+        services.AddScoped<IJwtAppService, JwtAppService>();
         // 添加ObjectMapper注入
         services.AddAutoMapperObjectMapper<ForumApplicationModule>();
 

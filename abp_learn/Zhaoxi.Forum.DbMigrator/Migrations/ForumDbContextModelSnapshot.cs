@@ -24,7 +24,7 @@ namespace Zhaoxi.Forum.DbMigrator.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Zhaoxi.Forum.Domain.Entities.CategoryEntity", b =>
+            modelBuilder.Entity("Zhaoxi.Forum.Domain.Category.CategoryEntity", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -96,7 +96,62 @@ namespace Zhaoxi.Forum.DbMigrator.Migrations
                     b.ToTable("category", (string)null);
                 });
 
-            modelBuilder.Entity("Zhaoxi.Forum.Domain.Entities.TopicEntity", b =>
+            modelBuilder.Entity("Zhaoxi.Forum.Domain.Topic.PostsEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id")
+                        .HasComment("主键标识");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("creation_time")
+                        .HasComment("创建时间");
+
+                    b.Property<string>("IpAddress")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("ip_address")
+                        .HasComment("IP地址");
+
+                    b.Property<ulong?>("IsRead")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit(1)")
+                        .HasDefaultValue(0ul)
+                        .HasColumnName("is_read")
+                        .HasComment("是否已读");
+
+                    b.Property<string>("PostContent")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("post_content")
+                        .HasComment("回复内容");
+
+                    b.Property<long?>("RecivedPostId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("recived_post_id")
+                        .HasComment("回复的评论的id");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("user_id")
+                        .HasComment("用户id");
+
+                    b.Property<long>("topic_id")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id")
+                        .HasName("pk_posts_id");
+
+                    b.HasIndex("topic_id");
+
+                    b.ToTable("posts", (string)null);
+                });
+
+            modelBuilder.Entity("Zhaoxi.Forum.Domain.TopicEntity", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -186,9 +241,109 @@ namespace Zhaoxi.Forum.DbMigrator.Migrations
                     b.ToTable("topic", (string)null);
                 });
 
-            modelBuilder.Entity("Zhaoxi.Forum.Domain.Entities.TopicEntity", b =>
+            modelBuilder.Entity("Zhaoxi.Forum.Domain.User.UserEntity", b =>
                 {
-                    b.HasOne("Zhaoxi.Forum.Domain.Entities.CategoryEntity", "Category")
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id")
+                        .HasComment("主键标识");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime?>("BlackTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("black_time")
+                        .HasComment("拉入黑名单时间");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("creation_time")
+                        .HasComment("创建时间");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("email")
+                        .HasComment("邮箱");
+
+                    b.Property<int?>("FollowTimes")
+                        .HasColumnType("int")
+                        .HasColumnName("follow_times")
+                        .HasComment("关注数量");
+
+                    b.Property<ulong?>("IsBlack")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit(1)")
+                        .HasDefaultValue(0ul)
+                        .HasColumnName("is_black")
+                        .HasComment("是否在黑名单");
+
+                    b.Property<ulong>("IsPass")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit(1)")
+                        .HasDefaultValue(0ul)
+                        .HasColumnName("is_pass")
+                        .HasComment("是否通过");
+
+                    b.Property<string>("NickName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("nick_name")
+                        .HasComment("昵称");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("password")
+                        .HasComment("密码");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)")
+                        .HasColumnName("phone")
+                        .HasComment("手机号");
+
+                    b.Property<int?>("Sex")
+                        .HasColumnType("int")
+                        .HasColumnName("sex")
+                        .HasComment("性别");
+
+                    b.Property<int?>("TopicTimes")
+                        .HasColumnType("int")
+                        .HasColumnName("topic_times")
+                        .HasComment("发帖数量");
+
+                    b.Property<string>("UserAvatar")
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)")
+                        .HasColumnName("user_avatar")
+                        .HasComment("用户头像");
+
+                    b.HasKey("Id")
+                        .HasName("pk_user_id");
+
+                    b.ToTable("user", (string)null);
+                });
+
+            modelBuilder.Entity("Zhaoxi.Forum.Domain.Topic.PostsEntity", b =>
+                {
+                    b.HasOne("Zhaoxi.Forum.Domain.TopicEntity", "Topic")
+                        .WithMany("Postses")
+                        .HasForeignKey("topic_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Topic");
+                });
+
+            modelBuilder.Entity("Zhaoxi.Forum.Domain.TopicEntity", b =>
+                {
+                    b.HasOne("Zhaoxi.Forum.Domain.Category.CategoryEntity", "Category")
                         .WithMany("Topics")
                         .HasForeignKey("category_id")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -197,9 +352,14 @@ namespace Zhaoxi.Forum.DbMigrator.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Zhaoxi.Forum.Domain.Entities.CategoryEntity", b =>
+            modelBuilder.Entity("Zhaoxi.Forum.Domain.Category.CategoryEntity", b =>
                 {
                     b.Navigation("Topics");
+                });
+
+            modelBuilder.Entity("Zhaoxi.Forum.Domain.TopicEntity", b =>
+                {
+                    b.Navigation("Postses");
                 });
 #pragma warning restore 612, 618
         }

@@ -35,6 +35,9 @@
 	  <None Update="Files\topic.xlsx">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
+	  <None Update="Files\user.xlsx">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 </Project>
