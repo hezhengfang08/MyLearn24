@@ -7,25 +7,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01.项目起始", "01.项�
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.业务模块", "02.业务模块", "{5F575A19-B21C-4003-A610-BB6EA987E56D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.PMS.Client.Start", "MySelf.PMS.Client.Start\MySelf.PMS.Client.Start.csproj", "{6ECA6164-600F-4E9B-AD81-270415DD57CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySelf.PMS.Client.Start", "MySelf.PMS.Client.Start\MySelf.PMS.Client.Start.csproj", "{6ECA6164-600F-4E9B-AD81-270415DD57CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.PMS.Client.FileModule", "MySelf.PMS.Client.FileModule\MySelf.PMS.Client.FileModule.csproj", "{04551131-1927-4BA2-B64C-C50001839D51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySelf.PMS.Client.FileModule", "MySelf.PMS.Client.FileModule\MySelf.PMS.Client.FileModule.csproj", "{04551131-1927-4BA2-B64C-C50001839D51}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03.业务逻辑层", "03.业务逻辑层", "{AD36F0ED-67EC-4F77-9C6A-8AD3846B7A48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.PMS.Client.IBLL", "MySelf.PMS.Client.IBLL\MySelf.PMS.Client.IBLL.csproj", "{8029FAF2-5A57-438D-9EFE-C48C9CD3396E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySelf.PMS.Client.IBLL", "MySelf.PMS.Client.IBLL\MySelf.PMS.Client.IBLL.csproj", "{8029FAF2-5A57-438D-9EFE-C48C9CD3396E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.PMS.Client.BLL", "MySelf.PMS.Client.BLL\MySelf.PMS.Client.BLL.csproj", "{5382D83B-F29F-4995-AC0A-881AC451596D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySelf.PMS.Client.BLL", "MySelf.PMS.Client.BLL\MySelf.PMS.Client.BLL.csproj", "{5382D83B-F29F-4995-AC0A-881AC451596D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04.数据访问层", "04.数据访问层", "{D1E352EC-E211-44CC-8C1E-207536C130A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.PMS.Client.IDAL", "MySelf.PMS.Client.IDAL\MySelf.PMS.Client.IDAL.csproj", "{30AA47E4-045E-45C1-A880-C78DF67D35BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySelf.PMS.Client.IDAL", "MySelf.PMS.Client.IDAL\MySelf.PMS.Client.IDAL.csproj", "{30AA47E4-045E-45C1-A880-C78DF67D35BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.PMS.Client.DAL", "MySelf.PMS.Client.DAL\MySelf.PMS.Client.DAL.csproj", "{D0154FFD-E0D4-4835-8C1E-C3FF08E12523}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySelf.PMS.Client.DAL", "MySelf.PMS.Client.DAL\MySelf.PMS.Client.DAL.csproj", "{D0154FFD-E0D4-4835-8C1E-C3FF08E12523}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05.公共资源", "05.公共资源", "{0C614798-10A3-4B9C-9D64-468B96F32C40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.PMS.Client.Assets", "MySelf.PMS.Client.Assets\MySelf.PMS.Client.Assets.csproj", "{6512F5CF-02FD-424C-8D4B-6E611D2453FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySelf.PMS.Client.Assets", "MySelf.PMS.Client.Assets\MySelf.PMS.Client.Assets.csproj", "{6512F5CF-02FD-424C-8D4B-6E611D2453FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.PMS.Client.Entities", "MySelf.PMS.Client.Entities\MySelf.PMS.Client.Entities.csproj", "{E389ED9F-18EB-434C-9FC5-64B1BD2DCF48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.PMS.Client.Upgrade", "MySelf.PMS.Client.Upgrade\MySelf.PMS.Client.Upgrade.csproj", "{0AEC1187-C3C6-48A4-AB9C-C6D0CFE7B2D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +65,14 @@ Global
 		{6512F5CF-02FD-424C-8D4B-6E611D2453FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6512F5CF-02FD-424C-8D4B-6E611D2453FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6512F5CF-02FD-424C-8D4B-6E611D2453FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E389ED9F-18EB-434C-9FC5-64B1BD2DCF48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E389ED9F-18EB-434C-9FC5-64B1BD2DCF48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E389ED9F-18EB-434C-9FC5-64B1BD2DCF48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E389ED9F-18EB-434C-9FC5-64B1BD2DCF48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AEC1187-C3C6-48A4-AB9C-C6D0CFE7B2D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AEC1187-C3C6-48A4-AB9C-C6D0CFE7B2D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AEC1187-C3C6-48A4-AB9C-C6D0CFE7B2D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AEC1187-C3C6-48A4-AB9C-C6D0CFE7B2D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +85,8 @@ Global
 		{30AA47E4-045E-45C1-A880-C78DF67D35BA} = {D1E352EC-E211-44CC-8C1E-207536C130A0}
 		{D0154FFD-E0D4-4835-8C1E-C3FF08E12523} = {D1E352EC-E211-44CC-8C1E-207536C130A0}
 		{6512F5CF-02FD-424C-8D4B-6E611D2453FA} = {0C614798-10A3-4B9C-9D64-468B96F32C40}
+		{E389ED9F-18EB-434C-9FC5-64B1BD2DCF48} = {0C614798-10A3-4B9C-9D64-468B96F32C40}
+		{0AEC1187-C3C6-48A4-AB9C-C6D0CFE7B2D3} = {9FA32BDA-3A1B-4839-BC94-9D3DB7BD7154}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B0F0D944-5058-4EC0-A5BD-D871E83B31C1}
