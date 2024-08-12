@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="SqlSugarCore" Version="5.1.4.166" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MySelf.PMS.Server.Entities\MySelf.PMS.Server.Entities.csproj" />
+    <ProjectReference Include="..\MySelf.PMS.Server.IService\MySelf.PMS.Server.IService.csproj" />
+  </ItemGroup>
+
 </Project>

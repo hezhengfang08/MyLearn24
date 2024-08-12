@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MySelf.PMS.Server.Entities\MySelf.PMS.Server.Entities.csproj" />
+  </ItemGroup>
+
 </Project>
