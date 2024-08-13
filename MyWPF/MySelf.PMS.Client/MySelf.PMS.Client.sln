@@ -27,9 +27,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05.公共资源", "05.公�
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySelf.PMS.Client.Assets", "MySelf.PMS.Client.Assets\MySelf.PMS.Client.Assets.csproj", "{6512F5CF-02FD-424C-8D4B-6E611D2453FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.PMS.Client.Entities", "MySelf.PMS.Client.Entities\MySelf.PMS.Client.Entities.csproj", "{E389ED9F-18EB-434C-9FC5-64B1BD2DCF48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySelf.PMS.Client.Entities", "MySelf.PMS.Client.Entities\MySelf.PMS.Client.Entities.csproj", "{E389ED9F-18EB-434C-9FC5-64B1BD2DCF48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.PMS.Client.Upgrade", "MySelf.PMS.Client.Upgrade\MySelf.PMS.Client.Upgrade.csproj", "{0AEC1187-C3C6-48A4-AB9C-C6D0CFE7B2D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySelf.PMS.Client.Upgrade", "MySelf.PMS.Client.Upgrade\MySelf.PMS.Client.Upgrade.csproj", "{0AEC1187-C3C6-48A4-AB9C-C6D0CFE7B2D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BEFD30B2-C434-40C0-B717-EFA3ABA5C82E}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
