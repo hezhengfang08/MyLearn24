@@ -4,6 +4,13 @@
              xmlns:local="clr-namespace:MySelf.PMS.Client.Start"
              xmlns:p="http://prismlibrary.com/">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/MySelf.PMS.Client.Assets;component/Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="/MySelf.PMS.Client.Assets;component/Styles/TextBoxStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <FontFamily x:Key="AliFont">/MySelf.PMS.Client.Assets;component/Fonts/AlibabaPuHuiTi-3-45-Light.ttf#阿里巴巴普惠体 3.0 45 Light</FontFamily>
+        </ResourceDictionary>
     </Application.Resources>
     </p:PrismApplication>

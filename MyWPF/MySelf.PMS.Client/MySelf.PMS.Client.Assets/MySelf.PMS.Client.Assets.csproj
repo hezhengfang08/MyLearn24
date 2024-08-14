@@ -1,9 +1,22 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\login_back.png" />
+    <None Remove="Images\login_img.png" />
+    <None Remove="Images\Logo_64.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\login_back.png" />
+    <Resource Include="Images\login_img.png" />
+    <Resource Include="Images\Logo_64.png" />
+  </ItemGroup>
 
 </Project>

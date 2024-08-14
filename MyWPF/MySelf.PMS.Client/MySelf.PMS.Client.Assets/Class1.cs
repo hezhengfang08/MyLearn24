@@ -1,7 +1,8 @@
-﻿namespace MySelf.PMS.Client.Assets
+
+namespace MySelf.PMS.Client.Assets
 {
     public class Class1
     {
-
     }
+
 }

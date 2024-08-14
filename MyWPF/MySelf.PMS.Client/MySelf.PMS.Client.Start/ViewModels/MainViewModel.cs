@@ -1,9 +1,7 @@
 ﻿using Prism.Services.Dialogs;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using System.Windows;
 
 namespace MySelf.PMS.Client.Start.ViewModels
 {
@@ -12,7 +10,13 @@ namespace MySelf.PMS.Client.Start.ViewModels
         public MainViewModel(IDialogService dialogService)
         {
             // 打开登录弹窗
-            dialogService.ShowDialog("LoginView");
+            dialogService.ShowDialog("LoginView", result =>
+            {
+                if (result.Result != ButtonResult.OK)
+                {
+                    Application.Current.Shutdown();
+                }
+            });
         }
     }
 }
