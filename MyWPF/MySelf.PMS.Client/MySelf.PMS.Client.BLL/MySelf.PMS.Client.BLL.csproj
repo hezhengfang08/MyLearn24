@@ -1,14 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MySelf.PMS.Client.Entities\MySelf.PMS.Client.Entities.csproj" />
     <ProjectReference Include="..\MySelf.PMS.Client.IBLL\MySelf.PMS.Client.IBLL.csproj" />
     <ProjectReference Include="..\MySelf.PMS.Client.IDAL\MySelf.PMS.Client.IDAL.csproj" />
+    <ProjectReference Include="..\MySelf.PMS.Client.Utils\MySelf.PMS.Client.Utils.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MySelf.PMS.Client.Upgrade": {
+      "commandName": "Project",
+      "commandLineArgs": "MySelf.PMS.Client.BLL.dll||100|werererer|\r\nMySelf.PMS.Client.IBLL.dll||110|erererere\r\nMySelf.PMS.Client.IDAL.dll||120|yyyyyyy"
+    }
+  }
+}

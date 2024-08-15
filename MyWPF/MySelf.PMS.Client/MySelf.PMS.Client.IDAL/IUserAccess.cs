@@ -8,6 +8,6 @@ namespace MySelf.PMS.Client.IDAL
 {
     public interface IUserAccess : IWebAccess
     {
-        bool Login(string username, string password);
+        string Login(string username, string password);
     }
 }

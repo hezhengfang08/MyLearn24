@@ -36,6 +36,8 @@ namespace MySelf.PMS.Client.Upgrade.DataAccess
             };
             // http://localhost:5273/api/File/download/none/Zhaoxi.PMS.Client.BLL.dll
             Debug.WriteLine("开始下载：" + web_file);
+            client.DownloadFileAsync(new Uri($"http://localhost:5021/api/File/download/{web_file}"),
+               local_file);
         }
 
 

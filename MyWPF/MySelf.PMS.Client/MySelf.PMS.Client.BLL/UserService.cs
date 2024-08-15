@@ -1,5 +1,7 @@
-﻿using MySelf.PMS.Client.IBLL;
+﻿using MySelf.PMS.Client.Entities;
+using MySelf.PMS.Client.IBLL;
 using MySelf.PMS.Client.IDAL;
+using MySelf.PMS.Client.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +17,17 @@ namespace MySelf.PMS.Client.BLL
         {
             _userAccess = userAccess;
         }
-        public bool Login(string username, string password)
+        public EmployeeEntity Login(string username, string password)
         {
-            return _userAccess.Login(username, password);
+            string json = _userAccess.Login(username, password);
+            ResultEntiy<EmployeeEntity> result = JsonUtil.Deserializer<ResultEntiy<EmployeeEntity>>(json);
+            if (result.RCode != ResultCode.Success)
+                throw new Exception(result.Message);
+
+
+            //将Entity -》  Model     如果这样处理的话，需要将所有Model独立到一个程序集中
+            return result.Data;
         }
     }
 }
+
