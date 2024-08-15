@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySelf.PMS.Server.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace MySelf.PMS.Server.IService
 {
     public interface IUserService
     {
-        bool CheckLogin(string username, string password);
+        SysEmployee? CheckLogin(string username, string password);
     }
 }

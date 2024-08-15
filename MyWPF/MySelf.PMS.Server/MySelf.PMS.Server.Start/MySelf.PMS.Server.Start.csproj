@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MySelf.PMS.Server.IService\MySelf.PMS.Server.IService.csproj" />
+    <ProjectReference Include="..\MySelf.PMS.Server.Models\MySelf.PMS.Server.Models.csproj" />
     <ProjectReference Include="..\MySelf.PMS.Server.Service\MySelf.PMS.Server.Service.csproj" />
   </ItemGroup>
 

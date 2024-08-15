@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MySelf.PMS.Server.Entities;
 using MySelf.PMS.Server.IService;
+using MySelf.PMS.Server.Models;
+using SqlSugar;
 
 namespace MySelf.PMS.Server.Start.Controllers
 {
@@ -15,8 +18,25 @@ namespace MySelf.PMS.Server.Start.Controllers
         }
         [HttpGet]
         public IActionResult Get(string un, string pw) {
-
-            return Ok(_userService.CheckLogin(un, pw));
+            Result<SysEmployee> result = new Result<SysEmployee>();
+            try
+            {
+                //throw new NotImplementedException();
+                var data = _userService.CheckLogin(un, pw);
+                if (data == null)
+                {
+                    result.State = StateEnum.Faile;
+                    result.Message = "用户名或密码错误";
+                }
+                else
+                    result.Data = data;
+            }
+            catch (Exception ex)
+            {
+                result.State = StateEnum.Error;
+                result.Message = ex.Message;
+            }
+            return Ok(result);
         }
     }
 }
