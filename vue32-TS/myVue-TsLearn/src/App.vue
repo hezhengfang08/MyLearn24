@@ -9,6 +9,6 @@ const store = useStore();  //定义store
  <NavBottom v-if="store.state.home.navState"/>
 </template>
 
-<style scoped>
-@import './assets/css/common.css'
+<style >
+@import '@/assets/css/common.css'
 </style>
