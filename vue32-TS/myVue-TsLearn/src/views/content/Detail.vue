@@ -29,7 +29,6 @@ const route = useRoute();
 const store = useStore();  //定义store
 const imgData = ref<IDetailImg[]>([]);
 const infoData = ref<IDetailInfo[]>([]);
-
 function getData(id:number) {
     getDetails<[IDetailImg[],IDetailInfo[]]>({mId:id}).then(res=>{
         imgData.value = res.data[0];
