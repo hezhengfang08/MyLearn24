@@ -1,6 +1,0 @@
-@Zhaoxi.Forum.HttpApi.Host_HostAddress = http://localhost:5005
-
-GET {{Zhaoxi.Forum.HttpApi.Host_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

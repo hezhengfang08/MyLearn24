@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35004.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myself.SimpleEvent.Client", "Myself.SimpleEvent\Myself.SimpleEvent.Client.csproj", "{F96C5CB7-C410-4B13-B3E3-6D77898F05A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myself.SimpleEvent.Bus", "Myself.SimpleEvent.Bus\Myself.SimpleEvent.Bus.csproj", "{2640E47D-B15C-42E9-88B4-D52F39450909}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F96C5CB7-C410-4B13-B3E3-6D77898F05A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F96C5CB7-C410-4B13-B3E3-6D77898F05A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F96C5CB7-C410-4B13-B3E3-6D77898F05A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F96C5CB7-C410-4B13-B3E3-6D77898F05A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2640E47D-B15C-42E9-88B4-D52F39450909}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2640E47D-B15C-42E9-88B4-D52F39450909}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2640E47D-B15C-42E9-88B4-D52F39450909}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2640E47D-B15C-42E9-88B4-D52F39450909}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AAFA3DE9-E7A4-430B-9E32-69E36A60E0CB}
+	EndGlobalSection
+EndGlobal
