@@ -1,4 +1,5 @@
 <template>
+    
     <div>
         <div class="other-header">
             <img :src="imgData.length>0?imgData[0].image_url : img1">
