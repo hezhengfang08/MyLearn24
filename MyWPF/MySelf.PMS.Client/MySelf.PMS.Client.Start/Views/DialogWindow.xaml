@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:MySelf.PMS.Client.Start.Views"
         mc:Ignorable="d" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen" Background="{x:Null}"
-         Height="{Binding Content.Height,RelativeSource={RelativeSource Self}}"
-        Width="{Binding Content.Width,RelativeSource={RelativeSource Self}}">
+        Title="{Binding Title}"
+        Width="{Binding Content.Width,RelativeSource={RelativeSource Self}}"
+        Height="{Binding Content.Height,RelativeSource={RelativeSource Self}}">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="-1" NonClientFrameEdges="None"/>
     </WindowChrome.WindowChrome>

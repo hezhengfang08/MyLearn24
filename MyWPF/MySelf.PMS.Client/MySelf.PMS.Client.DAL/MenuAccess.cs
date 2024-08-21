@@ -8,16 +8,15 @@ using System.Threading.Tasks;
 
 namespace MySelf.PMS.Client.DAL
 {
-    public class FileAccess : WebAccess, IFileAccess
+    public class MenuAccess : WebAccess, IMenuAccess
     {
-        public FileAccess(GlobalValues globalValues) : base(globalValues)
+        public MenuAccess(GlobalValues globalValues) : base(globalValues)
         {
         }
-        public string GetUpgradeFiles()
+        public string GetAllMenus()
         {
-            string uri = "/api/File";
-
-            return this.Get(uri);
+            string url = "/api/Menu/all";
+            return this.Get(url);
         }
     }
 }

@@ -4,9 +4,119 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MySelf.PMS.Client.Start.Views"
-        mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
+        xmlns:p="http://prismlibrary.com/"
+        mc:Ignorable="d" Background="#F4F7FF" WindowStartupLocation="CenterScreen"
+Title="我的物业系统" Height="750" Width="1300">
+    <WindowChrome.WindowChrome>
+        <WindowChrome NonClientFrameEdges="None" UseAeroCaptionButtons="False"/>
+    </WindowChrome.WindowChrome>
+    <Window.Resources>
+        <Style TargetType="RadioButton" x:Key="NavTabButtonStyle">
+            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="Margin" Value="5,0"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#3E7FFF"/>
+            <Setter Property="Effect" Value="{StaticResource shadowEffect}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid Height="30">
+                            <Border CornerRadius="15" Background="{TemplateBinding Background}"
+                          BorderBrush="#443E7FFF" BorderThickness="1"/>
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Background" Value="#3E7FFF"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Button" x:Key="ControlButtonStyle">
+            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+            <Setter Property="FontFamily" Value="{StaticResource Iconfont}"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="Transparent">
+                            <Border Background="Transparent" Name="border">
+                                <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#3000" TargetName="border"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#5000" TargetName="border"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border Background="#FFF" CornerRadius="0,0,10,10">
+            <Border.Effect>
+                <DropShadowEffect Color="#DDD" ShadowDepth="2" BlurRadius="5" Direction="-90" Opacity="0.2"/>
+            </Border.Effect>
+        </Border>
+
+        <Image Source="/MySelf.PMS.Client.Assets;component/Images/Logo_64.png" Margin="10,10"
+             HorizontalAlignment="Left">
+            <Image.Effect>
+                <DropShadowEffect Color="Gray" BlurRadius="5" ShadowDepth="0" Opacity="0.2"/>
+            </Image.Effect>
+        </Image>
+
+        <TextBlock FontFamily="{StaticResource DyhFont}" HorizontalAlignment="Left"
+         FontSize="15" VerticalAlignment="Center" Margin="55,0,0,0"
+         Foreground="#3E7FFF">
+            <TextBlock.RenderTransform>
+                <ScaleTransform ScaleX="1.4"/>
+            </TextBlock.RenderTransform>
+          <Run Text="我的物业管理系统"/>
+          <Run Text="  v1.0" FontSize="13"/>
+        </TextBlock>
+
+        <ItemsControl VerticalAlignment="Bottom" Margin="280,0,0,5"
+                    ItemsSource="{Binding Menus}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <RadioButton Content="{Binding MenuHeader}" 
+                               Style="{StaticResource NavTabButtonStyle}" IsChecked="True"
+                               Command="{Binding DataContext.PageSwitchCommand,RelativeSource={RelativeSource AncestorType=Window}}"
+                               CommandParameter="{Binding MenuId}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Button Content="&#xe7e6;" Style="{StaticResource ControlButtonStyle}"/>
+            <Button Content="&#xe694;" Style="{StaticResource ControlButtonStyle}"/>
+            <Button Content="&#xe625;" Style="{StaticResource ControlButtonStyle}"/>
+        </StackPanel>
+
+        <ContentControl p:RegionManager.RegionName="MainRegion"/>
     </Grid>
 </Window>

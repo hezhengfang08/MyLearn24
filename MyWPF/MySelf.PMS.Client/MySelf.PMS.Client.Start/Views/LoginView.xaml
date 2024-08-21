@@ -136,7 +136,7 @@
 
         <Grid Width="180" Height="230" Grid.RowSpan="5" HorizontalAlignment="Right"
            Margin="50,10,50,0" Name="grid"
-           Visibility="Collapsed" Opacity="0">
+           Visibility="Visible" Opacity="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1.5*"/>
                 <RowDefinition/>

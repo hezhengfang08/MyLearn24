@@ -4,10 +4,10 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
+
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Automation;
+
 
 namespace MySelf.PMS.Client.Upgrade.DataAccess
 {
@@ -25,7 +25,7 @@ namespace MySelf.PMS.Client.Upgrade.DataAccess
             Action<int, long> progress)
         {
             // 需要知道当前文件已经下载完成，可进行下一个文件的下载
-            client.DownloadDataCompleted += (sender, eventarg) =>
+            client.DownloadFileCompleted += (sender, eventarg) =>
             {
                 Debug.WriteLine("下载完成：" + web_file);
                 completed?.Invoke(eventarg);// 可以异常信息
@@ -36,7 +36,7 @@ namespace MySelf.PMS.Client.Upgrade.DataAccess
             };
             // http://localhost:5273/api/File/download/none/Zhaoxi.PMS.Client.BLL.dll
             Debug.WriteLine("开始下载：" + web_file);
-            client.DownloadFileAsync(new Uri($"http://localhost:5021/api/File/download/{web_file}"),
+            client.DownloadFileAsync(new Uri($"http://localhost:5273/api/File/download/{web_file}"),
                local_file);
         }
 

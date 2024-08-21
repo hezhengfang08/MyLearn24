@@ -28,10 +28,12 @@ namespace MySelf.PMS.Client.Start
 
             containerRegistry.Register<IUserService, UserService>();
             containerRegistry.Register<IFileService, FileService>();
-
+            containerRegistry.Register<IFileService, FileService>();
+            containerRegistry.Register<IMenuService, MenuService>();
 
             containerRegistry.Register<IUserAccess, UserAccess>();
             containerRegistry.Register<IFileAccess, FileAccess>();
+            containerRegistry.Register<IMenuAccess, MenuAccess>();
         }
     }
 
