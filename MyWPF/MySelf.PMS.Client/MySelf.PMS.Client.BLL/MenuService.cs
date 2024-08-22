@@ -19,13 +19,18 @@ namespace MySelf.PMS.Client.BLL
         public IEnumerable<MenuEntity> GetAllMenus()
         {
             string json = _menuAccess.GetAllMenus();
-            var result = JsonUtil.Deserializer<ResultEntiy<MenuEntity[]>>(json);
-            if (result == null)
-                throw new Exception("菜单数据获取失败!");
-            if (result.RCode != ResultCode.Success)
-                throw new Exception(result.Message);
+            if (!string.IsNullOrEmpty(json))
+            {
+                var result = JsonUtil.Deserializer<ResultEntiy<MenuEntity[]>>(json);
+                if (result == null)
+                    throw new Exception("菜单数据获取失败!");
+                if (result.State != ResultCode.Success)
+                    throw new Exception(result.Message);
 
-            return result.Data;
+                return result.Data;
+            }
+            return null;
+
         }
     }
 }

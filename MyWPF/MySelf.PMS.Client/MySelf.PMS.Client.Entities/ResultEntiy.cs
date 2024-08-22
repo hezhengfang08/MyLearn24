@@ -8,15 +8,15 @@ namespace MySelf.PMS.Client.Entities
 {
     public class ResultEntiy<T>
     {
-        public ResultCode RCode { get; set; }
+        public ResultCode State { get; set; }
         public string Message { get; set; }
         public T Data { get; set; }
     }
 
     public enum ResultCode {
-        Success =1,
-        Fail = 2,
-        Error =3
+        Success =200,
+        Fail = 400,
+        Error =500
     }
 
 }

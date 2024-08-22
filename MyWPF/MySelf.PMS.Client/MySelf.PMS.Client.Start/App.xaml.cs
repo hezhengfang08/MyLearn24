@@ -1,6 +1,7 @@
 ﻿
 using MySelf.PMS.Client.BLL;
 using MySelf.PMS.Client.DAL;
+using MySelf.PMS.Client.Entities;
 using MySelf.PMS.Client.IBLL;
 using MySelf.PMS.Client.IDAL;
 using MySelf.PMS.Client.Start.Views;
@@ -30,7 +31,7 @@ namespace MySelf.PMS.Client.Start
             containerRegistry.Register<IFileService, FileService>();
             containerRegistry.Register<IFileService, FileService>();
             containerRegistry.Register<IMenuService, MenuService>();
-
+            containerRegistry.RegisterSingleton<GlobalValues>();  //保持记录
             containerRegistry.Register<IUserAccess, UserAccess>();
             containerRegistry.Register<IFileAccess, FileAccess>();
             containerRegistry.Register<IMenuAccess, MenuAccess>();

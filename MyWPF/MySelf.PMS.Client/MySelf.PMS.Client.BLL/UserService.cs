@@ -21,7 +21,7 @@ namespace MySelf.PMS.Client.BLL
         {
             string json = _userAccess.Login(username, password);
             ResultEntiy<EmployeeEntity> result = JsonUtil.Deserializer<ResultEntiy<EmployeeEntity>>(json);
-            if (result.RCode != ResultCode.Success)
+            if (result.State != ResultCode.Success)
                 throw new Exception(result.Message);
 
 
