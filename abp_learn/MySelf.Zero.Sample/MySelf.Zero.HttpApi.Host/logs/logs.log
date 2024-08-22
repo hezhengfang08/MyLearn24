@@ -1,0 +1,92 @@
+2024-08-22 15:14:00.844 +08:00 [INF] Loaded ABP modules:
+2024-08-22 15:14:00.849 +08:00 [INF] - MySelf.Zero.HttpApi.Host.ZeroHttpApiHostModule
+2024-08-22 15:14:00.849 +08:00 [INF]   - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2024-08-22 15:14:00.849 +08:00 [INF]     - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2024-08-22 15:14:00.849 +08:00 [INF]       - Volo.Abp.Auditing.AbpAuditingModule
+2024-08-22 15:14:00.849 +08:00 [INF]         - Volo.Abp.Data.AbpDataModule
+2024-08-22 15:14:00.849 +08:00 [INF]           - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2024-08-22 15:14:00.849 +08:00 [INF]             - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2024-08-22 15:14:00.849 +08:00 [INF]             - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2024-08-22 15:14:00.849 +08:00 [INF]           - Volo.Abp.Uow.AbpUnitOfWorkModule
+2024-08-22 15:14:00.849 +08:00 [INF]           - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2024-08-22 15:14:00.849 +08:00 [INF]         - Volo.Abp.Json.AbpJsonModule
+2024-08-22 15:14:00.849 +08:00 [INF]           - Volo.Abp.Json.SystemTextJson.AbpJsonSystemTextJsonModule
+2024-08-22 15:14:00.849 +08:00 [INF]             - Volo.Abp.Json.AbpJsonAbstractionsModule
+2024-08-22 15:14:00.849 +08:00 [INF]             - Volo.Abp.Timing.AbpTimingModule
+2024-08-22 15:14:00.849 +08:00 [INF]               - Volo.Abp.Localization.AbpLocalizationModule
+2024-08-22 15:14:00.849 +08:00 [INF]                 - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2024-08-22 15:14:00.849 +08:00 [INF]                 - Volo.Abp.Settings.AbpSettingsModule
+2024-08-22 15:14:00.849 +08:00 [INF]                   - Volo.Abp.Security.AbpSecurityModule
+2024-08-22 15:14:00.849 +08:00 [INF]                 - Volo.Abp.Threading.AbpThreadingModule
+2024-08-22 15:14:00.849 +08:00 [INF]         - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2024-08-22 15:14:00.849 +08:00 [INF]           - Volo.Abp.MultiTenancy.AbpMultiTenancyAbstractionsModule
+2024-08-22 15:14:00.849 +08:00 [INF]         - Volo.Abp.Auditing.AbpAuditingContractsModule
+2024-08-22 15:14:00.849 +08:00 [INF]       - Volo.Abp.Http.AbpHttpModule
+2024-08-22 15:14:00.849 +08:00 [INF]         - Volo.Abp.Http.AbpHttpAbstractionsModule
+2024-08-22 15:14:00.849 +08:00 [INF]         - Volo.Abp.Minify.AbpMinifyModule
+2024-08-22 15:14:00.849 +08:00 [INF]       - Volo.Abp.Authorization.AbpAuthorizationModule
+2024-08-22 15:14:00.849 +08:00 [INF]         - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2024-08-22 15:14:00.849 +08:00 [INF]       - Volo.Abp.Validation.AbpValidationModule
+2024-08-22 15:14:00.849 +08:00 [INF]       - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2024-08-22 15:14:00.849 +08:00 [INF]       - Volo.Abp.AspNetCore.AbpAspNetCoreAbstractionsModule
+2024-08-22 15:14:00.849 +08:00 [INF]     - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2024-08-22 15:14:00.849 +08:00 [INF]     - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2024-08-22 15:14:00.849 +08:00 [INF]       - Volo.Abp.Application.AbpDddApplicationContractsModule
+2024-08-22 15:14:00.849 +08:00 [INF]     - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2024-08-22 15:14:00.849 +08:00 [INF]       - Volo.Abp.UI.AbpUiModule
+2024-08-22 15:14:00.849 +08:00 [INF]     - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2024-08-22 15:14:00.849 +08:00 [INF]     - Volo.Abp.Application.AbpDddApplicationModule
+2024-08-22 15:14:00.849 +08:00 [INF]       - Volo.Abp.Domain.AbpDddDomainModule
+2024-08-22 15:14:00.849 +08:00 [INF]         - Volo.Abp.EventBus.AbpEventBusModule
+2024-08-22 15:14:00.849 +08:00 [INF]           - Volo.Abp.Guids.AbpGuidsModule
+2024-08-22 15:14:00.849 +08:00 [INF]           - Volo.Abp.BackgroundWorkers.AbpBackgroundWorkersModule
+2024-08-22 15:14:00.849 +08:00 [INF]           - Volo.Abp.DistributedLocking.AbpDistributedLockingAbstractionsModule
+2024-08-22 15:14:00.849 +08:00 [INF]         - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2024-08-22 15:14:00.849 +08:00 [INF]         - Volo.Abp.Specifications.AbpSpecificationsModule
+2024-08-22 15:14:00.849 +08:00 [INF]         - Volo.Abp.Caching.AbpCachingModule
+2024-08-22 15:14:00.849 +08:00 [INF]           - Volo.Abp.Serialization.AbpSerializationModule
+2024-08-22 15:14:00.849 +08:00 [INF]         - Volo.Abp.Domain.AbpDddDomainSharedModule
+2024-08-22 15:14:00.849 +08:00 [INF]       - Volo.Abp.Features.AbpFeaturesModule
+2024-08-22 15:14:00.850 +08:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2024-08-22 15:14:00.850 +08:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2024-08-22 15:14:00.850 +08:00 [INF]   - MySelf.Zero.Application.ZeroApplicationModule
+2024-08-22 15:14:00.850 +08:00 [INF]     - Volo.Abp.AutoMapper.AbpAutoMapperModule
+2024-08-22 15:14:00.850 +08:00 [INF]     - MySelf.Zero.Application.Contracts.ZeroApplicationContractsModule
+2024-08-22 15:14:00.850 +08:00 [INF]     - MySelf.Zero.Domain.ZeroDomainModule
+2024-08-22 15:14:00.850 +08:00 [INF]   - MySelf.Zero.EntityFrameworkCore.ZeroEntityFrameworkCoreModule
+2024-08-22 15:14:00.850 +08:00 [INF]     - Volo.Abp.EntityFrameworkCore.MySQL.AbpEntityFrameworkCoreMySQLModule
+2024-08-22 15:14:00.850 +08:00 [INF]       - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2024-08-22 15:14:02.197 +08:00 [INF] User profile is available. Using 'C:\Users\EDY\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-08-22 15:14:02.273 +08:00 [INF] Initialized all ABP modules.
+2024-08-22 15:14:02.495 +08:00 [INF] Now listening on: https://localhost:7258
+2024-08-22 15:14:02.495 +08:00 [INF] Now listening on: http://localhost:5209
+2024-08-22 15:14:02.495 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-22 15:14:02.495 +08:00 [INF] Hosting environment: Development
+2024-08-22 15:14:02.495 +08:00 [INF] Content root path: D:\hzfhome\myweb\MyLearn24\abp_learn\MySelf.Zero.Sample\MySelf.Zero.HttpApi.Host
+2024-08-22 15:14:04.465 +08:00 [INF] Request starting HTTP/2 GET https://localhost:7258/swagger - null null
+2024-08-22 15:14:05.029 +08:00 [INF] Request finished HTTP/2 GET https://localhost:7258/swagger - 301 0 null 571.2571ms
+2024-08-22 15:14:05.078 +08:00 [INF] Request starting HTTP/2 GET https://localhost:7258/swagger/index.html - null null
+2024-08-22 15:14:05.230 +08:00 [INF] Request finished HTTP/2 GET https://localhost:7258/swagger/index.html - 200 null text/html;charset=utf-8 152.1768ms
+2024-08-22 15:14:05.264 +08:00 [INF] Request starting HTTP/2 GET https://localhost:7258/swagger/swagger-ui.css - null null
+2024-08-22 15:14:05.265 +08:00 [INF] Request starting HTTP/2 GET https://localhost:7258/swagger/index.css - null null
+2024-08-22 15:14:05.265 +08:00 [INF] Request starting HTTP/2 GET https://localhost:7258/swagger/swagger-ui-bundle.js - null null
+2024-08-22 15:14:05.283 +08:00 [INF] Request starting HTTP/2 GET https://localhost:7258/swagger/swagger-ui-standalone-preset.js - null null
+2024-08-22 15:14:05.283 +08:00 [INF] Request starting HTTP/2 GET https://localhost:7258/swagger/index.js - null null
+2024-08-22 15:14:05.286 +08:00 [INF] Request starting HTTP/2 GET https://localhost:7258/_vs/browserLink - null null
+2024-08-22 15:14:05.293 +08:00 [INF] Request finished HTTP/2 GET https://localhost:7258/swagger/index.js - 200 null application/javascript;charset=utf-8 9.7174ms
+2024-08-22 15:14:05.293 +08:00 [INF] Request starting HTTP/2 GET https://localhost:7258/_framework/aspnetcore-browser-refresh.js - null null
+2024-08-22 15:14:05.312 +08:00 [INF] Sending file. Request path: '/index.css'. Physical path: 'N/A'
+2024-08-22 15:14:05.312 +08:00 [INF] Request finished HTTP/2 GET https://localhost:7258/swagger/index.css - 200 202 text/css 47.7987ms
+2024-08-22 15:14:05.318 +08:00 [INF] Request finished HTTP/2 GET https://localhost:7258/_framework/aspnetcore-browser-refresh.js - 200 13784 application/javascript; charset=utf-8 24.8482ms
+2024-08-22 15:14:05.339 +08:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2024-08-22 15:14:05.339 +08:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2024-08-22 15:14:05.342 +08:00 [INF] Request finished HTTP/2 GET https://localhost:7258/swagger/swagger-ui-standalone-preset.js - 200 230293 text/javascript 59.0795ms
+2024-08-22 15:14:05.343 +08:00 [INF] Request finished HTTP/2 GET https://localhost:7258/swagger/swagger-ui.css - 200 152034 text/css 77.882ms
+2024-08-22 15:14:05.386 +08:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2024-08-22 15:14:05.386 +08:00 [INF] Request finished HTTP/2 GET https://localhost:7258/swagger/swagger-ui-bundle.js - 200 1452753 text/javascript 120.9924ms
+2024-08-22 15:14:05.402 +08:00 [INF] Request finished HTTP/2 GET https://localhost:7258/_vs/browserLink - 200 null text/javascript; charset=UTF-8 115.886ms
+2024-08-22 15:14:05.580 +08:00 [INF] Request starting HTTP/2 GET https://localhost:7258/swagger/favicon-32x32.png - null null
+2024-08-22 15:14:05.580 +08:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2024-08-22 15:14:05.581 +08:00 [INF] Request finished HTTP/2 GET https://localhost:7258/swagger/favicon-32x32.png - 200 628 image/png 1.1445ms
+2024-08-22 15:14:05.650 +08:00 [INF] Request starting HTTP/2 GET https://localhost:7258/swagger/v1/swagger.json - null null
+2024-08-22 15:14:06.310 +08:00 [INF] Request finished HTTP/2 GET https://localhost:7258/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 659.9823ms
