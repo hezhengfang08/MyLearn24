@@ -11,6 +11,7 @@ using Volo.Abp.Modularity;
 
 namespace MySelf.Zero.DbMigrator
 {
+    //auto 依赖注入
     [DependsOn(
 typeof(AbpAutofacModule),
 typeof(ZeroEntityFrameworkCoreModule),

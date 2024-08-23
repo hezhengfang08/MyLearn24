@@ -1,12 +1,5 @@
 ﻿using MySelf.Zero.Domain.Entities;
 using MySelf.Zero.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -25,6 +18,7 @@ namespace MySelf.Zero.EntityFrameworkCore.Repositories
         //和结构差不多的东西
         public async Task<Tuple<int, List<TopicEntity>>> GetTopicByCategory(long categoryId, int pageIndex, int pageSize)
         {
+           
             var queryable = await GetQueryableAsync();
             var result = queryable.Where(m => m.Category.Id == categoryId);
             var total = result.Count(m => m.Category.Id == categoryId);

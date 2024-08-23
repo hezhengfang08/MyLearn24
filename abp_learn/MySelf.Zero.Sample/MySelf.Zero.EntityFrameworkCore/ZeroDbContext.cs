@@ -20,6 +20,7 @@ namespace MySelf.Zero.EntityFrameworkCore
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            //扫描类所在的程序集中的配置 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ZeroDbContext).Assembly);
             // modelBuilder.ApplyConfiguration(new CategoryDbMapping())
             //.ApplyConfiguration(new TopicDbMapping());

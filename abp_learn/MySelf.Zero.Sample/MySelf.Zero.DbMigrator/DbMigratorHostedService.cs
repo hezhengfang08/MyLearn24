@@ -28,6 +28,7 @@ namespace MySelf.Zero.DbMigrator
         {
             using (var application = AbpApplicationFactory.Create<ZeroDbMigratorModule>(options =>
             {
+                //使用autofac 注入
                 options.UseAutofac();
                 options.Services.ReplaceConfiguration(configuration);
                 options.Services.AddLogging(c => c.AddSerilog());
