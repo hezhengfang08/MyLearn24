@@ -37,5 +37,7 @@ namespace MySelf.Zero.Domain.Entities
 
         public virtual CategoryEntity Category { get; set; }
 
+        public virtual ICollection<PostsEntity> Postses { get; set; }
+
     }
 }

@@ -11,7 +11,7 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace MySelf.Zero.EntityFrameworkCore
 {
-    [ConnectionStringName("Default")]
+   
     public class ZeroDbContext : AbpDbContext<ZeroDbContext>
     {
         public ZeroDbContext(DbContextOptions<ZeroDbContext> options) : base(options)
@@ -20,11 +20,16 @@ namespace MySelf.Zero.EntityFrameworkCore
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfiguration(new CategoryDbMapping())
-           .ApplyConfiguration(new TopicDbMapping());
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ZeroDbContext).Assembly);
+            // modelBuilder.ApplyConfiguration(new CategoryDbMapping())
+            //.ApplyConfiguration(new TopicDbMapping());
         }
         public DbSet<CategoryEntity> Categories { get; set; }
 
         public DbSet<TopicEntity> Topic { get; set; }
+
+        public DbSet<PostsEntity> Posts { get; set; }
+
+        public DbSet<UserEntity> User { get; set; }
     }
 }

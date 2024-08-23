@@ -18,11 +18,27 @@
     <PackageReference Include="Serilog.Sinks.Async" Version="2.0.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="8.2.2" />
   </ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\MySelf.Zero.Application.Contracts\MySelf.Zero.Application.Contracts.csproj" />
 		<ProjectReference Include="..\MySelf.Zero.Application\MySelf.Zero.Application.csproj" />
 		<ProjectReference Include="..\MySelf.Zero.EntityFrameworkCore\MySelf.Zero.EntityFrameworkCore.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<!--//读取数据库文件的如果不加始终复制 则可能连不上数据库-->
+	  <None Update="appsettings.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Files\category.xlsx">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Files\topic.xlsx">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Files\user.xlsx">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 </Project>

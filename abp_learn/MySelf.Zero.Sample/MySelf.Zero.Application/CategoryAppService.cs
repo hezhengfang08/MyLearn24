@@ -1,6 +1,9 @@
-﻿using MySelf.Zero.Application.Contracts;
+﻿using MySelf.Zero.Application.Contracts.Category;
+using MySelf.Zero.Application.Contracts.Topic;
 using MySelf.Zero.Domain.Entities;
 using MySelf.Zero.Domain.Repositories;
+using MySelf.Zero.Domain.Services;
+using MySelf.Zero.Domain.Shared;
 using System.Collections.Concurrent;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
@@ -9,31 +12,49 @@ namespace MySelf.Zero.Application
 {
     public class CategoryAppService : ApplicationService, ICategoryAppService
     {
-        //构造函数注入
         private readonly ICategoryRepositroy categoryRepositroy;
+        private readonly CategoryDomainService categoryDomainService;
         private readonly ITopicRepository topicRepository;
-        public CategoryAppService(ICategoryRepositroy _categoryRepositroy, ITopicRepository _topicRepository)
-        {
-            categoryRepositroy = _categoryRepositroy;
-            topicRepository = _topicRepository;
-        }
-        public async Task<CategoryDto> GetAsync(long id)
-        {
-            var categoryQueryable = await categoryRepositroy.GetQueryableAsync();
-            var topicQueryable = await topicRepository.GetQueryableAsync();
-            var category = await categoryRepositroy.GetAsync(id);
-            var categoryDto = ObjectMapper.Map<CategoryEntity, CategoryDto>(category);
 
-            // 自身和子板块主题数
-            var categoryIdArray = GetSubCategoryIds(categoryQueryable, id);
-            var topicTimes = topicQueryable.Count(t => categoryIdArray.Contains(t.Category.Id));
-            categoryDto.TopicTimes = topicTimes;
-
-            return categoryDto;
+        public CategoryAppService(ICategoryRepositroy categoryRepositroy,
+            CategoryDomainService categoryDomainService,
+            ITopicRepository topicRepository)
+        {
+            this.categoryRepositroy = categoryRepositroy;
+            this.categoryDomainService = categoryDomainService;
+            this.topicRepository = topicRepository;
         }
 
-        public async Task<ListResultDto<CategoryDto>> GetListAsync()
+        public async Task<bool> AnyAsync()
         {
+            var count = await categoryRepositroy.GetCountAsync();
+            return count > 0;
+        }
+
+        public async Task ImportAsync(IEnumerable<CategoryImportDto> importDtos)
+        {
+            var categories = ObjectMapper.Map<IEnumerable<CategoryImportDto>,
+                IEnumerable<CategoryEntity>>(importDtos);
+
+            await categoryRepositroy.InsertManyAsync(categories);
+        }
+
+        public async Task<ApiResponse<CategoryDto>> GetAsync(long id)
+        {
+            var response = new ApiResponse<CategoryDto>();
+
+            var tupleResult = await categoryDomainService.GetAsync(id);
+            var categoryDto = ObjectMapper.Map<CategoryEntity, CategoryDto>(tupleResult.Item1);
+            categoryDto.TopicTimes = tupleResult.Item2;
+
+            response.Result = categoryDto;
+
+            return response;
+        }
+
+        public async Task<ApiResponse<ListResultDto<CategoryDto>>> GetListAsync()
+        {
+            var response = new ApiResponse<ListResultDto<CategoryDto>>();
             var categoryQueryable = await categoryRepositroy.GetQueryableAsync();
             var topicQueryable = await topicRepository.GetQueryableAsync();
 
@@ -57,10 +78,13 @@ namespace MySelf.Zero.Application
                     var topicTimes = topicQueryable.Count(t => categoryIdArray.Contains(t.Category.Id));
                     curCategoryDto.TopicTimes = topicTimes;
 
-                    subDtoCategories.ForEach(subCategory =>
+                    subDtoCategories.ForEach(async subCategory =>
                     {
                         var cid = subCategory.Id;
                         stackIds.Push(cid);
+
+                        var hotTopices = await topicRepository.GetHotTopicsAsync(cid);
+                        subCategory.HotTopices = ObjectMapper.Map<List<TopicEntity>, List<TopicDto>>(hotTopices);
 
                         var subCategoryIdArray = GetSubCategoryIds(categoryQueryable, cid);
                         var topicTimes = topicQueryable.Count(t => subCategoryIdArray.Contains(t.Category.Id));
@@ -68,7 +92,8 @@ namespace MySelf.Zero.Application
                     });
                 }
             }
-            return new ListResultDto<CategoryDto>(parentCategoryDtoList);
+            response.Result = new ListResultDto<CategoryDto>(parentCategoryDtoList);
+            return response;
         }
         private ConcurrentBag<long> GetSubCategoryIds(IQueryable<CategoryEntity> categoryQueryable, long parentCategoryId)
         {

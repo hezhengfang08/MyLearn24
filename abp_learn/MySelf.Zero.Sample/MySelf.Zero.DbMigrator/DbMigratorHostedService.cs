@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp;
+using Volo.Abp.Data;
 
 namespace MySelf.Zero.DbMigrator
 {
@@ -16,26 +17,33 @@ namespace MySelf.Zero.DbMigrator
         private readonly IHostApplicationLifetime hostApplicationLifetime;
         private readonly IConfiguration configuration;
 
-        public DbMigratorHostedService(IHostApplicationLifetime _hostApplicationLifetime,
-    IConfiguration _configuration)
+        public DbMigratorHostedService(IHostApplicationLifetime hostApplicationLifetime,
+            IConfiguration configuration)
         {
-            hostApplicationLifetime = _hostApplicationLifetime;
-            configuration = _configuration;
+            this.hostApplicationLifetime = hostApplicationLifetime;
+            this.configuration = configuration;
         }
+
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-             using (var application = AbpApplicationFactory.Create<ZeroDbMigratorModule>(options =>
+            using (var application = AbpApplicationFactory.Create<ZeroDbMigratorModule>(options =>
             {
+                options.UseAutofac();
                 options.Services.ReplaceConfiguration(configuration);
                 options.Services.AddLogging(c => c.AddSerilog());
             }))
             {
                 await application.InitializeAsync();
-
-                application
-                     .ServiceProvider
-                     .GetRequiredService<ZeroDbMigrationService>()
-                     .Migrate();
+                ////这里要执行两次 有时要删除 __efmigrationshistory 表的相关数据
+                //application
+                //     .ServiceProvider
+                //     .GetRequiredService<ZeroDbMigrationService>()
+                //     .Migrate();
+                //  下面初始化 种子数据的
+                await application
+                    .ServiceProvider
+                    .GetRequiredService<DefaultDataSeedContributor>()
+                    .SeedAsync(new DataSeedContext());
 
                 await application.ShutdownAsync();
 
@@ -45,9 +53,9 @@ namespace MySelf.Zero.DbMigrator
             await Task.CompletedTask;
         }
 
-        public  Task StopAsync(CancellationToken cancellationToken)
+        public Task StopAsync(CancellationToken cancellationToken)
         {
-            return  Task.CompletedTask;
+            return Task.CompletedTask;
         }
     }
 }
