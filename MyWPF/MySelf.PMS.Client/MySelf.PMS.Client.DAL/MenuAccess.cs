@@ -12,11 +12,27 @@ namespace MySelf.PMS.Client.DAL
     {
         public MenuAccess(GlobalValues globalValues) : base(globalValues)
         {
+
         }
-        public string GetAllMenus()
+        public string DeleteMenu(string id)
         {
-            string url = "/api/Menu/all";
-            return this.Get(url);
+            string uri = $"api/menu/delete/{id}";
+            return this.Get(uri);
+        }
+
+        public string GetAllMenus(string key = ""   )
+        {
+            key = string.IsNullOrEmpty(key) ? "none" : key;
+            string uri = $"/api/Menu/all/{key}";
+            return this.Get(uri);
+        }
+        public string UpdateMenu(string menuJson)
+        {
+            string uri = "api/menu/update";
+            StringContent content = new StringContent(menuJson);
+            content.Headers.ContentType =
+                new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            return this.Post(uri, content);
         }
     }
 }

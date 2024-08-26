@@ -9,6 +9,8 @@ namespace MySelf.PMS.Client.IBLL
 {
     public interface IFileService
     {
-        IEnumerable<FileEntiy> GetUpgradeFiles();
+        IEnumerable<FileEntiy> GetUpgradeFiles(string key = "");
+
+        void UploadFile(string file, string filePath, Action<int> prograssChanged, Action completed);
     }
 }

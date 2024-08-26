@@ -3,6 +3,7 @@ using MySelf.PMS.Client.IDAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,7 +15,7 @@ namespace MySelf.PMS.Client.DAL
         GlobalValues _globalValues;
         public WebAccess(GlobalValues globalValues)
         {
-            _globalValues = globalValues; 
+            _globalValues = globalValues;
         }
 
         public string Get(string url)
@@ -71,6 +72,23 @@ namespace MySelf.PMS.Client.DAL
                 postContent.Add(item.Value, item.Key);
             }
             return postContent;
+        }
+        public void Upload(string uri,string file,Action<int> progress,Action completed,Dictionary<string, object> headers = null)
+        {
+            using (WebClient client = new WebClient())
+            {
+                client.Headers.Add("Authorization", "Bearer " + _globalValues.Token);
+                if (headers != null)
+                {
+                    foreach (var item in headers)
+                    {
+                        client.Headers.Add(item.Key, item.Value.ToString());
+                    }
+                }
+                client.UploadProgressChanged += (se, ev) => progress?.Invoke(ev.ProgressPercentage);
+                client.UploadFileCompleted += (se, ev) => completed?.Invoke();
+                client.UploadFileAsync(new Uri(HostName + uri), file);
+            }
         }
     }
 }

@@ -24,5 +24,21 @@ namespace MySelf.PMS.Client.DAL
             string result = this.Post(uri, mp);// Json字符串
             return result;
         }
+        public string UpdatePassword(int id, string opd, string npd)
+        {
+            // http://localhost:5273/api/User/update_pwd
+            string uri = $"/api/User/update_pwd";
+
+            // 通过Post方式传两个数据进入接口：id  pwd
+            Dictionary<string, HttpContent> FormData = new Dictionary<string, HttpContent>();
+
+            FormData.Add("id", new StringContent(id.ToString()));
+            FormData.Add("opd", new StringContent(opd));
+            FormData.Add("npd", new StringContent(npd));
+
+            var mp = this.GetFormData(FormData);
+            string result = this.Post(uri, mp);// Json字符串
+            return result;
+        }
     }
 }

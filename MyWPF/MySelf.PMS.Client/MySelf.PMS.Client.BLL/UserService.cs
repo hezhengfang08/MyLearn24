@@ -23,9 +23,15 @@ namespace MySelf.PMS.Client.BLL
             ResultEntiy<EmployeeEntity> result = JsonUtil.Deserializer<ResultEntiy<EmployeeEntity>>(json);
             if (result.State != ResultCode.Success)
                 throw new Exception(result.Message);
-
-
             //将Entity -》  Model     如果这样处理的话，需要将所有Model独立到一个程序集中
+            return result.Data;
+        }
+        public bool UpdatePassword(int id, string opd, string npd)
+        {
+            string json = _userAccess.UpdatePassword(id, opd, npd);
+            ResultEntiy<bool> result = JsonUtil.Deserializer<ResultEntiy<bool>>(json);
+            if (result.State != ResultCode.Success)
+                throw new Exception(result.Message);
             return result.Data;
         }
     }

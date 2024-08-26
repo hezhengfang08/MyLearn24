@@ -57,5 +57,20 @@ namespace MySelf.PMS.Server.Service
                 return false;
             }
         }
+        public bool UpdatePassword(int id, string old_password, string new_password)
+        {
+            var employee = _client.Queryable<SysEmployee>()
+                 .Where(e => e.EId == id && e.Password == old_password)
+                 .ToList().FirstOrDefault();
+            if (employee == null)
+                throw new Exception("没有匹配的用户的信息");
+
+            employee.Password = new_password;
+
+            // 更新的时候需要确认实体主键
+            _client.Updateable(employee).ExecuteCommand();
+
+            return true;
+        }
     }
 }

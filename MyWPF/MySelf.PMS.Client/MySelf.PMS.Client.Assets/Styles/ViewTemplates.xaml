@@ -1,0 +1,47 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ControlTemplate TargetType="{x:Type UserControl}" x:Key="DialogViewTemplate">
+        <Grid>
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#3E7FFF" Offset="-0.6"/>
+                    <GradientStop Color="White" Offset="0.3"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Border Height="1" Grid.Row="2" Background="#EEE" VerticalAlignment="Top"/>
+
+            <TextBlock Text="{Binding Title}" FontSize="14" 
+                 VerticalAlignment="Center"
+                 Foreground="#3E7FFF" Margin="15,0"/>
+
+
+            <Button Content="保存" Grid.Row="2" Height="30" Width="100"
+             HorizontalAlignment="Center" Foreground="White"
+             Style="{DynamicResource NormalButtonStyle}"
+             Command="{Binding SaveCommand}">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#3E7FFF" Offset="0"/>
+                        <GradientStop Color="#8BB2FF" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+
+            <Button Content="&#xe625;" Style="{DynamicResource NormalButtonStyle}"
+                 FontFamily="{DynamicResource Iconfont}"
+                 Width="40" Height="30" Margin="5,0"
+                 Background="Transparent"
+                 VerticalAlignment="Top" HorizontalAlignment="Right"
+                 WindowChrome.IsHitTestVisibleInChrome="True"
+                 Command="ApplicationCommands.Close"/>
+
+
+            <ContentPresenter Grid.Row="1"/>
+        </Grid>
+    </ControlTemplate>
+</ResourceDictionary>
