@@ -1,4 +1,8 @@
 
+using Prism.Commands;
+using Prism.Mvvm;
+using Prism.Regions;
+
 namespace MySelf.PMS.Client.Common
 {
     public class PageViewModelBase : BindableBase, INavigationAware

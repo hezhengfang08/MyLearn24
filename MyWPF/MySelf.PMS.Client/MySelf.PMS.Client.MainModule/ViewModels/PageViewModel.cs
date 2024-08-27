@@ -1,11 +1,9 @@
 ﻿using MySelf.PMS.Client.MainModule.Models;
-using System;
-using System.Collections.Generic;
+using Prism.Commands;
+using Prism.Regions;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace MySelf.PMS.Client.MainModule.ViewModels
 {

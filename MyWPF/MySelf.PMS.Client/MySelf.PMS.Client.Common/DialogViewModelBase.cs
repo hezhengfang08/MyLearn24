@@ -1,11 +1,9 @@
-﻿using System;
+﻿using Prism.Commands;
+using Prism.Mvvm;
+using Prism.Services.Dialogs;
 using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MySelf.PMS.Client.Common
 {
@@ -44,7 +42,7 @@ namespace MySelf.PMS.Client.Common
 
         public DelegateCommand SaveCommand { get; set; }
 
-        DialogCloseListener IDialogAware.RequestClose => throw new NotImplementedException();
+       
 
         public DialogViewModelBase()
         {

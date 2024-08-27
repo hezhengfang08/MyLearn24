@@ -1,6 +1,7 @@
 ﻿using MySelf.PMS.Client.Common;
 using MySelf.PMS.Client.IBLL;
 using MySelf.PMS.Client.SystemModule.Models;
+using Prism.Services.Dialogs;
 using System.Windows;
 
 namespace MySelf.PMS.Client.SystemModule.ViewModels.Dialogs

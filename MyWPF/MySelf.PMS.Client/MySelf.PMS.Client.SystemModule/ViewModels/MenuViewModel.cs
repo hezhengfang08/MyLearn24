@@ -1,6 +1,9 @@
 ﻿using MySelf.PMS.Client.Common;
 using MySelf.PMS.Client.IBLL;
 using MySelf.PMS.Client.SystemModule.Models;
+using Prism.Events;
+using Prism.Regions;
+using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

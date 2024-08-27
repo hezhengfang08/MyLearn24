@@ -38,11 +38,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySelf.PMS.Client.Utils", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySelf.PMS.Client.Assets", "MySelf.PMS.Client.Assets\MySelf.PMS.Client.Assets.csproj", "{77010DCD-E624-483F-8185-0D06AB93E3FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.PMS.Client.MainModule", "MySelf.PMS.Client.MainModule\MySelf.PMS.Client.MainModule.csproj", "{00CF7953-2E87-4CEE-B96E-964DBF1E83A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySelf.PMS.Client.MainModule", "MySelf.PMS.Client.MainModule\MySelf.PMS.Client.MainModule.csproj", "{00CF7953-2E87-4CEE-B96E-964DBF1E83A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.PMS.Client.SystemModule", "MySelf.PMS.Client.SystemModule\MySelf.PMS.Client.SystemModule.csproj", "{9BA05F22-DA18-4327-BA27-6D7BE44F9ABF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySelf.PMS.Client.SystemModule", "MySelf.PMS.Client.SystemModule\MySelf.PMS.Client.SystemModule.csproj", "{9BA05F22-DA18-4327-BA27-6D7BE44F9ABF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.PMS.Client.Common", "MySelf.PMS.Client.Common\MySelf.PMS.Client.Common.csproj", "{C6D6A67D-26CD-4441-AD9D-5E8D97672D04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySelf.PMS.Client.Common", "MySelf.PMS.Client.Common\MySelf.PMS.Client.Common.csproj", "{C6D6A67D-26CD-4441-AD9D-5E8D97672D04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

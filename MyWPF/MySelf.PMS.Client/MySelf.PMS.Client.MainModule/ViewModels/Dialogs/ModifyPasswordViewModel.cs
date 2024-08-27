@@ -1,12 +1,9 @@
 ﻿using MySelf.PMS.Client.IBLL;
-using System;
+using Prism.Commands;
+using Prism.Services.Dialogs;
 using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace MySelf.PMS.Client.MainModule.ViewModels.Dialogs
@@ -113,7 +110,7 @@ namespace MySelf.PMS.Client.MainModule.ViewModels.Dialogs
 
         public DelegateCommand SaveCommand { get; set; }
 
-        DialogCloseListener IDialogAware.RequestClose => throw new NotImplementedException();
+     
 
         IUserService _userService;
         public ModifyPasswordViewModel(IUserService userService)

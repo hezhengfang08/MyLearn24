@@ -2,6 +2,8 @@
 using MySelf.PMS.Client.Common;
 using MySelf.PMS.Client.IBLL;
 using MySelf.PMS.Client.SystemModule.Models;
+using Prism.Commands;
+using Prism.Regions;
 using System.Collections.ObjectModel;
 namespace MySelf.PMS.Client.SystemModule.ViewModels
 {
