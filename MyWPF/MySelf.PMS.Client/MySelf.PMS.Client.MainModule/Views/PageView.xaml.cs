@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prism.Regions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,27 @@ namespace MySelf.PMS.Client.MainModule.Views
     /// </summary>
     public partial class PageView : UserControl
     {
-        public PageView()
+        IRegionManager _regionManager;
+        public PageView(IRegionManager regionManager)
         {
             InitializeComponent();
+
+            _regionManager = regionManager;
+
+
+            // 如果这个页面中的区域无法默认加载，需要添加这个事件，
+            // 在事件进行区域更新，这个功能需要注意
+
+            //this.Loaded += PageView_Loaded;
         }
+
+        //private void PageView_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    if (_regionManager.Regions.ToList().Exists(r => r.Name == "PageRegion"))
+        //        return;
+
+        //    RegionManager.SetRegionManager(this, _regionManager);
+        //    RegionManager.UpdateRegions();
+        //}
     }
 }

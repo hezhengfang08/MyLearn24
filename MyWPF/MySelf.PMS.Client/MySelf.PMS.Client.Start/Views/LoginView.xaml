@@ -135,8 +135,8 @@
         </Border>
 
         <Grid Width="180" Height="230" Grid.RowSpan="5" HorizontalAlignment="Right"
-           Margin="50,10,50,0" Name="grid"
-           Visibility="Visible" Opacity="1">
+              Margin="50,10,50,0" Name="grid"
+              Visibility="Visible" Opacity="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1.5*"/>
                 <RowDefinition/>

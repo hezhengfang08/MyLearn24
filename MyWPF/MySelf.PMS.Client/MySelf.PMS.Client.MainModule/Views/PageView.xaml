@@ -14,6 +14,7 @@
             <Setter Property="GroupName" Value="sub_menu"/>
             <Setter Property="Width" Value="130"/>
             <Setter Property="Foreground" Value="#3E7FFF"/>
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RadioButton">
@@ -81,7 +82,7 @@
             </TextBlock.RenderTransform>
         </TextBlock>
 
-        <Border Background="White" Effect="{StaticResource shadowEffect}" Grid.Row="1">
+        <Border Background="#CFFF" Effect="{StaticResource shadowEffect}" Grid.Row="1">
             <Border.OpacityMask>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                     <GradientStop Color="Transparent" Offset="0"/>

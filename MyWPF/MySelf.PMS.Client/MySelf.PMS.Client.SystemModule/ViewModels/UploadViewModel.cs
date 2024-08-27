@@ -5,6 +5,7 @@ using MySelf.PMS.Client.SystemModule.Models;
 using Prism.Commands;
 using Prism.Regions;
 using System.Collections.ObjectModel;
+using System.Windows;
 namespace MySelf.PMS.Client.SystemModule.ViewModels
 {
     public class UploadViewModel : PageViewModelBase
@@ -22,7 +23,11 @@ namespace MySelf.PMS.Client.SystemModule.ViewModels
 
             _fileService = fileService;
 
-            UploadCommand = new DelegateCommand(DoUpload);
+            UploadCommand = new DelegateCommand(() =>
+            {
+                index = 0;
+                DoUpload();
+            });
 
             this.Refresh();
         }
@@ -84,45 +89,81 @@ namespace MySelf.PMS.Client.SystemModule.ViewModels
                 }
             }
         }
+
         public override void DoDelete(object model)
         {
-            base.DoDelete(model);
-        }
-        int index = 0;
-        private void DoUpload()
-        {
-            if (index >= Files.Count) return;
-
-            var file = Files[index];
             try
             {
-                if (file.State == "1" || file.State == "-1")
+                var m = model as FileModel;
+
+                int count = _fileService.DeleteFile(m.FileName);
+                if (count == 0)
                 {
-                    file.State = "2";// 状态为正在上传
-                    _fileService.UploadFile(file.FullPath, file.FilePath,
-                        progress =>
-                        {
-                            // 上传进度
-                            file.ProgressValue = progress;
-                        },
-                        () =>
-                        {
-                            // 上传完成
-                            file.State = "3";// 上传完成
-                            index++;
-                            DoUpload();
-                        });
+                    throw new Exception("删除文件失败");
                 }
-                else
-                {
-                    index++;
-                    DoUpload();
-                }
+                Files.Remove(m);
             }
             catch (Exception ex)
             {
-                file.Error = ex.Message;
-                file.State = "-1";
+                MessageBox.Show(ex.Message, "提示");
+            }
+        }
+
+        int index = 0;
+        private void DoUpload()
+        {
+            // 关于状态：
+            // 0 - 默认，从数据库获取的信息
+            // 1 - 等待上传
+            // 2 - 正在上传
+            // 3 - 上传完成
+            // -1- 上传失败
+            try
+            {
+                if (Files[index].State != "1" && Files[index].State != "-1")
+                {
+                    index++;
+                    if (index < Files.Count)
+                        DoUpload();
+
+                    return;
+                }
+                Files[index].State = "2";
+                _fileService.UploadFile(
+                            Files[index].FullPath,
+                            Files[index].FilePath,
+                            progress =>
+                            {
+                                // 上传进度
+                                Files[index].ProgressValue = progress;
+                            },
+                            completed =>
+                            {
+                                if (completed != null && completed.Error != null)
+                                {
+                                    // 需要提示异常
+                                    throw new Exception(completed.Error.Message);
+                                }
+                                else
+                                {
+                                    //上传完成
+                                    Files[index].ProgressValue = 100;
+                                    Files[index].State = "3";
+
+                                    index++;
+                                    if (index < Files.Count)
+                                        DoUpload();
+                                }
+                            });
+            }
+            catch (Exception ex)
+            {
+                Files[index].State = "-1";
+                Files[index].Error = ex.Message;
+
+                index++;
+                if (index < Files.Count)
+                    DoUpload();
             }
 
         }

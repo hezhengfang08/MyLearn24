@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace MySelf.PMS.Client.IDAL
 {
@@ -10,5 +6,7 @@ namespace MySelf.PMS.Client.IDAL
     {
         string Login(string username, string password);
         string UpdatePassword(int id, string opd, string npd);
+
+        string GetUsers(string kye);
     }
 }

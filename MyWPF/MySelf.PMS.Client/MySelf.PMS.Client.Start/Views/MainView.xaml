@@ -4,15 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MySelf.PMS.Client.Start.Views"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:p="http://prismlibrary.com/"
         mc:Ignorable="d" Background="#F4F7FF" WindowStartupLocation="CenterScreen"
-Title="我的物业系统" Height="750" Width="1300">
+        Title="朝夕物业系统" Height="750" Width="1300">
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction Command="{Binding WorkbenchCommand}"/>
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
     <WindowChrome.WindowChrome>
         <WindowChrome NonClientFrameEdges="None" UseAeroCaptionButtons="False"/>
     </WindowChrome.WindowChrome>
     <Window.Resources>
         <Style TargetType="RadioButton" x:Key="NavTabButtonStyle">
             <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+            <Setter Property="GroupName" Value="main_menu"/>
             <Setter Property="Width" Value="70"/>
             <Setter Property="Margin" Value="5,0"/>
             <Setter Property="Background" Value="White"/>
@@ -104,9 +111,10 @@ Title="我的物业系统" Height="750" Width="1300">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <RadioButton Content="{Binding MenuHeader}" 
-                               Style="{StaticResource NavTabButtonStyle}" IsChecked="True"
-                               Command="{Binding DataContext.PageSwitchCommand,RelativeSource={RelativeSource AncestorType=Window}}"
-                               CommandParameter="{Binding MenuId}"/>
+                                 IsChecked="{Binding IsSelected}"
+                                 Style="{StaticResource NavTabButtonStyle}"
+                                 Command="{Binding DataContext.PageSwitchCommand,RelativeSource={RelativeSource AncestorType=Window}}"
+                                 CommandParameter="{Binding MenuId}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
@@ -117,6 +125,7 @@ Title="我的物业系统" Height="750" Width="1300">
             <Button Content="&#xe625;" Style="{StaticResource ControlButtonStyle}"/>
         </StackPanel>
 
-        <ContentControl p:RegionManager.RegionName="MainRegion"/>
+        <ContentControl p:RegionManager.RegionName="MainRegion"
+                        Grid.Row="1"/>
     </Grid>
 </Window>

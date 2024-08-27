@@ -2,12 +2,6 @@
 using MySelf.PMS.Client.IBLL;
 using MySelf.PMS.Client.IDAL;
 using MySelf.PMS.Client.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace MySelf.PMS.Client.BLL
 {
     public class UserService : IUserService
@@ -34,6 +28,16 @@ namespace MySelf.PMS.Client.BLL
                 throw new Exception(result.Message);
             return result.Data;
         }
+
+
+        public EmployeeEntity[] GetUsers(string key)
+        {
+            string json = _userAccess.GetUsers(key);
+            ResultEntiy<EmployeeEntity[]> result = JsonUtil.Deserializer<ResultEntiy<EmployeeEntity[]>>(json);
+            if (result.State != ResultCode.Success)
+                throw new Exception(result.Message);
+
+            return result.Data;
+        }
     }
 }
-

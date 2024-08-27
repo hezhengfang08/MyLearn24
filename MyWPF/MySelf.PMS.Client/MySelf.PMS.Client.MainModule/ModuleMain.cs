@@ -7,7 +7,7 @@ namespace MySelf.PMS.Client.MainModule
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            throw new NotImplementedException();
+
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

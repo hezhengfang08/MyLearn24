@@ -16,10 +16,6 @@ namespace MySelf.PMS.Client.BLL
         public MenuService(IMenuAccess menuAccess) {
          _menuAccess = menuAccess;
         }
-        public int DeleteMenu(string id)
-        {
-            throw new NotImplementedException();
-        }
         public IEnumerable<MenuEntity> GetAllMenus(string key = "")
         {
             string json = _menuAccess.GetAllMenus(key);
@@ -48,6 +44,20 @@ namespace MySelf.PMS.Client.BLL
                 throw new Exception(result.Message);
             if (result.Data == 0)
                 throw new Exception("未更新任何数据");
+            return result.Data;
+        }
+        public int DeleteMenu(string id)
+        {
+            string json = _menuAccess.DeleteMenu(id);
+            var result = JsonUtil.Deserializer<ResultEntiy<int>>(json);
+
+            if (result == null)
+                throw new Exception("菜单数据获取失败!");
+            if (result.State != ResultCode.Success)
+                throw new Exception(result.Message);
+            if (result.Data == 0)
+                throw new Exception("未更新任何数据");
+
             return result.Data;
         }
     }

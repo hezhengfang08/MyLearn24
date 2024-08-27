@@ -8,6 +8,7 @@ namespace MySelf.PMS.Client.Start.Models
 {
     public class MenuModel
     {
+        public bool IsSelected { get; set; }
         public string MenuId { get; set; }
         public string MenuHeader { get; set; }
     }

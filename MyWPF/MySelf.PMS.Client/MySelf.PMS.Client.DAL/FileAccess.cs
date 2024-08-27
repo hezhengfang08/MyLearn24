@@ -1,11 +1,8 @@
 ﻿using MySelf.PMS.Client.Entities;
 using MySelf.PMS.Client.IDAL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace MySelf.PMS.Client.DAL
 {
@@ -14,15 +11,41 @@ namespace MySelf.PMS.Client.DAL
         public FileAccess(GlobalValues globalValues) : base(globalValues)
         {
         }
+
+        public string DeleteFile(string file_name)
+        {
+            string uri = "/api/file/delete";
+
+
+            Dictionary<string, HttpContent> FormData = new Dictionary<string, HttpContent>();
+
+            FormData.Add("fileName", new StringContent(file_name));
+
+            var mp = this.GetFormData(FormData);
+            string result = this.Post(uri, mp);// Json字符串
+
+            return result;
+        }
+
         public string GetUpgradeFiles(string key)
         {
             key = string.IsNullOrEmpty(key) ? "none" : key;
             string uri = $"/api/File/list/{key}";
             return this.Get(uri);
         }
-        public void UploadFile(string file, string save_path, Action<int> progress, Action completed)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="file">将要上传的文件的完整路径</param>
+        /// <param name="save_path">上传下载的时候，文件存放的相对路径（主程序）</param>
+        /// <param name="progress">上传进度变化回调</param>
+        /// <param name="completed">上传守成后的回调</param>
+        public void UploadFile(string file, string save_path, 
+            Action<int> progress, Action<AsyncCompletedEventArgs> completed)
         {
-            string uri = "";
+            string uri = "/api/file/upload";
+
             // 地址参数
             Dictionary<string, object> datas = new Dictionary<string, object>();
             datas.Add("md5", GetFileMd5(file));

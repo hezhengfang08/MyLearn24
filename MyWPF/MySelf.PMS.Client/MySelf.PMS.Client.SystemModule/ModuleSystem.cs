@@ -13,6 +13,8 @@ namespace MySelf.PMS.Client.SystemModule
         {
             containerRegistry.RegisterForNavigation<Views.MenuView>();
             containerRegistry.RegisterForNavigation<Views.UploadView>();
+            containerRegistry.RegisterForNavigation<Views.UserView>();
+
             containerRegistry.RegisterDialog<Views.Dialogs.ModifyMenuView>();
         }
     }

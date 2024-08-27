@@ -12,4 +12,8 @@
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="-1" NonClientFrameEdges="None"/>
     </WindowChrome.WindowChrome>
+    
+    <Window.CommandBindings>
+        <CommandBinding Command="Close" Executed="CloseBinding_Executed"/>
+    </Window.CommandBindings>
 </Window>

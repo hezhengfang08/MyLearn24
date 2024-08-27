@@ -138,13 +138,34 @@
                                        TextTrimming="WordEllipsis"/>
 
                             <TextBlock Text="{Binding FileLenght}" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" 
-                                       Margin="10,3" FontSize="11" Foreground="#888"/>
+                                       Margin="10,3" FontSize="11" Foreground="#888" Name="tb_fl"/>
                             <TextBlock Text="{Binding CompletedLen}" VerticalAlignment="Top" Grid.Column="2" Margin="10,3"
-                                       Grid.Row="1" FontSize="11" Foreground="#888"/>
+                                       Grid.Row="1" FontSize="11" Foreground="#888" Name="tb_cl"/>
                             <TextBlock Text="{Binding Progress,StringFormat={}{0:P0}}" 
                                        VerticalAlignment="Center" HorizontalAlignment="Center"
-                                       Grid.Column="3" Grid.RowSpan="2"/>
+                                       Grid.Column="3" Grid.RowSpan="2" Name="tb_p"/>
+
+                            <TextBlock Text="{Binding State}" Grid.Column="3" Grid.RowSpan="2"
+                                       VerticalAlignment="Center" HorizontalAlignment="Center"
+                                       Foreground="{Binding StateColor}"/>
+
+                            <TextBlock Text="{Binding ErrorMsg}" Foreground="Red"
+                                       Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                                       TextTrimming="CharacterEllipsis"
+                                       VerticalAlignment="Top" Margin="10,3"
+                                       ToolTip="{Binding ErrorMsg}"/>
                         </Grid>
+
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding HasError}" Value="True">
+                                <Setter TargetName="tb_fl" Property="Visibility" Value="Collapsed"/>
+                                <Setter TargetName="tb_cl" Property="Visibility" Value="Collapsed"/>
+                                <Setter TargetName="tb_p" Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding HasCompleted}" Value="True">
+                                <Setter TargetName="tb_p" Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

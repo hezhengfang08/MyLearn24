@@ -40,5 +40,12 @@ namespace MySelf.PMS.Client.DAL
             string result = this.Post(uri, mp);// Json字符串
             return result;
         }
+
+
+        public string GetUsers(string key)
+        {
+            string uri = "/api/user/list/" + (string.IsNullOrEmpty(key) ? "none" : key);
+            return this.Get(uri);
+        }
     }
 }

@@ -142,7 +142,7 @@
                                        HorizontalAlignment="Center" Name="state"/>
                             <Border Width="14" Height="14" Grid.Column="4" VerticalAlignment="Center"
                                     HorizontalAlignment="Right" BorderBrush="#F00" BorderThickness="1" CornerRadius="6"
-                                    ToolTip="异常信息异常信息" Visibility="Collapsed" Name="error_border">
+                                    ToolTip="{Binding Error}" Visibility="Collapsed" Name="error_border">
                                 <TextBlock Text="···" VerticalAlignment="Center" HorizontalAlignment="Center"
                                            Foreground="Red"/>
                             </Border>

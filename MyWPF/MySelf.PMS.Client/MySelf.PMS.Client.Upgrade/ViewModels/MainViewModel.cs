@@ -60,24 +60,35 @@ namespace MySelf.PMS.Client.Upgrade.ViewModels
             {
                 foreach (var file in FileList) {
                     if (file.HasCompleted) { continue; }
-                    WebAccess webAccess = new WebAccess();  
+                    file.ErrorMsg = "";
+                    file.HasError = false;
+
+                    // 两个路径
+                    // 1、本地路径
                     string local_file = System.IO.Path.Combine(file.FilePath, file.FileName);
-                    if (!string.IsNullOrEmpty(file.FilePath)&& !Directory.Exists(file.FilePath)) 
+                    if (!Directory.Exists(local_file))
                     {
                         Directory.CreateDirectory(file.FilePath);
                     }
-                    string path = (string.IsNullOrEmpty(file.FilePath) ? "none" : file.FilePath);
-                    string web_file = path+"/"+file.FileName;
+                    // 2、Uri路径
+                    string folder = file.FilePath;
+                    folder = folder == ".\\" ? "none" : folder;
+                    string web_file = folder + "/" + file.FileName;
+
+                    WebAccess webAccess = new WebAccess();
+
                     Debug.WriteLine("VM开始下载：" + web_file);
                     webAccess.DownloadFile(web_file, local_file,
+                        /// 当下载完成时回调
                         completed_ev =>
                         {
-                            Debug.WriteLine("VM开始完成：" + web_file);
+                            Debug.WriteLine("VM下载完成：" + web_file);
                             if (completed_ev != null && completed_ev.Error != null)
                             {
                                 file.ErrorMsg = completed_ev.Error.Message;
                                 file.State = "异常";
                                 file.StateColor = "Red";
+                                file.HasError = true;
                             }
                             else
                             {
@@ -115,6 +126,51 @@ namespace MySelf.PMS.Client.Upgrade.ViewModels
                     Application.Current.Shutdown();
                 });
             });
+
+
+            // 第二种情况的下载逻辑，待测试
+            //var file = FileList[index];
+            //this.DoDownload(file);
+        }
+
+        readonly object lock_obj = new object();
+        private void DoDownload(FileModel file)
+        {
+            string local_file = System.IO.Path.Combine(file.FilePath, file.FileName);
+            if (!string.IsNullOrEmpty(file.FilePath) && !Directory.Exists(file.FilePath))
+            {
+                Directory.CreateDirectory(file.FilePath);
+            }
+
+            string path = (string.IsNullOrEmpty(file.FilePath) ? "none" : file.FilePath);
+            string web_file = path + "/" + file.FileName;
+            Debug.WriteLine("VM开始下载：" + web_file);
+
+            WebAccess webAccess = new WebAccess();
+            webAccess.DownloadFile(web_file, local_file,
+                /// 当下载完成时回调
+                completed_ev =>
+                {
+                    Debug.WriteLine("VM下载完成：" + web_file);
+                    if (completed_ev != null && completed_ev.Error != null)
+                    {
+                        // 需要提示异常
+                        file.ErrorMsg = completed_ev.Error.Message;
+                    }
+                    index++;
+                    if (index == FileList.Count) return;
+                    Thread.Sleep(100);
+                    this.DoDownload(FileList[index]);
+                },
+
+                /// 当下载进程发生变化时回调
+                (progress, byte_len) =>
+                {
+                    // 接收进度百分比和接收到的字节数
+                    file.Progress = progress;
+                    file.CompletedLen = byte_len;
+                }
+              );
         }
     }
 }
