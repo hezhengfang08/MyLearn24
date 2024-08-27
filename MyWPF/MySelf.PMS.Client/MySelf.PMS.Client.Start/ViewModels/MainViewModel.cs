@@ -43,7 +43,7 @@ namespace MySelf.PMS.Client.Start.ViewModels
 
             // 获取出所需要的第一级菜单信息
             menus = menuService.GetAllMenus().ToArray();
-            foreach (var me in menus.Where(m => m.ParentId == "-1"))
+            foreach (var me in menus.Where(m => m.ParentId == "0"))
             {
                 Menus.Add(new MenuModel { MenuId = me.MenuId, MenuHeader = me.MenuHeader });
             }

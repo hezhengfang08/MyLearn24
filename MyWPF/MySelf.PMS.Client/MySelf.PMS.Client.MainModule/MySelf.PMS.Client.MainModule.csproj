@@ -16,5 +16,7 @@
     <ProjectReference Include="..\MySelf.PMS.Client.IBLL\MySelf.PMS.Client.IBLL.csproj" />
     <ProjectReference Include="..\MySelf.PMS.Client.Utils\MySelf.PMS.Client.Utils.csproj" />
   </ItemGroup>
-
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="copy $(TargetPath) $(SolutionDir)MySelf.PMS.Client.Start\bin\Debug\net8.0-windows\Modules\$(TargetFileName) /y" />
+	</Target>
 </Project>
