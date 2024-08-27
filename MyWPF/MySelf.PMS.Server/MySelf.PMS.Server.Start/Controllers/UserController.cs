@@ -90,5 +90,23 @@ namespace MySelf.PMS.Server.Start.Controllers
             }
             return Ok(result);
         }
+        [HttpGet("list/{key}")]
+        [Authorize]
+        public ActionResult GetUsers([FromRoute] string key)
+        {
+            Result<SysEmployee[]> result = new Result<SysEmployee[]>();
+            try
+            {
+                key = key == "none" ? "" : key;
+                result.Data = _userService.GetUsers(key);
+            }
+            catch (Exception ex)
+            {
+                result.State = StateEnum.Error;
+                result.Message = ex.Message;
+            }
+
+            return Ok(result);
+        }
     }
 }

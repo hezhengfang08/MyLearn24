@@ -21,14 +21,29 @@ namespace MySelf.PMS.Server.Service
                .Where(e => e.UserName == username && e.Password == password)
                .ToList();
             var employee = es.FirstOrDefault();
-            if (employee != null && this.AuthentionToken(username + password, out string token))
+            if (employee != null && this.AuthentationToken(username + password, out string token))
             {
                 employee.Token = token;
             }
 
             return employee;
         }
-        private bool AuthentionToken(string username, out string token) { 
+        public SysEmployee[] GetUsers(string key)
+        {
+            return _client.Queryable<SysEmployee>()
+                .Where(e =>
+                        string.IsNullOrEmpty(key) ||
+                        e.UserName.Contains(key) ||
+                        e.RealName.Contains(key) ||
+                        e.Address.Contains(key)
+                        )
+                .Select(e => new SysEmployee()
+                {
+                    Roles = SqlFunc.Subqueryable<RoleUser>()
+                    .Where(ru => ru.UserId == e.EId).ToList()
+                }).ToArray();
+        }
+        private bool AuthentationToken(string username, out string token) { 
              token = string.Empty;
             try
             {

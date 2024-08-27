@@ -29,14 +29,20 @@ namespace MySelf.PMS.Server.Service
             //              或者 TargetView匹配这个关键词，
             //              或者 当前菜单的子菜单相关的字段（MenuHeader/TargetView）也能匹配穿上关键词）
             var ms = _client.Queryable<MenuEntity>()
-               .Where(m => m.State >= 0  &&
-               (string.IsNullOrEmpty(key) ||(
-               m.MenuHeader.Contains(key)||
-               SqlFunc.Subqueryable<MenuEntity>().Where(sm => sm.ParentId == m.MenuId &&
-               (sm.MenuId.Contains(key) || sm.TargetView.Contains(key
-               ))).Count() >0
-              ))).ToList();
-            return ms;  
+                .Where(m => m.State >= 0 &&
+
+                (string.IsNullOrEmpty(key) ||
+                    (
+                      m.MenuHeader.Contains(key) ||
+                      m.TargetView.Contains(key) ||
+
+                      SqlFunc.Subqueryable<MenuEntity>().Where(sm => sm.ParentId == m.MenuId &&
+                                            (sm.MenuHeader.Contains(key) || sm.TargetView.Contains(key))).Count() > 0
+                    ))
+                )
+                .ToList();
+
+            return ms;
         }
 
        
@@ -58,7 +64,7 @@ namespace MySelf.PMS.Server.Service
                 var menuEntity = _client.Queryable<MenuEntity>()
                     .Where(m=>m.MenuId == menu.MenuId)
                     .ToList().FirstOrDefault();
-                if (menuEntity != null)
+                if (menuEntity == null)
                 {
                     throw new Exception("没有匹配的菜单的信息");
                 }

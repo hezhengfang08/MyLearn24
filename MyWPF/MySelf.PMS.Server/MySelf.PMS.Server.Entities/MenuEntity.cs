@@ -10,7 +10,7 @@ namespace MySelf.PMS.Server.Entities
     [SugarTable(TableName ="menus")]
     public class MenuEntity
     {
-        [SugarColumn(ColumnName = "menu_id")]
+        [SugarColumn(ColumnName = "menu_id",IsPrimaryKey =true)]
         public string MenuId { get; set; }
         [SugarColumn(ColumnName = "menu_header")]
         public string MenuHeader { get; set; }
