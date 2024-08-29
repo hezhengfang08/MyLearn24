@@ -10,7 +10,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Zhaoxi.PMS.Client.Assets;component/Styles/CalendarStyles.xaml"/>
+                <ResourceDictionary Source="/MySelf.PMS.Client.Assets;component/Styles/CalendarStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <DropShadowEffect Color="#3E7FFF" ShadowDepth="0" Opacity="0.2" x:Key="shadowEffect"/>
 

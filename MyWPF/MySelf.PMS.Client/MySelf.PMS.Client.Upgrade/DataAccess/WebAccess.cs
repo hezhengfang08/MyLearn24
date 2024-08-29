@@ -34,7 +34,7 @@ namespace MySelf.PMS.Client.Upgrade.DataAccess
             client.DownloadProgressChanged += (sender, eventarg) => { 
                progress?.Invoke(eventarg.ProgressPercentage,eventarg.BytesReceived);
             };
-            // http://localhost:5273/api/File/download/none/Zhaoxi.PMS.Client.BLL.dll
+            // http://localhost:5273/api/File/download/none/MySelf.PMS.Client.BLL.dll
             Debug.WriteLine("开始下载：" + web_file);
             client.DownloadFileAsync(new Uri($"http://localhost:5273/api/File/download/{web_file}"),
                local_file);

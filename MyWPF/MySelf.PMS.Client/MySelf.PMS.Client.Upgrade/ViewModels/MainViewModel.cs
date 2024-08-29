@@ -39,7 +39,7 @@ namespace MySelf.PMS.Client.Upgrade.ViewModels
             for (int i = 1; i <= files.Length; i++)
             {
                 var file = files[i - 1];
-                // Zhaoxi.PMS.Client.BLL.dll|UpgradeFiles|100
+                // MySelf.PMS.Client.BLL.dll|UpgradeFiles|100
                 string[] info = file.Split("|");
                 int.TryParse(info[2], out int len);
                 FileList.Add(new FileModel
@@ -68,7 +68,8 @@ namespace MySelf.PMS.Client.Upgrade.ViewModels
                     string local_file = System.IO.Path.Combine(file.FilePath, file.FileName);
                     if (!Directory.Exists(local_file))
                     {
-                        Directory.CreateDirectory(file.FilePath);
+                        if(!string.IsNullOrEmpty(file.FilePath))
+                          Directory.CreateDirectory(file.FilePath);
                     }
                     // 2、Uri路径
                     string folder = file.FilePath;

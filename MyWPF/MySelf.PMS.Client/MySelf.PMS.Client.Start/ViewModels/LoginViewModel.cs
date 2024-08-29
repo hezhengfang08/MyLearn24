@@ -85,7 +85,7 @@ namespace MySelf.PMS.Client.Start.ViewModels
 
                     // 拿到本地文件列表 （Json文件  当前客户端的文件相关信息 MD5）
                     string path_temp = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
-                    path_temp = Path.Combine(path_temp, "Zhaoxi.PMS", "upgrade_temp.json");
+                    path_temp = Path.Combine(path_temp, "MySelf.PMS", "upgrade_temp.json");
                     string json_str = "[]";
                     if (File.Exists(path_temp))
                         json_str = File.ReadAllText(path_temp);
@@ -111,7 +111,7 @@ namespace MySelf.PMS.Client.Start.ViewModels
                             !files_local.Exists(f => f.fileName == sf.fileName))
                         {
                             // 这个文件是需要下载的(名称、路径、大小)
-                            // Zhaoxi.PMS.Client.BLL.dll|UpgradeFiles|100
+                            // MySelf.PMS.Client.BLL.dll|UpgradeFiles|100
                             update_file.Add(sf.fileName + "|" + sf.filePath + "|" + sf.length + "|" + sf.fileMd5);
                         }
                     }
@@ -119,7 +119,7 @@ namespace MySelf.PMS.Client.Start.ViewModels
                     if (update_file.Count > 0)
                     {
                         // 启动更新程序，并且将更新文件列表传给它
-                        Process.Start("Zhaoxi.PMS.Client.Upgrade.exe", update_file);
+                        Process.Start("MySelf.PMS.Client.Upgrade.exe", update_file);
                         // 
 
                         // 下载完成进行服务文件列表的保存（Json序列化）

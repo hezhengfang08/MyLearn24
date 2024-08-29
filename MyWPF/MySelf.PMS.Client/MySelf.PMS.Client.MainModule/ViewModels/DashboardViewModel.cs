@@ -101,7 +101,7 @@ namespace MySelf.PMS.Client.MainModule.ViewModels
                 result =>
                 {
                     // 逻辑等于  退出登录   然后进行重新登录
-                    Process.Start("Zhaoxi.PMS.Client.Start.exe");
+                    Process.Start("MySelf.PMS.Client.Start.exe");
                     System.Environment.Exit(0);
                 });
         }
