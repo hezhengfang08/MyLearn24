@@ -5,6 +5,7 @@ import {
     MessageBox,
 } from '@element-plus/icons-vue'
 import Chart from './chartTemplate.vue'
+import ChinaMap from './myMap.vue'
 
 const lists = ref([
   {title:'电量监控',icon:Connection},
@@ -24,7 +25,7 @@ const option1 = {
   },
   series: [
     {
-      data: [150, 230, 224, 218, 135, 147, 260],
+      data: [750, 230, 224, 218, 135, 147, 960],
       type: 'line'
     }
   ]
@@ -44,22 +45,22 @@ const option1 = {
 
   <!-- 第二行 -->
   <div class="module-box">
-    <div style="flex:0 1 60%;margin:5px;">
+    <div style="flex:0 1 60%;margin:10px;">
       <el-card class="box-card">
-        <Chart :option="option1" :width='"100%"' height="400px" />
+        <ChinaMap />
       </el-card>
     </div>
 
     <div style="flex:0 1 40%;margin:5px;">
       <div style="flex:0 1 100%;margin:5px;">
         <el-card class="box-card">
-          444444
+          <Chart :option="option1" :width='"100%"' :height='"200px"' />
         </el-card>
       </div>
 
       <div style="flex:0 1 100%;margin:5px;">
         <el-card class="box-card">
-          444444
+          <Chart :option="option1" :width='"100%"' :height='"200px"' />
         </el-card>
       </div>
     </div>
@@ -69,13 +70,13 @@ const option1 = {
   <div class="module-box">
     <div style="flex:0 1 30%;margin:5px;">
       <el-card class="box-card">
-        444444
+        <Chart :option="option1" :width='"100%"' :height='"220px"' />
       </el-card>
     </div>
 
     <div style="flex:0 1 70%;margin:5px;">
       <el-card class="box-card">
-        444444
+        <Chart :option="option1" :width='"100%"' :height='"220px"' />
       </el-card>
     </div>
   </div>

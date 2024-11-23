@@ -1,0 +1,568 @@
+﻿<UserControl x:Class="MySelf.PMS.Client.MainModule.Views.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MySelf.PMS.Client.MainModule.Views"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="1300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/MySelf.PMS.Client.Assets;component/Styles/CalendarStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <DropShadowEffect Color="#3E7FFF" ShadowDepth="0" Opacity="0.2" x:Key="shadowEffect"/>
+
+            <Style TargetType="GroupBox">
+                <Setter Property="Margin" Value="5,5,5,10"/>
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="Effect" Value="{StaticResource shadowEffect}"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="GroupBox">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition MaxHeight="33"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Border Width="3" Background="#3E7FFF" Margin="10,7" 
+                                            HorizontalAlignment="Left" CornerRadius="2"/>
+                                    <ContentPresenter ContentSource="Header"
+                                                      VerticalAlignment="Center" Margin="20,0"
+                                  TextBlock.Foreground="#666" TextBlock.FontWeight="Bold"/>
+
+                                    <ContentPresenter Grid.RowSpan="2"/>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style TargetType="Button" x:Key="FuncButtonStyle">
+                <Setter Property="Margin" Value="0,2"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Width="22" Height="22" CornerRadius="15" Background="#4EEE" Margin="4,0">
+                                        <TextBlock Text="&#xe604;" FontFamily="{DynamicResource Iconfont}"
+                                       VerticalAlignment="Center" HorizontalAlignment="Center"
+                                       FontSize="14" Foreground="Orange"/>
+                                    </Border>
+                                    <ContentPresenter Grid.Column="1" VerticalAlignment="Center"
+                              Margin="4,0"/>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#5FFF"/>
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Background" Value="#2FFF"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        <Grid Margin="30,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="220"/>
+            </Grid.ColumnDefinitions>
+
+            <!--统计数据-->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="270"/>
+                    <RowDefinition Height="220"/>
+                    <RowDefinition Height="*" MinHeight="180"/>
+                </Grid.RowDefinitions>
+                <!--第一行-->
+                <ItemsControl ItemsSource="{Binding MainDatas}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Rows="1"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="White" CornerRadius="5" Margin="5,10" 
+                                Effect="{StaticResource shadowEffect}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Grid Width="40" Height="40" Margin="20,0" HorizontalAlignment="Left">
+                                        <Border Background="{Binding Color}"
+                                        CornerRadius="20" Opacity="0.3"/>
+                                        <TextBlock Text="{Binding Icon}" 
+                                               FontFamily="{DynamicResource Iconfont}" 
+                                               VerticalAlignment="Center" HorizontalAlignment="Center"
+                                               FontSize="20" Foreground="{Binding Color}"/>
+                                    </Grid>
+                                    <StackPanel VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Header}" Foreground="#888"/>
+                                        <TextBlock Text="{Binding Value}" FontSize="18" FontWeight="Bold"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <!--第二行-->
+                <UniformGrid Grid.Row="1" Rows="1">
+                    <GroupBox Header="2024年04月缴费统计">
+                        <Grid Margin="0,30,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="应缴费用：2042.39万元   已收：1032.23万元   待收：1010.16万元" 
+                                   Margin="10,5" Foreground="#999"/>
+                            <ItemsControl Grid.Row="1" ItemsSource="{Binding AmountList}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <lvc:Gauge Uses360Mode="True" Width="70" Height="70" 
+                                                   Value="{Binding Rate}" 
+                                                    From="0" To="100" 
+                                                    Foreground="{Binding Color}" 
+                                                   FromColor="{Binding Color}" 
+                                                   ToColor="{Binding Color}"
+                                                    InnerRadius="30">
+                                                <lvc:Gauge.GaugeRenderTransform>
+                                                    <TransformGroup>
+                                                        <RotateTransform Angle="90"></RotateTransform>
+                                                    </TransformGroup>
+                                                </lvc:Gauge.GaugeRenderTransform>
+                                            </lvc:Gauge>
+                                            <StackPanel VerticalAlignment="Center" Margin="10,0">
+                                                <TextBlock Text="{Binding Header}" Foreground="#555" FontWeight="Bold" Margin="0,0,0,5"/>
+                                                <TextBlock Text="{Binding Amount,StringFormat=已收取：{0}万元}" Foreground="#555" Margin="0,5,0,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="各栋楼收缴情况">
+                        <Grid Margin="0,4,0,0" TextBlock.Foreground="#999">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="（单位：万）" Margin="110,5"  FontSize="11"/>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right"
+                                    Margin="10,0">
+                                <Border Width="8" Height="8" Background="#993E7FFF"/>
+                                <TextBlock Text="已缴金额" Margin="10,0" FontSize="11"/>
+                                <Border Width="8" Height="8" Background="#7759E1FF"/>
+                                <TextBlock Text="未缴金额" Margin="10,0" FontSize="11"/>
+                            </StackPanel>
+                            <lvc:CartesianChart Grid.Row="1" Margin="10">
+                                <lvc:CartesianChart.Series>
+                                    <lvc:ColumnSeries Values="160,140,180,190,195,150,140,180,190,195,150" MaxColumnWidth="16" Fill="#993E7FFF"/>
+                                    <lvc:ColumnSeries Values="25,40,20,30,10,15,40,20,30,10,15" MaxColumnWidth="16" Fill="#7759E1FF"/>
+                                </lvc:CartesianChart.Series>
+                                <lvc:CartesianChart.AxisX>
+                                    <lvc:Axis Labels="1号楼,2号楼,3号楼,4号楼,5号楼,6号楼,7号楼,8号楼,9号楼,10号楼,11号楼">
+                                        <lvc:Axis.Separator>
+                                            <lvc:Separator Step="1" StrokeThickness="0"/>
+                                        </lvc:Axis.Separator>
+                                    </lvc:Axis>
+                                </lvc:CartesianChart.AxisX>
+                                <lvc:CartesianChart.AxisY>
+                                    <lvc:Axis MinValue="0" MaxValue="250"/>
+                                </lvc:CartesianChart.AxisY>
+                            </lvc:CartesianChart>
+                        </Grid>
+                    </GroupBox>
+                </UniformGrid>
+                <!--第三行-->
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="280"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Header="代办提醒">
+                        <StackPanel Margin="10,35,10,10" TextBlock.Foreground="#777">
+                            <Border BorderBrush="#EEE" BorderThickness="0,0,0,1" Height="30">
+                                <TextBlock Text="B-1楼梯口消防设备维修" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="#EEE" BorderThickness="0,0,0,1" Height="30">
+                                <TextBlock Text="A2楼顶出现漏水现象" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="#EEE" BorderThickness="0,0,0,1" Height="30">
+                                <TextBlock Text="B-1楼梯口消防设备维修" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="#EEE" BorderThickness="0,0,0,1" Height="30">
+                                <TextBlock Text="B-1楼梯口消防设备维修" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="#EEE" BorderThickness="0,0,0,1" Height="30">
+                                <TextBlock Text="A2-1下水道堵塞" VerticalAlignment="Center"/>
+                            </Border>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Header="工单处理统计" Grid.Column="1">
+                        <Grid Margin="0,15,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right"
+                         Margin="10,0">
+                                <Border Width="8" Height="8" Background="#F37DBB"/>
+                                <TextBlock Text="报修" Margin="10,0" FontSize="11"/>
+                                <Border Width="8" Height="8" Background="#3550EE"/>
+                                <TextBlock Text="投诉" Margin="10,0" FontSize="11"/>
+                                <Border Width="8" Height="8" Background="#1BE8FA"/>
+                                <TextBlock Text="其他" Margin="10,0" FontSize="11"/>
+                            </StackPanel>
+
+                            <lvc:CartesianChart Grid.Row="1" Margin="10">
+                                <lvc:CartesianChart.Series>
+                                    <lvc:LineSeries Values="368, 248, 195, 159, 134, 306, 173, 347, 221, 349, 311, 306, 386, 184, 199, 171, 352, 154, 116, 273"
+                                     Stroke="#771BE8FA" PointGeometrySize="0">
+                                        <lvc:LineSeries.Fill>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                <GradientStop Color="#1BE8FA" Offset="-0.8"/>
+                                                <GradientStop Color="Transparent" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </lvc:LineSeries.Fill>
+                                    </lvc:LineSeries>
+                                    <lvc:LineSeries Values="256, 70, 177, 121, 262, 219, 97, 87, 169, 155, 58, 201, 228, 68, 98, 243, 160, 284, 51, 139"
+                                     Stroke="#773550EE" PointGeometrySize="0">
+                                        <lvc:LineSeries.Fill>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                <GradientStop Color="#3550EE" Offset="-0.8"/>
+                                                <GradientStop Color="Transparent" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </lvc:LineSeries.Fill>
+                                    </lvc:LineSeries>
+                                    <lvc:LineSeries Values="126, 34, 178, 55, 93, 187, 12, 102, 159, 79, 193, 42, 67, 115, 24, 176, 89, 145, 7, 198"
+                                     Stroke="#77F37DBB" PointGeometrySize="0">
+                                        <lvc:LineSeries.Fill>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                <GradientStop Color="#F37DBB" Offset="-0.8"/>
+                                                <GradientStop Color="Transparent" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </lvc:LineSeries.Fill>
+                                    </lvc:LineSeries>
+                                </lvc:CartesianChart.Series>
+                                <lvc:CartesianChart.AxisY>
+                                    <lvc:Axis MinValue="0" MaxValue="400"/>
+                                </lvc:CartesianChart.AxisY>
+                                <lvc:CartesianChart.AxisX>
+                                    <lvc:Axis Labels="01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20">
+                                        <lvc:Axis.Separator>
+                                            <lvc:Separator Step="1" StrokeThickness="0"/>
+                                        </lvc:Axis.Separator>
+                                    </lvc:Axis>
+                                </lvc:CartesianChart.AxisX>
+                            </lvc:CartesianChart>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+
+                <!--第四行-->
+                <UniformGrid Rows="1" Grid.Row="3">
+                    <GroupBox Header="团队信息">
+                        <StackPanel Margin="10,35,10,10" TextBlock.Foreground="#777">
+                            <Border BorderBrush="#EEE" BorderThickness="0,0,0,1" Height="30">
+                                <TextBlock Text="团队信息" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="#EEE" BorderThickness="0,0,0,1" Height="30">
+                                <TextBlock Text="A2楼顶出现漏水现象" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="#EEE" BorderThickness="0,0,0,1" Height="30">
+                                <TextBlock Text="B-1楼梯口消防设备维修" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="#EEE" BorderThickness="0,0,0,1" Height="30">
+                                <TextBlock Text="团队信息" VerticalAlignment="Center"/>
+                            </Border>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="通知公告">
+                        <StackPanel Margin="10,35,10,10" TextBlock.Foreground="#777">
+                            <Grid Height="30">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Background="#EEE" VerticalAlignment="Bottom" Grid.ColumnSpan="2"
+                             Margin="10,0" Height="1"/>
+                                <TextBlock Text="朝夕物业武汉公司人员朝夕物业武汉公司人员朝夕物业武汉公司人员"
+                                VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                                <TextBlock Text="[24-03-24]" Grid.Column="1" VerticalAlignment="Center"
+                                HorizontalAlignment="Center" Foreground="#AAA"/>
+                            </Grid>
+                            <Grid Height="30">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Background="#EEE" VerticalAlignment="Bottom" Grid.ColumnSpan="2"
+                             Margin="10,0" Height="1"/>
+                                <TextBlock Text="朝夕物业2023年度总结大会朝夕物业2023年度总结大会朝夕物业2023年度总结大会"
+                                 VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                                <TextBlock Text="[24-03-24]" Grid.Column="1" VerticalAlignment="Center"
+                                 HorizontalAlignment="Center" Foreground="#AAA"/>
+                            </Grid>
+                            <Grid Height="30">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Background="#EEE" VerticalAlignment="Bottom" Grid.ColumnSpan="2"
+                             Margin="10,0" Height="1"/>
+                                <TextBlock Text="关于开展年度消息演习的通知"
+                                 VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                                <TextBlock Text="[24-03-24]" Grid.Column="1" VerticalAlignment="Center"
+                                 HorizontalAlignment="Center" Foreground="#AAA"/>
+                            </Grid>
+                            <Grid Height="30">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Background="#EEE" VerticalAlignment="Bottom" Grid.ColumnSpan="2"
+                             Margin="10,0" Height="1"/>
+                                <TextBlock Text="朝夕物业武汉公司人员朝夕物业武汉公司人员朝夕物业武汉公司人员"
+                                VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                                <TextBlock Text="[24-03-24]" Grid.Column="1" VerticalAlignment="Center"
+                                HorizontalAlignment="Center" Foreground="#AAA"/>
+                            </Grid>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="公司新闻">
+                        <StackPanel Margin="10,35,10,10" TextBlock.Foreground="#777">
+                            <Grid Height="30">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Background="#EEE" VerticalAlignment="Bottom" Grid.ColumnSpan="2"
+                        Margin="10,0" Height="1"/>
+                                <TextBlock Text="朝夕物业武汉公司人员朝夕物业武汉公司人员朝夕物业武汉公司人员"
+                           VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                                <TextBlock Text="[24-03-24]" Grid.Column="1" VerticalAlignment="Center"
+                           HorizontalAlignment="Center" Foreground="#AAA"/>
+                            </Grid>
+                            <Grid Height="30">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Background="#EEE" VerticalAlignment="Bottom" Grid.ColumnSpan="2"
+                        Margin="10,0" Height="1"/>
+                                <TextBlock Text="朝夕物业2023年度总结大会朝夕物业2023年度总结大会朝夕物业2023年度总结大会"
+                           VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                                <TextBlock Text="[24-03-24]" Grid.Column="1" VerticalAlignment="Center"
+                           HorizontalAlignment="Center" Foreground="#AAA"/>
+                            </Grid>
+                            <Grid Height="30">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Background="#EEE" VerticalAlignment="Bottom" Grid.ColumnSpan="2"
+                        Margin="10,0" Height="1"/>
+                                <TextBlock Text="关于开展年度消息演习的通知"
+                           VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                                <TextBlock Text="[24-03-24]" Grid.Column="1" VerticalAlignment="Center"
+                           HorizontalAlignment="Center" Foreground="#AAA"/>
+                            </Grid>
+                            <Grid Height="30">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Background="#EEE" VerticalAlignment="Bottom" Grid.ColumnSpan="2"
+                             Margin="10,0" Height="1"/>
+                                <TextBlock Text="朝夕物业武汉公司人员朝夕物业武汉公司人员朝夕物业武汉公司人员"
+                                VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                                <TextBlock Text="[24-03-24]" Grid.Column="1" VerticalAlignment="Center"
+                                HorizontalAlignment="Center" Foreground="#AAA"/>
+                            </Grid>
+                        </StackPanel>
+                    </GroupBox>
+                </UniformGrid>
+            </Grid>
+
+            <!--用户相关信息-->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="250"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <!--用户信息-->
+                <Border Margin="5,10,5,10" 
+             CornerRadius="5" Effect="{StaticResource shadowEffect}">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0.9,1">
+                            <GradientStop Color="#3E7FFF" Offset="0"/>
+                            <GradientStop Color="#993E7FFF" Offset="0.4"/>
+                            <GradientStop Color="#CC3E7FFF" Offset="0.4"/>
+                            <GradientStop Color="#AA3E7FFF" Offset="1.2"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                 Margin="0,20">
+                            <Border Width="50" Height="50" CornerRadius="25" Effect="{StaticResource shadowEffect}">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="{Binding CurrentUser.Avatar}"/>
+                                </Border.Background>
+                            </Border>
+                            <StackPanel VerticalAlignment="Center" Margin="10,0">
+                                <TextBlock Text="{Binding CurrentUser.RealName}" Margin="0,5"
+                                       Foreground="White"/>
+                                <TextBlock FontSize="11">
+                                    <Hyperlink TextDecorations="None" Foreground="#5FFF"
+                                               Command="{Binding ModifyPasswordCommand}">[修改密码]</Hyperlink>
+                                    <Hyperlink TextDecorations="None" Foreground="#5FFF"
+                                            Command="{Binding LockCommand}">[锁屏]</Hyperlink>
+                                    <Hyperlink TextDecorations="None" Foreground="#5FFF"
+                                Command="{Binding ExitCommand}">[退出]</Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <Border Height="01" Background="#EEE" Grid.Row="1" Margin="10,0" SnapsToDevicePixels="True"/>
+                        <TextBlock Text="常用功能" Grid.Row="1" 
+                               HorizontalAlignment="Center" Background="#5F93FF"
+                               FontSize="11" Foreground="White" Padding="5,0"/>
+
+                        <UniformGrid Grid.Row="2" Margin="10" Columns="2">
+                            <Button Content="新建住房" Style="{StaticResource FuncButtonStyle}"/>
+                            <Button Content="车位管理" Style="{StaticResource FuncButtonStyle}"/>
+                            <Button Content="新建报修" Style="{StaticResource FuncButtonStyle}"/>
+                            <Button Content="访问管理" Style="{StaticResource FuncButtonStyle}"/>
+                            <Button Content="车辆登记" Style="{StaticResource FuncButtonStyle}"/>
+                            <Button Content="功能按钮" Style="{StaticResource FuncButtonStyle}"/>
+                        </UniformGrid>
+                    </Grid>
+                </Border>
+                <!--用户日程-->
+                <GroupBox Grid.Row="1" Header="我的日程">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Calendar BorderThickness="0" 
+                              CalendarItemStyle="{StaticResource CalendarCalendarItemStyle1}"
+                              CalendarDayButtonStyle="{StaticResource CalendarCalendarDayButtonStyle1}"
+                              Background="Transparent"/>
+
+                        <StackPanel Grid.Row="1">
+                            <Grid Margin="0,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Border Background="#882D0CEF" Width="3" Margin="10,3" CornerRadius="2"/>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="晨会" FontWeight="Bold" Margin="0,0,0,5" Foreground="#444"/>
+                                    <TextBlock Text="上午10:00-11:00" FontSize="9" Foreground="#999"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Margin="0,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Border Background="#882D0CEF" Width="3" Margin="10,3" CornerRadius="2"/>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="项目实施内部培训" FontWeight="Bold" Margin="0,0,0,5" Foreground="#444"/>
+                                    <TextBlock Text="上午10:00-11:00" FontSize="9" Foreground="#999"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Margin="0,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Border Background="#882D0CEF" Width="3" Margin="10,3" CornerRadius="2"/>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="项目汇报" FontWeight="Bold" Margin="0,0,0,5" Foreground="#444"/>
+                                    <TextBlock Text="上午10:00-11:00" FontSize="9" Foreground="#999"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Margin="0,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Border Background="#882D0CEF" Width="3" Margin="10,3" CornerRadius="2"/>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="面试" FontWeight="Bold" Margin="0,0,0,5" Foreground="#444"/>
+                                    <TextBlock Text="上午10:00-11:00" FontSize="9" Foreground="#999"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Margin="0,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Border Background="#882D0CEF" Width="3" Margin="10,3" CornerRadius="2"/>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="项目实施内部培训" FontWeight="Bold" Margin="0,0,0,5" Foreground="#444"/>
+                                    <TextBlock Text="上午10:00-11:00" FontSize="9" Foreground="#999"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Margin="0,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Border Background="#882D0CEF" Width="3" Margin="10,3" CornerRadius="2"/>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="项目汇报" FontWeight="Bold" Margin="0,0,0,5" Foreground="#444"/>
+                                    <TextBlock Text="上午10:00-11:00" FontSize="9" Foreground="#999"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Margin="0,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Border Background="#882D0CEF" Width="3" Margin="10,3" CornerRadius="2"/>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="面试" FontWeight="Bold" Margin="0,0,0,5" Foreground="#444"/>
+                                    <TextBlock Text="上午10:00-11:00" FontSize="9" Foreground="#999"/>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>
+

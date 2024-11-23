@@ -1,0 +1,185 @@
+﻿<Window x:Class="MySelf.PMS.Client.Upgrade.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MySelf.PMS.Client.Upgrade.Views"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <WindowChrome.WindowChrome>
+        <WindowChrome NonClientFrameEdges="None" 
+                      UseAeroCaptionButtons="False"/>
+    </WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="ControlButtonStyle">
+            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+            <Setter Property="Foreground" Value="#888"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="Transparent" Name="border">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#E81123"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#418FF3" Offset="-0.3"/>
+                <GradientStop Color="#FFF" Offset="0.3"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="自动更新 [朝夕物业管理系统]" VerticalAlignment="Center"
+                   Foreground="#A000" FontSize="14" FontFamily="YouYuan"
+                   Margin="20,0" FontWeight="Normal"/>
+        <Button Width="40" Height="30" VerticalAlignment="Top"
+                HorizontalAlignment="Right" Margin="5,0" Name="btn"
+                Style="{StaticResource ControlButtonStyle}"
+                Click="btn_Click">
+            <Path Data="M0,0 12 12M0 12 12 0" Stroke="{Binding ElementName=btn,Path=Foreground}"/>
+        </Button>
+
+
+        <Viewbox Grid.Row="1" Width="200" VerticalAlignment="Top" Margin="30,20,30,30">
+            <Canvas Width="1600" Height="1000">
+                <Path Data="M666.000291 372.978036l84.7872 138.361019 504.5248 6.488436c22.472145 0.242036 33.708218 11.589818 33.708218 34.043345s-11.236073 33.670982-33.708218 33.670982h-24.222255c-20.237964 1.573236-30.356945 13.274764-30.356945 35.1232 0 24.743564 10.118982 37.115345 30.347636 37.115346h141.153746c20.666182 0.763345 30.999273 12.260073 30.999272 34.480872 0 22.2208-10.333091 34.657745-30.999272 37.301528h-419.095273c-22.230109 0-33.345164 12.381091-33.345164 37.133963 0 24.743564 11.115055 36.640582 33.345164 35.672437h90.707782c21.643636 0 29.174691 14.075345 29.174691 32.768 0 21.206109-9.541818 32.488727-29.174691 32.488727-19.642182 0-37.981091-0.130327-37.981091 38.651345 0 27.592145 12.660364 40.513164 37.981091 38.772364h320.037236c20.805818 1.163636 31.204073 13.526109 31.204073 37.096727s-10.398255 35.886545-31.204073 36.938473H342.928291c-20.973382 0-31.464727-11.599127-31.464727-34.797382 0-23.188945 10.491345-36.268218 31.464727-39.237818h15.592727c27.415273 0 41.118255-11.236073 41.118255-33.708218 0-22.472145-13.702982-33.568582-41.118255-33.289309H35.244218C16.356073 876.348509 6.916655 863.827782 6.916655 840.4992s9.439418-36.035491 28.327563-38.130036h290.229527c17.259055 0 25.879273-11.887709 25.879273-35.672437 0-23.794036-8.620218-36.165818-25.879273-37.133963h-32.646981c-15.872-1.480145-23.812655-12.660364-23.812655-33.531346 0-20.880291 7.940655-31.986036 23.812655-33.326545h50.101527c21.894982 0 32.842473-13.116509 32.842473-39.340218 0-26.2144-10.947491-38.818909-32.842473-37.822837h-108.730182c-20.740655-0.633018-31.101673-12.865164-31.101673-36.677818 0-23.803345 10.361018-36.314764 31.092364-37.524945H517.678545c19.809745 2.960291 29.714618-8.750545 29.714619-35.141819s-9.904873-39.3216-29.714619-38.800291h-71.605527c-21.587782 0-32.377018-10.817164-32.377018-32.45149 0-21.643636 10.798545-32.302545 32.377018-31.967419h219.936582z m-66.485527 504.292073a35.467636 35.467636 0 1 0 0 70.935273h173.782109a35.467636 35.467636 0 0 0 0-70.935273H599.505455z" Fill="#F1EFF2"/>
+                <Path Data="M733.9008 631.901091c-2.411055 88.957673-27.945891 152.715636-76.604509 191.273891 27.405964 19.8656 48.481745 44.488145 63.218036 73.867636 14.159127-18.888145 32.637673-31.343709 55.426328-37.394618 27.0336-6.702545 64.176873 2.010764 97.652363 56.4224 21.476073-25.162473 47.625309-29.956655 78.457018-14.382545 7.028364-28.020364 20.1728-47.8208 39.433309-59.392-54.197527-41.835055-85.662255-111.969745-94.384872-210.385455h-163.188364z" Fill="#EE8000"/>
+                <Path Data="M970.426182 432.006982l-55.882473 144.933236 83.3536 17.044946 3.7888-89.041455c-23.673018-14.205673-36.938473-42.626327-31.259927-72.936727" Fill="#CBD2D7"/>
+                <Path Data="M1085.049018 643.248873V527.676509c0-41.6768-17.044945-81.454545-46.415127-110.824727-29.360873 29.360873-46.415127 69.147927-46.415127 110.824727V643.258182h92.830254" Fill="#E36A57"/>
+                <Path Data="M622.778182 508.741818l9.476654 85.243346 82.413382-17.994473-55.891782-144.933236c4.738327 33.158982-10.426182 63.469382-35.998254 77.675054" Fill="#CBD2D7"/>
+                <Path Data="M543.213382 643.248873V527.676509c0-41.6768 17.044945-81.454545 46.415127-110.824727 29.360873 29.360873 46.415127 69.147927 46.415127 110.824727V643.258182h-92.830254" Fill="#E36A57"/>
+                <Path Data="M992.92858 643.495456l-0.006582-30.812783 92.438346-0.006582 0 30.8062-92.431764 0.013165M542.427404 643.107087l0-30.8062 92.431765-0.013165 0.006582 30.812782L542.433987 643.11367" Fill="#FACC5F"/>
+                <Path Data="M814.127554 6.682597c4.739415-2.843649-287.024259 216.920407-98.514014 636.569305l197.03461-0.006582C1102.099696 222.655121 809.394721 3.832365 814.127554 6.682597z" Fill="#F1F1F1"/>
+                <Path Data="M716.809309 643.518836h195.677091c4.729018-10.426182 9.634909-23.002764 13.423709-32.479418l-222.608291 0.949527c4.729018 10.426182 8.769164 21.113018 13.507491 31.529891zM748.767418 312.645818c36.100655-36.100655 94.626909-36.100655 130.727564 0s36.091345 94.626909 0 130.727564c-36.100655 36.100655-94.626909 36.100655-130.727564 0s-36.100655-94.626909 0-130.727564" Fill="#3E525D"/>
+                <Path Data="M764.872145 328.750545a69.659927 69.659927 0 1 1 98.51811 98.51811 69.659927 69.659927 0 0 1-98.51811-98.51811" Fill="#8CD0E9"/>
+                <Path Data="M883.283782 378.954473l-70.097455-70.097455c-11.3664 0-20.843055 3.7888-30.319709 7.5776l92.839564 92.839564c4.729018-10.426182 6.628073-19.893527 7.5776-30.319709M759.184291 336.337455l96.628364 96.619054a32.646982 32.646982 0 0 0 11.35709-11.375709l-97.559272-97.559273c-3.7888 3.779491-7.5776 7.568291-10.426182 12.306618" Fill="#5BB9DB"/>
+                <Path Data="M683.408291 194.243491h259.556073c-3.798109-11.375709-8.527127-21.783273-12.315928-31.259927l-233.984 0.940218c-3.7888 9.476655-8.517818 19.893527-13.256145 30.319709" Fill="#FACC5F"/>
+                <Path Data="M930.648436 162.983564C882.334255 57.828073 812.2368 4.784873 814.126545 6.683927c1.899055-1.899055-67.258182 52.093673-116.512581 156.299637h233.034472" Fill="#E36A57"/>
+                <Path Data="M815.699782 643.984291h-51.535127s-36.109964 14.848-3.397819 90.558836c32.702836 75.710836 54.923636 104.727273 54.923637 104.727273V643.984291z" Fill="#EFBA00"/>
+                <Path Data="M815.699782 643.816727H783.080727s-16.458473 12.781382-0.763345 56.878546c15.685818 44.087855 33.3824 77.284073 33.3824 77.284072V643.816727z" Fill="#F8D261"/>
+                <Path Data="M815.7184 643.984291h52.335709s36.677818 14.848 3.453673 90.558836c-33.214836 75.710836-55.789382 104.727273-55.789382 104.727273V643.984291z" Fill="#EFBA00"/>
+                <Path Data="M815.7184 643.816727h33.121745s16.719127 12.781382 0.781964 56.878546c-15.937164 44.087855-33.903709 77.284073-33.903709 77.284072V643.816727z" Fill="#F8D261"/>
+                <Path Data="M1244.206545 804.445091h318.045091a35.467636 35.467636 0 0 1 0 70.935273h-318.045091a35.467636 35.467636 0 0 1 0-70.935273z" Fill="#F1EFF2"/>
+                <Path Data="M1098.845091 853.876364l-3.490909 8.852945-8.778473-3.6864c-38.5024-16.197818-68.673164-15.238982-91.880727 2.224873-13.144436 9.309091-22.723491 27.554909-28.234473 55.147054l-2.708945 13.572655-11.543273-7.633455c-30.254545-19.968-52.745309-15.453091-72.043055 14.326691l-8.871563 13.684364-7.2704-14.596655c-22.313891-44.776727-56.022109-67.732945-86.006691-58.479709-22.211491 6.8608-39.349527 20.591709-51.730618 41.518546l-10.351709 17.501091-6.479128-19.269819c-20.2752-60.229818-90.130618-114.045673-150.434909-101.822836-26.596073 5.389964-51.702691 16.626036-74.8544 32.013964a251.764364 251.764364 0 0 0-31.3344 24.557382c-3.155782 2.913745-5.901964 5.613382-8.219927 8.005818a90.037527 90.037527 0 0 0-2.653091 2.857891A9.309091 9.309091 0 1 1 427.938909 870.4c2.234182-2.56 6.358109-6.851491 12.269382-12.306618a270.280145 270.280145 0 0 1 33.652364-26.381964c25.041455-16.635345 52.317091-28.848873 81.454545-34.750836 64.958836-13.163055 136.145455 36.528873 165.115345 97.661673 13.637818-16.877382 31.055127-28.634764 52.093673-35.13251 36.938473-11.394327 74.994036 11.329164 101.050182 54.942255 21.234036-24.482909 47.811491-29.370182 77.544727-14.242909 6.777018-25.227636 17.575564-43.333818 32.600437-53.9648 26.996364-20.321745 61.151418-22.676945 101.534254-7.726546 11.971491-24.920436 31.148218-43.706182 57.250909-56.133818l1.051928-0.418909c60.416-20.182109 113.682618 1.377745 157.938036 63.0784a9.309091 9.309091 0 1 1-15.127273 10.8544c-39.638109-55.268073-84.489309-73.560436-136.378182-56.450327-24.501527 11.794618-41.425455 29.835636-51.144145 54.439564z" Fill="#EE8000"/>
+            </Canvas>
+        </Viewbox>
+
+        <TextBlock Grid.Row="2" 
+                   Margin="30,0,0,0" VerticalAlignment="Center">
+            <Run Text="正在更新...."/>
+            <Run Text="["/><Run Text="{Binding Completed}"/><Run Text="/"/><Run Text="{Binding TotalCount}"/><Run Text="]"/>
+        </TextBlock>
+        <Button Content="开始更新" Grid.Row="2" Margin="0,0,30,0" 
+                HorizontalAlignment="Right" VerticalAlignment="Center"
+                Padding="10,5" BorderThickness="0"
+                Background="Orange" Foreground="White"
+                Command="{Binding StartCommand}"/>
+
+        <!--ListBox  ListView  DataGrid-->
+        <ScrollViewer Grid.Row="3" Margin="30,0,30,15" 
+                      VerticalScrollBarVisibility="Hidden" 
+                      Background="Transparent">
+            <ScrollViewer.OpacityMask>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="Black" Offset="0.6"/>
+                    <GradientStop Color="Transparent" Offset="0.9"/>
+                </LinearGradientBrush>
+            </ScrollViewer.OpacityMask>
+            <ItemsControl ItemsSource="{Binding FileList}"
+                          Margin="0,0,0,70">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="25"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="60"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Height="1" Background="#EEE" Grid.Row="1" Grid.ColumnSpan="4"
+                                    VerticalAlignment="Bottom"/>
+
+                            <ProgressBar Background="Transparent" Foreground="#661296db"
+                                         Value="{Binding Progress}"
+                                         Grid.ColumnSpan="2" BorderThickness="0"
+                                         Grid.RowSpan="2" Grid.Column="1"
+                                         Margin="0,5" Opacity="0.5" 
+                                         Minimum="0" Maximum="1"/>
+
+                            <Border Width="22" Height="20" Background="#44409EFE" Grid.RowSpan="2"
+                                    CornerRadius="5">
+                                <TextBlock Text="{Binding Index}" 
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"
+                                           FontSize="10" Foreground="White"/>
+                            </Border>
+
+                            <TextBlock Text="{Binding FileName}" VerticalAlignment="Bottom"
+                                       Grid.Column="1" Grid.ColumnSpan="2" Margin="10,0" FontWeight="Bold"
+                                       TextTrimming="WordEllipsis"/>
+
+                            <TextBlock Text="{Binding FileLenght}" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" 
+                                       Margin="10,3" FontSize="11" Foreground="#888" Name="tb_fl"/>
+                            <TextBlock Text="{Binding CompletedLen}" VerticalAlignment="Top" Grid.Column="2" Margin="10,3"
+                                       Grid.Row="1" FontSize="11" Foreground="#888" Name="tb_cl"/>
+                            <TextBlock Text="{Binding Progress,StringFormat={}{0:P0}}" 
+                                       VerticalAlignment="Center" HorizontalAlignment="Center"
+                                       Grid.Column="3" Grid.RowSpan="2" Name="tb_p"/>
+
+                            <TextBlock Text="{Binding State}" Grid.Column="3" Grid.RowSpan="2"
+                                       VerticalAlignment="Center" HorizontalAlignment="Center"
+                                       Foreground="{Binding StateColor}"/>
+
+                            <TextBlock Text="{Binding ErrorMsg}" Foreground="Red"
+                                       Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                                       TextTrimming="CharacterEllipsis"
+                                       VerticalAlignment="Top" Margin="10,3"
+                                       ToolTip="{Binding ErrorMsg}"/>
+                        </Grid>
+
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding HasError}" Value="True">
+                                <Setter TargetName="tb_fl" Property="Visibility" Value="Collapsed"/>
+                                <Setter TargetName="tb_cl" Property="Visibility" Value="Collapsed"/>
+                                <Setter TargetName="tb_p" Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding HasCompleted}" Value="True">
+                                <Setter TargetName="tb_p" Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+
+
+        <Path Data="M7245.283019 476.913509v469.764831A77.418264 77.418264 0 0 1 7167.903396 1024H77.379623A77.36030201 77.36030201 0 0 1 0 946.63969801v-739.79169801c3.32317001-0.67622601 6.70430201-1.255849 10.124075-1.738868C309.132075 164.226415 989.609057 28.594717 1399.13177399 96.41056599c409.54203801 67.815849 643.864151 571.411321 1080.80301801 571.41132101C2916.81569799 667.821887 3220.653887 19.320755 3767.54716999 19.320755c546.87396201 0 1046.334792 430.833509 1541.52573602 430.833509 495.190943 0 708.743245-306.774943 1043.51396199-275.900377C6686.56543399 205.031849 6914.975396 475.676981 7245.283019 476.894189z"
+              Fill="#221296db" Grid.Row="3" Height="35"
+              VerticalAlignment="Bottom"
+              Stretch="Fill"/>
+        <Path Data="M22.861395 245.974326C404.408558 24.409302 709.655814 5.882047 938.507907 190.392558c395.073488 318.440186 497.997395-78.228837 843.53786-119.069767 447.940465-52.962233 594.634419 223.136744 805.387907 190.511628C2905.969116 212.468093 2964.694326 0 3381.581395 0c166.697674 0 268.716651 215.611535 404.83721 261.834419 241.235349 81.92 436.485953 84.563349 619.16279-23.813954 285.767442-169.555349 619.162791-333.395349 952.55814-47.627907 45.365581 38.888186 95.374884 63.678512 150.027907 74.370977V1000.186047L0 1016.689116l22.861395-770.71479z"
+              Fill="#661296db" Grid.Row="3" Height="25"
+              VerticalAlignment="Bottom" Margin="-50,0"
+              Stretch="Fill"/>
+    </Grid>
+</Window>

@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Magicodes.IE.Excel.Abp" Version="2.7.5.1" />
+    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="8.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MySelf.Zero.Domain.Shared\MySelf.Zero.Domain.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

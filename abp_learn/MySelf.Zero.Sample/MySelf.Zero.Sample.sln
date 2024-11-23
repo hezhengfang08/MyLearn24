@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySelf.Zero.Domain", "MySelf.Zero.Domain\MySelf.Zero.Domain.csproj", "{68D9AAAD-84BC-4E7B-9CA4-10EC4C42EB7D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySelf.Zero.EntityFrameworkCore", "MySelf.Zero.EntityFrameworkCore\MySelf.Zero.EntityFrameworkCore.csproj", "{18AEDB5E-F607-44A6-9D26-DD7A0D30390F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.Zero.Application.Contracts", "MySelf.Zero.Application.Contracts\MySelf.Zero.Application.Contracts.csproj", "{8746CEA8-291F-4838-823B-01437C1B232F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.Zero.Application", "MySelf.Zero.Application\MySelf.Zero.Application.csproj", "{1649A8A5-0E0B-4570-98CF-9DC551D2C800}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.Zero.DbMigrator", "MySelf.Zero.DbMigrator\MySelf.Zero.DbMigrator.csproj", "{4987F022-4344-4C30-9867-81071881A02A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.Zero.HttpApi.Host", "MySelf.Zero.HttpApi.Host\MySelf.Zero.HttpApi.Host.csproj", "{4325C998-065D-4AF2-88D9-775145EE0B5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySelf.Zero.Domain.Shared", "MySelf.Zero.Domain.Shared\MySelf.Zero.Domain.Shared.csproj", "{E1AD124E-DE6B-4EB4-BCE4-C530D67410D3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{68D9AAAD-84BC-4E7B-9CA4-10EC4C42EB7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68D9AAAD-84BC-4E7B-9CA4-10EC4C42EB7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68D9AAAD-84BC-4E7B-9CA4-10EC4C42EB7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68D9AAAD-84BC-4E7B-9CA4-10EC4C42EB7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18AEDB5E-F607-44A6-9D26-DD7A0D30390F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18AEDB5E-F607-44A6-9D26-DD7A0D30390F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18AEDB5E-F607-44A6-9D26-DD7A0D30390F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18AEDB5E-F607-44A6-9D26-DD7A0D30390F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8746CEA8-291F-4838-823B-01437C1B232F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8746CEA8-291F-4838-823B-01437C1B232F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8746CEA8-291F-4838-823B-01437C1B232F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8746CEA8-291F-4838-823B-01437C1B232F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1649A8A5-0E0B-4570-98CF-9DC551D2C800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1649A8A5-0E0B-4570-98CF-9DC551D2C800}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1649A8A5-0E0B-4570-98CF-9DC551D2C800}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1649A8A5-0E0B-4570-98CF-9DC551D2C800}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4987F022-4344-4C30-9867-81071881A02A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4987F022-4344-4C30-9867-81071881A02A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4987F022-4344-4C30-9867-81071881A02A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4987F022-4344-4C30-9867-81071881A02A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4325C998-065D-4AF2-88D9-775145EE0B5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4325C998-065D-4AF2-88D9-775145EE0B5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4325C998-065D-4AF2-88D9-775145EE0B5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4325C998-065D-4AF2-88D9-775145EE0B5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1AD124E-DE6B-4EB4-BCE4-C530D67410D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1AD124E-DE6B-4EB4-BCE4-C530D67410D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1AD124E-DE6B-4EB4-BCE4-C530D67410D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1AD124E-DE6B-4EB4-BCE4-C530D67410D3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {77074B7D-674C-4AB6-9967-01E28B575FA7}
+	EndGlobalSection
+EndGlobal

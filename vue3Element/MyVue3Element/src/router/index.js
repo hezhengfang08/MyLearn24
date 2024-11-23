@@ -1,5 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-
+import {initRoutes} from '@/utils/myFn'
+import {permissionStore} from '@/store/permission'
+import {findModulesByUid} from '@/xhra/api'
+import {userStore} from '@/store/user'
 const routes = [
     {
         path:'/',
@@ -14,51 +17,44 @@ const routes = [
         path: '/home',  //首页
         name: 'home',
         meta:{title:'首页'},
-        component: () => import('../layout/index.vue'),
-        children:[
-            {
-                path: '/index',  //首页
-                name: 'index',
-                meta:{title:'首页'},
-                component: () => import('../views/home/index/index.vue')
-            },
-            {
-                path: '/vehicle',//车辆列表
-                name: 'vehicle',
-                meta:{title:'车辆列表'},
-                component: () => import('../views/home/vehicle/index.vue')
-            },
-            {
-                path: '/monitor',//车辆电量监控
-                name: 'monitor',
-                meta:{title:'车辆电量监控'},
-                component: () => import('../views/home/monitor/index.vue'),
-                children:[
-                    {
-                        path: '/monitor/charge',//车辆充电
-                        name: 'charge',
-                        meta:{title:'车辆充电'},
-                        component: () => import('../views/home/monitor/charge/index.vue')
-                    },
-                    {
-                        path: '/monitor/maintenance',//车辆维保
-                        name: 'maintenance',
-                        meta:{title:'车辆维保'},
-                        component: () => import('../views/home/monitor/maintenance/index.vue')
-                    },
-                    {
-                        path: 'order',//工单管理
-                        name: 'order',
-                        meta:{title:'工单管理'},
-                        component: () => import('../views/home/monitor/order/index.vue')
-                    },
-                ]
-            },
-        ]
+        redirect:'/index',
+        component: () => import('../layout/index.vue'), 
     }
 ]
 const router = createRouter({
     history: createWebHashHistory(),
     routes
+});
+//路由拦截
+router.beforeEach(async(to,from,next)=>{
+    if(to.path == '/login')
+    {
+        next();
+    }
+    else
+    {
+        if(permissionStore()&& permissionStore().navs.length ==0)
+        {
+             //没有缓存
+            //发送请求
+           const useUserStore = userStore();
+           let res = await findModulesByUid({id:useUserStore.uid})
+           
+            //缓存数据Store
+            permissionStore().setNav(res.data.data.list);
+             //1、筛选home
+             let homeRoutes = routes.filter(v=>v.path == '/home')[0];
+             //2、添加children
+             homeRoutes.children = [];
+             //3、递归
+             initRoutes(permissionStore().navs,homeRoutes.children);
+             router.addRoute(homeRoutes);
+             console.log(homeRoutes)
+             next({...to});
+        }else
+        {
+            next();
+        }
+    }
 })
 export default router

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MySelf.PMS.Client.Upgrade": {
+      "commandName": "Project",
+      "commandLineArgs": "vip.xspf|.\\|4577|101c3def4146d1e7f018583bd7aa5483\r\n箭头.png|.\\|1823|8d15c94446a411344c0535898663bdf2\r\n宣讲PPT.txt|.\\|1249|f747c130458731baf49b28a3a4d5b587"
+    }
+  }
+}

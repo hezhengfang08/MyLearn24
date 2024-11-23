@@ -5,10 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:utils="clr-namespace:MySelf.QOSM.QuickOrderAPP.Utils" 
+        xmlns:vm="clr-namespace:MySelf.QOSM.QuickOrderAPP.ViewModels"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
 xmlns:local="clr-namespace:MySelf.QOSM.QuickOrderAPP"
         mc:Ignorable="d"
         Title="快捷点餐管理系统" Height="600" Width="1000" Name="mainWindow" WindowState="{Binding WinState}" Style="{StaticResource noneBorderyWindowStyle}">
+    <Window.DataContext>
+        <vm:QuickOrderingMainViewModel/>
+    </Window.DataContext>
     <Window.Resources>
         <utils:FalseConverter x:Key="falseConverter" />
         <utils:TrueConverter x:Key="trueConverter" />

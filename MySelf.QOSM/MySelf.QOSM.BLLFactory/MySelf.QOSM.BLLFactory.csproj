@@ -9,6 +9,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MySelf.QOSM.Common\MySelf.QOSM.Common.csproj" />
+    <ProjectReference Include="..\MySelf.QOSM.IServices\MySelf.QOSM.IServices.csproj" />
+    <ProjectReference Include="..\MySelf.QOSM.Services\MySelf.QOSM.Services.csproj" />
   </ItemGroup>
 
 </Project>

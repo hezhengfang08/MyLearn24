@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.9.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.0.2" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.2" />
+    <PackageReference Include="Volo.Abp.AutoMapper" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.FluentValidation" Version="8.2.2" />
+  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\MySelf.Zero.Application.Contracts\MySelf.Zero.Application.Contracts.csproj" />
+		<ProjectReference Include="..\MySelf.Zero.Domain.Shared\MySelf.Zero.Domain.Shared.csproj" />
+		<ProjectReference Include="..\MySelf.Zero.Domain\MySelf.Zero.Domain.csproj" />
+	</ItemGroup>
+</Project>

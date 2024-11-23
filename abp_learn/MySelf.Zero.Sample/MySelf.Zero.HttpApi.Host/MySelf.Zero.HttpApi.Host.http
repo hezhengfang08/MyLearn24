@@ -1,0 +1,6 @@
+@MySelf.Zero.HttpApi.Host_HostAddress = http://localhost:5209
+
+GET {{MySelf.Zero.HttpApi.Host_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

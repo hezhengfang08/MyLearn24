@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.MySQL" Version="8.2.2" />
+  </ItemGroup>
+	<ItemGroup>
+  <ProjectReference Include="..\MySelf.Zero.Domain\MySelf.Zero.Domain.csproj" />
+</ItemGroup>
+
+</Project>

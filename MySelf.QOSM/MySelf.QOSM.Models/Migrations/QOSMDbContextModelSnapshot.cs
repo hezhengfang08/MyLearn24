@@ -62,6 +62,12 @@ namespace MySelf.QOSM.Models.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsLogin")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LogInTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("LogOffTime")
                         .HasColumnType("datetime");
 
@@ -108,6 +114,10 @@ namespace MySelf.QOSM.Models.Migrations
 
                     b.HasKey("Rfid");
 
+                    b.HasIndex("FoodId");
+
+                    b.HasIndex("OrderId");
+
                     b.ToTable("CustomerOrderInfos");
                 });
 
@@ -131,6 +141,9 @@ namespace MySelf.QOSM.Models.Migrations
                     b.Property<decimal>("FoodPrice")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int?>("FoodTypeInfoFtypeId")
+                        .HasColumnType("int");
+
                     b.Property<int>("FtypeId")
                         .HasColumnType("int")
                         .HasColumnName("FTypeId");
@@ -151,6 +164,8 @@ namespace MySelf.QOSM.Models.Migrations
                         .HasColumnType("nvarchar(500)");
 
                     b.HasKey("FoodId");
+
+                    b.HasIndex("FoodTypeInfoFtypeId");
 
                     b.ToTable("FoodInfos");
                 });
@@ -265,7 +280,12 @@ namespace MySelf.QOSM.Models.Migrations
                     b.Property<int>("ParentId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("RoleInfoRoleId")
+                        .HasColumnType("int");
+
                     b.HasKey("MenuId");
+
+                    b.HasIndex("RoleInfoRoleId");
 
                     b.ToTable("MenuInfos");
                 });
@@ -358,6 +378,8 @@ namespace MySelf.QOSM.Models.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("UserId");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("UserInfos");
                 });
@@ -523,6 +545,62 @@ namespace MySelf.QOSM.Models.Migrations
                         .HasColumnType("bit");
 
                     b.ToView("ViewUserInfos");
+                });
+
+            modelBuilder.Entity("MySelf.QOSM.Models.Entities.CustomerOrderInfo", b =>
+                {
+                    b.HasOne("MySelf.QOSM.Models.Entities.FoodInfo", "Food")
+                        .WithMany()
+                        .HasForeignKey("FoodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MySelf.QOSM.Models.Entities.FoodOrderInfo", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Food");
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("MySelf.QOSM.Models.Entities.FoodInfo", b =>
+                {
+                    b.HasOne("MySelf.QOSM.Models.Entities.FoodTypeInfo", null)
+                        .WithMany("Foods")
+                        .HasForeignKey("FoodTypeInfoFtypeId");
+                });
+
+            modelBuilder.Entity("MySelf.QOSM.Models.Entities.MenuInfo", b =>
+                {
+                    b.HasOne("MySelf.QOSM.Models.Entities.RoleInfo", null)
+                        .WithMany("Menus")
+                        .HasForeignKey("RoleInfoRoleId");
+                });
+
+            modelBuilder.Entity("MySelf.QOSM.Models.Entities.UserInfo", b =>
+                {
+                    b.HasOne("MySelf.QOSM.Models.Entities.RoleInfo", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("MySelf.QOSM.Models.Entities.FoodTypeInfo", b =>
+                {
+                    b.Navigation("Foods");
+                });
+
+            modelBuilder.Entity("MySelf.QOSM.Models.Entities.RoleInfo", b =>
+                {
+                    b.Navigation("Menus");
+
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

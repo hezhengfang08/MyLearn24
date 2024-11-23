@@ -3,7 +3,7 @@ import { ref, onMounted, defineProps, computed } from 'vue'
 import * as echarts from 'echarts'
 
 
-
+//供父模块调用
 const { width, height, option } = defineProps(
     {
         width: {
@@ -32,16 +32,15 @@ const { width, height, option } = defineProps(
                 ]
             }
         }
-
     }
 )
 onMounted(() => {
     InitChart();
 });
 const chart = ref();
-var style = computed(() => { width, height});
+//计算属性设置样式，注意写法
+const style = computed(() => ({ width, height }));
 const InitChart = () => {
-   
     const myChart = echarts.init(chart.value);
     myChart.setOption(option);
     window.addEventListener('resize', () => {
@@ -52,5 +51,4 @@ const InitChart = () => {
 <template>
     <div ref="chart" :style="style"></div>
 </template>
-<style scoped>
-</style>
+<style scoped></style>
