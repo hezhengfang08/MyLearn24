@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace Myself.SmartParking.ORM
 {
-      public class ZhaoxiDbContext : DbContext
+      public class MyselfDbContext : DbContext
     {
-        public ZhaoxiDbContext(DbContextOptions<ZhaoxiDbContext> options)
+        public MyselfDbContext(DbContextOptions<MyselfDbContext> options)
             : base(options)
         { }
 

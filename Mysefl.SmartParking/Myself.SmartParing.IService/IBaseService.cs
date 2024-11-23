@@ -35,7 +35,7 @@ namespace Myself.SmartParing.IService
         /// <param name="funcOrderBy"></param>
         /// <param name="isAsc"></param>
         /// <returns></returns>
-        PageResult<T> QueryPage<T,S>(Expression<Func<T,S>> funcWhere,int pageSize,int pageIndex,Expression<Func<T,S>> funcOrderBy,bool isAsc =true ) where T : class;
+        PageResult<T> QueryPage<T,S>(Expression<Func<T,bool>> funcWhere,int pageSize,int pageIndex,Expression<Func<T,S>> funcOrderBy,bool isAsc =true ) where T : class;
         #endregion
 
         #region add
