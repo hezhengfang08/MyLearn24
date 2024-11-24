@@ -5,8 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Myself.SmartParking.Views"
         mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        WindowStartupLocation="CenterScreen" FontFamily="Microsoft YaHei" FontSize="13" Foreground="#333" FontWeight="ExtraLight"
+         Title="我的停车场管理系统" Height="750" Width="1300">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="1" 
+                  NonClientFrameEdges="None"/>
+    </WindowChrome.WindowChrome>
+    <DockPanel>
+        <!--左侧菜单-->
+        <Grid Width="200" DockPanel.Dock="Left" Background="#604CFE">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" Margin="0,30" HorizontalAlignment="Center">
+                <Image Source="/Myself.SmartParking.Assets;component/Images/Logo.png" Width="40"/>
+                <TextBlock Text="朝夕教育" FontSize="14" HorizontalAlignment="Center"
+                         VerticalAlignment="Center" Foreground="White" Margin="20,0"/>
+            </StackPanel>
+
+            <TreeView Grid.Row="1" Background="Transparent" BorderThickness="0"
+                    ItemsSource="{Binding Menus}">
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                        <TextBlock Text="{Binding MenuHeader}"/>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+        </Grid>
+
+        <!--内容区域-->
+        <Grid/>
+    </DockPanel>
 </Window>

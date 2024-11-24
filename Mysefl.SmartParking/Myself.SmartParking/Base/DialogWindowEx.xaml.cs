@@ -22,6 +22,18 @@ namespace Myself.SmartParking.Base
         public DialogWindowEx()
         {
             InitializeComponent();
+            //this.Loaded += DialogWindowEx_Loaded;
+            //this.ContentRendered += DialogWindowEx_ContentRendered;
+        }
+
+        private void DialogWindowEx_ContentRendered(object? sender, EventArgs e)
+        {
+            this.SizeToContent = SizeToContent.WidthAndHeight;
+        }
+
+        private void DialogWindowEx_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.SizeToContent = SizeToContent.WidthAndHeight;
         }
 
         public IDialogResult Result { get ; set ; }

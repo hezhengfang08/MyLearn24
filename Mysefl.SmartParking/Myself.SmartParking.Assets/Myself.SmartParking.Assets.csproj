@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Remove="Images\login_back.jpg" />
+    <None Remove="Images\Logo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,7 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Myself.SmartParking.Entities\Myself.SmartParking.Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Images\login_back.jpg" />
+    <Resource Include="Images\Logo.png" />
   </ItemGroup>
 
 </Project>

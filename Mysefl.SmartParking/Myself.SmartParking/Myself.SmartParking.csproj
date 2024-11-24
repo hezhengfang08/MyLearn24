@@ -15,6 +15,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Myself.SmartParing.IService\Myself.SmartParing.IService.csproj" />
     <ProjectReference Include="..\Myself.SmartParking.Assets\Myself.SmartParking.Assets.csproj" />
+    <ProjectReference Include="..\Myself.SmartParking.Controls\Myself.SmartParking.Controls.csproj" />
+    <ProjectReference Include="..\Myself.SmartParking.Models\Myself.SmartParking.Models.csproj" />
     <ProjectReference Include="..\Myself.SmartParking.ORM\Myself.SmartParking.ORM.csproj" />
     <ProjectReference Include="..\Myself.SmartParking.Service\Myself.SmartParking.Service.csproj" />
   </ItemGroup>

@@ -4,9 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Myself.SmartParking.Base"
-        mc:Ignorable="d" ResizeMode="NoResize" SizeToContent="WidthAndHeight"
-        WindowStartupLocation="CenterScreen" >
+        mc:Ignorable="d" ResizeMode="NoResize" ShowInTaskbar="False"
+        WindowStartupLocation="CenterScreen" Background="{x:Null}"  
+        Width="{Binding Content.Width, RelativeSource={RelativeSource Self}}"
+        Height="{Binding Content.Height, RelativeSource={RelativeSource Self}}">
     <WindowChrome.WindowChrome>
-        <WindowChrome GlassFrameThickness="-1" UseAeroCaptionButtons="False"/>
+        <WindowChrome GlassFrameThickness="-1" UseAeroCaptionButtons="False" NonClientFrameEdges="None"/>
     </WindowChrome.WindowChrome>
 </Window>

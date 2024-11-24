@@ -15,11 +15,12 @@ namespace Myself.SmartParking.Service
         {
         }
 
-        public void Login(string username, string password)
+        public SysUser Login(string username, string password)
         {
             var users =
              this.Query<SysUser>(u => u.Name == username && u.Password == password)
              .ToList();
+            return users.FirstOrDefault();
         }
     }
 }

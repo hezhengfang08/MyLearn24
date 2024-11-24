@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using Myself.SmartParking.Entities;
 using System.Collections.Generic;
 
@@ -13,9 +14,10 @@ namespace Myself.SmartParking.ORM
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
-                optionsBuilder.UseSqlite("Data Source=data.db");
+                optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=SP2024;Integrated Security=True;Trust Server Certificate=True");
         }
 
         public virtual DbSet<SysUser> SysUser { get; set; }
+        public virtual DbSet<SysMenu> SysMenu { get; set; }
     }
 }
