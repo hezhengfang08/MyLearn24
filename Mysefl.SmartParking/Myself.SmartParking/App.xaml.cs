@@ -19,18 +19,27 @@ namespace Myself.SmartParking
         protected override Window CreateShell()
         {
             return Container.Resolve<MainView>();
+          
+        }
+        protected override void InitializeShell(Window shell)
+        {
+            base.InitializeShell(shell);
+
+            Container.Resolve<IRegionManager>().RegisterViewWithRegion("MainRegion", "DashboardView");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterDialog<LoginView>();
             containerRegistry.RegisterDialogWindow<DialogWindowEx>();
+           
 
 
             // 注册相关的实体
             containerRegistry.Register<DbContext, MyselfDbContext>();
             containerRegistry.Register<IUserService, UserService>();
             containerRegistry.Register<IMenuService, MenuService>();
+            containerRegistry.RegisterForNavigation<Views.Pages.DashboardView>();
         }
     }
 

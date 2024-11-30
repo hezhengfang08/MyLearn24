@@ -5,6 +5,12 @@
              xmlns:p="http://prismlibrary.com/"
              >
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <FontFamily x:Key="Icons">/Myself.SmartParking.Assets;component/Fonts/iconfont.ttf#zx_icons</FontFamily>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </p:PrismApplication>
