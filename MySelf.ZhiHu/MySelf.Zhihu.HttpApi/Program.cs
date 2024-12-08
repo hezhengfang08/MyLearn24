@@ -1,5 +1,5 @@
 using MySelf.Zhihu.HttpApi;
-using MySelf.Zhihu.Infrastructure;
+using MySelf.Zhihu.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

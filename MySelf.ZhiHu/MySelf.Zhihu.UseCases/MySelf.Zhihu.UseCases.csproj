@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MySelf.Zhihu.Core\MySelf.Zhihu.Core.csproj" />
+    <ProjectReference Include="..\MySelf.Zhihu.SharedKernel\MySelf.Zhihu.SharedKernel.csproj" />
+  </ItemGroup>
+
 </Project>
