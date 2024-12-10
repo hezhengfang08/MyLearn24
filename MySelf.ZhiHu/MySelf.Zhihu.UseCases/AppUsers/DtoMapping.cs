@@ -9,16 +9,12 @@ using System.Threading.Tasks;
 namespace MySelf.Zhihu.UseCases.AppUsers
 {
 
-    public record AppUserDto(int Id, string Nickname);
-
-    public record TokenDto(string AccessToken);
-
-
+    public record CreatedAppUserDto(int Id, string Nickname);
     public class DtoMapping: Profile
     {
         public DtoMapping()
         {
-            CreateMap<AppUser, AppUserDto>();
+            CreateMap<AppUser, CreatedAppUserDto>();
         }
     }
 }

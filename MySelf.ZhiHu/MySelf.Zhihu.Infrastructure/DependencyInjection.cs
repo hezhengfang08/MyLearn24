@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MySelf.Zhihu.Infrastructure.Data;
 using MySelf.Zhihu.Infrastructure.Data.Interceptors;
 using MySelf.Zhihu.Infrastructure.Identity;
 using MySelf.Zhihu.UseCases.Common.Interfaces;
@@ -11,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MySelf.Zhihu.Infrastructure.Data
+namespace MySelf.Zhihu.Infrastructure
 {
     public static class DependencyInjection
     {
