@@ -15,4 +15,8 @@
     <ProjectReference Include="..\MySelf.Zhihu.SharedKernel\MySelf.Zhihu.SharedKernel.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Questions\Commands\" />
+  </ItemGroup>
+
 </Project>

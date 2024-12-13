@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace MySelf.Zhihu.SharedKernel.Domain
 {
-    public interface IEntity<Tid>
+    public interface IEntity;
+
+    public interface IEntity<Tid> : IEntity
     {
         Tid Id { get; set; }
     }

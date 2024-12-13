@@ -57,7 +57,13 @@ namespace MySelf.Zhihu.SharedKernel.Result
                 Errors = result.Errors
             };
         }
-
+        public static Result NotFound(params string[] error)
+        {
+            return new Result(ResultStatus.NotFound)
+            {
+                Errors = error.AsEnumerable()
+            };
+        }
         public static Result Success()
         {
             return new Result(ResultStatus.Ok);
@@ -106,6 +112,13 @@ namespace MySelf.Zhihu.SharedKernel.Result
             return new Result(ResultStatus.Invalid)
             {
                 Errors = errors
+            };
+        }
+        public static Result Invalid(params string[] errors)
+        {
+            return new Result(ResultStatus.Invalid)
+            {
+                Errors = errors.AsEnumerable()
             };
         }
     }

@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using MySelf.Zhihu.Core.Data;
 using MySelf.Zhihu.SharedKernel.Domain;
+using MySelf.Zhihu.SharedKernel.Repositoy;
+using MySelf.Zhihu.SharedKernel.Specification;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,26 +12,38 @@ using System.Threading.Tasks;
 
 namespace MySelf.Zhihu.Infrastructure.Data.Repositories
 {
-    public class EfReadRepository<T>(AppDbContext dbContext) : IReadRepository<T> where T : class, IAggregateRoot
+    public class EfReadRepository<T>(AppDbContext dbContext) : IReadRepository<T> where T : class, IEntity
     {
-        public async Task<T?> GetByIdAsync<TKey>(TKey id, CancellationToken cancellationToken = default) where TKey : notnull
+        protected readonly DbSet<T> DbSet = dbContext.Set<T>();
+
+        public async Task<T?> GetByIdAsync<TKey>(TKey id, CancellationToken cancellationToken = default)
         {
-            return await dbContext.Set<T>().FindAsync(new object[] { id }, cancellationToken);
+            return await DbSet.FindAsync([id, cancellationToken], cancellationToken: cancellationToken);
         }
 
-        public async Task<int> GetCountAsync(Expression<Func<T, bool>> express, CancellationToken cancellationToken = default)
+        public async Task<List<T>> GetListAsync(ISpecification<T>? specification = null,
+            CancellationToken cancellationToken = default)
         {
-            return await dbContext.Set<T>().Where(express).CountAsync(cancellationToken);
+            return await SpecificationEvaluator.GetQuery(DbSet, specification).ToListAsync(cancellationToken);
         }
 
-        public async Task<List<T>> GetListAsync(Expression<Func<T, bool>> express, CancellationToken cancellationToken = default)
+        public async Task<T?> GetSingleOrDefaultAsync(ISpecification<T>? specification = null,
+            CancellationToken cancellationToken = default)
         {
-            return await dbContext.Set<T>().Where(express).ToListAsync(cancellationToken);
+            return await SpecificationEvaluator.GetQuery(DbSet, specification).FirstOrDefaultAsync(cancellationToken);
         }
 
-        public IQueryable<T> GetQuaryable()
+        public async Task<int> CountAsync(ISpecification<T>? specification = null,
+            CancellationToken cancellationToken = default)
         {
-            return dbContext.Set<T>().AsQueryable(); throw new NotImplementedException();
+            return await SpecificationEvaluator.GetQuery(DbSet, specification).CountAsync(cancellationToken);
+        }
+
+        public async Task<bool> AnyAsync(ISpecification<T>? specification = null,
+            CancellationToken cancellationToken = default)
+        {
+            return await SpecificationEvaluator.GetQuery(DbSet, specification).AnyAsync(cancellationToken);
         }
     }
+
 }

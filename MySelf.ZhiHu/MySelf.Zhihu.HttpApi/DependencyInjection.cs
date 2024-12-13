@@ -5,11 +5,13 @@ namespace MySelf.Zhihu.HttpApi
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddWebServices(this IServiceCollection services)
+        public static IServiceCollection AddWebServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IUser, CurrentUser>();
 
             services.AddHttpContextAccessor();
+
+            services.AddExceptionHandler<UseCaseExceptionHandler>();
 
             return services;
         }
