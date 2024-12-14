@@ -1,4 +1,5 @@
-﻿using MySelf.Zhihu.Core.Common;
+﻿using MySelf.Zhihu.Core.AppUserAggregate.Events;
+using MySelf.Zhihu.Core.Common;
 using MySelf.Zhihu.SharedKernel.Domain;
 using MySelf.Zhihu.SharedKernel.Result;
 using System;
@@ -22,13 +23,23 @@ namespace MySelf.Zhihu.Core.AppUserAggregate.Entites
         public string? Bio { get; set; }
 
         /// <summary>
-        ///    
+        ///     关注列表
         /// </summary>
         public ICollection<FollowUser> Followees { get; set; } = new List<FollowUser>();
 
+        /// <summary>
+        ///   粉丝列表
+        /// </summary>
         public ICollection<FollowUser> Followers { get; set; } =  new List<FollowUser>();
+       
 
-        public ICollection<FollowQuestion> FollowQuestions { get; set; } = new List<FollowQuestion>();
+
+        /// <summary>
+        ///     关注问题列表
+        /// </summary>
+        private readonly List<FollowQuestion> followQuestions = [];
+        public IEnumerable<FollowQuestion> FollowQuestions => followQuestions;
+
         /// <summary>
         ///    添加关注问题
         /// </summary>
@@ -44,7 +55,8 @@ namespace MySelf.Zhihu.Core.AppUserAggregate.Entites
                 FollowDate = DateTimeOffset.Now
             };
 
-            FollowQuestions.Add(followQuestion);
+            followQuestions.Add(followQuestion);
+            AddDomainEvent(new FollowQuestionAddedEvent(followQuestion));
             return Result.Success();
         }
 
@@ -55,7 +67,9 @@ namespace MySelf.Zhihu.Core.AppUserAggregate.Entites
         public void RemoveFollowQuestion(int questionId)
         {
             var followQuestion = FollowQuestions.FirstOrDefault(fq => fq.QuestionId == questionId);
-            if (followQuestion != null) FollowQuestions.Remove(followQuestion);
+            if (followQuestion == null) return;
+            followQuestions.Remove(followQuestion);
+            AddDomainEvent(new FollowQuestionRemovedEvent(followQuestion));
         }
     }
 }

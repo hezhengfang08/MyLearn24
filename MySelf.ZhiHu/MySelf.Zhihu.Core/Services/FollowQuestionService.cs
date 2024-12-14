@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MySelf.Zhihu.Core.QuestionAggregate.Services
+namespace MySelf.Zhihu.Core.Services
 {
     public class FollowQuestionService(IReadRepository<Question> questions) : IFollowQuestionService
     {

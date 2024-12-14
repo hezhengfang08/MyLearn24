@@ -23,6 +23,7 @@ namespace MySelf.Zhihu.UseCases.Common.Behaviors
                     throw new ForbiddenException();
                 }
             }
+            // 其它授权逻辑
             return await next();
         }
     }

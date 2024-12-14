@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MySelf.Zhihu.Core.Interfaces;
-using MySelf.Zhihu.Core.QuestionAggregate.Services;
+using MySelf.Zhihu.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;

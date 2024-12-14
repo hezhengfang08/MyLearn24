@@ -13,7 +13,7 @@ using System.Security.Claims;
 
 namespace MySelf.Zhihu.Infrastructure.Identity
 {
-    public class IdentityService(UserManager<IdentityUser> userManager, IOptions<JwtSettings> jwtSettings) : IIdentityService
+    public class IdentityService(UserManager<IdentityUser> userManager, IOptions<JwtSettings> jwtSettings)
     {
         /// <summary>
         /// 

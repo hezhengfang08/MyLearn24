@@ -78,7 +78,13 @@ namespace MySelf.Zhihu.SharedKernel.Result
         {
             return new Result(ResultStatus.Error);
         }
-
+        public static Result Failure(params string[] errors)
+        {
+            return new Result(ResultStatus.Error)
+            {
+                Errors = errors.AsEnumerable()
+            };
+        }
         public static Result Failure(IEnumerable<string>? errors)
         {
             return new Result(ResultStatus.Error)

@@ -1,35 +1,44 @@
-﻿using MySelf.Zhihu.Core.Data;
+﻿using Microsoft.EntityFrameworkCore;
 using MySelf.Zhihu.SharedKernel.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MySelf.Zhihu.SharedKernel.Repositoy;
+using MySelf.Zhihu.SharedKernel.Specification;
+
+
 
 namespace MySelf.Zhihu.Infrastructure.Data.Repositories
 {
     public class EfRepository<T>(AppDbContext dbContext) : EfReadRepository<T>(dbContext), IRepository<T>
-        where T : class, IAggregateRoot
+       where T : class, IEntity, IAggregateRoot
     {
+        private readonly AppDbContext _dbContext = dbContext;
+
         public T Add(T entity)
         {
-            dbContext.Set<T>().Add(entity);
+            DbSet.Add(entity);
             return entity;
         }
 
         public void Update(T entity)
         {
-            dbContext.Set<T>().Update(entity);
+            _dbContext.Entry(entity).State = EntityState.Modified;
+            DbSet.Update(entity);
         }
 
         public void Delete(T entity)
         {
-            dbContext.Set<T>().Remove(entity);
+            DbSet.Remove(entity);
+        }
+
+        public async Task<int> BatchDeleteAsync(ISpecification<T>? specification = null,
+            CancellationToken cancellationToken = default)
+        {
+            return await SpecificationEvaluator.GetQuery(DbSet, specification).ExecuteDeleteAsync(cancellationToken);
         }
 
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            return await dbContext.SaveChangesAsync(cancellationToken);
+            return await _dbContext.SaveChangesAsync(cancellationToken);
         }
     }
+
 }

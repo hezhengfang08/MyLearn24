@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MySelf.Zhihu.Core.AppUserAggregate.Entites;
+using MySelf.Zhihu.Core.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;

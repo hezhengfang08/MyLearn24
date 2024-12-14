@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MySelf.Zhihu.UseCases.AppUsers.Queries.QeurytUserInfo
+namespace MySelf.Zhihu.UseCases.AppUsers
 {
     public record UserInfoDto
     {

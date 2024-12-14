@@ -8,15 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MySelf.Zhihu.Core\MySelf.Zhihu.Core.csproj" />
     <ProjectReference Include="..\MySelf.Zhihu.SharedKernel\MySelf.Zhihu.SharedKernel.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Questions\Commands\" />
   </ItemGroup>
 
 </Project>
