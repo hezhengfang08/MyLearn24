@@ -17,7 +17,7 @@ namespace MySelf.Zhihu.UseCases.AppUsers.Commands
 {
     [Authorize]
     public record CreateFollowQuestionCommand(int QuestionId) : ICommand<IResult>;
-    internal class CreateFollowQuestionCommandHanlderr(
+    public class CreateFollowQuestionCommandHanlderr(
     IRepository<AppUser> userRepo,
     IFollowQuestionService followQuestionService,
     IUser user) : ICommandHandler<CreateFollowQuestionCommand, IResult>

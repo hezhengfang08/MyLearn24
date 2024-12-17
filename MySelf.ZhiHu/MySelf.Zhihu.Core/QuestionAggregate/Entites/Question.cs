@@ -20,10 +20,9 @@ namespace MySelf.Zhihu.Core.QuestionAggregate.Entites
 
         public ICollection<Answer> Answers { get; set; } = new List<Answer>();
 
-        public int AddView()
+        public void AddViewCount(int count)
         {
-            ViewCount += 1;
-            return ViewCount;
+            ViewCount += count;
         }
     }
 }

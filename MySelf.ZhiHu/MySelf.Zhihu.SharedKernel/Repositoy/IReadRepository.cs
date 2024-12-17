@@ -19,13 +19,13 @@ namespace MySelf.Zhihu.SharedKernel.Repositoy
         /// <returns></returns>
         Task<T?> GetByIdAsync<TKey>(TKey id, CancellationToken cancellationToken = default);
 
-        /// <summary>
+
         ///     查询实体集合
         /// </summary>
         /// <param name="specification"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-
+        Task<List<T>> GetListAsync(ISpecification<T>? specification = null, CancellationToken cancellationToken = default);
 
 
         /// <summary>

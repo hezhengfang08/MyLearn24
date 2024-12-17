@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MySelf.Zhihu.Core.AppUserAggregate.Entites;
 using MySelf.Zhihu.Core.QuestionAggregate.Entites;
+using MySelf.Zhihu.SharedKernel.Paging;
 using MySelf.Zhihu.UseCases.Common.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,21 @@ namespace MySelf.Zhihu.Infrastructure.Data
         public async Task<IList<T>> ToListAsync<T>(IQueryable<T> queryable) where T : class
         {
             return await queryable.ToListAsync();
+        }
+        public async Task<PagedList<T>> ToPageListAsync<T>(IQueryable<T> queryable, Pagination pagination) where T : class
+        {
+            var count = queryable.Count();
+            var items = await queryable
+                .Skip((pagination.PageNumber - 1) * pagination.PageSize)
+                .Take(pagination.PageSize)
+                .ToListAsync();
+
+            return new PagedList<T>(items, count, pagination);
+        }
+
+        public async Task<bool> AnyAsync<T>(IQueryable<T> queryable) where T : class
+        {
+            return await queryable.AsNoTracking().AnyAsync();
         }
     }
 }

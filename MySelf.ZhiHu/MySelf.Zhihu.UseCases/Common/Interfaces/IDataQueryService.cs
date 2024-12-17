@@ -1,5 +1,6 @@
 ﻿using MySelf.Zhihu.Core.AppUserAggregate.Entites;
 using MySelf.Zhihu.Core.QuestionAggregate.Entites;
+using MySelf.Zhihu.SharedKernel.Paging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,5 +26,8 @@ namespace MySelf.Zhihu.UseCases.Common.Interfaces
         Task<T?> FirstOrDefaultAsync<T>(IQueryable<T> queryable) where T : class;
 
         Task<IList<T>> ToListAsync<T>(IQueryable<T> queryable) where T : class;
+        Task<PagedList<T>> ToPageListAsync<T>(IQueryable<T> queryable, Pagination pagination) where T : class;
+
+        Task<bool> AnyAsync<T>(IQueryable<T> queryable) where T : class;
     }
 }

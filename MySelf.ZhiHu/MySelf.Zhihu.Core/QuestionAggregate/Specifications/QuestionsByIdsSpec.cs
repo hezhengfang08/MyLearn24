@@ -1,0 +1,18 @@
+﻿using MySelf.Zhihu.Core.QuestionAggregate.Entites;
+using MySelf.Zhihu.SharedKernel.Specification;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MySelf.Zhihu.Core.QuestionAggregate.Specifications
+{
+    public class QuestionsByIdsSpec : Specification<Question>
+    {
+        public QuestionsByIdsSpec(int[] ids)
+        {
+            FilterCondition = question => ids.Contains(question.Id);
+        }
+    }
+}
