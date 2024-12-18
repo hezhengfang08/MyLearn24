@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MySelf.Zhihu.UseCases.Answers.Commands
 {
-    public record DeleteAnswerLikeCommand(int AnswerId) : ICommand<Result>;
+    public record DeleteAnswerLikeCommand(int QuestionId,int AnswerId) : ICommand<Result>;
     public class DeleteAnswerLikeCommandValidator : AbstractValidator<DeleteAnswerLikeCommand>
     {
         public DeleteAnswerLikeCommandValidator()
@@ -21,7 +21,7 @@ namespace MySelf.Zhihu.UseCases.Answers.Commands
     {
         public async Task<Result> Handle(DeleteAnswerLikeCommand request, CancellationToken cancellationToken)
         {
-            var spec = new AnswerByIdWithLikeByUserIdSpec(request.AnswerId, user.Id!.Value);
+            var spec = new AnswerByIdWithLikeByUserIdSpec(request.QuestionId, request.AnswerId, user.Id!.Value);
             var answer = await answers.GetAnswerByIdWithLikeByUserIdAsync(spec, cancellationToken);
             if (answer == null) return Result.NotFound("回答不存在");
 

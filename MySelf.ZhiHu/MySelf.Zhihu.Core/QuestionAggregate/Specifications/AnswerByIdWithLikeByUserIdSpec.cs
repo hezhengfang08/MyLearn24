@@ -10,9 +10,9 @@ namespace MySelf.Zhihu.Core.QuestionAggregate.Specifications
 {
     public class AnswerByIdWithLikeByUserIdSpec : Specification<Answer>
     {
-        public AnswerByIdWithLikeByUserIdSpec(int answerId, int userId)
+        public AnswerByIdWithLikeByUserIdSpec(int questionId,int answerId, int userId)
         {
-            FilterCondition = answer => answer.Id == answerId;
+            FilterCondition = answer => answer.QuestionId == questionId && answer.Id == answerId;
             AddInclude(answer => answer.AnswerLikes.Where(al => al.UserId == userId));
         }
     }

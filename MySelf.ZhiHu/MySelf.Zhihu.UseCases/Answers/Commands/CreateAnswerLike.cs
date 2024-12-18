@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 namespace MySelf.Zhihu.UseCases.Answers.Commands
 {
 
-    public record CreateAnswerLikeCommand(int AnswerId, bool IsLike) : ICommand<Result>;
+    public record CreateAnswerLikeCommand(int QuestionId, int AnswerId, bool IsLike) : ICommand<Result>;
 
     public class CreateAnswerLikeCommandValidator : AbstractValidator<CreateAnswerLikeCommand>
     {
         public CreateAnswerLikeCommandValidator()
         {
+            RuleFor(command => command.QuestionId).GreaterThan(0);
             RuleFor(command => command.AnswerId).GreaterThan(0);
         }
     }
@@ -23,7 +24,7 @@ namespace MySelf.Zhihu.UseCases.Answers.Commands
     {
         public async Task<Result> Handle(CreateAnswerLikeCommand request, CancellationToken cancellationToken)
         {
-            var spec = new AnswerByIdWithLikeByUserIdSpec(request.AnswerId, user.Id!.Value);
+            var spec = new AnswerByIdWithLikeByUserIdSpec(request.QuestionId, request.AnswerId, user.Id!.Value);
             var answer = await answers.GetAnswerByIdWithLikeByUserIdAsync(spec, cancellationToken);
             if (answer == null) return Result.NotFound("回答不存在");
 
