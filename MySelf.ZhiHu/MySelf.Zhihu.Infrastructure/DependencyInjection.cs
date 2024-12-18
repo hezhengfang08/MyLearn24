@@ -10,6 +10,8 @@ using MySelf.Zhihu.Infrastructure.Data.Repositories;
 using MySelf.Zhihu.Infrastructure.Identity;
 using MySelf.Zhihu.SharedKernel.Repositoy;
 using MySelf.Zhihu.UseCases.Common.Interfaces;
+using MySelf.Zhihu.UseCases.Questions.Jobs;
+using Quartz;
 using System.Text;
 
 namespace MySelf.Zhihu.Infrastructure
@@ -21,7 +23,7 @@ namespace MySelf.Zhihu.Infrastructure
             ConfigureEfCore(services, configuration);
 
             ConfigureIdentity(services, configuration);
-
+            ConfigureQuartz(services,configuration);
             return services;
         }
         private static void ConfigureEfCore(IServiceCollection services, IConfiguration configuration)
@@ -45,7 +47,17 @@ namespace MySelf.Zhihu.Infrastructure
 
             services.AddScoped<IDataQueryService, DataQueryService>();
         }
+        private static void ConfigureQuartz(IServiceCollection services, IConfiguration configuration)
+        {
 
+            services.Configure<QuartzOptions>(configuration.GetSection("Quartz"));
+            services.AddTransient<UpdateQuestionViewCountJob>();
+            services.AddQuartz(config=> config.CreateUpdateQuestionViewCountJobSchedule());
+            services.AddQuartzHostedService(opt =>
+            {
+                opt.WaitForJobsToComplete = true;
+            });
+        }
         private static void ConfigureIdentity(IServiceCollection services, IConfiguration configuration)
         {
             services
