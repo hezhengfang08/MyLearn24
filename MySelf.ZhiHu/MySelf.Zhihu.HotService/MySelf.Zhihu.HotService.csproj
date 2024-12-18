@@ -7,16 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
-    <PackageReference Include="Quartz" Version="3.13.1" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Quartz.Extensions.DependencyInjection" Version="3.13.1" />
+    <PackageReference Include="Quartz.Jobs" Version="3.13.1" />
+    <PackageReference Include="StackExchange.Redis" Version="2.8.22" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MySelf.Zhihu.Core\MySelf.Zhihu.Core.csproj" />
-    <ProjectReference Include="..\MySelf.Zhihu.HotService\MySelf.Zhihu.HotService.csproj" />
     <ProjectReference Include="..\MySelf.Zhihu.SharedKernel\MySelf.Zhihu.SharedKernel.csproj" />
+    <ProjectReference Include="..\MySelf.Zhihu.UseCases.Contracts\MySelf.Zhihu.UseCases.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

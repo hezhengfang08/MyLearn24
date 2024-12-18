@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
  using FluentValidation;
+using MySelf.Zhihu.HotService;
 
 namespace MySelf.Zhihu.UseCases
 {
@@ -22,6 +23,7 @@ namespace MySelf.Zhihu.UseCases
             {
                 cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
                 cfg.RegisterServicesFromAssembly(Assembly.GetAssembly(typeof(Core.DependencyInjection))!);
+                cfg.RegisterServicesFromAssembly(Assembly.GetAssembly(typeof(HotService.DependencyInjection))!);
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             });

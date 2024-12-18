@@ -20,7 +20,7 @@ namespace MySelf.Zhihu.UseCases.FunctionalTests.Answers.Commands
         [Fact]
         public async Task ShouldAnswerNotExists()
         {
-            var result = await Sender.Send((new CreateAnswerLikeCommand(1, 9999, true));
+            var result = await Sender.Send(new CreateAnswerLikeCommand(1, 9999, true));
             result.Status.Should().Be(ResultStatus.NotFound);
             result.Errors.Should().Contain("回答不存在");
         }
