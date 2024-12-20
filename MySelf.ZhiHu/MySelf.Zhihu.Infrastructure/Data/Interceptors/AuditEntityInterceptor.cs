@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using MySelf.Zhihu.Core.Common;
-using MySelf.Zhihu.UseCases.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -5,7 +5,7 @@ using MySelf.Zhihu.Core.Interfaces;
 using MySelf.Zhihu.SharedKernel.Messaging;
 using MySelf.Zhihu.SharedKernel.Result;
 using MySelf.Zhihu.UseCases.Common.Attributes;
-using MySelf.Zhihu.UseCases.Common.Interfaces;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,4 +1,4 @@
-﻿using MySelf.Zhihu.UseCases.Common.Interfaces;
+﻿
 using System.Security.Claims;
 
 namespace MySelf.Zhihu.HttpApi.Services

@@ -12,21 +12,28 @@ namespace MySelf.Zhihu.HotService.Jobs
         private static readonly TriggerKey Key = new(nameof(RefreshHotRankJobSchedule), nameof(HotService));
 
         public static void CreateRefreshHotRankJobSchedule(
-            this IServiceCollectionQuartzConfigurator configurator,
-            int hour = 5)
+            this IScheduler scheduler,
+        int hour = 5)
         {
-            configurator.AddJob<RefreshHotRankJob>(triggerConfigurator => triggerConfigurator
-                .WithIdentity(RefreshHotRankJob.Key)
-                .RequestRecovery());
+            var jobDetail = JobBuilder.Create<RefreshHotRankJob>()
+             .WithIdentity(RefreshHotRankJob.Key)
+             .Build();
 
-            configurator.AddTrigger(trigger => trigger
+            var triggers = new List<ITrigger>
+        {
+            TriggerBuilder.Create()
                 .WithIdentity(Key)
                 .ForJob(RefreshHotRankJob.Key)
-                .WithCronSchedule($"0 0 {hour} * * ?"));
+                .WithCronSchedule($"0 0 {hour} * * ?")
+                .Build(),
 
-            configurator.AddTrigger(trigger => trigger
+            TriggerBuilder.Create()
                 .ForJob(RefreshHotRankJob.Key)
-                .StartNow());
+                .StartNow()
+                .Build(),
+        };
+
+            scheduler.ScheduleJob(jobDetail, triggers, true);
         }
     }
 

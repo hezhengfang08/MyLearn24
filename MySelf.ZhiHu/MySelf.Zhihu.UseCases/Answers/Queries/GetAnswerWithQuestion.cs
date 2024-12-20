@@ -1,4 +1,5 @@
-﻿using MySelf.Zhihu.UseCases.Questions;
+﻿using MySelf.Zhihu.UseCases.Contracts.Common.Interfaces;
+using MySelf.Zhihu.UseCases.Questions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

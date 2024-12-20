@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using MySelf.Zhihu.Core.AppUserAggregate.Entites;
 using MySelf.Zhihu.Core.QuestionAggregate.Entites;
 using MySelf.Zhihu.Infrastructure.Data;
-using MySelf.Zhihu.UseCases.Common.Interfaces;
 
 
 namespace MySelf.Zhihu.UseCases.FunctionalTests;

@@ -1,7 +1,7 @@
 ﻿using Microsoft.OpenApi.Models;
 using MySelf.Zhihu.HttpApi.Infrastructure;
 using MySelf.Zhihu.HttpApi.Services;
-using MySelf.Zhihu.UseCases.Common.Interfaces;
+
 
 namespace MySelf.Zhihu.HttpApi
 {

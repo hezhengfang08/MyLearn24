@@ -1,5 +1,6 @@
 ﻿using MySelf.Zhihu.Core.Data;
 using MySelf.Zhihu.Core.QuestionAggregate.Specifications;
+using MySelf.Zhihu.UseCases.Contracts.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

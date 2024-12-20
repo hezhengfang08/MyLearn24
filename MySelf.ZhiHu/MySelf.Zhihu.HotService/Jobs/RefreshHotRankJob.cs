@@ -1,6 +1,7 @@
 ﻿using MySelf.Zhihu.HotService.Core;
 using MySelf.Zhihu.HotService.Data;
 using Quartz;
+using Quartz.Impl.Matchers;
 using Quartz.Spi;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MySelf.Zhihu.HotService.Jobs
 {
-    public class RefreshHotRankJob(ISchedulerFactory schedulerFactory, QuestionStatQuery questionStatQuery, QuestionStatManager questionStatManager, HotRankManager hotRankManager) : IJob
+    public class RefreshHotRankJob( QuestionStatQuery questionStatQuery, QuestionStatManager questionStatManager, HotRankManager hotRankManager) : IJob
     {
         public static readonly JobKey Key = new(nameof(RefreshHotRankJob), nameof(HotService));
         public async Task Execute(IJobExecutionContext context)
@@ -20,15 +21,15 @@ namespace MySelf.Zhihu.HotService.Jobs
 
             var questionStats = result.Value!;
 
-            var scheduler = await schedulerFactory.GetScheduler();
-            await scheduler.PauseTrigger(UpdateHotRankJobSchedule.Key);
+            var triggerKey = GroupMatcher<TriggerKey>.GroupEquals(nameof(UpdateHotRankJob));
+            await context.Scheduler.PauseTriggers(triggerKey);
 
             await hotRankManager.ClearHotRankAsync();
             await hotRankManager.CreateHotRankAsync(questionStats);
 
             questionStatManager.Set(questionStats);
 
-            await scheduler.ResumeTrigger(UpdateHotRankJobSchedule.Key);
+            await context.Scheduler.ResumeTriggers(triggerKey);
         }
     }
 }

@@ -1,31 +1,32 @@
 ﻿using Quartz;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace MySelf.Zhihu.HotService.Jobs
 {
     public static class UpdateHotRankJobSchedule
     {
-        public static readonly TriggerKey Key = new(nameof(UpdateHotRankJobSchedule), nameof(HotService));
+
 
         public static void CreateUpdateHotRankJobSchedule(
-            this IServiceCollectionQuartzConfigurator configurator,
-            int intervalTime = 1)
+            this IScheduler scheduler,
+            int intervalTime = 60)
         {
-            configurator.AddJob<UpdateHotRankJob>(triggerConfigurator => triggerConfigurator
-                .WithIdentity(UpdateHotRankJob.Key));
+            var schedulerId = scheduler.SchedulerInstanceId;
+            var triggerKey = new TriggerKey($"{nameof(UpdateHotRankJobSchedule)}-{schedulerId}", nameof(UpdateHotRankJob));
 
-            configurator.AddTrigger(trigger => trigger
-                .WithIdentity(Key)
-                .ForJob(UpdateHotRankJob.Key)
-                .StartAt(DateBuilder.FutureDate(intervalTime, IntervalUnit.Minute))
-                .WithSimpleSchedule(builder => builder
-                    .RepeatForever()
-                    .WithInterval(TimeSpan.FromMinutes(intervalTime))
-                ));
+            var jobDetail = JobBuilder.Create<UpdateHotRankJob>()
+          .WithIdentity(UpdateHotRankJob.Key)
+          .Build();
+
+            var trigger = TriggerBuilder.Create()
+           .WithIdentity(triggerKey)
+           .ForJob(UpdateHotRankJob.Key)
+           .WithSimpleSchedule(builder => builder
+               .RepeatForever()
+               .WithInterval(TimeSpan.FromSeconds(intervalTime)))
+           .Build();
+
+            scheduler.ScheduleJob(jobDetail, trigger);
         }
     }
 

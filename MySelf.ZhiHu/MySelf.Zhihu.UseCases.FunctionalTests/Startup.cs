@@ -8,7 +8,7 @@ using MySelf.Zhihu.Infrastructure.Data;
 using MySelf.Zhihu.Infrastructure.Data.Interceptors;
 using MySelf.Zhihu.Infrastructure.Data.Repositories;
 using MySelf.Zhihu.SharedKernel.Repositoy;
-using MySelf.Zhihu.UseCases.Common.Interfaces;
+using MySelf.Zhihu.UseCases.Contracts.Common.Interfaces;
 
 namespace MySelf.Zhihu.UseCases.FunctionalTests;
 

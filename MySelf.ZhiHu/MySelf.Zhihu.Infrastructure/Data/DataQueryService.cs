@@ -2,7 +2,7 @@
 using MySelf.Zhihu.Core.AppUserAggregate.Entites;
 using MySelf.Zhihu.Core.QuestionAggregate.Entites;
 using MySelf.Zhihu.SharedKernel.Paging;
-using MySelf.Zhihu.UseCases.Common.Interfaces;
+using MySelf.Zhihu.UseCases.Contracts.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

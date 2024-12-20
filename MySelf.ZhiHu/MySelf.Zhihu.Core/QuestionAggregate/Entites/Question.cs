@@ -14,6 +14,7 @@ namespace MySelf.Zhihu.Core.QuestionAggregate.Entites
 
         public string? Description { get; set; }
 
+        public string? Summary { get; set; }
         public int ViewCount { get; private set; }
 
         public int FollowerCount { get; set; }

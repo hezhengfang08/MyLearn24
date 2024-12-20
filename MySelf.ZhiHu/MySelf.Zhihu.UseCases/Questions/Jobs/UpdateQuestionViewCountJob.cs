@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace MySelf.Zhihu.UseCases.Questions.Jobs
 {
-    public class UpdateQuestionViewCountJob(IRepository<Question> questions) : IJob
+    public class UpdateQuestionViewCountJob(IRepository<Question> questions,
+         QuestionViewCountService questionViewCount) : IJob
     {
         public static readonly JobKey Key = new(nameof(UpdateQuestionViewCountJob), nameof(Questions));
 

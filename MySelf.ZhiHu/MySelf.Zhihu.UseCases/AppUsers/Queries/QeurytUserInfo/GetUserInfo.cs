@@ -1,6 +1,6 @@
 ﻿using MySelf.Zhihu.SharedKernel.Messaging;
 using MySelf.Zhihu.SharedKernel.Result;
-using MySelf.Zhihu.UseCases.Common.Interfaces;
+using MySelf.Zhihu.UseCases.Contracts.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

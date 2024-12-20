@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MySelf.Zhihu.UseCases.Common.Interfaces;
 using MySelf.Zhihu.SharedKernel.Result;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;

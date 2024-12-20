@@ -1,5 +1,6 @@
 ﻿using MySelf.Zhihu.HotService.Data;
 using StackExchange.Redis;
+using System.Text.Json;
 
 
 namespace MySelf.Zhihu.HotService.Core
@@ -53,6 +54,22 @@ namespace MySelf.Zhihu.HotService.Core
         public async Task ClearHotRankAsync()
         {
             await _db.KeyDeleteAsync(RedisConstant.HotRanking);
+        }
+        public async Task<List<QuestionHotList>> GetTopHotRankAsync(int top = 50)
+        {
+            var hotrank =
+                await _db.SortedSetRangeByRankWithScoresAsync(RedisConstant.HotRanking, 0, top - 1, Order.Descending);
+
+            var hotlist = hotrank.Select(entry => new QuestionHotList
+            {
+                Id = Convert.ToInt32(entry.Element),
+                HotValue = Convert.ToInt32(entry.Score),
+            }).ToList();
+            return hotlist;
+        }
+        public async Task UpdateHotListAsync(List<QuestionHotList> questionLists)
+        {
+            await _db.StringSetAsync(RedisConstant.HotList, JsonSerializer.Serialize(questionLists));
         }
     }
 }

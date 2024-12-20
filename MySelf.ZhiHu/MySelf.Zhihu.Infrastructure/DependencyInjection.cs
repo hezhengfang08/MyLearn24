@@ -3,16 +3,24 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.IdentityModel.Tokens;
+using MySelf.Zhihu.Infrastructure.Cache;
 using MySelf.Zhihu.Infrastructure.Data;
 using MySelf.Zhihu.Infrastructure.Data.Interceptors;
 using MySelf.Zhihu.Infrastructure.Data.Repositories;
 using MySelf.Zhihu.Infrastructure.Identity;
+using MySelf.Zhihu.Infrastructure.Quartz;
 using MySelf.Zhihu.SharedKernel.Repositoy;
-using MySelf.Zhihu.UseCases.Common.Interfaces;
+using MySelf.Zhihu.UseCases.Contracts.Common.Interfaces;
 using MySelf.Zhihu.UseCases.Questions.Jobs;
 using Quartz;
+using StackExchange.Redis;
 using System.Text;
+using ZiggyCreatures.Caching.Fusion.Backplane.StackExchangeRedis;
+using ZiggyCreatures.Caching.Fusion;
+
+
 
 namespace MySelf.Zhihu.Infrastructure
 {
@@ -23,7 +31,11 @@ namespace MySelf.Zhihu.Infrastructure
             ConfigureEfCore(services, configuration);
 
             ConfigureIdentity(services, configuration);
-            ConfigureQuartz(services,configuration);
+
+            ConfigureQuartz(services, configuration);
+
+            ConfigureCache(services, configuration);
+
             return services;
         }
         private static void ConfigureEfCore(IServiceCollection services, IConfiguration configuration)
@@ -49,14 +61,7 @@ namespace MySelf.Zhihu.Infrastructure
         }
         private static void ConfigureQuartz(IServiceCollection services, IConfiguration configuration)
         {
-
-            services.Configure<QuartzOptions>(configuration.GetSection("Quartz"));
-            services.AddTransient<UpdateQuestionViewCountJob>();
-            services.AddQuartz(config=> config.CreateUpdateQuestionViewCountJobSchedule());
-            services.AddQuartzHostedService(opt =>
-            {
-                opt.WaitForJobsToComplete = true;
-            });
+            services.AddQuartzService(configuration);
         }
         private static void ConfigureIdentity(IServiceCollection services, IConfiguration configuration)
         {
@@ -99,6 +104,26 @@ namespace MySelf.Zhihu.Infrastructure
                     };
                 });
         }
+        private static void ConfigureCache(IServiceCollection services, IConfiguration configuration)
+        {
+            var redisConn = configuration.GetConnectionString("RedisConnection");
+            if (redisConn != null)
+                services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(redisConn));
 
+            services.AddStackExchangeRedisCache(options => options.Configuration = redisConn);
+            services.AddFusionCache()
+                .WithOptions(options =>
+                {
+                    options.DefaultEntryOptions = new FusionCacheEntryOptions { Duration = TimeSpan.FromMinutes(1) };
+                })
+                .WithSystemTextJsonSerializer()
+                .WithDistributedCache(provider => provider.GetRequiredService<IDistributedCache>())
+                .WithBackplane(new RedisBackplane(new RedisBackplaneOptions
+                {
+                    Configuration = redisConn
+                }));
+
+            services.AddSingleton(typeof(ICacheService<>), typeof(CacheService<>));
         }
+    }
 }

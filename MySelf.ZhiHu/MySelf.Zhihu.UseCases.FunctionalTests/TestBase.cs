@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using MySelf.Zhihu.Infrastructure.Data;
-using MySelf.Zhihu.UseCases.Common.Interfaces;
 
 namespace MySelf.Zhihu.UseCases.FunctionalTests
 {
