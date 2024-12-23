@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.3.4" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MySelf.Zhihu.Feed.Core\MySelf.Zhihu.Feed.Core.csproj" />
+    <ProjectReference Include="..\MySelf.Zhihu.Feed.UseCases\MySelf.Zhihu.Feed.UseCases.csproj" />
+  </ItemGroup>
+
+</Project>

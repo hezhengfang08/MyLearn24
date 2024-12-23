@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="MassTransit" Version="8.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MySelf.Zhihu.Feed.Core\MySelf.Zhihu.Feed.Core.csproj" />
+    <ProjectReference Include="..\MySelf.Zhihu.SharedKernel\MySelf.Zhihu.SharedKernel.csproj" />
+    <ProjectReference Include="..\MySelf.Zhihu.SharedModels\MySelf.Zhihu.SharedModels.csproj" />
+  </ItemGroup>
+
+</Project>

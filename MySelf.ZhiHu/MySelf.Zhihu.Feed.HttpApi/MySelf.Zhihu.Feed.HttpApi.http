@@ -1,0 +1,6 @@
+@MySelf.Zhihu.Feed.HttpApi_HostAddress = http://localhost:5262
+
+GET {{MySelf.Zhihu.Feed.HttpApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
