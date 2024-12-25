@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MySelf.Zhihu.Feed.Core.Entites;
 using MySelf.Zhihu.Feed.Infrastructure.Data.Contexts;
+using MySelf.Zhihu.Feed.UseCases.Common.Interfaces;
 using MySelf.Zhihu.SharedKernel.Paging;
 using System;
 using System.Collections.Generic;
