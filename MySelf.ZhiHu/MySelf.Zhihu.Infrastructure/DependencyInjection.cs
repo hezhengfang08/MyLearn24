@@ -19,7 +19,9 @@ using StackExchange.Redis;
 using System.Text;
 using ZiggyCreatures.Caching.Fusion.Backplane.StackExchangeRedis;
 using ZiggyCreatures.Caching.Fusion;
-
+using MassTransit;
+using MySelf.Zhihu.Infrastructure.MassTransit;
+using MassTransit.RabbitMqTransport.Configuration;
 
 
 namespace MySelf.Zhihu.Infrastructure
@@ -124,6 +126,19 @@ namespace MySelf.Zhihu.Infrastructure
                 }));
 
             services.AddSingleton(typeof(ICacheService<>), typeof(CacheService<>));
+        }
+        private static void ConfigureRabbitMq(IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddMassTransit(configurator =>
+            {
+                configurator.UsingRabbitMq((context, cfg) =>
+                {
+                    cfg.Host(configuration.GetConnectionString("RabbitMqConnection"));
+                    cfg.UseMessageRetry(retry => retry.Interval(3, TimeSpan.FromSeconds(3)));
+                });
+            });
+
+            services.AddScoped<IMessageBusService, MessageBusService>();
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
  using FluentValidation;
 using MySelf.Zhihu.HotService;
+using MySelf.Zhihu.UseCases.Questions.Jobs;
 
 namespace MySelf.Zhihu.UseCases
 {
@@ -27,7 +28,8 @@ namespace MySelf.Zhihu.UseCases
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             });
-
+            services.AddSingleton<QuestionViewCountService>();
+            services.AddHotService();
             return services;
         }
     }

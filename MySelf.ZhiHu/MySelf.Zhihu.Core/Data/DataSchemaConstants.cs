@@ -10,6 +10,8 @@ namespace MySelf.Zhihu.Core.Data
     {
         public const int DefaultQuestionTitleLength = 200;
 
+        public const int DefaultQuestionSummaryLength = 50;
+
         public const int DefaultDescriptionTitleLength = 5000;
 
         public const int DefaultAppUserNickNameLength = 20;

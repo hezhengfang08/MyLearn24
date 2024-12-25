@@ -1,4 +1,5 @@
 ﻿using MySelf.Zhihu.Core.Common;
+using MySelf.Zhihu.Core.Data;
 using MySelf.Zhihu.SharedKernel.Domain;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,19 @@ namespace MySelf.Zhihu.Core.QuestionAggregate.Entites
         public void AddViewCount(int count)
         {
             ViewCount += count;
+        }
+
+        public void GenerateSummary()
+        {
+            if (Description == null) return;
+
+            if (Description.Length <= DataSchemaConstants.DefaultQuestionSummaryLength)
+            {
+                Summary = Description;
+                return;
+            }
+
+            Summary = Description?.Substring(0, DataSchemaConstants.DefaultQuestionSummaryLength);
         }
     }
 }

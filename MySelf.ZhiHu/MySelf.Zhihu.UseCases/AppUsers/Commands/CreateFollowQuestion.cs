@@ -17,9 +17,18 @@ namespace MySelf.Zhihu.UseCases.AppUsers.Commands
 {
     [Authorize]
     public record CreateFollowQuestionCommand(int QuestionId) : ICommand<IResult>;
+
+    public class CreateFollowQuestionCommandValidator : AbstractValidator<CreateFollowQuestionCommand>
+    {
+        public CreateFollowQuestionCommandValidator()
+        {
+            RuleFor(command => command.QuestionId)
+                .GreaterThan(0);
+        }
+    }
     public class CreateFollowQuestionCommandHanlderr(
     IRepository<AppUser> userRepo,
-    IFollowQuestionService followQuestionService,
+    IAppUserService followQuestionService,
     IUser user) : ICommandHandler<CreateFollowQuestionCommand, IResult>
     {
         public async Task<IResult> Handle(CreateFollowQuestionCommand request, CancellationToken cancellationToken)
@@ -28,7 +37,7 @@ namespace MySelf.Zhihu.UseCases.AppUsers.Commands
             var appuser = await userRepo.GetSingleOrDefaultAsync(spec, cancellationToken);
             if (appuser == null) return Result.NotFound("用户不存在");
 
-            var result = await followQuestionService.FollowAsync(appuser, request.QuestionId, cancellationToken);
+            var result = await followQuestionService.FollowQuestionAsync(appuser, request.QuestionId, cancellationToken);
             if (!result.IsSuccess) return result;
 
             await userRepo.SaveChangesAsync(cancellationToken);

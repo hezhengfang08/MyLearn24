@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
 using MySelf.Zhihu.Core.Data;
 using MySelf.Zhihu.Core.QuestionAggregate.Entites;
+using MySelf.Zhihu.SharedModels;
+using MySelf.Zhihu.UseCases.Contracts.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,17 +27,33 @@ namespace MySelf.Zhihu.UseCases.Questions.Commands
         }
     }
 
-    public  class CreateQuestionCommandHandler(IRepository<Question> questions, IMapper mapper) : ICommandHandler<CreateQuestionCommand, Result<CreatedQuestionDto>>
+
+    public class CreateQuestionCommandHandler(
+    IUser user,
+    IRepository<Question> questions,
+    IMapper mapper,
+    IMessageBusService bus) : ICommandHandler<CreateQuestionCommand, Result<CreatedQuestionDto>>
     {
-        public async Task<Result<CreatedQuestionDto>> Handle(CreateQuestionCommand request, CancellationToken cancellationToken)
+        public async Task<Result<CreatedQuestionDto>> Handle(CreateQuestionCommand request,
+            CancellationToken cancellationToken)
         {
             var question = mapper.Map<Question>(request);
+
+            question.GenerateSummary();
 
             questions.Add(question);
 
             await questions.SaveChangesAsync(cancellationToken);
 
+            await bus.PushishAsync(new FeedCreatedEvent
+            {
+                FeedType = FeedType.Quesiton,
+                FeedId = question.Id,
+                UserId = user.Id!.Value
+            });
+
             return Result.Success(new CreatedQuestionDto(question.Id));
         }
     }
+
 }

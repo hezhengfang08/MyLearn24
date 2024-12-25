@@ -14,6 +14,14 @@ namespace MySelf.Zhihu.UseCases.AppUsers.Commands
 {
     [Authorize]
     public record DeleteFollowQuestionCommand(int QuestionId):ICommand<IResult>;
+    public class DeleteFollowQuestionCommandValidator : AbstractValidator<DeleteFollowQuestionCommand>
+    {
+        public DeleteFollowQuestionCommandValidator()
+        {
+            RuleFor(command => command.QuestionId)
+                .GreaterThan(0);
+        }
+    }
     public class DeleteFollowQuestionCommandHandler(IRepository<AppUser> userRepository, IUser user) : ICommandHandler<DeleteFollowQuestionCommand, IResult>
     {
         public async Task<IResult> Handle(DeleteFollowQuestionCommand request, CancellationToken cancellationToken)

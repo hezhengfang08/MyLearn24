@@ -3,6 +3,7 @@ using MySelf.Zhihu.Infrastructure;
 using MySelf.Zhihu.UseCases;
 using MySelf.Zhihu.Core;
 using System.Text.Json;
+using MySelf.Zhihu.Infrastructure.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -25,7 +26,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    await app.InitializeDatabaseAsync();
+    await app.InitialzeDataBaseAsync();
     app.UseSwagger();
     app.UseSwaggerUI();
 }

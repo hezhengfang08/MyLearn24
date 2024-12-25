@@ -1,4 +1,5 @@
 ﻿using MySelf.Zhihu.HotService.Data;
+using MySelf.Zhihu.SharedKernel.Result;
 using StackExchange.Redis;
 using System.Text.Json;
 
@@ -70,6 +71,14 @@ namespace MySelf.Zhihu.HotService.Core
         public async Task UpdateHotListAsync(List<QuestionHotList> questionLists)
         {
             await _db.StringSetAsync(RedisConstant.HotList, JsonSerializer.Serialize(questionLists));
+        }
+        public async Task<Result<List<QuestionHotList>>> GetHotListAsync()
+        {
+            var storedJson = await _db.StringGetAsync(RedisConstant.HotList);
+            if (!storedJson.HasValue) return Result.NotFound();
+
+            var result = JsonSerializer.Deserialize<List<QuestionHotList>>(storedJson.ToString());
+            return Result.Success(result!);
         }
     }
 }

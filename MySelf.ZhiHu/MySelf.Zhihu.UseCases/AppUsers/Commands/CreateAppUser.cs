@@ -8,16 +8,27 @@ using System.Threading.Tasks;
 
 namespace MySelf.Zhihu.UseCases.AppUsers.Commands
 {
-    public record CreateAppUserCommand(int UserId) :ICommand<Result<CreatedAppUserDto>>;
-    public class RegisterUserCommandHandler(
-     IRepository<AppUser> userRepo,
-     IMapper mapper) : ICommandHandler<CreateAppUserCommand, Result<CreatedAppUserDto>>
+    public record CreateAppUserCommand(int UserId) : ICommand<Result<CreatedAppUserDto>>;
+
+    public class CreateAppUserCommandValidator : AbstractValidator<CreateAppUserCommand>
     {
-        public async Task<Result<CreatedAppUserDto>> Handle(CreateAppUserCommand request, CancellationToken cancellationToken)
+        public CreateAppUserCommandValidator()
         {
-            var user = userRepo.Add(new AppUser(request.UserId)
+            RuleFor(command => command.UserId)
+                .GreaterThan(0);
+        }
+    }
+
+    public class CreateAppUserCommandHandler(
+        IRepository<AppUser> userRepo,
+        IMapper mapper) : ICommandHandler<CreateAppUserCommand, Result<CreatedAppUserDto>>
+    {
+        public async Task<Result<CreatedAppUserDto>> Handle(CreateAppUserCommand command,
+            CancellationToken cancellationToken)
+        {
+            var user = userRepo.Add(new AppUser(command.UserId)
             {
-                Nickname = $"新用户{request.UserId}"
+                Nickname = $"新用户{command.UserId}"
             });
 
             await userRepo.SaveChangesAsync(cancellationToken);

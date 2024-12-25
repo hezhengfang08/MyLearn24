@@ -13,7 +13,7 @@ namespace MySelf.Zhihu.Core
     {
         public static IServiceCollection AddCoreServices(this IServiceCollection services)
         {
-            services.AddScoped<IFollowQuestionService, FollowQuestionService>();
+            services.AddScoped<IAppUserService, AppUserService>();
             return services;
         }
     }
