@@ -43,6 +43,8 @@ namespace Myself.SmartParking
             containerRegistry.RegisterForNavigation<Views.Pages.DashboardView>();
             containerRegistry.RegisterForNavigation<Views.Pages.MenuManagementView>();
             containerRegistry.RegisterForNavigation<Views.Pages.UserManagementView>();
+
+            containerRegistry.RegisterDialog<Views.Pages.Dialogs.ModifyMenuView>();
         }
     }
 

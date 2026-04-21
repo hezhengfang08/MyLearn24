@@ -11,6 +11,7 @@ namespace Myself.SmartParking.ViewModels.Pages
         public UserManagementView(IRegionManager regionManager) : base(regionManager)
         {
             PageTitle = "用户数据维护";
+           
         }
     }
 }

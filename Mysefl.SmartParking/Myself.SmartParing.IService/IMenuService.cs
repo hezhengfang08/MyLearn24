@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Myself.SmartParing.IService
 {
-    public interface IMenuService
+    public interface IMenuService:IBaseService
     {
-        IEnumerable<SysMenu> GetMenuList();
+        IEnumerable<SysMenu> GetMenuList(string key = "");
     }
 }

@@ -11,6 +11,7 @@ namespace Myself.SmartParking.Models
     public class MenuItemModel:BindableBase
 
     {
+        public int MenuId { get; set; }
         /// <summary>
         /// 图标
         /// </summary>
@@ -26,7 +27,8 @@ namespace Myself.SmartParking.Models
         /// </summary>
         public string TargetView { get; set; }
 
-        public int ParentId { get; set; }
+        public int? MenuType { get; set; }
+        public int? ParentId { get; set; }
         public bool IsLastChild { get; set; }
         /// <summary>
         /// 是否展开

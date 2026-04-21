@@ -17,8 +17,10 @@ namespace Myself.SmartParking.Entities
         public int MenuId { get; set; }
 
         [Column("menu_header")]
+
         public string? MenuHeader { get; set; }
 
+        
         [Column("target_view")]
         public string? TargetView { get; set; }
 

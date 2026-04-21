@@ -1,5 +1,7 @@
 ﻿using Myself.SmartParing.IService;
+using Myself.SmartParking.Base;
 using Myself.SmartParking.Models;
+using Myself.SmartParking.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,13 +16,15 @@ namespace Myself.SmartParking.ViewModels
     {
         List<Entities.SysMenu> sysMenuList;
         IRegionManager _regionManager;
+        private readonly IMenuService _menuService;
         public MainViewModel(
             IDialogService dialogService
             , IMenuService menuService
-            , IRegionManager regionManager)
+            , IRegionManager regionManager
+            ,IEventAggregator eventAggregator)
         {
             _regionManager = regionManager;
-
+            _menuService = menuService;
             // 打开登录窗口
             dialogService.ShowDialog("LoginView", rerult =>
             {
@@ -32,10 +36,24 @@ namespace Myself.SmartParking.ViewModels
             // 当前窗口要做的事
             OpenViewCommand = new DelegateCommand<MenuItemModel>(DoOpenView);
             // 加载菜单
-            sysMenuList = menuService.GetMenuList().ToList();
+            eventAggregator.GetEvent<RefreshMenuEvent>()
+               .Subscribe(() =>
+               {
+                   LoadMenus();
+               });
+            // 加载菜单
+            LoadMenus();
+           
             FillMenus(Menus, 0);
         }
-
+        private void LoadMenus()
+        {
+            Menus.Clear();
+            // 获取所有菜单
+            sysMenuList = _menuService.GetMenuList().ToList();
+            // 树状填充
+            FillMenus(Menus, 0);
+        }
         #region 菜单相关功能
 
         public DelegateCommand<MenuItemModel> OpenViewCommand { get; set; }

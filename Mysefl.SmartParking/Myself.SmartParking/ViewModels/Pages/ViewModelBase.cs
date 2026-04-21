@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xaml.Behaviors.Core;
+using Myself.SmartParking.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,18 @@ namespace Myself.SmartParking.ViewModels.Pages
         public string PageTitle { get; set; } = "页面标题";
         public bool IsCanClose { get; set; } = true;
         public DelegateCommand CloseCommand { get; set; }
+        public DelegateCommand<string> RefreshCommand { get; set; }
+        public DelegateCommand<MenuItemModel> ModifyCommand { get; set; }
+        public DelegateCommand<MenuItemModel> DeleteCommand { get; set; }
+
         private readonly IRegionManager _regionManager;
         public ViewModelBase(IRegionManager regionManager)
         {
             _regionManager = regionManager;
             CloseCommand = new DelegateCommand(DoClose);
+            RefreshCommand = new DelegateCommand<string>(Refresh);
+            ModifyCommand = new DelegateCommand<MenuItemModel>(DoModify);
+            DeleteCommand = new DelegateCommand<MenuItemModel>(DoDelete);
         }
         private string PageName { get; set; }
         private void DoClose()
@@ -29,6 +37,10 @@ namespace Myself.SmartParking.ViewModels.Pages
                 region.Remove(view);
             }
         }
+
+        public virtual void Refresh(string key = "") { }
+        public virtual void DoModify(MenuItemModel model) { }
+        public virtual void DoDelete(MenuItemModel model) { }
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
             return true;
