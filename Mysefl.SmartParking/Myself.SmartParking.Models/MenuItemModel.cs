@@ -26,6 +26,8 @@ namespace Myself.SmartParking.Models
         /// </summary>
         public string TargetView { get; set; }
 
+        public int ParentId { get; set; }
+        public bool IsLastChild { get; set; }
         /// <summary>
         /// 是否展开
         /// </summary>

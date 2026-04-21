@@ -39,7 +39,10 @@ namespace Myself.SmartParking
             containerRegistry.Register<DbContext, MyselfDbContext>();
             containerRegistry.Register<IUserService, UserService>();
             containerRegistry.Register<IMenuService, MenuService>();
+
             containerRegistry.RegisterForNavigation<Views.Pages.DashboardView>();
+            containerRegistry.RegisterForNavigation<Views.Pages.MenuManagementView>();
+            containerRegistry.RegisterForNavigation<Views.Pages.UserManagementView>();
         }
     }
 

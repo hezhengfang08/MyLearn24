@@ -10,10 +10,17 @@ using System.Windows.Controls;
 
 namespace Myself.SmartParking.ViewModels
 {
-    public class MainViewModel:BindableBase
+    public class MainViewModel : BindableBase
     {
         List<Entities.SysMenu> sysMenuList;
-        public MainViewModel(IDialogService dialogService ,IMenuService menuService) {
+        IRegionManager _regionManager;
+        public MainViewModel(
+            IDialogService dialogService
+            , IMenuService menuService
+            , IRegionManager regionManager)
+        {
+            _regionManager = regionManager;
+
             // 打开登录窗口
             dialogService.ShowDialog("LoginView", rerult =>
             {
@@ -23,10 +30,15 @@ namespace Myself.SmartParking.ViewModels
                 }
             });
             // 当前窗口要做的事
+            OpenViewCommand = new DelegateCommand<MenuItemModel>(DoOpenView);
             // 加载菜单
             sysMenuList = menuService.GetMenuList().ToList();
             FillMenus(Menus, 0);
         }
+
+        #region 菜单相关功能
+
+        public DelegateCommand<MenuItemModel> OpenViewCommand { get; set; }
 
         /// <summary>
         /// 菜单集合
@@ -67,5 +79,20 @@ namespace Myself.SmartParking.ViewModels
                 }
             }
         }
+        private void DoOpenView(MenuItemModel itemModel)
+        {
+            // 需要判断：双击的是父节点的时候，关闭或者打开；双击的是子节点，打开对应的页面
+            if (itemModel.Children != null && itemModel.Children.Count > 0)
+            {
+                itemModel.IsExpanded = !itemModel.IsExpanded;
+
+            }
+            else if (!string.IsNullOrEmpty(itemModel.TargetView))
+            {
+                _regionManager.RequestNavigate("MainRegion", itemModel.TargetView);
+            }
+           
+        }
+        #endregion
     }
 }
