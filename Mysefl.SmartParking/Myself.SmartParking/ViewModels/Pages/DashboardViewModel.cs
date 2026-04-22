@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 
 namespace Myself.SmartParking.ViewModels.Pages
 {
-    public class DashboardViewModel: ViewModelBase
+    public class DashboardViewModel: ViewModelBase<AreaModel>
     {
-        public string PageTitle { get; set; } = "数据中心";
+      
 
         public ObservableCollection<AreaModel> AraeList { get; set; } =
             new ObservableCollection<AreaModel>();
@@ -35,6 +35,8 @@ namespace Myself.SmartParking.ViewModels.Pages
 
         public DashboardViewModel() : base(null)
         {
+            PageTitle = "数据中心";
+            IsCanClose = false;
             BoardList.Add(new BoardModel { Header = "总收入", Value = 568768, Color = "#EC9606", Icon = "\ue66d" });
             BoardList.Add(new BoardModel { Header = "优惠卷(张)", Value = 24, Color = "#088DF6", Icon = "\ue624" });
             BoardList.Add(new BoardModel { Header = "会员累计人数", Value = 698, Color = "#F76E55", Icon = "\ue604" });

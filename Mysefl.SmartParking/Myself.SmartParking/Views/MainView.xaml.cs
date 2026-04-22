@@ -23,5 +23,7 @@ namespace Myself.SmartParking.Views
         {
             InitializeComponent();
         }
+
+       
     }
 }

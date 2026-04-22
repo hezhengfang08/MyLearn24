@@ -4,13 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Myself.SmartParking.Views"
-         xmlns:p="http://prismlibrary.com/"
+        xmlns:p="http://prismlibrary.com/"
         mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen" FontFamily="Microsoft YaHei" FontSize="13" Foreground="#333" FontWeight="ExtraLight"
-         Title="我的停车场管理系统" Height="750" Width="1300">
+        WindowStartupLocation="CenterScreen"
+        FontFamily="Microsoft YaHei" FontSize="13" 
+        Foreground="#333" 
+        FontWeight="ExtraLight"
+        Background="#FAFCFF"
+        Title="朝夕教育停车场管理系统" Height="750" Width="1300">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="1" 
-                  NonClientFrameEdges="None"/>
+                      NonClientFrameEdges="None"/>
     </WindowChrome.WindowChrome>
     <DockPanel>
         <!--右侧菜单-->
@@ -22,7 +26,7 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Orientation="Horizontal" Margin="0,20" HorizontalAlignment="Center">
-                    <Image Source="/MySelf.SmartParking.Assets;component/Images/Logo.png" Width="36"/>
+                    <Image Source="/Myself.SmartParking.Assets;component/Images/Logo.png" Width="36"/>
                     <TextBlock Text="朝夕教育" FontSize="15" HorizontalAlignment="Center"
            VerticalAlignment="Center" Foreground="#444" FontWeight="Normal" Margin="10,0"/>
                 </StackPanel>
@@ -54,6 +58,7 @@
                         </ControlTemplate>
 
                         <Style TargetType="TreeViewItem">
+                            <Setter Property="IsExpanded" Value="{Binding IsExpanded}"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="TreeViewItem">
@@ -68,9 +73,10 @@
                                             </Grid.RowDefinitions>
                                             <Grid.InputBindings>
                                                 <MouseBinding MouseAction="LeftDoubleClick"
-                   Command="{Binding DataContext.OpenViewCommand,RelativeSource={RelativeSource AncestorType=Window}}"
-                   CommandParameter="{Binding}"/>
+                                                              Command="{Binding DataContext.OpenViewCommand,RelativeSource={RelativeSource AncestorType=Window}}"
+                                                              CommandParameter="{Binding}"/>
                                             </Grid.InputBindings>
+
                                             <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}"
                                                     BorderThickness="{TemplateBinding BorderThickness}"
                                                     Background="{TemplateBinding Background}"
@@ -123,7 +129,7 @@
                     </TreeView.Resources>
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                            <Grid>
+                            <Grid Background="Transparent">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="30" Name="c1"/>
                                     <ColumnDefinition/>
@@ -150,20 +156,21 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="45"/>
-                <RowDefinition/>
+                <RowDefinition Height="371*"/>
+                <RowDefinition Height="319*"/>
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="1" Background="#F0F6FB"/>
+            <Border Grid.Row="1" Background="#F0F6FB" Grid.RowSpan="2"/>
 
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left"
-                       Margin="15,0">
+                       Margin="15,0,0,0">
                 <Run Text="智慧停车场管理系统" FontSize="14" FontWeight="ExtraBold"/>
                 <Run Text="v3.0" FontSize="11"/>
             </TextBlock>
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
-                        HorizontalAlignment="Right"
-                        Margin="0,0,10,0">
+                        HorizontalAlignment="Left"
+                        Margin="833,0,0,0">
                 <StackPanel.Resources>
                     <ResourceDictionary>
                         <ResourceDictionary.MergedDictionaries>
@@ -183,25 +190,99 @@
                 <Border Width="30" Height="30" CornerRadius="20"
                         Margin="0,0,10,0" BorderBrush="White" BorderThickness="1">
                     <Border.Background>
-                        <ImageBrush ImageSource="/Myself.SmartParking.Assets;component/Images/Avatar/002m.jpg"/>
+                        <ImageBrush ImageSource="{Binding CurrentUser.UserIcon}"/>
                     </Border.Background>
                 </Border>
-                <TextBlock Text="Hi! Admin" VerticalAlignment="Center"
-                           FontSize="11" FontWeight="Normal" Foreground="#888"
-                           Margin="0,0,10,0"/>
+
+                <ToggleButton Content="{Binding CurrentUser.RealName}" 
+                              ContentStringFormat="Hi! {0}"
+                              VerticalAlignment="Center"
+                              FontSize="11" FontWeight="Normal" Foreground="#888"
+                              Margin="0,0,10,0" Name="tbtn_user"
+                              Height="30"
+                              WindowChrome.IsHitTestVisibleInChrome="True"
+                              Style="{StaticResource UserInfoButtonStyle}"/>
 
                 <Button Content="&#xe7e6;" FontFamily="{StaticResource Icons}"
                         Style="{StaticResource ControlButtonStyle}"/>
                 <Button Content="&#xe694;" FontFamily="{StaticResource Icons}"
                         Style="{StaticResource ControlButtonStyle}"/>
                 <Button Content="&#xe625;" FontFamily="{StaticResource Icons}"
-                        Command="{Binding CloseCommand}"
                         Style="{StaticResource ControlButtonStyle}"/>
             </StackPanel>
+            <Popup StaysOpen="False" IsOpen="{Binding ElementName=tbtn_user,Path=IsChecked}"
+                   PlacementTarget="{Binding ElementName=tbtn_user}" Placement="Right"
+                   HorizontalOffset="-160" VerticalOffset="33"
+                   AllowsTransparency="True">
+                <Grid Margin="5">
+                    <!--背景-->
+                    <Border Width="160" Height="200" Background="#FFF" CornerRadius="5">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="0" Direction="0" Color="Gray" Opacity="0.1"/>
+                        </Border.Effect>
+                    </Border>
+
+                    <!--内容-->
+                    <Grid TextBlock.Foreground="#666">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="80"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <!--背景-->
+                        <Border CornerRadius="5,5,0,0">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding CurrentUser.UserIcon}"
+                                            Stretch="UniformToFill"/>
+                            </Border.Background>
+                            <Border.Effect>
+                                <BlurEffect Radius="40"/>
+                            </Border.Effect>
+                            <Border.Clip>
+                                <RectangleGeometry Rect="0,0,160,200" RadiusX="5" RadiusY="5"/>
+                            </Border.Clip>
+                        </Border>
+
+                        <Border Width="50" Height="50" CornerRadius="10"
+                                Margin="0,0,5,0" BorderBrush="White" BorderThickness="1">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding CurrentUser.UserIcon}"/>
+                            </Border.Background>
+                        </Border>
+
+                        <TextBlock Text="{Binding CurrentUser.RealName}" 
+                                   Grid.Row="1" HorizontalAlignment="Center"
+                                   FontWeight="Bold"/>
+
+                        <StackPanel Grid.Row="2" VerticalAlignment="Center" 
+                                    HorizontalAlignment="Center"
+                                    Orientation="Horizontal" TextBlock.FontSize="11">
+                            <TextBlock Text="{Binding CurrentUser.Age}" Margin="5,0"/>
+                            <TextBlock Text="{Binding CurrentUser.Gender}" Margin="5,0"/>
+                        </StackPanel>
+
+                        <Border Background="#EEE" Height="0.5" Grid.Row="3"/>
+
+                        <Button Content="修改密码" Grid.Row="4" 
+                                Style="{StaticResource NormalButtonStyle}"
+                                Background="Transparent" Foreground="#409EFE"
+                                Margin="5,3" FontSize="12"
+                                Command="{Binding ModifyPasswordCommand}"/>
+                        <Button Content="切换账号" Grid.Row="5" 
+                                Style="{StaticResource NormalButtonStyle}"
+                                Background="Transparent" Foreground="#409EFE"
+                                Margin="5,3" FontSize="12"
+                                Command="{Binding SwitchCommand}"/>
+                    </Grid>
+                </Grid>
+            </Popup>
 
 
             <TabControl Grid.Row="1" Background="Transparent"
-                        BorderThickness="0" p:RegionManager.RegionName="MainRegion">
+                        BorderThickness="0" p:RegionManager.RegionName="MainRegion" Grid.RowSpan="2">
                 <TabControl.Resources>
 
                     <Style TargetType="TabControl">
@@ -274,8 +355,7 @@
                                                 <Button Grid.Column="1" Style="{StaticResource TabCloseButtonStyle}" 
                                                         Foreground="{TemplateBinding Foreground}"
                                                         Visibility="Collapsed" Name="close_btn"
-                                                        Command="{Binding DataContext.CloseCommand}"
-                                                        CommandParameter="{Binding DataContext.NavUri}"/>
+                                                        Command="{Binding DataContext.CloseCommand}"/>
                                             </Grid>
                                         </Grid>
                                     </Border>

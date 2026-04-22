@@ -11,34 +11,28 @@ using System.Windows;
 
 namespace Myself.SmartParking.ViewModels.Pages.Dialogs
 {
-    public class ModifyMenuViewModel : IDialogAware
+    public class ModifyMenuViewModel : DialogViewModelBase
     {
         private readonly IMenuService _menuService;
         public ModifyMenuViewModel(IMenuService menuService)
         {
             _menuService = menuService;
-            SaveCommand = new DelegateCommand(DoSave);
+           
         }
-        public string Title { get; set; }
+
 
         // 显式实现接口属性
         public DialogCloseListener RequestClose { get; private set; }
 
-        public bool CanCloseDialog()
-        {
-            return true;
-        }
+        
 
-        public void OnDialogClosed()
-        {
-            //no implementation
-        }
+     
         public MenuItemModel MenuModel { get; set; } =
                 new MenuItemModel();
 
         public List<SysMenu> ParentNodes { get; set; } =
           new List<SysMenu>();
-        public void OnDialogOpened(IDialogParameters parameters)
+        public override  void OnDialogOpened(IDialogParameters parameters)
         {
             var model = parameters.GetValue<MenuItemModel>("model");
             if (model == null)
@@ -74,8 +68,8 @@ namespace Myself.SmartParking.ViewModels.Pages.Dialogs
             ///    数据更新完成后，提交到了数据库，需要主窗口进行同步操作
             ///    
         }
-        public DelegateCommand SaveCommand { get; set; }
-        private void DoSave()
+
+        public override void DoSave()
         {
             try
             {
@@ -106,7 +100,7 @@ namespace Myself.SmartParking.ViewModels.Pages.Dialogs
                     entity.MenuType = MenuModel.MenuType;
                     _menuService.Update<SysMenu>(entity);
                 }
-                RequestClose.Invoke(new DialogResult(ButtonResult.Cancel));
+               base.DoSave();
             }
             catch (Exception ex)
             {

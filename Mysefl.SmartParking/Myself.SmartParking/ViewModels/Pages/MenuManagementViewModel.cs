@@ -12,7 +12,7 @@ using System.Windows;
 
 namespace Myself.SmartParking.ViewModels.Pages
 {
-    public class MenuManagementViewModel : ViewModelBase
+    public class MenuManagementViewModel : ViewModelBase<MenuItemModel>
     {
         private readonly IMenuService _menuService;
         private readonly IDialogService _dialogService;
@@ -36,11 +36,11 @@ namespace Myself.SmartParking.ViewModels.Pages
         public ObservableCollection<MenuItemModel> Menus { get; set; } = new ObservableCollection<MenuItemModel>();
         List<Entities.SysMenu> sysMenuList;
         string _searchKey;
-        public override void Refresh(string search_key = "")
+        public override void Refresh()
         {
-            _searchKey = search_key;
+            
             Menus.Clear();
-            sysMenuList = _menuService.GetMenuList(search_key).ToList();
+            sysMenuList = _menuService.GetMenuList(SearchKey).ToList();
             FillMenus(Menus, 0);
         }
         private void FillMenus(ObservableCollection<MenuItemModel> menuList, int parent_id)
@@ -77,7 +77,7 @@ namespace Myself.SmartParking.ViewModels.Pages
                 // 判断子窗口的返回状态，如果OK，刷新当前页面，否则不管
                 if (result.Result == ButtonResult.OK)
                 {
-                    this.Refresh(_searchKey);
+                    this.Refresh();
                     PublishRefreshMenuEvent();
 
 
@@ -103,7 +103,7 @@ namespace Myself.SmartParking.ViewModels.Pages
                     // 通过特定字段进行数据过滤
                     MessageBox.Show("删除完成！", "提示");
 
-                    this.Refresh(_searchKey);
+                    this.Refresh();
 
                     PublishRefreshMenuEvent();
                 }

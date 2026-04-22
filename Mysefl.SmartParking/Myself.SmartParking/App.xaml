@@ -7,6 +7,13 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Myself.SmartParking.Assets;component/Styles/TextBoxStyles.xaml"/>
+                <ResourceDictionary Source="/Myself.SmartParking.Assets;component/Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="/Myself.SmartParking.Assets;component/Styles/ScrollViewerStyle.xaml"/>
+
+                <ResourceDictionary Source="/Myself.SmartParking.Assets;component/Styles/ComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Myself.SmartParking.Assets;component/Styles/DatePickerStyle.xaml"/>
+                <ResourceDictionary Source="/Myself.SmartParking.Assets;component/Styles/DataGridStyle.xaml"/>
                 <ResourceDictionary>
                     <FontFamily x:Key="Icons">/Myself.SmartParking.Assets;component/Fonts/iconfont.ttf#zx_icons</FontFamily>
                 </ResourceDictionary>
