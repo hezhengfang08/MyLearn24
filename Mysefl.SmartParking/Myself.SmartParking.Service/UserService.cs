@@ -18,7 +18,7 @@ namespace Myself.SmartParking.Service
         public SysUser Login(string username, string password)
         {
             var users =
-             this.Query<SysUser>(u => u.Name == username && u.Password == password)
+             this.Query<SysUser>(u => u.UserName == username && u.Password == password)
              .ToList();
             return users.FirstOrDefault();
         }

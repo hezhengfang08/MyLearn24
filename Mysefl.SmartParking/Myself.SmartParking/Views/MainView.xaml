@@ -195,6 +195,7 @@
                 <Button Content="&#xe694;" FontFamily="{StaticResource Icons}"
                         Style="{StaticResource ControlButtonStyle}"/>
                 <Button Content="&#xe625;" FontFamily="{StaticResource Icons}"
+                        Command="{Binding CloseCommand}"
                         Style="{StaticResource ControlButtonStyle}"/>
             </StackPanel>
 

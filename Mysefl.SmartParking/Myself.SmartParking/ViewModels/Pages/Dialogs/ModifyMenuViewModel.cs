@@ -17,6 +17,7 @@ namespace Myself.SmartParking.ViewModels.Pages.Dialogs
         public ModifyMenuViewModel(IMenuService menuService)
         {
             _menuService = menuService;
+            SaveCommand = new DelegateCommand(DoSave);
         }
         public string Title { get; set; }
 
@@ -105,7 +106,7 @@ namespace Myself.SmartParking.ViewModels.Pages.Dialogs
                     entity.MenuType = MenuModel.MenuType;
                     _menuService.Update<SysMenu>(entity);
                 }
-                RequestClose.Invoke(new DialogResult(ButtonResult.OK));
+                RequestClose.Invoke(new DialogResult(ButtonResult.Cancel));
             }
             catch (Exception ex)
             {

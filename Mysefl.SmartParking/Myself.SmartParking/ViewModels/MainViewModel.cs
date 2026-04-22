@@ -35,6 +35,10 @@ namespace Myself.SmartParking.ViewModels
             });
             // 当前窗口要做的事
             OpenViewCommand = new DelegateCommand<MenuItemModel>(DoOpenView);
+            CloseCommand = new DelegateCommand(() =>
+            {
+                System.Environment.Exit(0);
+            });
             // 加载菜单
             eventAggregator.GetEvent<RefreshMenuEvent>()
                .Subscribe(() =>
@@ -57,7 +61,7 @@ namespace Myself.SmartParking.ViewModels
         #region 菜单相关功能
 
         public DelegateCommand<MenuItemModel> OpenViewCommand { get; set; }
-
+        public DelegateCommand CloseCommand { get; set; }
         /// <summary>
         /// 菜单集合
         /// </summary>

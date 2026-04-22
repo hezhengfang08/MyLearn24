@@ -2,6 +2,7 @@
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using Myself.SmartParking.Models;
+using Prism.Navigation.Regions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Myself.SmartParking.ViewModels.Pages
 {
-    public class DashboardViewModel
+    public class DashboardViewModel: ViewModelBase
     {
         public string PageTitle { get; set; } = "数据中心";
 
@@ -32,7 +33,7 @@ namespace Myself.SmartParking.ViewModels.Pages
 
         public DateTime CurrentDate { get; set; } = DateTime.Now;
 
-        public DashboardViewModel()
+        public DashboardViewModel() : base(null)
         {
             BoardList.Add(new BoardModel { Header = "总收入", Value = 568768, Color = "#EC9606", Icon = "\ue66d" });
             BoardList.Add(new BoardModel { Header = "优惠卷(张)", Value = 24, Color = "#088DF6", Icon = "\ue624" });
