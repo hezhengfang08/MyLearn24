@@ -39,12 +39,16 @@ namespace Myself.SmartParking
             containerRegistry.Register<DbContext, MyselfDbContext>();
             containerRegistry.Register<IUserService, UserService>();
             containerRegistry.Register<IMenuService, MenuService>();
+            containerRegistry.Register<IRoleService, RoleService>();
 
             containerRegistry.RegisterForNavigation<Views.Pages.DashboardView>();
             containerRegistry.RegisterForNavigation<Views.Pages.MenuManagementView>();
             containerRegistry.RegisterForNavigation<Views.Pages.UserManagementView>();
+            containerRegistry.RegisterForNavigation<Views.Pages.RoleView>();
 
             containerRegistry.RegisterDialog<Views.Pages.Dialogs.ModifyMenuView>();
+            containerRegistry.RegisterDialog<Views.Pages.Dialogs.ModifyUserView>();
+            containerRegistry.RegisterDialog<Views.Pages.Dialogs.ModifyPasswordView>();
         }
     }
 

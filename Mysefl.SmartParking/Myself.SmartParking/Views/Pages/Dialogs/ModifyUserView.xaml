@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="Myself.SmartParking.Views.Pages.Dialogs.ModifyUserView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Myself.SmartParking.Views.Pages.Dialogs"
+                xmlns:c="clr-namespace:Myself.SmartParking.Base.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="330" d:DesignWidth="500">
+    <UserControl.Resources>
+        <c:SectionConverter x:Key="sConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Border Background="#FAFCFF" Grid.Row="1"/>
+        <Border Height="1" Background="#EEE" VerticalAlignment="Bottom"/>
+        <Border Height="1" Grid.Row="2" Background="#EEE" VerticalAlignment="Top"/>
+        <TextBlock Text="{Binding Title}" FontSize="14" 
+            VerticalAlignment="Center" 
+            FontWeight="Bold"
+            Foreground="#888" Margin="10,0"/>
+        <Button Content="保存" Grid.Row="2" Height="30" Width="100"
+         HorizontalAlignment="Center"
+         Style="{StaticResource NormalButtonStyle}"
+         Command="{Binding SaveCommand}"/>
+        <Grid Grid.Row="1" Margin="20,10" FocusManager.FocusedElement="{Binding ElementName=tb_un}">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="用户名" VerticalAlignment="Center" Foreground="#888"/>
+            <TextBlock Text="姓   名" Grid.Row="1" VerticalAlignment="Center" Foreground="#888"/>
+            <TextBlock Text="性   别" Grid.Row="2" VerticalAlignment="Center" Foreground="#888"/>
+            <TextBlock Text="地   址" Grid.Row="3" VerticalAlignment="Center" Foreground="#888"/>
+            <TextBlock Text="年   龄" Grid.Row="4" VerticalAlignment="Center" Foreground="#888"/>
+            <TextBlock Text="手机号" Grid.Row="5" VerticalAlignment="Center" Foreground="#888"/>
+
+
+            <!--用户名：验证唯一-->
+            <TextBox Grid.Column="1" Name="tb_un"
+               Text="{Binding UserInfo.UserName,ValidatesOnNotifyDataErrors=True}" 
+               Style="{StaticResource ValidationTextBoxStyle}" 
+               IsReadOnly="{Binding IsReadOnlyUserName}" />
+            <TextBox Grid.Column="1" Grid.Row="1"
+               Text="{Binding UserInfo.RealName}" 
+               Style="{StaticResource NormalTextBoxStyle}"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1"
+                  VerticalAlignment="Center">
+                <RadioButton Content="男"
+                      IsChecked="{Binding UserInfo.Gender,Converter={StaticResource sConverter},ConverterParameter=1}"/>
+                <RadioButton Content="女" Margin="10,0"
+                      IsChecked="{Binding UserInfo.Gender,Converter={StaticResource sConverter},ConverterParameter=0}"/>
+            </StackPanel>
+            <TextBox Grid.Column="1" Text="{Binding UserInfo.Address}" Grid.Row="3" Style="{StaticResource NormalTextBoxStyle}" Grid.ColumnSpan="2"/>
+            <TextBox Grid.Column="1" Text="{Binding UserInfo.Age}" Grid.Row="4" Style="{StaticResource NormalTextBoxStyle}" Grid.ColumnSpan="2"/>
+            <TextBox Grid.Column="1" Text="{Binding UserInfo.Phone}" Grid.Row="5" Style="{StaticResource NormalTextBoxStyle}" Grid.ColumnSpan="2"/>
+
+        </Grid>
+    </Grid>
+</UserControl>

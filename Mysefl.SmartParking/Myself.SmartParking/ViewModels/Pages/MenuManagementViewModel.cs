@@ -72,7 +72,7 @@ namespace Myself.SmartParking.ViewModels.Pages
         {
             DialogParameters ps = new DialogParameters();
             ps.Add("model", model);
-            _dialogService.ShowDialog("ModifyMenuView", ps, result =>
+             _dialogService.ShowDialog("ModifyMenuView", ps, result =>
             {
                 // 判断子窗口的返回状态，如果OK，刷新当前页面，否则不管
                 if (result.Result == ButtonResult.OK)

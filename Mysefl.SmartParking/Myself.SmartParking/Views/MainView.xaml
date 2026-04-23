@@ -208,7 +208,7 @@
                 <Button Content="&#xe694;" FontFamily="{StaticResource Icons}"
                         Style="{StaticResource ControlButtonStyle}"/>
                 <Button Content="&#xe625;" FontFamily="{StaticResource Icons}"
-                        Style="{StaticResource ControlButtonStyle}"/>
+                        Style="{StaticResource ControlButtonStyle}" Command="{Binding CloseCommand}"/>
             </StackPanel>
             <Popup StaysOpen="False" IsOpen="{Binding ElementName=tbtn_user,Path=IsChecked}"
                    PlacementTarget="{Binding ElementName=tbtn_user}" Placement="Right"

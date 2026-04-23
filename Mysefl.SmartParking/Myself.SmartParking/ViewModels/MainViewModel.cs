@@ -1,5 +1,6 @@
 ﻿using Myself.SmartParing.IService;
 using Myself.SmartParking.Base;
+using Myself.SmartParking.Entities;
 using Myself.SmartParking.Models;
 using Myself.SmartParking.Service;
 using System;
@@ -15,6 +16,7 @@ namespace Myself.SmartParking.ViewModels
     public class MainViewModel : BindableBase
     {
         List<Entities.SysMenu> sysMenuList;
+        public UserModel CurrentUser { get; set; } = new UserModel();
         IRegionManager _regionManager;
         private readonly IMenuService _menuService;
         public MainViewModel(
@@ -26,11 +28,26 @@ namespace Myself.SmartParking.ViewModels
             _regionManager = regionManager;
             _menuService = menuService;
             // 打开登录窗口
-            dialogService.ShowDialog("LoginView", rerult =>
+            dialogService.ShowDialog("LoginView", result =>
             {
-                if (rerult.Result != ButtonResult.OK)
+                if (result.Result != ButtonResult.OK)
                 {
                     System.Environment.Exit(0);
+                }
+                else 
+                {
+                    // 记录当前登录用户信息
+                    var su = result.Parameters.GetValue<SysUser>("user");
+                    CurrentUser.UserId = su.UserId;
+                    CurrentUser.UserName = su.UserName;
+                    CurrentUser.RealName = su.RealName;
+                    CurrentUser.Password = su.Password;
+                    CurrentUser.UserIcon = "pack://siteoforigin:,,,/Avatars/" + su.UserIcon;
+                    CurrentUser.Gender = su.Gender;
+                    CurrentUser.Address = su.Address;
+                    CurrentUser.Age = su.Age;
+                    CurrentUser.Status = su.Status;
+                    CurrentUser.Phone = su.Phone;
                 }
             });
             // 当前窗口要做的事

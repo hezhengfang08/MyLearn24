@@ -7,7 +7,7 @@
              xmlns:p="http://prismlibrary.com/" 
              xmlns:b="clr-namespace:Myself.SmartParking.Base"
              xmlns:c="clr-namespace:Myself.SmartParking.Controls;assembly=Myself.SmartParking.Controls"
-              Background="Gray" Height="300" Width="400"
+              Background="Gray" Height="300" Width="480"
              mc:Ignorable="d" 
              >
     <UserControl.Resources>

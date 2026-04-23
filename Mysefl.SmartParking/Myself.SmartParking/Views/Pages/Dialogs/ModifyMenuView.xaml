@@ -15,7 +15,7 @@
                 <ResourceDictionary Source="/Myself.SmartParking.Assets;component/Styles/ComboBoxStyle.xaml"/>
 
                 <ResourceDictionary>
-                    <c:MenuTypeConverter x:Key="mtConverter"/>
+                    <c:SectionConverter x:Key="sConverter"/>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -75,9 +75,9 @@
             <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2"
                     VerticalAlignment="Center">
                 <RadioButton Content="集合类型"
-                         IsChecked="{Binding MenuModel.MenuType,Converter={StaticResource mtConverter},ConverterParameter=1}"/>
+                         IsChecked="{Binding MenuModel.MenuType,Converter={StaticResource sConverter},ConverterParameter=1}"/>
                 <RadioButton Content="视图类型" Margin="20,0"
-                         IsChecked="{Binding MenuModel.MenuType,Converter={StaticResource mtConverter},ConverterParameter=0}"/>
+                         IsChecked="{Binding MenuModel.MenuType,Converter={StaticResource sConverter},ConverterParameter=0}"/>
             </StackPanel>
             <TextBox Grid.Row="3" Grid.Column="1" Height="30" 
                  Style="{StaticResource NormalTextBoxStyle}"

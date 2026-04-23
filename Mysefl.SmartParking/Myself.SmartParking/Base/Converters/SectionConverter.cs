@@ -8,7 +8,7 @@ using System.Windows.Data;
 
 namespace Myself.SmartParking.Base.Converters
 {
-    public class MenuTypeConverter : IValueConverter
+    public class SectionConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

@@ -5,44 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Myself.SmartParking.Views.Pages"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="10,5">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="45"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+             d:DesignHeight="450" d:DesignWidth="800"
+              Template="{StaticResource PageTempalte}" Tag="添加用户">
+    
 
-    <!--搜索输入框-->
-    <TextBox VerticalAlignment="Center" Width="300" HorizontalAlignment="Left" 
-          Text="{Binding SearchKey,UpdateSourceTrigger=PropertyChanged}"
-          Style="{StaticResource SearchTextBoxStyle}" Name="tb_search">
-        <TextBox.InputBindings>
-            <KeyBinding Key="Return" Command="{Binding RefreshCommand}"/>
-        </TextBox.InputBindings>
-    </TextBox>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-            <!--刷新按钮-->
-            <Button Content="刷新" Style="{StaticResource NormalButtonStyle}"
-            Command="{Binding RefreshCommand}"
-            Width="70" Margin="5,0" Background="#409EFE"/>
-            <!--添加按钮-->
-            <Button Content="添加用户" Style="{StaticResource IconWithContentButtonStyle}"
-            Command="{Binding ModifyCommand}"
-            Tag="&#xe603;" Width="100">
-                <Button.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                        <GradientStop Color="#FE582D" Offset="0"/>
-                        <GradientStop Color="#F1961A" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-        </StackPanel>
-        <!--内容部分-->
-        <Border CornerRadius="5" Background="White" Grid.Row="1" Margin="0,5,0,10">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="5" Color="Gray" ShadowDepth="0" Opacity="0.3"/>
-            </Border.Effect>
-        </Border>
+   
+      
         <Grid Grid.Row="1" Grid.IsSharedSizeScope="True" Margin="0,5,0,10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
@@ -218,5 +186,5 @@
             </ListBox>
 
         </Grid>
-    </Grid>
+   
 </UserControl>

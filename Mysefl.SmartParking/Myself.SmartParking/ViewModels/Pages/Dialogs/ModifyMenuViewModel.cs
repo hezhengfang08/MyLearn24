@@ -20,13 +20,9 @@ namespace Myself.SmartParking.ViewModels.Pages.Dialogs
            
         }
 
-
         // 显式实现接口属性
         public DialogCloseListener RequestClose { get; private set; }
 
-        
-
-     
         public MenuItemModel MenuModel { get; set; } =
                 new MenuItemModel();
 
