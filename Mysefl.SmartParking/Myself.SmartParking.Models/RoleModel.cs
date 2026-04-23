@@ -11,5 +11,7 @@ namespace Myself.SmartParking.Models
         public int RoleId { get; set; }
         public string RoleName { get; set; }
         public string RoleDesc { get; set; }
+        public List<int> MenuIds { get; set; }
+        public List<int> UserIds { get; set; }
     }
 }

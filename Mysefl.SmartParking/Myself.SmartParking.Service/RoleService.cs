@@ -16,14 +16,22 @@ namespace Myself.SmartParking.Service
         }
         public IEnumerable<Entities.SysRole> GetRoles(string key)
         {
-            var query = this.Query<SysRole>(m =>
-
-                string.IsNullOrEmpty(key) ||
-
-                m.RoleName.Contains(key) ||
-
-                m.RoleDesc.Contains(key));
-            return query.ToList();
+            return this.Set<SysRole>()
+                  .Include(r => r.Users)
+                  .Include(r => r.Menus)
+                  .Where(r =>
+                      string.IsNullOrEmpty(key) ||
+                      r.RoleName.Contains(key) ||
+                      r.RoleDesc.Contains(key)
+                  );
+          
+        }
+        public bool CheckRoleName(string roleName, int roleId)
+        {
+            return this.Query<SysRole>(r =>
+                                        r.RoleName == roleName &&
+                                        r.RoleId != roleId)
+                .Count() > 0;
         }
     }
 }

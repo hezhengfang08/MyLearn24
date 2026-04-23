@@ -23,6 +23,14 @@ namespace Myself.SmartParking.Models
 
         public int UserId { get; set; }
 
+        private bool _isSelected;
+
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set { SetProperty<bool>(ref _isSelected, value); }
+        }
+
         private string _userName;
 
         public string UserName

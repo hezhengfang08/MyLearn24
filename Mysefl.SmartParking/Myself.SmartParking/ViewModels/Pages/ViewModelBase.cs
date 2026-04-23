@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Myself.SmartParking.ViewModels.Pages
 {
-    public class ViewModelBase<T> : INavigationAware where T : class
+    public class ViewModelBase<T> : BindableBase, INavigationAware where T : class
     {
         public string PageTitle { get; set; } = "页面标题";
         public bool IsCanClose { get; set; } = true;

@@ -49,6 +49,8 @@ namespace Myself.SmartParking
             containerRegistry.RegisterDialog<Views.Pages.Dialogs.ModifyMenuView>();
             containerRegistry.RegisterDialog<Views.Pages.Dialogs.ModifyUserView>();
             containerRegistry.RegisterDialog<Views.Pages.Dialogs.ModifyPasswordView>();
+            containerRegistry.RegisterDialog<Views.Pages.Dialogs.ModifyRoleView>();
+            containerRegistry.RegisterDialog<Views.Pages.Dialogs.SelectUserView>();
         }
     }
 

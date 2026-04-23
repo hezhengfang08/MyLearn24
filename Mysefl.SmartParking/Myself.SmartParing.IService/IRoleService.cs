@@ -10,5 +10,7 @@ namespace Myself.SmartParing.IService
     public interface IRoleService:IBaseService
     {
         IEnumerable<SysRole> GetRoles(string key);
+
+        bool CheckRoleName(string roleName, int roleId);
     }
 }

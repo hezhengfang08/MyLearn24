@@ -22,5 +22,10 @@ namespace Myself.SmartParking.Entities
 
         [Column("state")]
         public int State { get; set; }
+
+        [NotMapped]
+        public List<RoleUser> Users { get; set; }
+        [NotMapped]
+        public List<RoleMenu> Menus { get; set; }
     }
 }

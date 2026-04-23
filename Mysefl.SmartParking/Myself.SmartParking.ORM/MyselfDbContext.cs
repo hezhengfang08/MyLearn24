@@ -20,6 +20,20 @@ namespace Myself.SmartParking.ORM
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // 联合主键
+            modelBuilder.Entity<RoleMenu>()
+                .HasKey(pk => new { pk.RoleId, pk.MenuId });
+            modelBuilder.Entity<RoleUser>()
+                .HasKey(pk => new { pk.RoleId, pk.UserId });
+            // 角色表的一对多关系
+            modelBuilder.Entity<RoleUser>()
+                .HasOne(u => u.SysRole)
+                .WithMany(r => r.Users)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<RoleMenu>()
+                .HasOne(u => u.SysRole)
+                .WithMany(r => r.Menus)
+                .OnDelete(DeleteBehavior.Cascade);
             // 页面-》数据库的转换
             // 数据库-》页面的转换
             ValueConverter iconValueConverter =
@@ -34,5 +48,8 @@ namespace Myself.SmartParking.ORM
         public virtual DbSet<SysUser> SysUser { get; set; }
         public virtual DbSet<SysMenu> SysMenu { get; set; }
         public virtual DbSet<SysRole> SysRole { get; set; }
+
+        public virtual DbSet<RoleMenu> RoleMenu { get; set; }
+        public virtual DbSet<RoleUser> RoleUser { get; set; }
     }
 }

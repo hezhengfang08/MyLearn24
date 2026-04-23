@@ -101,18 +101,6 @@
                         </Setter>
                     </Style>
 
-                    <ControlTemplate TargetType="ToggleButton" x:Key="ExpandeButtonTemplate">
-                        <Border Background="#409EFE" CornerRadius="3" Width="15" Height="15">
-                            <Path Data="M0 4 8 4M4 0 4 8" Stroke="White" StrokeThickness="1" Name="path"
-                         VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        </Border>
-
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="True">
-                                <Setter Property="Data" Value="M0 0 8 0" TargetName="path"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
                 </TreeView.Resources>
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate ItemsSource="{Binding Children}">

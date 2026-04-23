@@ -137,7 +137,9 @@ namespace Myself.SmartParking.ViewModels
                     // 关闭登录窗口，进入主窗口
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        RequestClose.Invoke(new DialogResult(ButtonResult.OK));
+                        DialogResult result = new DialogResult(ButtonResult.OK);
+                        result.Parameters.Add("user", user);
+                        RequestClose.Invoke(result);
                     });
                 }
                 catch (Exception ex)

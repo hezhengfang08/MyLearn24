@@ -46,4 +46,31 @@
             <ContentPresenter Grid.Row="1"/>
         </Grid>
     </ControlTemplate>
+
+    <ControlTemplate TargetType="UserControl" x:Key="DialogViewTemplate">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Border Background="#FAFCFF" Grid.Row="1"/>
+            <Border Height="1" Background="#EEE" VerticalAlignment="Bottom"/>
+            <Border Height="1" Grid.Row="2" Background="#EEE" VerticalAlignment="Top"/>
+
+            <TextBlock Text="{Binding Title}" FontSize="14" 
+                     VerticalAlignment="Center" 
+                     FontWeight="Bold"
+                     Foreground="#888" Margin="10,0"/>
+
+            <Button Content="保存" Grid.Row="2" Height="30" Width="100"
+                 HorizontalAlignment="Center"
+                 Style="{StaticResource NormalButtonStyle}"
+                 Command="{Binding SaveCommand}"/>
+
+
+            <ContentPresenter Grid.Row="1"/>
+        </Grid>
+    </ControlTemplate>
+    
 </ResourceDictionary>

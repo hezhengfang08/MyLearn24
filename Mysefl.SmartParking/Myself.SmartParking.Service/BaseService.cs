@@ -17,6 +17,16 @@ namespace Myself.SmartParking.Service
         #region Query
 
         /// <summary>
+        ///  不应该暴露给上端使用者，尽量少用
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        //[Obsolete("尽量避免使用，using 带表达式目录树的代替")]
+        public IQueryable<T> Set<T>() where T : class
+        {
+            return Context.Set<T>();
+        }
+        /// <summary>
         /// Context 就是数据库操作的EFcore的上下文Context
         /// </summary>
         /// <typeparam name="T"></typeparam>
