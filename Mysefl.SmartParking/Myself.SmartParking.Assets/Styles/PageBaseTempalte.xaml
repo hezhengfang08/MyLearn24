@@ -58,10 +58,10 @@
             <Border Height="1" Background="#EEE" VerticalAlignment="Bottom"/>
             <Border Height="1" Grid.Row="2" Background="#EEE" VerticalAlignment="Top"/>
 
-            <TextBlock Text="{Binding Title}" FontSize="14" 
+            <!--<TextBlock Text="{Binding Title}" FontSize="14" 
                      VerticalAlignment="Center" 
                      FontWeight="Bold"
-                     Foreground="#888" Margin="10,0"/>
+                     Foreground="#888" Margin="20,0"/>-->
 
             <Button Content="保存" Grid.Row="2" Height="30" Width="100"
                  HorizontalAlignment="Center"

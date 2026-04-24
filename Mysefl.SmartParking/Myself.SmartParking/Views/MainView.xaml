@@ -266,7 +266,7 @@
                 Style="{StaticResource UserIconButtonStyle}"
                 Content="{Binding CurrentUser.UserIcon}"
                 IsChecked="{Binding IsDropdownAvatar}"
-                Name="tbtn_avatar"/>
+                Name="tbtn_avatar" Cursor="Hand"/>
                 
                 <ToggleButton Content="{Binding CurrentUser.RealName}" 
                   ContentStringFormat="Hi! {0}"

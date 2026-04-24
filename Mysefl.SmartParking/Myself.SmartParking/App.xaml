@@ -18,6 +18,7 @@
                 <ResourceDictionary Source="/Myself.SmartParking.Assets;component/Styles/PageBaseTempalte.xaml"/>
                 <ResourceDictionary Source="/Myself.SmartParking.Assets;component/Styles/ToggleButtonStyle.xaml"/>
                 
+                
                 <ResourceDictionary>
                     <FontFamily x:Key="Icons">/Myself.SmartParking.Assets;component/Fonts/iconfont.ttf#zx_icons</FontFamily>
                 </ResourceDictionary>
