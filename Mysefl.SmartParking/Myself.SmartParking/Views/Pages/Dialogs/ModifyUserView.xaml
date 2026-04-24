@@ -6,28 +6,13 @@
              xmlns:local="clr-namespace:Myself.SmartParking.Views.Pages.Dialogs"
                 xmlns:c="clr-namespace:Myself.SmartParking.Base.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="330" d:DesignWidth="500">
+             d:DesignHeight="330" d:DesignWidth="500" Template="{StaticResource DialogViewTemplate}">
     <UserControl.Resources>
         <c:SectionConverter x:Key="sConverter"/>
     </UserControl.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition/>
-            <RowDefinition Height="40"/>
-        </Grid.RowDefinitions>
-        <Border Background="#FAFCFF" Grid.Row="1"/>
-        <Border Height="1" Background="#EEE" VerticalAlignment="Bottom"/>
-        <Border Height="1" Grid.Row="2" Background="#EEE" VerticalAlignment="Top"/>
-        <TextBlock Text="{Binding Title}" FontSize="14" 
-            VerticalAlignment="Center" 
-            FontWeight="Bold"
-            Foreground="#888" Margin="10,0"/>
-        <Button Content="保存" Grid.Row="2" Height="30" Width="100"
-         HorizontalAlignment="Center"
-         Style="{StaticResource NormalButtonStyle}"
-         Command="{Binding SaveCommand}"/>
-        <Grid Grid.Row="1" Margin="20,10" FocusManager.FocusedElement="{Binding ElementName=tb_un}">
+
+       
+        <Grid  Margin="20,10" FocusManager.FocusedElement="{Binding ElementName=tb_un}">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -68,5 +53,5 @@
             <TextBox Grid.Column="1" Text="{Binding UserInfo.Phone}" Grid.Row="5" Style="{StaticResource NormalTextBoxStyle}" Grid.ColumnSpan="2"/>
 
         </Grid>
-    </Grid>
+
 </UserControl>

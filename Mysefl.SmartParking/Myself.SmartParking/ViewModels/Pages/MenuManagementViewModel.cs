@@ -80,8 +80,8 @@ namespace Myself.SmartParking.ViewModels.Pages
                     this.Refresh();
                     PublishRefreshMenuEvent();
 
-
                 }
+                
             });
         }
         private void PublishRefreshMenuEvent()

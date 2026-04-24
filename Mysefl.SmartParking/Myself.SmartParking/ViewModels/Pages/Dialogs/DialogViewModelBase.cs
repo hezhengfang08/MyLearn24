@@ -10,9 +10,11 @@ namespace Myself.SmartParking.ViewModels.Pages.Dialogs
     {
         public string Title { get; set; }
         public DelegateCommand SaveCommand { get; set; }
+        public DelegateCommand CancelCommand { get; set; }
         public DialogViewModelBase()
         {
             SaveCommand = new DelegateCommand(DoSave);
+            CancelCommand = new DelegateCommand(OnCloseRequested);
         }
 
         #region IDialogAware
@@ -23,6 +25,14 @@ namespace Myself.SmartParking.ViewModels.Pages.Dialogs
         public virtual bool CanCloseDialog()
         {
             return true;
+        }
+        private void OnCloseRequested()
+        {
+            if (CanCloseDialog())
+            {
+                // 点 X 视为取消/放弃，传 None 或 Cancel
+                RequestClose.Invoke(new DialogResult(ButtonResult.Cancel));
+            }
         }
 
         public virtual void OnDialogClosed()
