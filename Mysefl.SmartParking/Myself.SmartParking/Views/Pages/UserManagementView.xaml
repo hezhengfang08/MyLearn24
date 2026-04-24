@@ -138,10 +138,10 @@
                                          CommandParameter="{Binding}"
                                          TextDecorations="None" Foreground="#409EFE">删除</Hyperlink>
                                 </TextBlock>
-                                <ToggleButton Content="&#xe60b;" FontFamily="{StaticResource Icons}"
-                                        Style="{StaticResource MoreButtonStyle}"
-                                        Name="tb_more"/>
-                            </StackPanel>
+                            <ToggleButton Content="&#xe60b;" FontFamily="{StaticResource Icons}"
+                   Style="{StaticResource MoreButtonStyle}"
+                   Name="tb_more" Cursor=""/>
+                        </StackPanel>
 
                             <Popup StaysOpen="False" IsOpen="{Binding ElementName=tb_more,Path=IsChecked}"
                              PlacementTarget="{Binding ElementName=tb_more}" 

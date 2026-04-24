@@ -36,7 +36,7 @@ namespace Myself.SmartParking
 
 
             // 注册相关的实体
-            containerRegistry.Register<DbContext, MyselfDbContext>();
+            containerRegistry.RegisterScoped<DbContext, MyselfDbContext>();
             containerRegistry.Register<IUserService, UserService>();
             containerRegistry.Register<IMenuService, MenuService>();
             containerRegistry.Register<IRoleService, RoleService>();

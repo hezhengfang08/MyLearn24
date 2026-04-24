@@ -26,7 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Fonts\iconfont.ttf" />
+    <Resource Include="Fonts\iconfont.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Avatar\002m.jpg" />
     <Resource Include="Images\covers\1.png" />
     <Resource Include="Images\covers\2.png" />

@@ -16,6 +16,81 @@
         <WindowChrome GlassFrameThickness="1" 
                       NonClientFrameEdges="None"/>
     </WindowChrome.WindowChrome>
+    <Window.Resources>
+        <Style TargetType="ToggleButton" x:Key="UserIconButtonStyle">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid>
+                            <Border Width="30" Height="30" CornerRadius="20"
+                                  BorderBrush="White" BorderThickness="1" Background="White"
+                                  Name="border" Visibility="Collapsed">
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="5" ShadowDepth="0"
+                                                    Color="Black" Opacity="0.3"/>
+                                </Border.Effect>
+                            </Border>
+                            <Border Width="30" Height="30" CornerRadius="20"
+                                  BorderBrush="Transparent" BorderThickness="1">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="{Binding Content,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                                </Border.Background>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="border" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button" x:Key="AvatarItemButtonStyle">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border Width="30" Height="30" CornerRadius="5"
+                                  Background="White" Name="border" Visibility="Collapsed">
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="5" ShadowDepth="0"
+                                            Color="Black" Opacity="0.3"/>
+                                </Border.Effect>
+                            </Border>
+                            <Border Width="30" Height="30" CornerRadius="5"
+                                  BorderBrush="White" BorderThickness="1" >
+                                <Border.Background>
+                                    <ImageBrush ImageSource="{Binding Content,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                                </Border.Background>
+                                <ContentPresenter VerticalAlignment="Center" 
+                                                HorizontalAlignment="Center" 
+                                                Visibility="Collapsed"
+                                                Name="cp"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="CommandParameter" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Visible" TargetName="cp"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
     <DockPanel>
         <!--右侧菜单-->
         <Border BorderBrush="#EEE" BorderThickness="0,0,1,0">
@@ -187,21 +262,24 @@
                            VerticalAlignment="Center"
                            FontSize="18" Foreground="#888"
                            Margin="0,0,20,0"/>
-                <Border Width="30" Height="30" CornerRadius="20"
-                        Margin="0,0,10,0" BorderBrush="White" BorderThickness="1">
-                    <Border.Background>
-                        <ImageBrush ImageSource="{Binding CurrentUser.UserIcon}"/>
-                    </Border.Background>
-                </Border>
-
+                <ToggleButton Width="30" Height="30" Margin="0,0,5,0"
+                Style="{StaticResource UserIconButtonStyle}"
+                Content="{Binding CurrentUser.UserIcon}"
+                IsChecked="{Binding IsDropdownAvatar}"
+                Name="tbtn_avatar"/>
+                
                 <ToggleButton Content="{Binding CurrentUser.RealName}" 
-                              ContentStringFormat="Hi! {0}"
-                              VerticalAlignment="Center"
-                              FontSize="11" FontWeight="Normal" Foreground="#888"
-                              Margin="0,0,10,0" Name="tbtn_user"
-                              Height="30"
-                              WindowChrome.IsHitTestVisibleInChrome="True"
-                              Style="{StaticResource UserInfoButtonStyle}"/>
+                  ContentStringFormat="Hi! {0}"
+                 VerticalAlignment="Center"
+                 FontSize="11" FontWeight="Normal" Foreground="#888"
+                 Margin="0,0,10,0" Name="tbtn_user"
+                  Height="30"
+                 WindowChrome.IsHitTestVisibleInChrome="True"
+               Style="{StaticResource UserInfoButtonStyle}">
+                </ToggleButton>
+               
+
+
 
                 <Button Content="&#xe7e6;" FontFamily="{StaticResource Icons}"
                         Style="{StaticResource ControlButtonStyle}"/>
@@ -211,9 +289,9 @@
                         Style="{StaticResource ControlButtonStyle}" Command="{Binding CloseCommand}"/>
             </StackPanel>
             <Popup StaysOpen="False" IsOpen="{Binding ElementName=tbtn_user,Path=IsChecked}"
-                   PlacementTarget="{Binding ElementName=tbtn_user}" Placement="Right"
-                   HorizontalOffset="-160" VerticalOffset="33"
-                   AllowsTransparency="True">
+           PlacementTarget="{Binding ElementName=tbtn_user}" Placement="Right"
+           HorizontalOffset="-160" VerticalOffset="33"
+           AllowsTransparency="True">
                 <Grid Margin="5">
                     <!--背景-->
                     <Border Width="160" Height="200" Background="#FFF" CornerRadius="5">
@@ -236,7 +314,7 @@
                         <Border CornerRadius="5,5,0,0">
                             <Border.Background>
                                 <ImageBrush ImageSource="{Binding CurrentUser.UserIcon}"
-                                            Stretch="UniformToFill"/>
+                                    Stretch="UniformToFill"/>
                             </Border.Background>
                             <Border.Effect>
                                 <BlurEffect Radius="40"/>
@@ -247,19 +325,19 @@
                         </Border>
 
                         <Border Width="50" Height="50" CornerRadius="10"
-                                Margin="0,0,5,0" BorderBrush="White" BorderThickness="1">
+                        Margin="0,0,5,0" BorderBrush="White" BorderThickness="1">
                             <Border.Background>
                                 <ImageBrush ImageSource="{Binding CurrentUser.UserIcon}"/>
                             </Border.Background>
                         </Border>
 
                         <TextBlock Text="{Binding CurrentUser.RealName}" 
-                                   Grid.Row="1" HorizontalAlignment="Center"
-                                   FontWeight="Bold"/>
+                           Grid.Row="1" HorizontalAlignment="Center"
+                           FontWeight="Bold"/>
 
                         <StackPanel Grid.Row="2" VerticalAlignment="Center" 
-                                    HorizontalAlignment="Center"
-                                    Orientation="Horizontal" TextBlock.FontSize="11">
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal" TextBlock.FontSize="11">
                             <TextBlock Text="{Binding CurrentUser.Age}" Margin="5,0"/>
                             <TextBlock Text="{Binding CurrentUser.Gender}" Margin="5,0"/>
                         </StackPanel>
@@ -267,16 +345,61 @@
                         <Border Background="#EEE" Height="0.5" Grid.Row="3"/>
 
                         <Button Content="修改密码" Grid.Row="4" 
-                                Style="{StaticResource NormalButtonStyle}"
-                                Background="Transparent" Foreground="#409EFE"
-                                Margin="5,3" FontSize="12"
-                                Command="{Binding ModifyPasswordCommand}"/>
+                        Style="{StaticResource NormalButtonStyle}"
+                        Background="Transparent" Foreground="#409EFE"
+                        Margin="5,3" FontSize="12"
+                        Command="{Binding ModifyPasswordCommand}"/>
                         <Button Content="切换账号" Grid.Row="5" 
-                                Style="{StaticResource NormalButtonStyle}"
-                                Background="Transparent" Foreground="#409EFE"
-                                Margin="5,3" FontSize="12"
-                                Command="{Binding SwitchCommand}"/>
+                        Style="{StaticResource NormalButtonStyle}"
+                        Background="Transparent" Foreground="#409EFE"
+                        Margin="5,3" FontSize="12"
+                        Command="{Binding SwitchCommand}"/>
                     </Grid>
+                </Grid>
+            </Popup>
+            <Popup StaysOpen="False" IsOpen="{Binding ElementName=tbtn_avatar,Path=IsChecked}"
+           PlacementTarget="{Binding ElementName=tbtn_avatar}"
+           AllowsTransparency="True">
+                <Grid Margin="5">
+                    <Border Width="160" Height="100" Background="#FFF" CornerRadius="5">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="0" Direction="0" Color="Gray" Opacity="0.1"/>
+                        </Border.Effect>
+                    </Border>
+
+                    <UniformGrid Columns="4" Margin="5">
+                        <Button Style="{StaticResource AvatarItemButtonStyle}"
+                        Content="pack://siteoforigin:,,,/Avatars/a01.jpg"
+                        CommandParameter="a01.jpg" 
+                        Command="{Binding SetAvatarCommand}"/>
+                        <Button Style="{StaticResource AvatarItemButtonStyle}"
+                        Content="pack://siteoforigin:,,,/Avatars/a02.jpg"
+                        Command="{Binding SetAvatarCommand}"
+                        CommandParameter="a02.jpg"/>
+                        <Button Style="{StaticResource AvatarItemButtonStyle}"
+                        Content="pack://siteoforigin:,,,/Avatars/a03.png"
+                        Command="{Binding SetAvatarCommand}"
+                        CommandParameter="a03.png"/>
+                        <Button Style="{StaticResource AvatarItemButtonStyle}"
+                        Content="pack://siteoforigin:,,,/Avatars/a04.jpg"
+                        Command="{Binding SetAvatarCommand}"
+                        CommandParameter="a04.jpg"/>
+                        <Button Style="{StaticResource AvatarItemButtonStyle}"
+                        Content="pack://siteoforigin:,,,/Avatars/a05.png"
+                        Command="{Binding SetAvatarCommand}"
+                        CommandParameter="a05.png"/>
+                        <Button Style="{StaticResource AvatarItemButtonStyle}"
+                        Content="pack://siteoforigin:,,,/Avatars/a06.jpg"
+                        Command="{Binding SetAvatarCommand}"
+                        CommandParameter="a06.jpg"/>
+                        <Button Style="{StaticResource AvatarItemButtonStyle}"
+                        Content="pack://siteoforigin:,,,/Avatars/a07.jpg"
+                        Command="{Binding SetAvatarCommand}"
+                        CommandParameter="a07.jpg"/>
+                        <Button Style="{StaticResource AvatarItemButtonStyle}"
+                        Command="{Binding SetAvatarCommand}"
+                        Content="选择" FontSize="12" Foreground="#409EFE"/>
+                    </UniformGrid>
                 </Grid>
             </Popup>
 
