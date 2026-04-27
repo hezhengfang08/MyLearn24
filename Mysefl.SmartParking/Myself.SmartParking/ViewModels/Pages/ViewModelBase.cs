@@ -10,6 +10,7 @@ namespace Myself.SmartParking.ViewModels.Pages
 {
     public class ViewModelBase<T> : BindableBase, INavigationAware where T : class
     {
+       public  UserModel CurrentUser { get; set; } = new UserModel()    ;
         public string PageTitle { get; set; } = "页面标题";
         public bool IsCanClose { get; set; } = true;
         public string SearchKey { get; set; }
@@ -57,6 +58,7 @@ namespace Myself.SmartParking.ViewModels.Pages
         public virtual void OnNavigatedTo(NavigationContext navigationContext)
         {
             PageName = navigationContext.Uri.ToString();
+            CurrentUser = navigationContext.Parameters.GetValue<UserModel>("currentUser"); 
         }
     }
 }

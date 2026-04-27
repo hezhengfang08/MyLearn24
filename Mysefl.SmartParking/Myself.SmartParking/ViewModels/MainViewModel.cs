@@ -147,7 +147,9 @@ namespace Myself.SmartParking.ViewModels
             }
             else if (!string.IsNullOrEmpty(itemModel.TargetView))
             {
-                _regionManager.RequestNavigate("MainRegion", itemModel.TargetView);
+                NavigationParameters nps = new NavigationParameters();
+                nps.Add("currentUser", CurrentUser);
+                _regionManager.RequestNavigate("MainRegion", itemModel.TargetView, nps);
             }
            
         }

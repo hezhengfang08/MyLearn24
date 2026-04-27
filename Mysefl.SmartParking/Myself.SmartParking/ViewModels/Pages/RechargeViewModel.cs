@@ -38,12 +38,12 @@ namespace Myself.SmartParking.ViewModels.Pages
 
         public ObservableCollection<RechargeModel> RechargeList { get; set; } =
                new ObservableCollection<RechargeModel>();
-        UserModel _currentUser;
+        
         public override void OnNavigatedTo(NavigationContext navigationContext)
         {
             base.OnNavigatedTo(navigationContext);
 
-            _currentUser = navigationContext.Parameters.GetValue<UserModel>("user");
+         
 
             // 从车辆 记录过来的时候，正常情况是有值的
             // 还有一种情况，从主页面菜单过来的时候，这里面是没有auto参数
@@ -92,7 +92,8 @@ namespace Myself.SmartParking.ViewModels.Pages
         public override void DoModify(RechargeModel model)
         {
             DialogParameters dps = new DialogParameters();
-            dps.Add("user", _currentUser);
+            dps.Add("user", CurrentUser);
+            dps.Add("autoLicense", SearchKey);
             _dialogService.ShowDialog("ModifyRechargeView", dps, result =>
             {
              

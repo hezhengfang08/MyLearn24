@@ -123,6 +123,7 @@ namespace Myself.SmartParking.ViewModels.Pages
         {
             // 需要跳转到RechargeView
             NavigationParameters nps = new NavigationParameters();
+            nps.Add("currentUser", CurrentUser);
             nps.Add("auto", model.AutoLicense);
             _regionManager.RequestNavigate("MainRegion", "RechargeView", nps);
         }

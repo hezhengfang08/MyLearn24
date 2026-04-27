@@ -12,6 +12,7 @@ namespace Myself.SmartParking.ViewModels.Pages.Dialogs
 {
   public  class ModifyRechargeViewModel: DialogViewModelBase
     {
+
         IRechargeService _rechargeService;
         public ModifyRechargeViewModel(IRechargeService rechargeService)
         {
@@ -32,19 +33,31 @@ namespace Myself.SmartParking.ViewModels.Pages.Dialogs
             RechargeInfo.RechargeEndTime = DateTime.Now;
 
             var user = parameters.GetValue<UserModel>("user");
+            SelectedAutoLisence = parameters.GetValue<string>("autoLicense");
             if (user != null)
             {
                 _userId = user.UserId;
                 _userName = user.UserName;
             }
         }
+
+        private string selectedAutoLisence;
+
+        public string SelectedAutoLisence
+        {
+            get { return selectedAutoLisence; }
+            set { selectedAutoLisence = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public override void DoSave()
         {
             try
             {
                 _rechargeService.Insert(new MemberRecharge
                 {
-                    AutoLisence = RechargeInfo.AutoLisence,
+                    AutoLisence =SelectedAutoLisence,
                     FeeModeId = RechargeInfo.FeeModeId,
                     RechargeCount = RechargeInfo.RechargeCount,
                     RechargeEndTime = RechargeInfo.RechargeEndTime.ToString(),
