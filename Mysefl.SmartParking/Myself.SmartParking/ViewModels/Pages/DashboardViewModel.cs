@@ -49,25 +49,25 @@ namespace Myself.SmartParking.ViewModels.Pages
             // 后台有数据后，再做对接
             RecordList.Add(new RecordModel
             {
-                CarImage = "/Zhaoxi.SmartParking.Assets;component/Images/covers/huA.jpg",
+                CarImage = "/Myself.SmartParking.Assets;component/Images/covers/huA.jpg",
                 Number = "沪A59P65",
                 RecordInfo = "测试车辆进出记录，未见异常"
             });
             RecordList.Add(new RecordModel
             {
-                CarImage = "/Zhaoxi.SmartParking.Assets;component/Images/covers/wanF.jpg",
+                CarImage = "/Myself.SmartParking.Assets;component/Images/covers/wanF.jpg",
                 Number = "皖FC001C",
                 RecordInfo = "测试车辆进出记录，未见异常"
             });
             RecordList.Add(new RecordModel
             {
-                CarImage = "/Zhaoxi.SmartParking.Assets;component/Images/covers/yiB.jpg",
+                CarImage = "/Myself.SmartParking.Assets;component/Images/covers/yiB.jpg",
                 Number = "冀B850AR",
                 RecordInfo = "测试车辆进出记录，未见异常"
             });
             RecordList.Add(new RecordModel
             {
-                CarImage = "/Zhaoxi.SmartParking.Assets;component/Images/covers/yueA.jpg",
+                CarImage = "/Myself.SmartParking.Assets;component/Images/covers/yueA.jpg",
                 Number = "粤AFQ787",
                 RecordInfo = "测试车辆进出记录，未见异常"
             });
