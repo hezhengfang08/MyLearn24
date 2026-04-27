@@ -40,17 +40,28 @@ namespace Myself.SmartParking
             containerRegistry.Register<IUserService, UserService>();
             containerRegistry.Register<IMenuService, MenuService>();
             containerRegistry.Register<IRoleService, RoleService>();
+            containerRegistry.Register<IDeviceService, DeviceService>();
+            containerRegistry.Register<IAutoService, AutoService>();
+            containerRegistry.Register<IRechargeService, RechargeSerivce>();
 
             containerRegistry.RegisterForNavigation<Views.Pages.DashboardView>();
             containerRegistry.RegisterForNavigation<Views.Pages.MenuManagementView>();
             containerRegistry.RegisterForNavigation<Views.Pages.UserManagementView>();
             containerRegistry.RegisterForNavigation<Views.Pages.RoleView>();
+            containerRegistry.RegisterForNavigation<Views.Pages.DeviceView>();
+            containerRegistry.RegisterForNavigation<Views.Pages.AutoView>();
+            containerRegistry.RegisterForNavigation<Views.Pages.RechargeView>();
+            containerRegistry.RegisterForNavigation<Views.Pages.MonitorView>();
 
             containerRegistry.RegisterDialog<Views.Pages.Dialogs.ModifyMenuView>();
             containerRegistry.RegisterDialog<Views.Pages.Dialogs.ModifyUserView>();
             containerRegistry.RegisterDialog<Views.Pages.Dialogs.ModifyPasswordView>();
             containerRegistry.RegisterDialog<Views.Pages.Dialogs.ModifyRoleView>();
             containerRegistry.RegisterDialog<Views.Pages.Dialogs.SelectUserView>();
+            containerRegistry.RegisterDialog<Views.Pages.Dialogs.ModifyDeviceView>();
+            containerRegistry.RegisterDialog<Views.Pages.Dialogs.ModifyAutoView>();
+            containerRegistry.RegisterDialog<Views.Pages.Dialogs.ModifyRechargeView>();
+
         }
     }
 

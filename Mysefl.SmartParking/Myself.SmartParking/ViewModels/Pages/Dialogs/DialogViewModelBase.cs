@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace Myself.SmartParking.ViewModels.Pages.Dialogs
 {
-    public class DialogViewModelBase : IDialogAware, INotifyDataErrorInfo
+    public class DialogViewModelBase : BindableBase, IDialogAware, INotifyDataErrorInfo
     {
         public string Title { get; set; }
         public DelegateCommand SaveCommand { get; set; }

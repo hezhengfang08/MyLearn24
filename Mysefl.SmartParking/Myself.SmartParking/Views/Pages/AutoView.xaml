@@ -1,0 +1,153 @@
+﻿<UserControl x:Class="Myself.SmartParking.Views.Pages.AutoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Myself.SmartParking.Views.Pages"
+               xmlns:zxc="clr-namespace:Myself.SmartParking.Controls;assembly=Myself.SmartParking.Controls"
+             mc:Ignorable="d" Template="{StaticResource PageTempalte}" Tag="车辆管理"
+             d:DesignHeight="450" d:DesignWidth="1100">
+    <Grid Margin="10,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Border Background="#F7F9FA" Height="1" VerticalAlignment="Bottom"/>
+        <Grid TextBlock.FontSize="12" TextBlock.FontWeight="Bold" TextBlock.Foreground="#666">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="120"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="序号" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0"/>
+            <TextBlock Text="车牌号" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"/>
+            <TextBlock Text="车牌颜色" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2"/>
+            <TextBlock Text="车牌类型" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="3"/>
+            <TextBlock Text="车身颜色" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="4"/>
+            <TextBlock Text="计费模式" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="5"/>
+            <TextBlock Text="有效次数" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="6"/>
+            <TextBlock Text="有效时间" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="7"/>
+            <TextBlock Text="状态" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="8"/>
+            <TextBlock Text="备注" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="9"/>
+            <TextBlock Text="操作" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="10"/>
+        </Grid>
+
+        <ListBox Grid.Row="1" ItemsSource="{Binding AutoList}" BorderThickness="0"
+              AlternationCount="2" ItemContainerStyle="{StaticResource NoramalListBoxItemStyle}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="33" Name="root" Background="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="90"/>
+                            <ColumnDefinition Width="90"/>
+                            <ColumnDefinition Width="90"/>
+                            <ColumnDefinition Width="90"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="120"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Index}" Grid.Column="0" 
+                                VerticalAlignment="Center" HorizontalAlignment="Center"
+                                Foreground="#888"/>
+                        <TextBlock Text="{Binding AutoLicense}" Grid.Column="1" 
+                                VerticalAlignment="Center"
+                                Foreground="#888" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding LColorName}" Grid.Column="2"
+                                VerticalAlignment="Center" HorizontalAlignment="Center"
+                                Foreground="#888"/>
+                        <TextBlock Text="{Binding LTypeName}" Grid.Column="3" 
+                                VerticalAlignment="Center" HorizontalAlignment="Center"
+                                Foreground="#888"/>
+                        <TextBlock Text="{Binding AColorName}" Grid.Column="4" 
+                                VerticalAlignment="Center" HorizontalAlignment="Center"
+                                Foreground="#888"/>
+                        <TextBlock Text="{Binding FeeModeName}" Grid.Column="5" 
+                                VerticalAlignment="Center" HorizontalAlignment="Center"
+                                Foreground="#888"/>
+                        <TextBlock Text="{Binding ValidCount}" Grid.Column="6" 
+                                VerticalAlignment="Center" HorizontalAlignment="Center"
+                                Foreground="#888"/>
+                        <TextBlock Text="{Binding ValidEndTime,StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}" 
+                                Grid.Column="7" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                Foreground="#888"/>
+                        <TextBlock Text="锁定" Grid.Column="8" VerticalAlignment="Center" 
+                                HorizontalAlignment="Center"
+                                Foreground="#888" Name="tb_state"/>
+                        <TextBlock Text="{Binding Description}" Grid.Column="9" 
+                                VerticalAlignment="Center" TextWrapping="Wrap"
+                                Foreground="#888" HorizontalAlignment="Center"/>
+
+                        <StackPanel Grid.Column="10" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center">
+                             <Hyperlink Command="{Binding DataContext.ModifyCommand,RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                        CommandParameter="{Binding}">编辑</Hyperlink>
+                            </TextBlock>
+                            <TextBlock Margin="6,0" VerticalAlignment="Center">
+                             <Hyperlink Command="{Binding DataContext.DeleteCommand,RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                        CommandParameter="{Binding}">删除</Hyperlink>
+                            </TextBlock>
+
+
+                            <ToggleButton Content="&#xe60b;" FontFamily="{StaticResource Icons}"
+                                       Style="{StaticResource MoreButtonStyle}"
+                                       Name="tb_more" Height="22"/>
+                        </StackPanel>
+
+                        <Popup StaysOpen="False" IsOpen="{Binding ElementName=tb_more,Path=IsChecked}"
+                             PlacementTarget="{Binding ElementName=tb_more}" 
+                             AllowsTransparency="True"
+                             HorizontalOffset="-100" VerticalOffset="2">
+                            <Border Width="120" Background="#F0F6FB" CornerRadius="3" Margin="5"
+                                 BorderBrush="#CCC" BorderThickness="1">
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="10" ShadowDepth="0" Direction="0" Color="Gray" Opacity="0.1"/>
+                                </Border.Effect>
+                                <Grid Margin="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Border Height="1" Background="#DDD" Grid.Row="1" Margin="0,3"/>
+                                    <Button Content="费用清单" Style="{StaticResource MoreMenuButtonStyle}"
+                                          Command="{Binding DataContext.RechargeCommand,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                          CommandParameter="{Binding}"/>
+                                    <Button Content="{Binding LockButtonText}" Grid.Row="3" Style="{StaticResource MoreMenuButtonStyle}"
+                                          Command="{Binding DataContext.LockAutoCommand,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                          CommandParameter="{Binding}"/>
+                                </Grid>
+                            </Border>
+                        </Popup>
+                    </Grid>
+                    <DataTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#EEE" TargetName="root"/>
+                        </Trigger>
+                        <DataTrigger Binding="{Binding State}" Value="1">
+                            <Setter TargetName="tb_state" Property="Text" Value="正常"/>
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+
+
+        <zxc:Pagination DataContext="{Binding PaginationModel}"
+                     Grid.Row="2" HorizontalAlignment="Center"/>
+    </Grid>
+</UserControl>

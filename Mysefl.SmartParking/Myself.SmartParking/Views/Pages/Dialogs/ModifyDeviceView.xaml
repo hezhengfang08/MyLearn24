@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="Myself.SmartParking.Views.Pages.Dialogs.ModifyDeviceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Myself.SmartParking.Views.Pages.Dialogs"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="500"  Template="{StaticResource DialogViewTemplate}" >
+    <Grid Margin="20,10" TextBlock.Foreground="#777" TextBlock.FontWeight="Normal"
+         FocusManager.FocusedElement="{Binding ElementName=tb}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="设备名称" VerticalAlignment="Center"/>
+        <TextBlock Text="设备IP" VerticalAlignment="Center" Grid.Row="1"/>
+        <TextBlock Text="设备端口号" VerticalAlignment="Center" Grid.Row="2"/>
+        <TextBlock Text="COM口" VerticalAlignment="Center" Grid.Row="3"/>
+        <TextBlock Text="用户名" VerticalAlignment="Center" Grid.Row="4"/>
+        <TextBlock Text="密码" VerticalAlignment="Center" Grid.Row="5"/>
+        <TextBlock Text="回调URL-1" VerticalAlignment="Center" Grid.Row="6"/>
+        <TextBlock Text="回调URL-2" VerticalAlignment="Center" Grid.Row="7"/>
+        <TextBlock Text="回调URL-3" VerticalAlignment="Center" Grid.Row="8"/>
+
+        <TextBox Grid.Column="1" Style="{StaticResource ValidationTextBoxStyle}" Height="33"
+                Text="{Binding DeviceName}"
+                Name="tb"/>
+        <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource NormalTextBoxStyle}" Height="33"
+                Text="{Binding Device.AddrIp}"/>
+        <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource NormalTextBoxStyle}" Height="33"
+                Text="{Binding Device.AddrPort}"/>
+        <TextBox Grid.Column="1" Grid.Row="3" Style="{StaticResource NormalTextBoxStyle}" Height="33"
+                Text="{Binding Device.AddrCom}"/>
+        <TextBox Grid.Column="1" Grid.Row="4" Style="{StaticResource NormalTextBoxStyle}" Height="33"
+                Text="{Binding Device.UserName}"/>
+        <TextBox Grid.Column="1" Grid.Row="5" Style="{StaticResource NormalTextBoxStyle}" Height="33"
+                Text="{Binding Device.Password}"/>
+        <TextBox Grid.Column="1" Grid.Row="6" Style="{StaticResource NormalTextBoxStyle}" Height="33"
+                Text="{Binding Device.CallbackUrl1}"/>
+        <TextBox Grid.Column="1" Grid.Row="7" Style="{StaticResource NormalTextBoxStyle}" Height="33"
+                Text="{Binding Device.CallbackUrl2}"/>
+        <TextBox Grid.Column="1" Grid.Row="8" Style="{StaticResource NormalTextBoxStyle}" Height="33"
+                Text="{Binding Device.CallbackUrl3}"/>
+    </Grid>
+</UserControl>

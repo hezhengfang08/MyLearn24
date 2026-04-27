@@ -51,5 +51,14 @@ namespace Myself.SmartParking.ORM
 
         public virtual DbSet<RoleMenu> RoleMenu { get; set; }
         public virtual DbSet<RoleUser> RoleUser { get; set; }
+
+        public virtual DbSet<AutoRegister> AutoRegister { get; set; }
+        public virtual DbSet<DeviceInfo> DeviceInfo { get; set; }
+        public virtual DbSet<BaseLicenseColor> BaseLicenseColor { get; set; }
+        public virtual DbSet<BaseLicenseType> BaseLicenseType { get; set; }
+        public virtual DbSet<BaseAutoColor> BaseAutoColor { get; set; }
+        public virtual DbSet<BaseFeeMode> BaseFeeMode { get; set; }
+     
+        public virtual DbSet<MemberRecharge> MemberRecharge { get; set; }
     }
 }

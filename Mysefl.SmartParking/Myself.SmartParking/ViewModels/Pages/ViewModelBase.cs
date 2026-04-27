@@ -54,7 +54,7 @@ namespace Myself.SmartParking.ViewModels.Pages
           
         }
 
-        public void OnNavigatedTo(NavigationContext navigationContext)
+        public virtual void OnNavigatedTo(NavigationContext navigationContext)
         {
             PageName = navigationContext.Uri.ToString();
         }

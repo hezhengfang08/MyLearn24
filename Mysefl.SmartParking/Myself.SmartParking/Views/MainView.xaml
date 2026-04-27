@@ -244,8 +244,8 @@
             </TextBlock>
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
-                        HorizontalAlignment="Left"
-                        Margin="833,0,0,0">
+                        HorizontalAlignment="Right"
+                        Margin="0,0,10,0">
                 <StackPanel.Resources>
                     <ResourceDictionary>
                         <ResourceDictionary.MergedDictionaries>
