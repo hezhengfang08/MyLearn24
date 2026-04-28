@@ -8,6 +8,7 @@ namespace Myself.SmartParking.Models
 {
     public class RecordModel
     {
+        public string Index { get; set; }
         public string CarImage { get; set; }
         public string Number { get; set; }
         public string RecordInfo { get; set; }

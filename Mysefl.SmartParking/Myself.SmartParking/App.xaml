@@ -21,6 +21,8 @@
 
 
                 <ResourceDictionary>
+                    <FontFamily x:Key="DigitalDisplay">/Myself.SmartParking.Assets;component/Fonts/#Digital Display
+                    </FontFamily>
                     <FontFamily x:Key="Icons">/Myself.SmartParking.Assets;component/Fonts/iconfont.ttf#zx_icons</FontFamily>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>

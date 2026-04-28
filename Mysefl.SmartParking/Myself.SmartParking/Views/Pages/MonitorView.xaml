@@ -4,9 +4,599 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Myself.SmartParking.Views.Pages"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+              d:DesignHeight="750" d:DesignWidth="1300">
+    <UserControl.Resources>
+        <Style TargetType="GroupBox" x:Key="GroupBoxStyle">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GroupBox">
+                        <Grid>
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height="30"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Border Background="#00F7FF" Width="3" Height="20" CornerRadius="2" 
+                                 HorizontalAlignment="Left">
+                                <Border.RenderTransform>
+                                    <SkewTransform AngleX="20"/>
+                                </Border.RenderTransform>
+                            </Border>
+                            <Border BorderThickness="2,0,0,1" CornerRadius="2,0,0,8" Height="24"
+                                 Margin="8,0,0,0">
+                                <Border.BorderBrush>
+                                    <LinearGradientBrush StartPoint="0.2,0" EndPoint="1,1">
+                                        <GradientStop Color="#00F7FF" Offset="-0.1"/>
+                                        <GradientStop Color="Transparent" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.BorderBrush>
+                                <Border.RenderTransform>
+                                    <SkewTransform AngleX="20"/>
+                                </Border.RenderTransform>
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Color="#1FFF" Offset="0"/>
+                                        <GradientStop Color="Transparent" Offset="0.8"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+
+                            <Border BorderThickness="1,0" Width="4" Height="14" HorizontalAlignment="Right">
+                                <Border.BorderBrush>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Color="Transparent" Offset="-1"/>
+                                        <GradientStop Color="#00F7FF" Offset="2"/>
+                                    </LinearGradientBrush>
+                                </Border.BorderBrush>
+                            </Border>
+
+                            <!--<ContentPresenter ContentSource="Header"/>-->
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
+                                     HorizontalAlignment="Left">
+                                <ContentPresenter ContentSource="Header"
+                                               TextBlock.Foreground="#FFF"
+                                               TextBlock.FontSize="11"
+                                               VerticalAlignment="Center" Margin="25,0">
+                                    <ContentPresenter.Effect>
+                                        <DropShadowEffect BlurRadius="5" ShadowDepth="0" Color="#00F7FF"/>
+                                    </ContentPresenter.Effect>
+                                </ContentPresenter>
+                                <Path Data="M0 0 4 4 0 8" Stroke="#00F7FF" StrokeThickness="1"
+                                   VerticalAlignment="Center"/>
+                                <Path Data="M0 0 4 4 0 8" Stroke="#8800F7FF" StrokeThickness="1"
+                                   VerticalAlignment="Center"/>
+                            </StackPanel>
+
+
+                            <!--<ContentPresenter Grid.Row="1"/>-->
+                            <Grid Grid.Row="1" Margin="0,5" Background="#0500F3FE">
+                                <Ellipse Fill="#8800F3FE" Width="3" Height="3" 
+                                      VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                <Ellipse Fill="#8800F3FE" Width="3" Height="3" 
+                                      VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                                <Ellipse Fill="#8800F3FE" Width="3" Height="3" 
+                                      VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                                <Ellipse Fill="#8800F3FE" Width="3" Height="3" 
+                                      VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                                <ContentPresenter Margin="5"/>
+                            </Grid>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="CheckBox" x:Key="StatusCheckBoxStyle">
+            <Setter Property="IsEnabled" Value="False"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="#00F7FF"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="{Binding Content,RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                    FontFamily="{StaticResource Icons}" HorizontalAlignment="Center"
+                                    FontSize="20"/>
+                            <TextBlock Text="正常" Name="tip" Grid.Row="1" HorizontalAlignment="Center"
+                                    FontSize="10"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter Property="Foreground" Value="OrangeRed"/>
+                                <Setter TargetName="tip" Property="Text" Value="异常"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <Style TargetType="ToggleButton" x:Key="LicenseItemButtonStyle">
+            <Setter Property="Margin" Value="2,0"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Background" Value="#2FFF"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="3">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                           Margin="5,0"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#4FFF"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Background" Value="#6FFF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <LinearGradientBrush x:Key="SeperatorLineBrush" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="Transparent" Offset="0"/>
+            <GradientStop Color="#00F7FF" Offset="0.5"/>
+            <GradientStop Color="Transparent" Offset="1"/>
+        </LinearGradientBrush>
+    </UserControl.Resources>
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup>
+            <VisualState Name="ShowState">
+                <Storyboard>
+                    <ThicknessAnimation Duration="0:0:0.300"
+                                     Storyboard.TargetProperty="Margin"
+                                     From="0,150,0,-150"
+                                     To="0,0,0,0"/>
+                    <DoubleAnimation Duration="0:0:0.300"
+                                  Storyboard.TargetProperty="Opacity"
+                                  From="0" To="1"/>
+                </Storyboard>
+            </VisualState>
+            <VisualState Name="CloseState">
+                <Storyboard>
+                    <ThicknessAnimation Duration="0:0:0.300"
+                                      Storyboard.TargetProperty="Margin"
+                                      From="0,0,0,0"
+                                      To="0,150,0,-150"/>
+                    <DoubleAnimation Duration="0:0:0.300"
+                                   Storyboard.TargetProperty="Opacity"
+                                   From="1" To="0"/>
+                </Storyboard>
+            </VisualState>
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="UserControl.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Duration="0:0:2" 
+                                                Storyboard.TargetName="tb_datetime"
+                            Storyboard.TargetProperty="DataContext" RepeatBehavior="Forever">
+                        <DiscreteObjectKeyFrame Value="{x:Static sys:DateTime.Now}" KeyTime="0:0:0"/>
+                        <DiscreteObjectKeyFrame Value="{x:Static sys:DateTime.Now}" KeyTime="0:0:1"/>
+                    </ObjectAnimationUsingKeyFrames>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
     <Grid>
-        <Button Content="管理后台" Command="{Binding GotoManagerCommand}"/>
+        <Grid.Background>
+            <RadialGradientBrush GradientOrigin="0.5,0" Center="0.5,0">
+                <GradientStop Color="#396682" Offset="0"/>
+                <GradientStop Color="#222" Offset="1"/>
+            </RadialGradientBrush>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="380"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Path Data="M0 0 0 38 60 38C67 38 67 38 70 33L 90 0" VerticalAlignment="Center">
+            <Path.Fill>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#FF1F3A69" Offset="-0.2"/>
+                    <GradientStop Color="#990C192A" Offset="1.5"/>
+                </LinearGradientBrush>
+            </Path.Fill>
+            <Path.Effect>
+                <DropShadowEffect BlurRadius="10" Color="Black" ShadowDepth="0" Opacity="0.3"/>
+            </Path.Effect>
+        </Path>
+        <Image Source="/Myself.SmartParking.Assets;component/Images/logo.png" Height="28" 
+            HorizontalAlignment="Left" Margin="20,0">
+            <Image.Effect>
+                <DropShadowEffect BlurRadius="5" Color="White" ShadowDepth="0" Opacity="0.3"/>
+            </Image.Effect>
+        </Image>
+
+        <TextBlock Text="朝夕教育 - 停车场门岗自动系统 v3.0" Grid.ColumnSpan="2" 
+                HorizontalAlignment="Left" VerticalAlignment="Center"
+                FontFamily="YouYuan" FontSize="15" Foreground="#C5E5E9"
+                Margin="90,0,0,0" FontWeight="Bold">
+            <TextBlock.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0" Color="#00F3FE"/>
+            </TextBlock.Effect>
+        </TextBlock>
+
+        <!--当前时间-->
+        <TextBlock Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" 
+                DataContext="{x:Static sys:DateTime.Now}"
+                VerticalAlignment="Center" Name="tb_datetime" Margin="100,0" Foreground="#1FDCF5">
+         <Run Text="{Binding Now,Mode=OneWay,StringFormat='yyyy-MM-dd HH:mm:ss'}" FontSize="17"
+              FontFamily="{StaticResource DigitalDisplay}"/>
+         <Run Text=" "/>
+         <Run Text="{Binding Now,Mode=OneWay,StringFormat='dddd',ConverterCulture=zh-CN}" 
+                 FontSize="14" FontWeight="Bold"/>
+        </TextBlock>
+
+        <Button Content="关闭系统" Style="{StaticResource NormalButtonStyle}" Grid.Column="2" Height="30"
+             VerticalAlignment="Center" Background="DarkRed" BorderBrush="#991FDCF5" BorderThickness="0"
+             HorizontalAlignment="Right" Foreground="#C5E5E9" Margin="10,0" Padding="10,2"
+             WindowChrome.IsHitTestVisibleInChrome="True"/>
+
+
+        <Grid Grid.Row="1" Margin="15,5,5,10">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <GroupBox Header="车辆入场" Style="{StaticResource GroupBoxStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="76*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+                    <Border BorderThickness="1" Margin="5,5,5,5" CornerRadius="8" BorderBrush="#6FFF" Grid.ColumnSpan="2">
+                        <Border.Background>
+                            <ImageBrush ImageSource="{Binding EnterSnapFull}" Stretch="Fill"/>
+                        </Border.Background>
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="20" ShadowDepth="0" Color="#00F3FE" Opacity="0.3"/>
+                        </Border.Effect>
+                    </Border>
+
+                    <Border Grid.Row="1"  CornerRadius="5" Background="#111FDCF5" Margin="5,5,5,5" Grid.ColumnSpan="2">
+                        <UniformGrid Rows="1" VerticalAlignment="Center" Margin="10,0">
+                            <CheckBox Content="&#xe628;" Style="{StaticResource StatusCheckBoxStyle}" 
+                                   IsChecked="True"/>
+                            <CheckBox Content="&#xe7e7;" Style="{StaticResource StatusCheckBoxStyle}" 
+                                   IsChecked="True"/>
+                            <CheckBox Content="&#xe6e7;" Style="{StaticResource StatusCheckBoxStyle}" 
+                                   IsChecked="True"/>
+                            <CheckBox Content="&#xe6e7;" Style="{StaticResource StatusCheckBoxStyle}" 
+                                   IsChecked="True"/>
+                            <CheckBox Content="&#xe9e2;" Style="{StaticResource StatusCheckBoxStyle}"/>
+                        </UniformGrid>
+                    </Border>
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="车辆出场" Grid.Row="1" Style="{StaticResource GroupBoxStyle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+                    <Border BorderThickness="1" Margin="5" CornerRadius="8" BorderBrush="#6FFF">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Myself.SmartParking.Assets;component/Images/covers/hua.jpg" Stretch="Fill"/>
+                        </Border.Background>
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="20" ShadowDepth="0" Color="#00F3FE" Opacity="0.3"/>
+                        </Border.Effect>
+                    </Border>
+
+                    <Border Grid.Row="1"  CornerRadius="5" Background="#111FDCF5" Margin="5">
+                        <UniformGrid Rows="1" VerticalAlignment="Center" Margin="10,0">
+                            <CheckBox Content="&#xe628;" Style="{StaticResource StatusCheckBoxStyle}" 
+                   IsChecked="True"/>
+                            <CheckBox Content="&#xe7e7;" Style="{StaticResource StatusCheckBoxStyle}" 
+                   IsChecked="True"/>
+                            <CheckBox Content="&#xe6e7;" Style="{StaticResource StatusCheckBoxStyle}" 
+                   IsChecked="True"/>
+                            <CheckBox Content="&#xe6e7;" Style="{StaticResource StatusCheckBoxStyle}" 
+                   IsChecked="True"/>
+                            <CheckBox Content="&#xe9e2;" Style="{StaticResource StatusCheckBoxStyle}"/>
+                        </UniformGrid>
+                    </Border>
+                </Grid>
+            </GroupBox>
+        </Grid>
+
+
+        <Grid Grid.Column="1" Grid.Row="1" Margin="5,5,15,10">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="260"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="180"/>
+            </Grid.ColumnDefinitions>
+
+            <GroupBox Header="车辆收费提示" Style="{StaticResource GroupBoxStyle}">
+                <Grid Margin="20,0,20,10" TextBlock.Foreground="#551FDCF5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="1.2*"/>
+                    </Grid.RowDefinitions>
+                    <Border Height="1" Background="#9900F7FF" VerticalAlignment="Bottom"/>
+                    <Border Height="1" Background="#9900F7FF" VerticalAlignment="Bottom" Grid.Row="2"/>
+                    <TextBlock Text="车辆信息" Foreground="#99C5E5E9" FontWeight="Bold"
+                            VerticalAlignment="Center"/>
+                    <TextBlock Text="收费信息" Foreground="#99C5E5E9" FontWeight="Bold" Grid.Row="2"
+                            VerticalAlignment="Center"/>
+                    <Border Background="Green" VerticalAlignment="Center" HorizontalAlignment="Right"
+                         Margin="5,0" CornerRadius="5" Grid.Column="3">
+                        <TextBlock Text="正常放行" Foreground="White" Margin="8,3" FontSize="11"/>
+                    </Border>
+
+                    <Grid Grid.Row="1" Margin="0,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Border Background="#111FDCF5" Grid.RowSpan="4" CornerRadius="5"/>
+                        <Border Background="#111FDCF5" Grid.RowSpan="4" Grid.Column="2" CornerRadius="5"/>
+                        <TextBlock Text="车牌照片" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center"
+                                Margin="0,5,0,0"/>
+                        <TextBlock Text="识别结果" Grid.Row="0" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Center"
+                                Margin="0,5,0,0"/>
+                        <TextBlock Text="车辆类型" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Text="入场时间" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Text="出场时间" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Text="停车时长" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                        <Border Width="130" Height="35" Grid.Column="1" HorizontalAlignment="Left"
+                             Grid.RowSpan="2" VerticalAlignment="Top" Margin="10,5,0,0"
+                             CornerRadius="5">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding SnapSmall}"/>
+                            </Border.Background>
+                        </Border>
+                        <UniformGrid Grid.Column="3" Rows="1" Grid.RowSpan="2" Height="35"
+                                 HorizontalAlignment="Left" Margin="10,3" VerticalAlignment="Top">
+                            <ToggleButton Content="苏" Style="{StaticResource LicenseItemButtonStyle}"
+                                       Name="tb_province"/>
+                            <ToggleButton Content="E" Style="{StaticResource LicenseItemButtonStyle}"/>
+                            <ToggleButton Content="0" Style="{StaticResource LicenseItemButtonStyle}"
+                                       Name="tb_number"/>
+                            <ToggleButton Content="5" Style="{StaticResource LicenseItemButtonStyle}"/>
+                            <ToggleButton Content="E" Style="{StaticResource LicenseItemButtonStyle}"/>
+                            <ToggleButton Content="V" Style="{StaticResource LicenseItemButtonStyle}"/>
+                            <ToggleButton Content="8" Style="{StaticResource LicenseItemButtonStyle}"/>
+                            <ToggleButton Content="-" Style="{StaticResource LicenseItemButtonStyle}"/>
+                        </UniformGrid>
+
+
+                        <TextBlock Text="临时车" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"
+                                Margin="10,0" Foreground="#CC1FDCF5" FontWeight="Bold" FontSize="13"/>
+                        <TextBlock Text="2024-02-06 20:00:00" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center"
+                                Margin="10,0" Foreground="#CC1FDCF5" FontWeight="Bold" FontSize="13"/>
+                        <TextBlock Text="2024-02-06 20:00:00" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" 
+                                Margin="10,0" Foreground="#CC1FDCF5" FontWeight="Bold" FontSize="13"/>
+                        <TextBlock Text="24小时" Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" 
+                                Margin="10,0" Foreground="#CC1FDCF5" FontWeight="Bold" FontSize="13"/>
+                    </Grid>
+
+                    <Grid Grid.Row="3" Margin="0,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Border Background="#111FDCF5" Grid.RowSpan="3" CornerRadius="5"/>
+                        <Border Background="#111FDCF5" Grid.RowSpan="3" Grid.Column="2" CornerRadius="5"/>
+                        <TextBlock Text="应收金额" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Text="微信支付" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Text="储值支付" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Text="其他支付" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Text="待支付" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Text="支付方式" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                        <TextBlock Text="100.00元" Grid.Column="1" VerticalAlignment="Center" 
+                                Margin="10,0" Foreground="#C5E5E9" FontWeight="Bold" FontSize="14"/>
+                        <TextBlock Text="60.40元" Grid.Column="3" VerticalAlignment="Center" 
+                                Margin="10,0" Foreground="#C5E5E9" FontWeight="Bold" FontSize="14"/>
+                        <TextBlock Text="0.00元" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"
+                                Margin="10,0" Foreground="#C5E5E9" FontWeight="Bold" FontSize="14"/>
+                        <TextBlock Text="0.00元" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center"
+                                Margin="10,0" Foreground="#C5E5E9" FontWeight="Bold" FontSize="14"/>
+                        <TextBlock Text="39.60元" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" 
+                                Margin="10,0" Foreground="#C5E5E9" FontWeight="Bold" FontSize="14"/>
+                        <TextBlock Text="微信扫码支付" Grid.Row="2" Grid.Column="3" VerticalAlignment="Center"
+                                Margin="10,0" Foreground="#C5E5E9" FontWeight="Bold" FontSize="14"/>
+                    </Grid>
+
+                    <Border Background="#111FDCF5" Grid.Row="3" CornerRadius="5" Height="33" 
+                         VerticalAlignment="Bottom">
+                        <StackPanel Orientation="Horizontal" TextBlock.Foreground="OrangeRed"
+                                 VerticalAlignment="Center" TextBlock.FontSize="14" TextBlock.FontWeight="Bold">
+                            <TextBlock Text="&#xe7ff;" FontFamily="{StaticResource Icons}" VerticalAlignment="Center"
+                                    Margin="5,0" FontSize="14"/>
+                            <TextBlock Text="车辆沪A59P65在场内转变了车型  查看详情>>" VerticalAlignment="Center"
+                                    Margin="5,0" FontSize="12"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </GroupBox>
+
+
+            <GroupBox Grid.Row="1" Grid.ColumnSpan="2" Margin="5"
+                    Style="{StaticResource GroupBoxStyle}" Header="车辆出入场记录">
+                <Grid Grid.Row="1" TextBlock.Foreground="#99C5E5E9">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="33"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Border Background="#111FDCF5" CornerRadius="8"/>
+                    <Grid TextBlock.FontWeight="Bold">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="70"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="序号" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Text="类型" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="车牌号" VerticalAlignment="Center" Grid.Column="2"/>
+                        <TextBlock Text="时间" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="3"/>
+                        <TextBlock Text="通道" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="4"/>
+                        <TextBlock Text="计费模式" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="5"/>
+                    </Grid>
+
+                    <ListBox ItemsSource="{Binding RecordList}" Grid.Row="1"
+                          Background="Transparent" BorderThickness="0" 
+                          ItemContainerStyle="{StaticResource NoramalListBoxItemStyle}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Height="30" Name="root" Background="Transparent"
+                                   TextBlock.Foreground="#44C5E5E9">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="70"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="70"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Index}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="入场" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1"/>
+                                    <TextBlock Text="鄂A66666" VerticalAlignment="Center" Grid.Column="2" FontWeight="Bold"/>
+                                    <TextBlock Text="2022-03-14 20:00:00" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="3" />
+                                    <TextBlock Text="东门1#入口" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="4" />
+                                    <TextBlock Text="临时车" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="6" />
+
+                                </Grid>
+                                <DataTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#111FDCF5" TargetName="root"/>
+                                    </Trigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </GroupBox>
+
+            <Border CornerRadius="5" Grid.Column="1" Background="#111FDCF5" Margin="5,10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border CornerRadius="5,5,0,0">
+                        <Border.Background>
+                            <ImageBrush ImageSource="{Binding CurrentUser.UserIcon}"
+                                     Stretch="UniformToFill"/>
+                        </Border.Background>
+                        <Border.Effect>
+                            <BlurEffect Radius="40"/>
+                        </Border.Effect>
+                        <Border.Clip>
+                            <RectangleGeometry Rect="0,0,170,200" RadiusX="5" RadiusY="5"/>
+                        </Border.Clip>
+                    </Border>
+
+                    <Border Width="50" Height="50" CornerRadius="5"
+                         Margin="0,0,5,0" BorderBrush="White" BorderThickness="1">
+                        <Border.Background>
+                            <ImageBrush ImageSource="{Binding CurrentUser.UserIcon}"/>
+                        </Border.Background>
+                    </Border>
+
+                    <TextBlock Text="{Binding CurrentUser.RealName}" Foreground="#C5E5E9"
+                            Grid.Row="1" HorizontalAlignment="Center"
+                            FontWeight="Bold"/>
+                    <TextBlock Text="[白班A职]" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Center"
+                            Foreground="#66C5E5E9"/>
+
+                    <Grid Grid.Row="3" Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Border Height="1" Background="{StaticResource SeperatorLineBrush}" Grid.Row="1" Grid.ColumnSpan="2"/>
+                        <Border Height="1" Background="{StaticResource SeperatorLineBrush}" Grid.Row="3" Grid.ColumnSpan="2"/>
+                        <Border Height="1" Background="{StaticResource SeperatorLineBrush}" Grid.Row="5" Grid.ColumnSpan="2"/>
+                        <Border Height="1" Background="{StaticResource SeperatorLineBrush}" Grid.Row="7" Grid.ColumnSpan="2"/>
+
+                        <Button Content="换岗登录" Grid.Row="0" Style="{StaticResource NormalButtonStyle}"
+                             Foreground="#9FFF" Background="Transparent" HorizontalAlignment="Stretch"/>
+                        <Button Content="管理后台" Grid.Row="0" Grid.Column="2" Style="{StaticResource NormalButtonStyle}"
+                             Foreground="#9FFF" Background="Transparent"
+                             Command="{Binding GotoManagerCommand}"/>
+                        <Button Content="手动放行" Grid.Row="2" Style="{StaticResource NormalButtonStyle}"
+                             Foreground="#9FFF" Background="Transparent"/>
+                        <Button Content="异常放行" Grid.Row="2" Grid.Column="2" Style="{StaticResource NormalButtonStyle}"
+                             Foreground="#9FFF" Background="Transparent"/>
+                        <Button Content="取消放行" Grid.Row="4" Style="{StaticResource NormalButtonStyle}"
+                             Foreground="#9FFF" Background="Transparent"/>
+                        <Button Content="移动支付" Grid.Row="4" Grid.Column="2" Style="{StaticResource NormalButtonStyle}"
+                             Foreground="#9FFF" Background="Transparent"/>
+                        <Button Content="网络检测" Grid.Row="6" Style="{StaticResource NormalButtonStyle}"
+                             Foreground="#9FFF" Background="Transparent"/>
+                        <Button Content="服务重启" Grid.Row="6" Grid.Column="2" Style="{StaticResource NormalButtonStyle}"
+                             Foreground="#9FFF" Background="Transparent"/>
+                        <Button Content="设备重置" Grid.Row="8" Style="{StaticResource NormalButtonStyle}"
+                             Foreground="#9FFF" Background="Transparent"/>
+                        <Button Content="临时限行" Grid.Row="8" Grid.Column="2" Style="{StaticResource NormalButtonStyle}"
+                             Foreground="#9FFF" Background="Transparent"/>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+
     </Grid>
 </UserControl>

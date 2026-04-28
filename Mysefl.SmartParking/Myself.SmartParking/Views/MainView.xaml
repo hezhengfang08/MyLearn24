@@ -91,14 +91,16 @@
         </Style>
 
     </Window.Resources>
-    <DockPanel>
-        <!--右侧菜单-->
+    <Grid>
+        <DockPanel>
+        <!--左侧菜单-->
         <Border BorderBrush="#EEE" BorderThickness="0,0,1,0">
             <Grid Width="200" DockPanel.Dock="Left">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition/>
-                </Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
 
                 <StackPanel Orientation="Horizontal" Margin="0,20" HorizontalAlignment="Center">
                     <Image Source="/Myself.SmartParking.Assets;component/Images/Logo.png" Width="36"/>
@@ -224,7 +226,37 @@
                         </HierarchicalDataTemplate>
                     </TreeView.ItemTemplate>
                 </TreeView>
-            </Grid>
+                    <Border Grid.Row="2" Height="140" CornerRadius="15" Margin="20,5,20,10"
+       BorderBrush="#F7F9FA" BorderThickness="1"
+       Background="White">
+                        <StackPanel VerticalAlignment="Bottom">
+                            <TextBlock Text="点击按钮，打开车辆出入监控页面" FontSize="11" Margin="20,0"
+                 TextWrapping="Wrap" TextAlignment="Center"
+                 Foreground="#999"/>
+                            <Button Content="打开出入监控" Style="{StaticResource NormalButtonStyle}"
+              Foreground="White" Height="33"
+              Margin="20,10" FontWeight="Bold"
+              Command="{Binding ShowMonitorCommand}">
+                                <Button.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="#2096F0" Offset="-0.2"/>
+                                        <GradientStop Color="#A723F0" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                        </StackPanel>
+                    </Border>
+                    <Image Source="/Myself.SmartParking.Assets;component/Images/camera.png"
+     Grid.Row="3" Width="60" VerticalAlignment="Top"
+     Margin="0,-10,0,0">
+                        <Image.Effect>
+                            <DropShadowEffect BlurRadius="5"
+                        Color="Gray"
+                        ShadowDepth="0"
+                        Opacity="0.4"/>
+                        </Image.Effect>
+                    </Image>
+                </Grid>
         </Border>
         <!--内容区域-->
 
@@ -267,7 +299,7 @@
                 Content="{Binding CurrentUser.UserIcon}"
                 IsChecked="{Binding IsDropdownAvatar}"
                 Name="tbtn_avatar" Cursor="Hand"/>
-                
+
                 <ToggleButton Content="{Binding CurrentUser.RealName}" 
                   ContentStringFormat="Hi! {0}"
                  VerticalAlignment="Center"
@@ -277,7 +309,7 @@
                  WindowChrome.IsHitTestVisibleInChrome="True"
                Style="{StaticResource UserInfoButtonStyle}">
                 </ToggleButton>
-               
+
 
 
 
@@ -520,4 +552,6 @@
 
         </Grid>
     </DockPanel>
+    <ContentControl p:RegionManager.RegionName="MonitorRegion"/>
+    </Grid>
 </Window>

@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Myself.SmartParking.ViewModels
@@ -24,6 +25,8 @@ namespace Myself.SmartParking.ViewModels
         public DelegateCommand ModifyPasswordCommand { get; set; }
         public DelegateCommand SwitchCommand { get; set; }
         public DelegateCommand<string> SetAvatarCommand { get; set; }
+
+        public DelegateCommand ShowMonitorCommand { get; set; }
         public bool IsDropdownAvatar { get; set; }
         IRegionManager _regionManager;
         IDialogService _dialogService;
@@ -75,6 +78,9 @@ namespace Myself.SmartParking.ViewModels
             SwitchCommand = new DelegateCommand(DoSwitch);
 
             SetAvatarCommand = new DelegateCommand<string>(DoSetAvatar);
+
+            ShowMonitorCommand = new DelegateCommand(DoShowMonitor);
+
             // 加载菜单
             eventAggregator.GetEvent<RefreshMenuEvent>()
                .Subscribe(() =>
@@ -238,6 +244,20 @@ namespace Myself.SmartParking.ViewModels
 
                 throw;
             }
+        }
+        private void DoShowMonitor()
+        {
+            // MonitorView加载出来
+            NavigationParameters nps = new NavigationParameters();
+            nps.Add("user", CurrentUser);
+            _regionManager.RequestNavigate("MonitorRegion", "MonitorView", nps);
+
+
+            var region = _regionManager.Regions["MonitorRegion"];
+            if (region == null) return;
+
+            var view = region.Views.FirstOrDefault();
+            VisualStateManager.GoToElementState((FrameworkElement)view, "ShowState", true);
         }
     }
 }
