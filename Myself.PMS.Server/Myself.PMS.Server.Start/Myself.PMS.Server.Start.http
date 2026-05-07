@@ -1,0 +1,6 @@
+@Myself.PMS.Server.Start_HostAddress = http://localhost:5021
+
+GET {{Myself.PMS.Server.Start_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SqlSugarCore" Version="5.1.4.214" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Myself.PMS.Server.Entities\Myself.PMS.Server.Entities.csproj" />
+    <ProjectReference Include="..\Myself.PMS.Server.IService\Myself.PMS.Server.IService.csproj" />
+  </ItemGroup>
+
+</Project>
