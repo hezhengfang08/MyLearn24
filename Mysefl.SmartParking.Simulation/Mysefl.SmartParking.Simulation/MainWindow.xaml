@@ -38,9 +38,31 @@
         <Button Content="触发相机" Grid.Row="2" Width="100" Height="100"
          Click="ButtonEnter_Click"/>
         <Button Content="触发相机" Grid.Row="2" Grid.Column="2" Width="100" Height="100"
-         Click="Button_Click"/>
+         Click="ButtonExit_Click"/>
 
-        <Border Background="#DDD" Width="200" Height="200"
-         Grid.Row="2" Grid.Column="4"/>
+        <!--抬杆动画对象-->
+        <Border Width="25" Height="60" Grid.Column="1" Grid.Row="2"
+        Background="Gray" HorizontalAlignment="Left"
+        Margin="20,30,0,0"/>
+        <Border Width="150" Height="10" Grid.Column="1" Grid.Row="2"
+        Background="Orange" HorizontalAlignment="Left">
+            <Border.RenderTransform>
+                <RotateTransform Angle="0" CenterX="32.5" CenterY="5" x:Name="rt1"/>
+            </Border.RenderTransform>
+        </Border>
+
+        <Border Width="25" Height="60" Grid.Column="3" Grid.Row="2"
+        Background="Gray" HorizontalAlignment="Left"
+        Margin="20,30,0,0"/>
+        <Border Width="150" Height="10" Grid.Column="3" Grid.Row="2"
+        Background="Orange" HorizontalAlignment="Left">
+            <Border.RenderTransform>
+                <RotateTransform Angle="0" CenterX="32.5" CenterY="5" x:Name="rt2"/>
+            </Border.RenderTransform>
+        </Border>
+
+
+        <Border Background="{Binding QRImage}" Width="200" Height="200"
+        Grid.Row="2" Grid.Column="4"/>
     </Grid>
 </Window>

@@ -52,6 +52,8 @@ namespace Myself.SmartParking
             containerRegistry.RegisterForNavigation<Views.Pages.AutoView>();
             containerRegistry.RegisterForNavigation<Views.Pages.RechargeView>();
             containerRegistry.RegisterForNavigation<Views.Pages.MonitorView>();
+            containerRegistry.RegisterForNavigation<Views.Pages.OrderView>();
+            containerRegistry.RegisterForNavigation<Views.Pages.ReportView>();
 
             containerRegistry.RegisterDialog<Views.Pages.Dialogs.ModifyMenuView>();
             containerRegistry.RegisterDialog<Views.Pages.Dialogs.ModifyUserView>();
@@ -61,7 +63,7 @@ namespace Myself.SmartParking
             containerRegistry.RegisterDialog<Views.Pages.Dialogs.ModifyDeviceView>();
             containerRegistry.RegisterDialog<Views.Pages.Dialogs.ModifyAutoView>();
             containerRegistry.RegisterDialog<Views.Pages.Dialogs.ModifyRechargeView>();
-
+            containerRegistry.RegisterDialog<Views.Pages.Dialogs.PrintView>();
         }
     }
 

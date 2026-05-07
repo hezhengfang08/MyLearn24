@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="QRCoder" Version="1.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="imgs\SUA-01.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

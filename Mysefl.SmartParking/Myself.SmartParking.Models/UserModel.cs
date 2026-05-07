@@ -58,7 +58,7 @@ namespace Myself.SmartParking.Models
                 });
             }
         }
-
+        public List<RoleModel> Roles { get; set; }
         public string RealName { get; set; }
         public string UserIcon { get; set; }
         public int? Age { get; set; }

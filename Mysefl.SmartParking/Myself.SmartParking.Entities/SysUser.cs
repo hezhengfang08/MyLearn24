@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Myself.SmartParking.Entities
 {
@@ -42,5 +43,7 @@ namespace Myself.SmartParking.Entities
         public DateTime? LastModifyTime { get; set; }
 
         public int? LastModifyId { get; set; }
+        [NotMapped]
+        public List<RoleUser> Roles { get; set; }
     }
 }

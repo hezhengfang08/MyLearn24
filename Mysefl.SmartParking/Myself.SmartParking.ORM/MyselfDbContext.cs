@@ -60,5 +60,7 @@ namespace Myself.SmartParking.ORM
         public virtual DbSet<BaseFeeMode> BaseFeeMode { get; set; }
      
         public virtual DbSet<MemberRecharge> MemberRecharge { get; set; }
+        public virtual DbSet<RecordInfo> RecordInfo { get; set; }
+        public virtual DbSet<OrderInfo> OrderInfo { get; set; }
     }
 }

@@ -17,5 +17,7 @@ namespace Myself.SmartParking.Entities
 
         [NotMapped]
         public SysRole SysRole { get; set; }
+        [NotMapped]
+        public SysUser User { get; set; }
     }
 }
