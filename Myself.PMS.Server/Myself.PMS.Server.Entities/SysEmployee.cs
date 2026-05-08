@@ -1,4 +1,6 @@
-﻿namespace Myself.PMS.Server.Entities
+﻿using SqlSugar;
+
+namespace Myself.PMS.Server.Entities
 {
     public class SysEmployee
     {

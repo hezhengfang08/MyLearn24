@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Myself.PMS.Client.IDAL\Myself.PMS.Client.IDAL.csproj" />
+  </ItemGroup>
+
 </Project>
