@@ -7,4 +7,18 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Fonts\AlibabaPuHuiTi-3-45-Light.ttf" />
+    <None Remove="Images\login_back.png" />
+    <None Remove="Images\login_img.png" />
+    <None Remove="Images\Logo_64.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\AlibabaPuHuiTi-3-45-Light.ttf" />
+    <Resource Include="Images\login_back.png" />
+    <Resource Include="Images\login_img.png" />
+    <Resource Include="Images\Logo_64.png" />
+  </ItemGroup>
+
 </Project>

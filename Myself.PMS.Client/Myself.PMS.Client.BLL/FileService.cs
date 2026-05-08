@@ -1,6 +1,8 @@
 ﻿using Myself.PMS.Client.Entities;
 using Myself.PMS.Client.IBLL;
 using Myself.PMS.Client.IDAL;
+using Myself.PMS.Client.Utils;
+using System.Collections.Generic;
 
 namespace Myself.PMS.Client.BLL
 {
@@ -14,7 +16,8 @@ namespace Myself.PMS.Client.BLL
         public IEnumerable<FileEntiy> GetUpgradeFiles()
         {
             string json = _fileAccess.GetUpgradeFiles();
-            return System.Text.Json.JsonSerializer.Deserialize<List<FileEntiy>>(json);
+            
+            return json.Deserialize<List<FileEntiy>>();  
         }
     }
 }

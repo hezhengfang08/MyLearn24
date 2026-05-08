@@ -1,7 +1,9 @@
-﻿namespace Myself.PMS.Client.IBLL
+﻿using Myself.PMS.Client.Entities;
+
+namespace Myself.PMS.Client.IBLL
 {
     public interface IUserService
     {
-        bool Login(string username, string password);
+        EmployeeEntity Login(string username, string password);
     }
 }
