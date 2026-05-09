@@ -7,12 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.26" />
     <PackageReference Include="SqlSugarCore" Version="5.1.4.214" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Myself.PMS.Server.IService\Myself.PMS.Server.IService.csproj" />
+    <ProjectReference Include="..\Myself.PMS.Server.Models\Myself.PMS.Server.Models.csproj" />
     <ProjectReference Include="..\Myself.PMS.Server.Service\Myself.PMS.Server.Service.csproj" />
   </ItemGroup>
 

@@ -1,7 +1,11 @@
-﻿namespace Myself.PMS.Server.IService
+﻿using Myself.PMS.Server.Entities;
+
+namespace Myself.PMS.Server.IService
 {
-    public interface IUserService
-    {
-        bool CheckLogin(string username, string password);
-    }
+
+        public interface IUserService
+        {
+            SysEmployee? CheckLogin(string username, string password);
+        }
+    
 }
