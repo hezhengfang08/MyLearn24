@@ -1,4 +1,5 @@
-﻿using Myself.PMS.Client.IDAL;
+﻿using Myself.PMS.Client.Entities;
+using Myself.PMS.Client.IDAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,24 @@ namespace Myself.PMS.Client.DAL
 {
     public class UserAccess : WebAccess, IUserAccess
     {
+        public UserAccess(GlobalValues globalValues) : base(globalValues)
+        {
+        }
         public string Login(string username, string password)
         {
-            string uri = $"/api/User?un={username}&pw={password}";
-            string result = this.Get(uri);
+            //string uri = $"/api/User?un={username}&pw={password}";
+            string uri = $"/api/User/login";
 
-            return result ;
+
+            Dictionary<string, HttpContent> FormData = new Dictionary<string, HttpContent>();
+
+            FormData.Add("un", new StringContent(username));
+            FormData.Add("pw", new StringContent(password));
+
+            var mp = this.GetFormData(FormData);
+            string result = this.Post(uri, mp);// Json字符串
+
+            return result;
         }
     }
 }

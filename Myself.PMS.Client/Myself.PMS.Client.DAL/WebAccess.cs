@@ -1,4 +1,5 @@
-﻿using Myself.PMS.Client.IDAL;
+﻿using Myself.PMS.Client.Entities;
+using Myself.PMS.Client.IDAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,13 @@ namespace Myself.PMS.Client.DAL
     public class WebAccess : IWebAccess
     {
         public string HostName { get; set; } =
-            "http://localhost:5273";
+             "http://localhost:5273";
+
+        GlobalValues _globalValues;
+        public WebAccess(GlobalValues globalValues)
+        {
+            _globalValues = globalValues;
+        }
 
         public string Get(string url)
         {
@@ -28,6 +35,45 @@ namespace Myself.PMS.Client.DAL
 
                 return result;
             }
+        }
+        public string Post(string url, HttpContent content)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(HostName);
+
+
+
+                var response = client
+                    .PostAsync(url, content)
+                    .GetAwaiter().GetResult();
+
+                string result = response.Content
+                    .ReadAsStringAsync()
+                    .GetAwaiter().GetResult();
+
+
+
+                return result;
+            }
+        }
+
+        public MultipartFormDataContent GetFormData(Dictionary<string, HttpContent> contents)
+        {
+            var postContent = new MultipartFormDataContent();
+            string boundary = string.Format("-------{0}", DateTime.Now.Ticks.ToString("x"));
+
+            postContent.Headers.Add("ContentType", $"multipart/form-data, boundary={boundary}");
+
+            // "{\"username\":\"admin\",\"password\":\"123456\"}"
+
+            foreach (var item in contents)
+            {
+                // 需要进行传递的键值对：比如 ：username=admin
+                postContent.Add(item.Value, item.Key);
+            }
+
+            return postContent;
         }
     }
 }

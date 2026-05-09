@@ -45,5 +45,6 @@ namespace Myself.PMS.Client.Entities
         public string lastModifyTime { get; set; }
 
         public int lastModifyId { get; set; }
+        public string Token { get; set; }
     }
 }
