@@ -11,6 +11,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Myself.PMS.Client.Upgrade.ViewModels
@@ -36,7 +37,7 @@ namespace Myself.PMS.Client.Upgrade.ViewModels
             {
                 var file = files[i - 1];
 
-                // Zhaoxi.PMS.Client.BLL.dll|UpgradeFiles|100
+                // Myself.PMS.Client.BLL.dll|UpgradeFiles|100
                 string[] info = file.Split("|");
                 int.TryParse(info[2], out int len);
                 FileList.Add(new FileModel
@@ -123,7 +124,7 @@ namespace Myself.PMS.Client.Upgrade.ViewModels
 
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    Process.Start("Zhaoxi.PMS.Client.Start.exe");
+                    Process.Start("Myself.PMS.Client.Start.exe");
                     Application.Current.Shutdown();
                 });
         });

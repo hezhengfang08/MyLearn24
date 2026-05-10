@@ -50,7 +50,7 @@
         <Button Width="40" Height="30" VerticalAlignment="Top"
                 HorizontalAlignment="Right" Margin="5,0" Name="btn"
                 Style="{StaticResource ControlButtonStyle}"
-                Click="btn_Click">
+               >
             <Path Data="M0,0 12 12M0 12 12 0" Stroke="{Binding ElementName=btn,Path=Foreground}"/>
         </Button>
 

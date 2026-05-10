@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myself.PMS.Client.Upgrade",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myself.PMS.Client.Utils", "Myself.PMS.Client.Utils\Myself.PMS.Client.Utils.csproj", "{8D548B57-C375-442A-90B0-EF44F97AD010}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myself.PMS.Client.MainModule", "Myself.PMS.Client.MainModule\Myself.PMS.Client.MainModule.csproj", "{DB365274-548D-4764-B265-F4F5E59D4BEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{8D548B57-C375-442A-90B0-EF44F97AD010}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D548B57-C375-442A-90B0-EF44F97AD010}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D548B57-C375-442A-90B0-EF44F97AD010}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB365274-548D-4764-B265-F4F5E59D4BEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB365274-548D-4764-B265-F4F5E59D4BEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB365274-548D-4764-B265-F4F5E59D4BEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB365274-548D-4764-B265-F4F5E59D4BEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -94,6 +100,7 @@ Global
 		{CEB5A52F-8A9C-48F6-A4A5-4E6D47F224A4} = {BF1B641C-3386-421B-8F64-312D93B51A81}
 		{916E0A1C-7AAF-4E41-979B-13744DB3C293} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{8D548B57-C375-442A-90B0-EF44F97AD010} = {BF1B641C-3386-421B-8F64-312D93B51A81}
+		{DB365274-548D-4764-B265-F4F5E59D4BEE} = {369CB01D-A1A7-72D2-AABC-3F0945D148A2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C08719B3-A2D1-4EF7-978C-2F7A43802004}

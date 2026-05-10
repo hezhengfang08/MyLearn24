@@ -1,10 +1,12 @@
 ﻿using Myself.PMS.Client.BLL;
 using Myself.PMS.Client.DAL;
+using Myself.PMS.Client.Entities;
 using Myself.PMS.Client.IBLL;
 using Myself.PMS.Client.IDAL;
 using Myself.PMS.Client.Start.Views;
 using Prism.DryIoc;
 using Prism.Ioc;
+using Prism.Modularity;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
@@ -24,15 +26,29 @@ namespace Myself.PMS.Client.Start
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterSingleton<GlobalValues>();
+
+            containerRegistry.RegisterDialogWindow<DialogWindow>();
+            containerRegistry.RegisterDialog<LoginView>();
             containerRegistry.RegisterDialog<LoginView>();
 
 
             containerRegistry.Register<IUserService, UserService>();
             containerRegistry.Register<IFileService, FileService>();
-
+            containerRegistry.Register<IMenuService, MenuService>();
 
             containerRegistry.Register<IUserAccess, UserAccess>();
             containerRegistry.Register<IFileAccess, FileAccess>();
+            containerRegistry.Register<IMenuAccess, MenuAccess>();
+        }
+
+        protected override IModuleCatalog CreateModuleCatalog()
+        {
+            return new DirectoryModuleCatalog
+            {
+                ModulePath = Environment.CurrentDirectory + "\\Modules"
+            };
+            //return base.CreateModuleCatalog();
         }
     }
 

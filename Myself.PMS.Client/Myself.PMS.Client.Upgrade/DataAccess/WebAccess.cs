@@ -30,9 +30,9 @@ namespace Myself.PMS.Client.Upgrade.DataAccess
             {
                 progress?.Invoke(ev.ProgressPercentage, ev.BytesReceived);
             };
-            // http://localhost:5273/api/File/download/none/Zhaoxi.PMS.Client.BLL.dll
+            // http://localhost:5273/api/File/download/none/Myself.PMS.Client.BLL.dll
             Debug.WriteLine("开始下载：" + web_file);
-            client.DownloadFileAsync(new Uri($"http://localhost:5273/api/File/download/{web_file}"),
+            client.DownloadFileAsync(new Uri($"https://localhost:7299/api/File/download/{web_file}"),
                 local_file);
         }
     }

@@ -52,8 +52,12 @@ namespace Myself.PMS.Client.Start.ViewModels
             get { return _errorInfo; }
             set { SetProperty<string>(ref _errorInfo, value); }
         }
+
+
         public DelegateCommand LoginCommand { get; set; }
+
         public DelegateCommand<object> LoadedCommand { get; set; }
+
 
         IUserService _userService;
         GlobalValues _globalValues;
@@ -62,9 +66,8 @@ namespace Myself.PMS.Client.Start.ViewModels
         {
             _userService = userService;
             _globalValues = globalValues;
+
             LoginCommand = new DelegateCommand(DoLogin);
-
-
             LoadedCommand = new DelegateCommand<object>(obj =>
             {
                 Task.Run(async () =>
@@ -111,23 +114,23 @@ namespace Myself.PMS.Client.Start.ViewModels
                         }
                     }
                     // 服务器拿到文件列表中的文件都得下载
-                    if (update_file.Count > 0)
-                    {
-                        // 启动更新程序，并且将更新文件列表传给它
-                        Process.Start("Myself.PMS.Client.Upgrade.exe", update_file);
-                        // 
+                    //if (update_file.Count > 0)
+                    //{
+                    //    // 启动更新程序，并且将更新文件列表传给它
+                    //    Process.Start("Myself.PMS.Client.Upgrade.exe", update_file);
+                    //    // 
 
-                        // 下载完成进行服务文件列表的保存（Json序列化）
-                        // 这个逻辑需要在Upgrade.exe进程里处理，判断正常更新完成后写入
-                        //json_str = System.Text.Json.JsonSerializer.Serialize(update_file);
-                        //File.WriteAllText("upgrade_temp.json", json_str);
+                    //    // 下载完成进行服务文件列表的保存（Json序列化）
+                    //    // 这个逻辑需要在Upgrade.exe进程里处理，判断正常更新完成后写入
+                    //    //json_str = System.Text.Json.JsonSerializer.Serialize(update_file);
+                    //    //File.WriteAllText("upgrade_temp.json", json_str);
 
-                        Application.Current.Dispatcher.Invoke(new Action(() =>
-                        {
-                            //Application.Current.Shutdown();
-                            System.Environment.Exit(0);// 结束进程
-                        }));
-                    }
+                    //    Application.Current.Dispatcher.Invoke(new Action(() =>
+                    //    {
+                    //        //Application.Current.Shutdown();
+                    //        System.Environment.Exit(0);// 结束进程
+                    //    }));
+                    //}
 
 
                     // pied pi :  提示一个Bug：
@@ -149,6 +152,8 @@ namespace Myself.PMS.Client.Start.ViewModels
                     });
                 });
             });
+
+
         }
 
 

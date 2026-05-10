@@ -11,7 +11,8 @@ namespace Myself.PMS.Client.DAL
     public class WebAccess : IWebAccess
     {
         public string HostName { get; set; } =
-             "http://localhost:5273";
+             //"http://localhost:7299";
+        "https://localhost:7299";
 
         GlobalValues _globalValues;
         public WebAccess(GlobalValues globalValues)
@@ -25,6 +26,10 @@ namespace Myself.PMS.Client.DAL
             {
                 client.BaseAddress = new Uri(HostName);
 
+                // 请求的Token数据带上
+                if (!string.IsNullOrEmpty(_globalValues.Token))
+                    client.DefaultRequestHeaders.Authorization =
+                        new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _globalValues.Token);
                 var response = client
                     .GetAsync(url)
                     .GetAwaiter().GetResult();
@@ -42,7 +47,10 @@ namespace Myself.PMS.Client.DAL
             {
                 client.BaseAddress = new Uri(HostName);
 
-
+                // 请求的Token数据带上
+                if (!string.IsNullOrEmpty(_globalValues.Token))
+                    client.DefaultRequestHeaders.Authorization =
+                        new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _globalValues.Token);
 
                 var response = client
                     .PostAsync(url, content)

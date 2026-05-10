@@ -11,6 +11,7 @@
     <None Remove="Fonts\AlibabaPuHuiTi-3-45-Light.ttf" />
     <None Remove="Fonts\iconfont.ttf" />
     <None Remove="Fonts\SmileySans-Oblique.ttf" />
+    <None Remove="Images\002m.jpg" />
     <None Remove="Images\login_back.png" />
     <None Remove="Images\login_img.png" />
     <None Remove="Images\Logo_64.png" />
@@ -20,6 +21,7 @@
     <Resource Include="Fonts\AlibabaPuHuiTi-3-45-Light.ttf" />
     <Resource Include="Fonts\iconfont.ttf" />
     <Resource Include="Fonts\SmileySans-Oblique.ttf" />
+    <Resource Include="Images\002m.jpg" />
     <Resource Include="Images\login_back.png" />
     <Resource Include="Images\login_img.png" />
     <Resource Include="Images\Logo_64.png" />

@@ -1,18 +1,74 @@
-﻿using Prism.Services.Dialogs;
+﻿using Myself.PMS.Client.IBLL;
+using Myself.PMS.Client.Start.Models;
+using Prism.Commands;
+using Prism.Regions;
+using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace Myself.PMS.Client.Start.ViewModels
 {
     public class MainViewModel
     {
-        public MainViewModel(IDialogService dialogService)
+        public List<MenuModel> Menus { get; set; } =
+           new List<MenuModel>();
+        private Entities.MenuEntity[] menus;
+
+        Entities.EmployeeEntity _currentUser;
+        IRegionManager _regionManager;
+        IMenuService _menuService;
+        public MainViewModel(IDialogService dialogService, IRegionManager regionManager, IMenuService menuService)
         {
+            _regionManager = regionManager;
+            _menuService = menuService; 
             // 打开登录弹窗
-            dialogService.ShowDialog("LoginView");
+            // 打开登录弹窗
+            dialogService.ShowDialog("LoginView", result =>
+            {
+                if (result.Result != ButtonResult.OK)
+                {
+                    Application.Current.Shutdown();
+                }
+                _currentUser = result.Parameters.GetValue<Entities.EmployeeEntity>("user");
+            });
+
+            PageSwitchCommand = new DelegateCommand<string>(DoPageSwitch);
+            WorkbenchCommand = new DelegateCommand(ShowWorkbench);
+            // 获取出所需要的第一级菜单信息
+            menus = menuService.GetAllMenus().ToArray();
+            foreach (var me in menus.Where(m => m.ParentId == "0"))
+            {
+                Menus.Add(new MenuModel { MenuId = me.MenuId, MenuHeader = me.MenuHeader });
+            }
+            if (menus.Count() > 0)
+            {
+                Menus[0].IsSelected = true;
+            }
         }
+        private void ShowWorkbench()
+        {
+            NavigationParameters nps = new NavigationParameters();
+            nps.Add("user", _currentUser);
+            // 页面Loaded时触发
+            _regionManager.RequestNavigate("MainRegion", "DashboardView", nps);
+        }
+
+        private void DoPageSwitch(string id)
+        {
+            // IRegionManager
+            // 默认需要导航Dashboard页面显示
+            if (id == "0")
+                ShowWorkbench();
+            else
+            {
+            }
+        }
+        public DelegateCommand WorkbenchCommand { get; set; }
+        public DelegateCommand<string> PageSwitchCommand { get; set; }
     }
 }
