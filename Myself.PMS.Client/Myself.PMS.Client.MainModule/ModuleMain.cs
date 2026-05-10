@@ -13,7 +13,11 @@ namespace Myself.PMS.Client.MainModule
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
+        
             containerRegistry.RegisterForNavigation<Views.DashboardView>();
+            containerRegistry.RegisterForNavigation<Views.PageView>();
+
+            containerRegistry.RegisterDialog<Views.Dialogs.ModifyPasswordView>();
         }
     }
 

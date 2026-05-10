@@ -55,6 +55,24 @@ namespace Myself.PMS.Server.Start.Controllers
         {
             return Ok("Zhaoxi");
         }
+        [HttpPost("update_pwd")]
+        [Authorize]
+        public ActionResult UpdatePassword([FromForm] int id, [FromForm] string opd, [FromForm] string npd)
+        {
+            Result<bool> result = new Result<bool>();
+            try
+            {
+                _userService.UpdatePassword(id, opd, npd);
+                result.Data = true;
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+
+            return Ok(result);
+        }
     }
 }
 

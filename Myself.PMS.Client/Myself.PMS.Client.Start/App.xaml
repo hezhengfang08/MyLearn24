@@ -8,6 +8,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Myself.PMS.Client.Assets;component/Styles/ButtonStyles.xaml"/>
                 <ResourceDictionary Source="/Myself.PMS.Client.Assets;component/Styles/TextBoxStyles.xaml"/>
+                <ResourceDictionary Source="/Myself.PMS.Client.Assets;component/Styles/ViewTemplates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <FontFamily x:Key="AliFont">/Myself.PMS.Client.Assets;component/Fonts/AlibabaPuHuiTi-3-45-Light.ttf#阿里巴巴普惠体 3.0 45 Light</FontFamily>

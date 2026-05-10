@@ -29,6 +29,18 @@ namespace Myself.PMS.Client.BLL
             //将Entity -》  Model     如果这样处理的话，需要将所有Model独立到一个程序集中
             return result.Data;
         }
+
+        public bool UpdatePassword(int id, string opd, string npd)
+        {
+            string json = _userAccess.UpdatePassword(id, opd, npd);
+            Result<bool> result = json.Deserialize<Result<bool>>(   );
+            if (result.State != 200)
+                throw new Exception(result.ExceptionMessage);
+
+
+            return result.Data;
+        }
+
         public EmployeeEntity Login(string username, string password, int test)
         {
             return null;

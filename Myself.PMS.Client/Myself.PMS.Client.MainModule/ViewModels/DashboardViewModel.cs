@@ -1,7 +1,10 @@
 ﻿using Myself.PMS.Client.MainModule.Models;
+using Prism.Commands;
 using Prism.Regions;
+using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,8 +21,11 @@ namespace Myself.PMS.Client.MainModule.ViewModels
 
         public UserModel CurrentUser { get; set; } = new UserModel();
 
+        public DelegateCommand ModifyPasswordCommand { get; set; }
 
-        public DashboardViewModel()
+        IDialogService _dialogService;
+
+        public DashboardViewModel(IDialogService dialogService)
         {
             MainDatas.Add(new DataModel()
             {
@@ -84,15 +90,30 @@ namespace Myself.PMS.Client.MainModule.ViewModels
                 Header = "垃圾处理费",
                 Amount = 147.18
             });
+            _dialogService = dialogService;
+            ModifyPasswordCommand = new DelegateCommand(DoModityPassword);
         }
 
+        private void DoModityPassword()
+        {
+            DialogParameters dps = new DialogParameters();
+            dps.Add("id", CurrentUser.UserId);
+            dps.Add("pwd", CurrentUser.Password);
+            _dialogService.ShowDialog("ModifyPasswordView", dps,
+                result =>
+                {
+                    // 逻辑等于  退出登录   然后进行重新登录
+                    Process.Start("Zhaoxi.PMS.Client.Start.exe");
+                    System.Environment.Exit(0);
+                });
+        }
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             Entities.EmployeeEntity _currentUser = navigationContext.Parameters
                 .GetValue<Entities.EmployeeEntity>("user");
             CurrentUser.UserId = _currentUser.eId;
             CurrentUser.RealName = _currentUser.realName;
-            CurrentUser.Avatar = _currentUser.eIcon;
+            CurrentUser.Avatar = "https://localhost:7299/api/File/img/" + _currentUser.eIcon;
             CurrentUser.Password = _currentUser.password;
         }
 

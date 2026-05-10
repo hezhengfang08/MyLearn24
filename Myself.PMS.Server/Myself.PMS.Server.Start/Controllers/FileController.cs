@@ -40,8 +40,54 @@ namespace Myself.PMS.Server.Start.Controllers
             // 最终返回文件对象
             return File(fs, type, fileDownloadName: file);
         }
-    }
+    
 
+    // http://localhost:5273/api/File/img/002m.jpg
+        [HttpGet("img/{img}")]
+        public IActionResult GetImage([FromRoute(Name = "img")] string imgPath)
+        {
+            var root = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+            string rootPath = Path.Combine(root, @"WebFiles\UserAvatars");
+            //获取图片的返回类型
+            var contentTypDict = new Dictionary<string, string> {
+                {"jpg","image/jpeg"},
+                {"jpeg","image/jpeg"},
+                {"jpe","image/jpeg"},
+                {"png","image/png"},
+                {"gif","image/gif"},
+                {"ico","image/x-ico"},
+                {"tif","image/tiff"},
+                {"tiff","image/tiff"},
+                {"fax","image/fax"},
+                {"wbmp","image/nd.wap.wbmp"},
+                {"rp","imagend.rn-realpix"}
+            };
+            var contentTypeStr = "image/jpeg";
+
+            var imgTypeSplit = imgPath.Split('.');
+            var imgType = imgTypeSplit[imgTypeSplit.Length - 1].ToLower();
+            //未知的图片类型
+            if (contentTypDict.ContainsKey(imgType))
+            {
+                contentTypeStr = contentTypDict[imgType];
+            }
+
+            string filePath = Path.Combine(rootPath, imgPath);
+            //图片不存在
+            if (!new FileInfo(filePath).Exists)
+            {
+                return NotFound();
+            }
+            //返回原图
+            using (var sw = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                var bytes = new byte[sw.Length];
+                sw.Read(bytes, 0, bytes.Length);
+                sw.Close();
+                return new FileContentResult(bytes, contentTypeStr);
+            }
+        }
+    }
     internal class ResFileStream : FileStream
     {
         public ResFileStream(string path, FileMode mode, FileAccess access) : base(path, mode, access) { }

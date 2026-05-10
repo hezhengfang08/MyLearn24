@@ -66,6 +66,12 @@ namespace Myself.PMS.Client.Start.ViewModels
                 ShowWorkbench();
             else
             {
+                // 这里根据id进行子菜单的获取
+                var ms = menus.Where(m => m.ParentId == id).ToList();
+                NavigationParameters nps = new NavigationParameters();
+                nps.Add("menu", ms);
+                // 页面Loaded时触发
+                _regionManager.RequestNavigate("MainRegion", "PageView", nps);
             }
         }
         public DelegateCommand WorkbenchCommand { get; set; }
