@@ -17,9 +17,9 @@ namespace Myself.PMS.Client.BLL
         {
             _menuAccess = menuAccess;
         }
-        public IEnumerable<MenuEntity> GetAllMenus()
+        public IEnumerable<MenuEntity> GetAllMenus(string key)
         {
-            string json = _menuAccess.GetAllMenus();
+            string json = _menuAccess.GetAllMenus(key);
             var result = json.Deserialize<Result<MenuEntity[]>>();
             if (result == null)
                 throw new Exception("菜单数据获取失败!");

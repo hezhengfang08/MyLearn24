@@ -14,9 +14,10 @@ namespace Myself.PMS.Client.DAL
         {
         }
 
-        public string GetAllMenus()
+        public string GetAllMenus(string key)
         {
-            string url = "/api/Menu/all";
+            key = string.IsNullOrEmpty(key) ? "none" : key;
+            string url = $"/api/Menu/all/{key}";
             return this.Get(url);
         }
     }

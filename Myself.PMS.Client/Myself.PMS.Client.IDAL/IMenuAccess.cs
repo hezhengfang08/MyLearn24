@@ -8,6 +8,6 @@ namespace Myself.PMS.Client.IDAL
 {
     public interface IMenuAccess
     {
-        string GetAllMenus();
+        string GetAllMenus(string key);
     }
 }

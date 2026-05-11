@@ -41,7 +41,7 @@ namespace Myself.PMS.Client.Start.ViewModels
             WorkbenchCommand = new DelegateCommand(ShowWorkbench);
             // 获取出所需要的第一级菜单信息
             menus = menuService.GetAllMenus().ToArray();
-            foreach (var me in menus.Where(m => m.ParentId == "0"))
+            foreach (var me in menus.Where(m => m.ParentId == "-1"))
             {
                 Menus.Add(new MenuModel { MenuId = me.MenuId, MenuHeader = me.MenuHeader });
             }

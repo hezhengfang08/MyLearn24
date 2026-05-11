@@ -9,6 +9,6 @@ namespace Myself.PMS.Client.IBLL
 {
     public interface IMenuService
     {
-        IEnumerable<MenuEntity> GetAllMenus();
+        IEnumerable<MenuEntity> GetAllMenus(string key = "");
     }
 }
