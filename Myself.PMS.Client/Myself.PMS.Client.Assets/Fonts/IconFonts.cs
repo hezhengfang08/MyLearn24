@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Myself.PMS.Client.Assets.Fonts
 {
-    public class IconFonts
+    public static class IconFonts
     {
         public static List<string> All { get; set; } = new List<string>
         {

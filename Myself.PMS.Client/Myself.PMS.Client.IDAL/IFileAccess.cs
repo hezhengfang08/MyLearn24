@@ -2,6 +2,8 @@
 {
     public interface IFileAccess : IWebAccess
     {
-        string GetUpgradeFiles();
+        string GetUpgradeFiles(string key);
+
+        void UploadFile(string file, string save_path, Action<int> progress, Action completed);
     }
 }

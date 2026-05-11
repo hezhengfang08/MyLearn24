@@ -13,11 +13,22 @@ namespace Myself.PMS.Client.BLL
         {
             _fileAccess = fileAccess;
         }
-        public IEnumerable<FileEntiy> GetUpgradeFiles()
+        public IEnumerable<FileEntiy> GetUpgradeFiles(string key = "")
         {
-            string json = _fileAccess.GetUpgradeFiles();
-            
-            return json.Deserialize<List<FileEntiy>>();  
+            string json = _fileAccess.GetUpgradeFiles(key);
+            var result = json.Deserialize<Result<FileEntiy[]>>();
+
+            if (result == null)
+                throw new Exception("文件数据获取失败!");
+            if (result.State != 200)
+                throw new Exception(result.ExceptionMessage);
+
+            return result.Data;
+        }
+
+        public void UploadFile(string file, string filePath, Action<int> prograssChanged, Action completed)
+        {
+            _fileAccess.UploadFile(file, filePath, prograssChanged, completed);
         }
     }
 }

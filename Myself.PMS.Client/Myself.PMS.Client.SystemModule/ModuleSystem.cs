@@ -16,6 +16,8 @@ namespace Myself.PMS.Client.SystemModule
             containerRegistry.RegisterForNavigation<Views.MenuView>();
 
             containerRegistry.RegisterDialog<Views.Dialogs.ModifyMenuView>();
+
+            containerRegistry.RegisterDialog<Views.UploadView>();
         }
     }
 

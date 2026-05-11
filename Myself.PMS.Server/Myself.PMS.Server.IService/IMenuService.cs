@@ -10,5 +10,8 @@ namespace Myself.PMS.Server.IService
     public interface IMenuService
     {
         IEnumerable<MenuEntity> GetAllMenus(string key);
+        int Update(MenuEntity menu);
+
+        int Delete(string id);
     }
 }

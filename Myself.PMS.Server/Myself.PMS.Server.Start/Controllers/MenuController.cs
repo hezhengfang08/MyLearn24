@@ -40,5 +40,40 @@ namespace Myself.PMS.Server.Start.Controllers
             }
             return Ok(result);
         }
+        [HttpPost("update")]
+        [Authorize]
+        public ActionResult Update(MenuEntity menu)
+        {
+            Result<int> result = new Result<int>();
+            try
+            {
+                var count = _menuService.Update(menu);
+                result.Data = count;
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
+
+        [HttpGet("delete/{id}")]
+        [Authorize]
+        public ActionResult DeleteMenu([FromRoute] string id)
+        {
+            Result<int> result = new Result<int>();
+            try
+            {
+                var count = _menuService.Delete(id);
+                result.Data = count;
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
     }
 }

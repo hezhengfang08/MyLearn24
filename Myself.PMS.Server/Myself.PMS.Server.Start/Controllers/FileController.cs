@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Http.Headers;
+using Myself.PMS.Server.Entities;
 using Myself.PMS.Server.IService;
+using Myself.PMS.Server.Models;
+using System.Net.Http.Headers;
 
 namespace Myself.PMS.Server.Start.Controllers
 {
@@ -14,10 +16,22 @@ namespace Myself.PMS.Server.Start.Controllers
         {
             _fileService = fileService;
         }
-        [HttpGet]
-        public ActionResult Get()
+        [HttpGet("list/{key}")]
+        public ActionResult Get([FromRoute] string key)
         {
-            return Ok(_fileService.GetUpgradeFiles());
+            Result<UpgradeFileEntity[]> result = new Result<UpgradeFileEntity[]>();
+            try
+            {
+                key = key == "none" ? "" : key;
+                var fs = _fileService.GetUpgradeFiles(key);
+                result.Data = fs.ToArray();
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
         }
 
         // http://localhost:5000/api/file/download/modules/dll_name

@@ -1,5 +1,4 @@
-﻿using Prism.Services.Dialogs;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,25 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Myself.PMS.Client.Start.Views
+namespace Myself.PMS.Client.SystemModule.Views
 {
     /// <summary>
-    /// DialogWindow.xaml 的交互逻辑
+    /// UploadView.xaml 的交互逻辑
     /// </summary>
-    public partial class DialogWindow : Window, IDialogWindow
+    public partial class UploadView : UserControl
     {
-        public DialogWindow()
+        public UploadView()
         {
             InitializeComponent();
-        }
-
-        public IDialogResult Result { get; set; }
-
-        private void CloseBinding_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }

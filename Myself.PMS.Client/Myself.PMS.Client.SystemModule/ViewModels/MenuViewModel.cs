@@ -11,6 +11,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Myself.PMS.Client.SystemModule.ViewModels
 {
@@ -105,7 +106,23 @@ namespace Myself.PMS.Client.SystemModule.ViewModels
 
         public override void DoDelete(object model)
         {
-            base.DoDelete(model);
+            try
+            {
+                if (MessageBox.Show("是否确定删除此项？", "提示", MessageBoxButton.YesNo) ==
+                    MessageBoxResult.Yes)
+                {
+                    // 物理删除
+                    _menuService.DeleteMenu((model as MenuModel).MenuId);
+
+                    MessageBox.Show("删除完成！", "提示");
+
+                    this.Refresh();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "提示");
+            }
         }
     }
 }

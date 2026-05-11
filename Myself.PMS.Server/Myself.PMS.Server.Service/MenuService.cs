@@ -41,5 +41,49 @@ namespace Myself.PMS.Server.Service
 
             return ms;
         }
+
+        public int Update(MenuEntity menu)
+        {
+            int count = 0;
+            if (string.IsNullOrEmpty(menu.MenuId))
+            {
+                // 新增的逻辑
+                var max = _client.Queryable<MenuEntity>()
+                                .Where(m => m.ParentId == menu.ParentId)
+                                .Max(m => m.MenuId);
+                if (max == null)
+                {
+                    menu.MenuId = menu.ParentId + "001";
+                }
+                else
+                {
+                    menu.MenuId = (int.Parse(max)+ 1   ).ToString();
+                }
+                count = _client.Insertable(menu).ExecuteCommand();
+            }
+            else
+            {
+                var menuEntity = _client.Queryable<MenuEntity>()
+                                        .Where(m => m.MenuId == menu.MenuId)
+                                        .ToList().FirstOrDefault();
+                if (menuEntity == null)
+                    throw new Exception("没有匹配的菜单的信息");
+
+                menuEntity.MenuHeader = menu.MenuHeader;
+                menuEntity.ParentId = menu.ParentId;
+                menuEntity.TargetView = menu.TargetView;
+                menuEntity.MenuIcon = menu.MenuIcon;
+                count = _client.Updateable(menuEntity).ExecuteCommand();
+            }
+
+            return count;
+        }
+
+        public int Delete(string id)
+        {
+            // 根据主键删除
+            return _client.Deleteable<MenuEntity>()
+                .In(id).ExecuteCommand();
+        }
     }
 }

@@ -16,9 +16,12 @@ namespace Myself.PMS.Server.Service
         {
             _sqlSugarClient = sqlSugarClient;
         }
-        public IEnumerable<UpgradeFileEntity> GetUpgradeFiles()
+        public IEnumerable<UpgradeFileEntity> GetUpgradeFiles(string key)
         {
-            return _sqlSugarClient.Queryable<UpgradeFileEntity>().ToList();
+            return _sqlSugarClient.Queryable<UpgradeFileEntity>()
+                            .Where(f => string.IsNullOrEmpty(key) ||
+                                        f.FileName.Contains(key))
+                            .ToList();
         }
     }
 }

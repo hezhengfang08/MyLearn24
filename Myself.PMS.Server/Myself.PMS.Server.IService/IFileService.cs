@@ -9,7 +9,7 @@ namespace Myself.PMS.Server.IService
 {
     public interface IFileService
     {
-        IEnumerable<UpgradeFileEntity> GetUpgradeFiles();
+        IEnumerable<UpgradeFileEntity> GetUpgradeFiles(string key);
 
     }
 }
