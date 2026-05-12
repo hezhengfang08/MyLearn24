@@ -10,8 +10,9 @@ namespace Myself.PMS.Server.Entities
     [SugarTable("upgrade_files")]
     public class UpgradeFileEntity
     {
-        [SugarColumn(ColumnName = "file_id")]
+        [SugarColumn(ColumnName = "file_id", IsPrimaryKey = true, IsIdentity = true)]
         public int FileId { get; set; }
+
         [SugarColumn(ColumnName = "file_name")]
         public string FileName { get; set; }
         [SugarColumn(ColumnName = "file_md5")]
@@ -23,6 +24,6 @@ namespace Myself.PMS.Server.Entities
         [SugarColumn(ColumnName = "state")]
         public int state { get; set; }
         [SugarColumn(ColumnName = "length")]
-        public int Length { get; set; }
+        public long Length { get; set; }
     }
 }

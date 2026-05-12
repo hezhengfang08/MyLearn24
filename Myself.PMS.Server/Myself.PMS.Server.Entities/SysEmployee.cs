@@ -45,5 +45,7 @@ namespace Myself.PMS.Server.Entities
 
         [SugarColumn(IsIgnore = true)]
         public string Token { get; set; }
+        [SugarColumn(IsIgnore = true)]
+        public List<RoleUser> Roles { get; set; }
     }
 }

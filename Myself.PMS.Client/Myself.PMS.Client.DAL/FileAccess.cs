@@ -1,5 +1,6 @@
 ﻿using Myself.PMS.Client.Entities;
 using Myself.PMS.Client.IDAL;
+using System.ComponentModel;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -12,6 +13,21 @@ namespace Myself.PMS.Client.DAL
         {
         }
 
+        public string DeleteFile(string file_name)
+        {
+            string uri = "/api/file/delete";
+
+
+            Dictionary<string, HttpContent> FormData = new Dictionary<string, HttpContent>();
+
+            FormData.Add("fileName", new StringContent(file_name));
+
+            var mp = this.GetFormData(FormData);
+            string result = this.Post(uri, mp);// Json字符串
+
+            return result;
+        }
+
         public string GetUpgradeFiles(string key)
         {
             key = string.IsNullOrEmpty(key) ? "none" : key;
@@ -19,7 +35,6 @@ namespace Myself.PMS.Client.DAL
 
             return this.Get(uri);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -27,9 +42,10 @@ namespace Myself.PMS.Client.DAL
         /// <param name="save_path">上传下载的时候，文件存放的相对路径（主程序）</param>
         /// <param name="progress">上传进度变化回调</param>
         /// <param name="completed">上传守成后的回调</param>
-        public void UploadFile(string file, string save_path, Action<int> progress, Action completed)
+        public void UploadFile(string file, string save_path,
+            Action<int> progress, Action<AsyncCompletedEventArgs> completed)
         {
-            string uri = "";
+            string uri = "/api/file/upload";
 
             // 地址参数
             Dictionary<string, object> datas = new Dictionary<string, object>();

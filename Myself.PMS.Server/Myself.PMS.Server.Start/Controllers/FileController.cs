@@ -101,7 +101,96 @@ namespace Myself.PMS.Server.Start.Controllers
                 return new FileContentResult(bytes, contentTypeStr);
             }
         }
+
+        [HttpPost("upload")]
+        //[Authorize]
+        public IActionResult Upload(
+           [FromForm] IFormCollection formCollection,// 用来传递文件
+           [FromHeader] string md5,//计算文件的MD5值    进行标记
+           [FromHeader] string save_path)// 文件需要存放的子目录   .\    Modules
+        {
+            Result<long> result = new Result<long>();
+            try
+            {
+                FormFileCollection filelist = (FormFileCollection)formCollection.Files;
+                if (filelist.Count > 0)
+                {
+                    // 文件名称
+                    string fileName = filelist[0].FileName;
+
+                    var root = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+                    string targetPath = Path.Combine(root, "WebFiles", "UpgradeFiles");
+                    if (!string.IsNullOrEmpty(save_path) && save_path != ".\\")
+                        targetPath = Path.Combine(targetPath, save_path);
+
+                    DirectoryInfo di = new DirectoryInfo(targetPath);
+                    if (!di.Exists) di.Create();
+
+
+
+
+                    using (FileStream fs = System.IO.File.Create(Path.Combine(targetPath, fileName)))
+                    {
+                        // 复制文件
+                        filelist[0].CopyToAsync(fs).GetAwaiter().GetResult();
+                        // 清空缓冲区数据
+                        fs.Flush();
+                    }
+
+
+
+                    // 更新或新增到数据库
+                    UpgradeFileEntity upgradeFile = new UpgradeFileEntity
+                    {
+                        FileName = fileName,
+                        FileMd5 = md5,
+                        FilePath = save_path,
+                        UploadTime = DateTime.Now,
+                        Length = filelist[0].Length
+                    };
+
+                    result.Data = _fileService.AddOrUpdate(upgradeFile);
+                }
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
+
+        [HttpPost("delete")]
+        //[Authorize]
+        public ActionResult DeleteFile([FromForm] string fileName)
+        {
+            Result<int> result = new Result<int>();
+            try
+            {
+                var file = _fileService.GetFileByName(fileName);
+                result.Data = _fileService.Delete(fileName);// 删除数据库记录，文件
+
+                // 删除存放文件
+                //file.FilePath;
+                //fileName
+                var root = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+                string targetPath = Path.Combine(root, "WebFiles", "UpgradeFiles");
+                if (!string.IsNullOrEmpty(file.FilePath) && file.FilePath != ".\\")
+                    targetPath = Path.Combine(targetPath, file.FilePath);
+
+                string full_path = Path.Combine(targetPath, fileName);
+                if (System.IO.File.Exists(full_path))
+                    System.IO.File.Delete(full_path);
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
     }
+
     internal class ResFileStream : FileStream
     {
         public ResFileStream(string path, FileMode mode, FileAccess access) : base(path, mode, access) { }

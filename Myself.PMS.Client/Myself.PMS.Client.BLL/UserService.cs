@@ -41,9 +41,16 @@ namespace Myself.PMS.Client.BLL
             return result.Data;
         }
 
-        public EmployeeEntity Login(string username, string password, int test)
+
+
+        public EmployeeEntity[] GetUsers(string key)
         {
-            return null;
+            string json = _userAccess.GetUsers(key);
+            Result<EmployeeEntity[]> result = json.Deserialize<Result<EmployeeEntity[]>>();
+            if (result.State != 200)
+                throw new Exception(result.ExceptionMessage);
+
+            return result.Data;
         }
     }
 }

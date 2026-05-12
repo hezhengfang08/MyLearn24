@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Myself.PMS.Client.SystemModule.ViewModels
 {
@@ -27,7 +28,11 @@ namespace Myself.PMS.Client.SystemModule.ViewModels
 
             _fileService = fileService;
 
-            UploadCommand = new DelegateCommand(DoUpload);
+            UploadCommand = new DelegateCommand(() =>
+            {
+                index = 0;
+                DoUpload();
+            });
 
             this.Refresh();
         }
@@ -93,44 +98,78 @@ namespace Myself.PMS.Client.SystemModule.ViewModels
 
         public override void DoDelete(object model)
         {
-            base.DoDelete(model);
+            try
+            {
+                var m = model as FileModel;
+
+                int count = _fileService.DeleteFile(m.FileName);
+                if (count == 0)
+                {
+                    throw new Exception("删除文件失败");
+                }
+                Files.Remove(m);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "提示");
+            }
         }
 
         int index = 0;
         private void DoUpload()
         {
-            if (index >= Files.Count) return;
-
-            var file = Files[index];
+            // 关于状态：
+            // 0 - 默认，从数据库获取的信息
+            // 1 - 等待上传
+            // 2 - 正在上传
+            // 3 - 上传完成
+            // -1- 上传失败
             try
             {
-                if (file.State == "1" || file.State == "-1")
-                {
-                    file.State = "2";// 状态为正在上传
-                    _fileService.UploadFile(file.FullPath, file.FilePath,
-                        progress =>
-                        {
-                            // 上传进度
-                            file.ProgressValue = progress;
-                        },
-                        () =>
-                        {
-                            // 上传完成
-                            file.State = "3";// 上传完成
-                            index++;
-                            DoUpload();
-                        });
-                }
-                else
+                if (Files[index].State != "1" && Files[index].State != "-1")
                 {
                     index++;
-                    DoUpload();
+                    if (index < Files.Count)
+                        DoUpload();
+
+                    return;
                 }
+                Files[index].State = "2";
+                _fileService.UploadFile(
+                            Files[index].FullPath,
+                            Files[index].FilePath,
+                            progress =>
+                            {
+                                // 上传进度
+                                Files[index].ProgressValue = progress;
+                            },
+                            completed =>
+                            {
+                                if (completed != null && completed.Error != null)
+                                {
+                                    // 需要提示异常
+                                    throw new Exception(completed.Error.Message);
+                                }
+                                else
+                                {
+                                    //上传完成
+                                    Files[index].ProgressValue = 100;
+                                    Files[index].State = "3";
+
+                                    index++;
+                                    if (index < Files.Count)
+                                        DoUpload();
+                                }
+                            });
             }
             catch (Exception ex)
             {
-                file.Error = ex.Message;
-                file.State = "-1";
+                Files[index].State = "-1";
+                Files[index].Error = ex.Message;
+
+                index++;
+                if (index < Files.Count)
+                    DoUpload();
             }
 
         }

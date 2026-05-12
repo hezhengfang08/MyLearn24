@@ -2,6 +2,7 @@
 using Myself.PMS.Client.IDAL;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -89,7 +90,7 @@ namespace Myself.PMS.Client.DAL
             string uri,
             string file,
             Action<int> progress,
-            Action completed,
+             Action<AsyncCompletedEventArgs> completed,
             Dictionary<string, object> headers = null)
         {
             using (WebClient client = new WebClient())
@@ -105,7 +106,7 @@ namespace Myself.PMS.Client.DAL
                     }
                 }
                 client.UploadProgressChanged += (se, ev) => progress?.Invoke(ev.ProgressPercentage);
-                client.UploadFileCompleted += (se, ev) => completed?.Invoke();
+                client.UploadFileCompleted += (se, ev) => completed?.Invoke(ev);
 
                 client.UploadFileAsync(new Uri(HostName + uri), file);
             }

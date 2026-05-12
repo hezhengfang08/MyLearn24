@@ -78,6 +78,8 @@ namespace Myself.PMS.Client.Start.ViewModels
                     //1、获取最新文件列表
                     // 
                     var files_server = fileService.GetUpgradeFiles().ToList();
+                    //files_server.Clear();// 临时测试用   正常逻辑不要这个
+
                     // 2、文件判断，新增的直接下载；更新的直接下载；删除的直接删除
                     //    客户端本地需要一个记录，最后更新的记录（）
 
@@ -114,23 +116,23 @@ namespace Myself.PMS.Client.Start.ViewModels
                         }
                     }
                     // 服务器拿到文件列表中的文件都得下载
-                    //if (update_file.Count > 0)
-                    //{
-                    //    // 启动更新程序，并且将更新文件列表传给它
-                    //    Process.Start("Myself.PMS.Client.Upgrade.exe", update_file);
-                    //    // 
+                    if (update_file.Count > 0)
+                    {
+                        // 启动更新程序，并且将更新文件列表传给它
+                        Process.Start("Myself.PMS.Client.Upgrade.exe", update_file);
+                        // 
 
-                    //    // 下载完成进行服务文件列表的保存（Json序列化）
-                    //    // 这个逻辑需要在Upgrade.exe进程里处理，判断正常更新完成后写入
-                    //    //json_str = System.Text.Json.JsonSerializer.Serialize(update_file);
-                    //    //File.WriteAllText("upgrade_temp.json", json_str);
+                        // 下载完成进行服务文件列表的保存（Json序列化）
+                        // 这个逻辑需要在Upgrade.exe进程里处理，判断正常更新完成后写入
+                        //json_str = System.Text.Json.JsonSerializer.Serialize(update_file);
+                        //File.WriteAllText("upgrade_temp.json", json_str);
 
-                    //    Application.Current.Dispatcher.Invoke(new Action(() =>
-                    //    {
-                    //        //Application.Current.Shutdown();
-                    //        System.Environment.Exit(0);// 结束进程
-                    //    }));
-                    //}
+                        Application.Current.Dispatcher.Invoke(new Action(() =>
+                        {
+                            //Application.Current.Shutdown();
+                            System.Environment.Exit(0);// 结束进程
+                        }));
+                    }
 
 
                     // pied pi :  提示一个Bug：

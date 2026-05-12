@@ -30,7 +30,22 @@ namespace Myself.PMS.Server.Service
             return employee;
         }
 
-
+        public SysEmployee[] GetUsers(string key)
+        {
+            return _client.Queryable<SysEmployee>()
+                .Where(e =>
+                        string.IsNullOrEmpty(key) ||
+                        e.UserName.Contains(key) ||
+                        e.RealName.Contains(key) ||
+                        e.Address.Contains(key)
+                        )
+                .Select(e => new SysEmployee()
+                {
+                    Roles = SqlFunc.Subqueryable<RoleUser>()
+                    .Where(ru => ru.UserId == e.EId).ToList()
+                })
+                .ToArray();
+        }
         private bool AuthentationToken(string username, out string token)
         {
             token = string.Empty;

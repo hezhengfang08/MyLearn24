@@ -48,5 +48,11 @@ namespace Myself.PMS.Client.DAL
 
             return result;
         }
+
+        public string GetUsers(string key) {
+
+            string uri = "/api/user/list/" + (string.IsNullOrEmpty(key) ? "none" : key);
+            return this.Get(uri);
+        }
     }
 }

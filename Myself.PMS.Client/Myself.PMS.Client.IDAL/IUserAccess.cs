@@ -10,5 +10,6 @@ namespace Myself.PMS.Client.IDAL
     {
         string Login(string username, string password);
         string UpdatePassword(int id, string opd, string npd);
+        string GetUsers(string kye);
     }
 }
