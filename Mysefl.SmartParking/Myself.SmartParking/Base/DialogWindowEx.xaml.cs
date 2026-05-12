@@ -37,5 +37,10 @@ namespace Myself.SmartParking.Base
         }
 
         public IDialogResult Result { get ; set ; }
+
+        private void CloseBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

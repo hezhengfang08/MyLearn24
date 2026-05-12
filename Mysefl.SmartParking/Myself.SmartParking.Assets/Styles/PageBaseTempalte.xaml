@@ -67,6 +67,13 @@
                  HorizontalAlignment="Center"
                  Style="{StaticResource NormalButtonStyle}"
                  Command="{Binding SaveCommand}"/>
+            <Button Content="&#xe625;" Style="{DynamicResource NormalButtonStyle}"
+        FontFamily="{DynamicResource Icons}"
+        Width="40" Height="30" Margin="5,0"
+        Background="Transparent"
+        VerticalAlignment="Top" HorizontalAlignment="Right"
+        WindowChrome.IsHitTestVisibleInChrome="True"
+        Command="ApplicationCommands.Close"/>
             <Button Content="取消" Grid.Row="2" Height="30" Width="100"
       HorizontalAlignment="Right"
       Style="{StaticResource NormalButtonStyle}"
