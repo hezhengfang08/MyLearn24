@@ -1,6 +1,9 @@
-﻿using Myself.PMS.Client.IBLL;
+﻿using Myself.PMS.Client.Common;
+using Myself.PMS.Client.IBLL;
 using Myself.PMS.Client.Start.Models;
 using Prism.Commands;
+using Prism.Events;
+using Prism.Mvvm;
 using Prism.Regions;
 using Prism.Services.Dialogs;
 using System;
@@ -13,8 +16,35 @@ using System.Windows.Controls;
 
 namespace Myself.PMS.Client.Start.ViewModels
 {
-    public class MainViewModel
+    public class MainViewModel: BindableBase
     {
+        private int _viewBlur;
+
+        public int ViewBlur
+        {
+            get { return _viewBlur; }
+            set { SetProperty(ref _viewBlur, value); }
+        }
+        private bool _showLoading;
+
+        public bool ShowLoading
+        {
+            get { return _showLoading; }
+            set
+            {
+                SetProperty<bool>(ref _showLoading, value, () =>
+                {
+                    ViewBlur = value ? 5 : 0;
+                });
+            }
+        }
+        private string _loadingTip;
+
+        public string LoadingTip
+        {
+            get { return _loadingTip; }
+            set { SetProperty<string>(ref _loadingTip, value); }
+        }
         public List<MenuModel> Menus { get; set; } =
            new List<MenuModel>();
         private Entities.MenuEntity[] menus;
@@ -22,7 +52,11 @@ namespace Myself.PMS.Client.Start.ViewModels
         Entities.EmployeeEntity _currentUser;
         IRegionManager _regionManager;
         IMenuService _menuService;
-        public MainViewModel(IDialogService dialogService, IRegionManager regionManager, IMenuService menuService)
+        public MainViewModel(
+            IDialogService dialogService
+            , IRegionManager regionManager
+            , IMenuService menuService
+            , IEventAggregator eventAggregator)
         {
             _regionManager = regionManager;
             _menuService = menuService; 
@@ -49,6 +83,13 @@ namespace Myself.PMS.Client.Start.ViewModels
             {
                 Menus[0].IsSelected = true;
             }
+            eventAggregator.GetEvent<LoadingEvent>()
+               .Subscribe(tip =>
+               {
+                   // 显示或隐藏Loading动画
+                   ShowLoading = !ShowLoading;
+                   this.LoadingTip = tip;
+               });
         }
         private void ShowWorkbench()
         {

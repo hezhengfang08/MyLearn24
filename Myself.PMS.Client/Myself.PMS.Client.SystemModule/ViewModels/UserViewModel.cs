@@ -2,6 +2,7 @@
 using Myself.PMS.Client.IBLL;
 using Myself.PMS.Client.SystemModule.Models;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Regions;
 using Prism.Services.Dialogs;
 using System;
@@ -22,17 +23,20 @@ namespace Myself.PMS.Client.SystemModule.ViewModels
         IUserService _userService;
         IRoleService _roleService;
         IDialogService _dialogService;
+        IEventAggregator _eventAggregator;
         public DelegateCommand<object> LockUserCommand { get; set; }
 
         public UserViewModel(IRegionManager regionManager,
             IUserService userService,
             IRoleService roleService,
-            IDialogService dialogService) : base(regionManager)
+            IDialogService dialogService
+            , IEventAggregator eventAggregator) : base(regionManager)
         {
             PageTitle = "系统用户管理";
 
             _userService = userService;
             _roleService = roleService;
+            _eventAggregator = eventAggregator;
             _dialogService = dialogService;
 
             LockUserCommand = new DelegateCommand<object>(DoLockUser);
@@ -43,29 +47,63 @@ namespace Myself.PMS.Client.SystemModule.ViewModels
         public override void Refresh()
         {
             Users.Clear();
-            var users = _userService.GetUsers(SearchKey).ToList();
 
-            int index = 1;
-            foreach (var user in users)
+            _eventAggregator.GetEvent<LoadingEvent>()
+               .Publish("正在加载用户....");
+            Task.Run(async () =>
             {
-                UserModel model = new UserModel
+                // 这里只是测试耗时操作的效果
+                await Task.Delay(1000);
+                try
                 {
-                    Index = index++,
-                    UserId = user.eId,
-                    UserName = user.userName,
-                    RealName = user.realName,
-                    UserIcon = "http://localhost:7299/api/File/img/" + user.eIcon,
-                    Address = user.address,
-                    Age = user.age,
-                    Password = user.password,
-                    Gender = user.gender,
-                    Email = user.email,
-                    Status = user.status,
+                    var users = _userService.GetUsers(SearchKey).ToList();
 
-                    LockButtonText = user.status == 1 ? "锁定" : "启用"
-                };
-                Users.Add(model);
-            }
+                    int index = 1;
+                    foreach (var user in users)
+                    {
+                        UserModel model = new UserModel
+                        {
+                            Index = index++,
+                            UserId = user.eId,
+                            UserName = user.userName,
+                            RealName = user.realName,
+                            UserIcon = "http://localhost:5273/api/File/img/" + user.eIcon,
+                            Address = user.address,
+                            Age = user.age,
+                            Password = user.password,
+                            Gender = user.gender,
+                            Email = user.email,
+                            Status = user.status,
+
+                            LockButtonText = user.status == 1 ? "锁定" : "启用"
+                        };
+
+                        // 需要根据当前用户的角色ID进行角色数据的获取
+                        int[] role_ids = user.roles.Select(r => r.RoleId).ToArray();
+                        var roles = _roleService.GetRoleByIds(role_ids);
+
+                        model.Roles = roles.Select(r => new RoleModel
+                        {
+                            RoleId = r.RoleId,
+                            RoleName = r.RoleName,
+                        }).ToList();
+
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            Users.Add(model);
+                        });
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    _eventAggregator.GetEvent<LoadingEvent>()
+                        .Publish("");
+                }
+            });
         }
 
         public override void DoModify(object model)

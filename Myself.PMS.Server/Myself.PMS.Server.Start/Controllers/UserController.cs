@@ -145,6 +145,59 @@ namespace Myself.PMS.Server.Start.Controllers
             }
             return Ok(result);
         }
+        [HttpGet("check/{id}/{name}")]
+        [Authorize]
+        public ActionResult CheckUserName(string name, int id)
+        {
+            Result<bool> result = new Result<bool>();
+            try
+            {
+                var state = _userService.CheckUserName(name, id);
+                result.Data = state;
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
+
+        [HttpPost("save_roles")]
+        [Authorize]
+        public ActionResult SaveUserRoles(RoleUser[] roleUsers)
+        {
+            Result<int> result = new Result<int>();
+            try
+            {
+                var count = _userService.SaveUserRoles(roleUsers);
+                result.Data = count;
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
+
+        [HttpPost("reset_pwd")]
+        [Authorize]
+        public ActionResult ResetPassword(int id)
+        {
+            Result<int> result = new Result<int>();
+            try
+            {
+                var count = _userService.ResetPassword(id);
+                result.Data = count;
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
     }
 }
 

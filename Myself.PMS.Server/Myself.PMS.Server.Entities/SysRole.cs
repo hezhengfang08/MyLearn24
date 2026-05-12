@@ -20,5 +20,13 @@ namespace Myself.PMS.Server.Entities
 
         [SugarColumn(ColumnName = "state")]
         public int State { get; set; }
+
+        [SugarColumn(IsIgnore = true)]
+        [Navigate(NavigateType.OneToMany, nameof(RoleMenu.RoleId))]
+        public List<RoleMenu>? Menus { get; set; }
+
+        [SugarColumn(IsIgnore = true)]
+        [Navigate(NavigateType.OneToMany, nameof(RoleUser.RoleId))]
+        public List<RoleUser>? Users { get; set; }
     }
 }

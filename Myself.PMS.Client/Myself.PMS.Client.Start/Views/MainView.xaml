@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Myself.PMS.Client.Start.Views"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:p="http://prismlibrary.com/"
+        xmlns:c="clr-namespace:Myself.PMS.Client.Controls;assembly=Myself.PMS.Client.Controls"
         mc:Ignorable="d" Background="#F4F7FF" WindowStartupLocation="CenterScreen"
         Title="朝夕物业系统" Height="750" Width="1300">
     <b:Interaction.Triggers>
@@ -17,6 +18,7 @@
         <WindowChrome NonClientFrameEdges="None" UseAeroCaptionButtons="False"/>
     </WindowChrome.WindowChrome>
     <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="b2v"/>
         <Style TargetType="RadioButton" x:Key="NavTabButtonStyle">
             <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
             <Setter Property="GroupName" Value="main_menu"/>
@@ -73,58 +75,67 @@
         </Style>
     </Window.Resources>
 
+
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Border Background="#FFF" CornerRadius="0,0,10,10">
-            <Border.Effect>
-                <DropShadowEffect Color="#DDD" ShadowDepth="2" BlurRadius="5" Direction="-90" Opacity="0.2"/>
-            </Border.Effect>
-        </Border>
+        <Grid>
+            <Grid.Effect>
+                <BlurEffect Radius="{Binding ViewBlur}"/>
+            </Grid.Effect>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border Background="#FFF" CornerRadius="0,0,10,10">
+                <Border.Effect>
+                    <DropShadowEffect Color="#DDD" ShadowDepth="2" BlurRadius="5" Direction="-90" Opacity="0.2"/>
+                </Border.Effect>
+            </Border>
 
-        <Image Source="/Myself.PMS.Client.Assets;component/Images/Logo_64.png" Margin="10,10"
+            <Image Source="/Myself.PMS.Client.Assets;component/Images/Logo_64.png" Margin="10,10"
              HorizontalAlignment="Left">
-            <Image.Effect>
-                <DropShadowEffect Color="Gray" BlurRadius="5" ShadowDepth="0" Opacity="0.2"/>
-            </Image.Effect>
-        </Image>
+                <Image.Effect>
+                    <DropShadowEffect Color="Gray" BlurRadius="5" ShadowDepth="0" Opacity="0.2"/>
+                </Image.Effect>
+            </Image>
 
-        <TextBlock FontFamily="{StaticResource DyhFont}" HorizontalAlignment="Left"
+            <TextBlock FontFamily="{StaticResource DyhFont}" HorizontalAlignment="Left"
          FontSize="15" VerticalAlignment="Center" Margin="55,0,0,0"
          Foreground="#3E7FFF">
-            <TextBlock.RenderTransform>
-                <ScaleTransform ScaleX="1.4"/>
-            </TextBlock.RenderTransform>
+                <TextBlock.RenderTransform>
+                    <ScaleTransform ScaleX="1.4"/>
+                </TextBlock.RenderTransform>
           <Run Text="朝夕物业管理系统"/>
           <Run Text="  v1.0" FontSize="13"/>
-        </TextBlock>
+            </TextBlock>
 
-        <ItemsControl VerticalAlignment="Bottom" Margin="280,0,0,5"
+            <ItemsControl VerticalAlignment="Bottom" Margin="280,0,0,5"
                     ItemsSource="{Binding Menus}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
 
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <RadioButton Content="{Binding MenuHeader}" 
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton Content="{Binding MenuHeader}" 
                                Style="{StaticResource NavTabButtonStyle}" IsChecked="True"
                                Command="{Binding DataContext.PageSwitchCommand,RelativeSource={RelativeSource AncestorType=Window}}"
                                CommandParameter="{Binding MenuId}"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
-            <Button Content="&#xe7e6;" Style="{StaticResource ControlButtonStyle}"/>
-            <Button Content="&#xe694;" Style="{StaticResource ControlButtonStyle}"/>
-            <Button Content="&#xe625;" Style="{StaticResource ControlButtonStyle}"/>
-        </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <Button Content="&#xe7e6;" Style="{StaticResource ControlButtonStyle}"/>
+                <Button Content="&#xe694;" Style="{StaticResource ControlButtonStyle}"/>
+                <Button Content="&#xe625;" Style="{StaticResource ControlButtonStyle}"/>
+            </StackPanel>
 
-        <ContentControl p:RegionManager.RegionName="MainRegion" Grid.Row="1"/>
+            <ContentControl p:RegionManager.RegionName="MainRegion" Grid.Row="1"/>
+        </Grid>
+        <!--Loading 层-->
+        <c:Loading Height="100" Message="{Binding LoadingTip}"
+           Visibility="{Binding ShowLoading,Converter={StaticResource b2v}}"/>
     </Grid>
 </Window>

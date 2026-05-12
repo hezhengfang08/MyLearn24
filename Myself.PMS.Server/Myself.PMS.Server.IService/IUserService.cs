@@ -13,6 +13,11 @@ namespace Myself.PMS.Server.IService
         int Delete(int id);
 
         bool LockUser(int id, int status);
+        bool CheckUserName(string username, int id);
+
+        int SaveUserRoles(RoleUser[] roleUser);
+
+        int ResetPassword(int id);
     }
     
 }

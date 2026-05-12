@@ -10,5 +10,12 @@ namespace Myself.PMS.Server.IService
     public interface IRoleService
     {
         SysRole[] GetRoleByIds(int[] id);
+        SysRole[] GetAllRoles(string key);
+
+        bool CheckRoleName(string roleName, int id);
+
+        int Update(SysRole role);
+
+        int DeleteRole(int id);
     }
 }

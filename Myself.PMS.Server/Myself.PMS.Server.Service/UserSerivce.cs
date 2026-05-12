@@ -15,6 +15,31 @@ namespace Myself.PMS.Server.Service
         {
             _client = client;
         }
+
+        public bool CheckUserName(string username, int id)
+        {
+            // 新建的时候    id肯定为空  == 0
+            // 编辑
+            return _client.Queryable<SysEmployee>()
+                .Any(u => u.UserName == username &&
+                        u.EId != id);
+        }
+
+        public int ResetPassword(int id)
+        {
+            return _client.Updateable<SysEmployee>()
+                 .SetColumns(e => new SysEmployee { Password = "123456" })
+                 .Where(e => e.EId == id)
+                 .ExecuteCommand();
+        }
+        public int SaveUserRoles(RoleUser[] roleUser)
+        {
+            _client.Deleteable<RoleUser>()
+                .Where(ru => ru.UserId == roleUser[0].UserId)
+                .ExecuteCommand();
+
+            return _client.Insertable(roleUser).ExecuteCommand();
+        }
         public int Delete(int id)
         {
             return _client.Deleteable<SysEmployee>()
