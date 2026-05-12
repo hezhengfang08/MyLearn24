@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Myself.PMS.Client.BLL
 {
-    public class MenuService : IMenuService
+    public class MenuService : BaseService, IMenuService
     {
         IMenuAccess _menuAccess;
         public MenuService(IMenuAccess menuAccess)
@@ -20,43 +20,46 @@ namespace Myself.PMS.Client.BLL
         public IEnumerable<MenuEntity> GetAllMenus(string key)
         {
             string json = _menuAccess.GetAllMenus(key);
-            var result = json.Deserialize<Result<MenuEntity[]>>();
-            if (result == null)
-                throw new Exception("菜单数据获取失败!");
-            if (result.State != 200)
-                throw new Exception(result.ExceptionMessage);
+            //var result = json.Deserialize<Result<MenuEntity[]>>();
+            //if (result == null)
+            //    throw new Exception("菜单数据获取失败!");
+            //if (result.State != 200)
+            //    throw new Exception(result.ExceptionMessage);
 
-            return result.Data;
+            //return result.Data;
+            return this.GetResult<MenuEntity[]>(json);  
         }
         public int UpdateMenu(MenuEntity menu)
         {
             string menu_json = System.Text.Json.JsonSerializer.Serialize(menu);
             string json = _menuAccess.UpdateMenu(menu_json);
-            var result = json.Deserialize<Result<int>>();
+            //var result = json.Deserialize<Result<int>>();
 
-            if (result == null)
-                throw new Exception("菜单数据获取失败!");
-            if (result.State != 200)
-                throw new Exception(result.ExceptionMessage);
-            if (result.Data == 0)
-                throw new Exception("未更新任何数据");
+            //if (result == null)
+            //    throw new Exception("菜单数据获取失败!");
+            //if (result.State != 200)
+            //    throw new Exception(result.ExceptionMessage);
+            //if (result.Data == 0)
+            //    throw new Exception("未更新任何数据");
 
-            return result.Data;
+            //return result.Data;
+            return this.GetResult<int>(json);   
         }
 
         public int DeleteMenu(string id)
         {
             string json = _menuAccess.DeleteMenu(id);
-            var result = json.Deserialize<Result<int>>();
+            //var result = json.Deserialize<Result<int>>();
 
-            if (result == null)
-                throw new Exception("菜单数据获取失败!");
-            if (result.State != 200)
-                throw new Exception(result.ExceptionMessage);
-            if (result.Data == 0)
-                throw new Exception("未更新任何数据");
+            //if (result == null)
+            //    throw new Exception("菜单数据获取失败!");
+            //if (result.State != 200)
+            //    throw new Exception(result.ExceptionMessage);
+            //if (result.Data == 0)
+            //    throw new Exception("未更新任何数据");
 
-            return result.Data;
+            //return result.Data;
+            return this.GetResult<int>(json);
         }
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Myself.PMS.Client.BLL
 {
-    public class UserService : IUserService
+    public class UserService : BaseService, IUserService
     {
         IUserAccess _userAccess;
         public UserService(IUserAccess userAccess)
@@ -51,6 +51,25 @@ namespace Myself.PMS.Client.BLL
                 throw new Exception(result.ExceptionMessage);
 
             return result.Data;
+        }
+
+        public int DeleteUser(int id)
+        {
+            string result = _userAccess.DeleteUser(id);
+            return this.GetResult<int>(result);
+        }
+
+        public bool LockUser(int id, int status)
+        {
+            string json = _userAccess.LockUser(id, status);
+            return this.GetResult<bool>(json);
+        }
+        public int UpdateUser(EmployeeEntity entity)
+        {
+            string json = entity.Serialize();
+            json = _userAccess.UpdateUser(json);
+
+            return this.GetResult<int>(json);
         }
     }
 }

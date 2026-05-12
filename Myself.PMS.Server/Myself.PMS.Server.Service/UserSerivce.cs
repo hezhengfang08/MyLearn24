@@ -15,7 +15,26 @@ namespace Myself.PMS.Server.Service
         {
             _client = client;
         }
+        public int Delete(int id)
+        {
+            return _client.Deleteable<SysEmployee>()
+                .In(id).ExecuteCommand();
+        }
+        public bool LockUser(int id, int status)
+        {
+            return _client.Updateable<SysEmployee>()
+                 .SetColumns(e => new SysEmployee { Status = status })
+                 .Where(e => e.EId == id)
+                 .ExecuteCommand() > 0;
 
+
+            // 第二种指定字段更新的方式:   两种方式  选一种处理
+            // new { Status = status, EId = id }
+            // SQL: update SysEmployee set Status=status wher eid=id;
+            //
+            //return _client.Updateable<SysEmployee>(new { Status = status, EId = id })
+            //     .ExecuteCommand() > 0;
+        }
         public SysEmployee? CheckLogin(string username, string password)
         {
             var es = _client.Queryable<SysEmployee>()
@@ -29,7 +48,36 @@ namespace Myself.PMS.Server.Service
             }
             return employee;
         }
+        public int Update(SysEmployee employee)
+        {
+            int count = 0;
+            if (employee.EId == 0)
+            {
+                // 插入
+                // 用户ID生成一下
+                int max = _client.Queryable<SysEmployee>()
+                    .Where(e => e.EId.ToString().StartsWith(DateTime.Now.Year.ToString()))
+                    .Max(e => e.EId);
+                int new_id = 0;
+                if (max == 0)
+                {
+                    new_id = DateTime.Now.Year * 1000 + 1;
+                }
+                {
+                    max %= 1000;
+                    new_id = DateTime.Now.Year * 1000 + max + 1;
+                }
 
+                employee.EId = new_id;
+                count = _client.Insertable(employee).ExecuteCommand();
+            }
+            else
+            {
+                // 更新
+                count = _client.Updateable(employee).ExecuteCommand();
+            }
+            return count;
+        }
         public SysEmployee[] GetUsers(string key)
         {
             return _client.Queryable<SysEmployee>()

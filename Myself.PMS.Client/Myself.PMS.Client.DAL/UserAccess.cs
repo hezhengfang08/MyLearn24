@@ -54,5 +54,27 @@ namespace Myself.PMS.Client.DAL
             string uri = "/api/user/list/" + (string.IsNullOrEmpty(key) ? "none" : key);
             return this.Get(uri);
         }
+
+        public string DeleteUser(int id)
+        {
+            string uri = $"/api/user/delete/{id}";
+            return this.Get(uri);
+        }
+
+        public string LockUser(int id, int status)
+        {
+            string uri = $"/api/user/lock/{id}/{status}";
+            return this.Get(uri);
+        }
+        public string UpdateUser(string user_json)
+        {
+            string uri = "/api/user/update";
+
+            StringContent content = new StringContent(user_json);
+            content.Headers.ContentType =
+                new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+
+            return this.Post(uri, content);
+        }
     }
 }

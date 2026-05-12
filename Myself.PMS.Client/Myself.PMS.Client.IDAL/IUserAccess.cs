@@ -11,5 +11,11 @@ namespace Myself.PMS.Client.IDAL
         string Login(string username, string password);
         string UpdatePassword(int id, string opd, string npd);
         string GetUsers(string kye);
+
+        string DeleteUser(int id);
+
+        string UpdateUser(string user_json);
+
+        string LockUser(int id, int status);
     }
 }

@@ -36,10 +36,12 @@ namespace Myself.PMS.Client.Start
             containerRegistry.Register<IUserService, UserService>();
             containerRegistry.Register<IFileService, FileService>();
             containerRegistry.Register<IMenuService, MenuService>();
+            containerRegistry.Register<IRoleService, RoleService>();
 
             containerRegistry.Register<IUserAccess, UserAccess>();
             containerRegistry.Register<IFileAccess, FileAccess>();
             containerRegistry.Register<IMenuAccess, MenuAccess>();
+            containerRegistry.Register<IRoleAccess, RoleAccess>();
         }
 
         protected override IModuleCatalog CreateModuleCatalog()

@@ -91,6 +91,60 @@ namespace Myself.PMS.Server.Start.Controllers
 
             return Ok(result);
         }
+        [HttpPost("update")]
+        [Authorize]
+        public ActionResult UpdateUser(SysEmployee entity)
+        {
+            Result<int> result = new Result<int>();
+            try
+            {
+                var count = _userService.Update(entity);
+                result.Data = count;
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
+
+        [HttpGet("delete/{id}")]
+        [Authorize]
+        public ActionResult DeleteUser([FromRoute] int id)
+        {
+            Result<int> result = new Result<int>();
+            try
+            {
+                var count = _userService.Delete(id);
+                result.Data = count;
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
+
+        // api/user/lock/2024001/0
+        [HttpGet("lock/{id}/{status}")]
+        //[Authorize]
+        public ActionResult LockUser(int id, int status)
+        {
+            Result<bool> result = new Result<bool>();
+            try
+            {
+                var state = _userService.LockUser(id, status);
+                result.Data = state;
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
     }
 }
 

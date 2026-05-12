@@ -24,27 +24,30 @@ namespace Myself.PMS.Client.Entities
 
         public string eIcon { get; set; }
 
-        public string phone { get; set; }
+        public string? phone { get; set; }
 
-        public string mobile { get; set; }
+        public string? mobile { get; set; }
 
-        public string address { get; set; }
+        public string? address { get; set; }
 
-        public string email { get; set; }
+        public string? email { get; set; }
 
-        public string qq { get; set; }
+        public string? qq { get; set; }
 
-        public string weChat { get; set; }
+        public string? weChat { get; set; }
 
-        public string lastLoginTime { get; set; }
+        public string? lastLoginTime { get; set; }
 
-        public string createTime { get; set; }
+        public string? createTime { get; set; }
 
-        public int createId { get; set; }
+        public int? createId { get; set; }
 
-        public string lastModifyTime { get; set; }
+        public string? lastModifyTime { get; set; }
 
-        public int lastModifyId { get; set; }
-        public string Token { get; set; }
+        public int? lastModifyId { get; set; }
+
+        public string? Token { get; set; }
+
+        public UserRoleEntity[]? roles { get; set; }
     }
 }
