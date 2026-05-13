@@ -9,5 +9,12 @@ namespace Myself.PMS.Client.IDAL
     public interface IBaseInfoAccess
     {
         string GetInfoPage(string key, int index, int size);
+        string UpdateInfo(string infoJson);
+
+        string DeleteInfo(int id);
+
+        string CancelState(int id);
+        string PublishState(int id);
+        string RevokeState(int id);
     }
 }

@@ -169,6 +169,8 @@ namespace Myself.PMS.Client.Start.ViewModels
                 // 登录成功
 
                 _globalValues.Token = user.Token;
+                _globalValues.UserId = user.eId;
+                _globalValues.UserName = user.userName;
 
                 DialogParameters dps = new DialogParameters();
                 dps.Add("user", user);

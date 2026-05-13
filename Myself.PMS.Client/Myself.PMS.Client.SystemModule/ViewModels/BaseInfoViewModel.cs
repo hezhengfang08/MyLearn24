@@ -27,10 +27,13 @@ namespace Myself.PMS.Client.SystemModule.ViewModels
         IEventAggregator _eventAggregator;
         IBaseInfoService _baseInfoService;
         IDialogService _dialogService;
+
+        public DelegateCommand<BaseInfoModel> CancelCommand { get; }
+        public DelegateCommand<BaseInfoModel> PublishCommand { get; }
         public BaseInfoViewModel(IRegionManager regionManager,
             IEventAggregator eventAggregator,
             IBaseInfoService baseInfoService,
-            IDialogService dialogService) : base(regionManager)
+            IDialogService dialogService) : base(regionManager, eventAggregator)
         {
             // 允许ObservableCollectin集合跨线程操作
             // 这个除Dispatcher之外的第二种跨线程处理方案
@@ -47,14 +50,14 @@ namespace Myself.PMS.Client.SystemModule.ViewModels
                 PaginationModel.PageIndex = int.Parse(index.ToString());
                 this.Refresh();
             });
-
+            CancelCommand = new DelegateCommand<BaseInfoModel>(DoCancelState);
+            PublishCommand = new DelegateCommand<BaseInfoModel>(DoPublishState);
             this.Refresh();
         }
         public override void Refresh()
         {
             BaseInfoList.Clear();
-            _eventAggregator.GetEvent<LoadingEvent>()
-                .Publish("正在加载....");
+            this.BeginLoading();
 
             Task.Run(() =>
             {
@@ -97,8 +100,7 @@ namespace Myself.PMS.Client.SystemModule.ViewModels
                 catch { }
                 finally
                 {
-                    _eventAggregator.GetEvent<LoadingEvent>()
-                        .Publish("");
+                    EndLoading();
                 }
             });
         }
@@ -118,7 +120,76 @@ namespace Myself.PMS.Client.SystemModule.ViewModels
         }
         public override void DoDelete(object model)
         {
-            base.DoDelete(model);
+            try
+            {
+                if (MessageBox.Show("是否确定删除此项？", "提示", MessageBoxButton.YesNo) ==
+                    MessageBoxResult.Yes)
+                {
+                    _baseInfoService.DeleteInfo((model as BaseInfoModel).InfoId);
+
+                    MessageBox.Show("删除完成！", "提示");
+
+                    BaseInfoList.Remove(model as BaseInfoModel);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "提示");
+            }
+        }
+        private void DoCancelState(BaseInfoModel model)
+        {
+            try
+            {
+                if (MessageBox.Show("是否作废当前信息？", "提示", MessageBoxButton.YesNo) ==
+                    MessageBoxResult.Yes)
+                {
+                    // 物理删除
+                    var count = _baseInfoService.CancelState((model as BaseInfoModel).InfoId);
+                    if (count == 0)
+                        throw new Exception("未作废任何数据");
+
+                    MessageBox.Show("信息已作废！", "提示");
+
+                    model.State = -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "提示");
+            }
+        }
+        private void DoPublishState(BaseInfoModel model)
+        {
+            try
+            {
+                string tip = model.State == 0 ? "发布" : "撤销";
+                if (MessageBox.Show($"是否{tip}当前信息？", "提示", MessageBoxButton.YesNo) ==
+                       MessageBoxResult.Yes)
+                {
+                    int count = 0;
+                    if (model.State == 0)
+                    {
+                        count = _baseInfoService.PublishState(model.InfoId);
+                        model.State = 1;
+                        model.PublishTime = DateTime.Now;
+                    }
+                    else
+                    {
+                        count = _baseInfoService.RevokeState(model.InfoId);
+                        model.State = 0;
+                        model.PublishTime = null;
+                    }
+                    if (count == 0)
+                        throw new Exception($"未{tip}任何数据");
+
+                    MessageBox.Show($"信息已{tip}！", "提示");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "提示");
+            }
         }
     }
 }

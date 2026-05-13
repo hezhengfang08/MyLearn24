@@ -42,25 +42,25 @@ namespace Myself.PMS.Client.DAL
         public string GetRoleByIds(string id_json)
         {
             string uri = "/api/role/list";
-            return this.PostJons(uri, id_json);
+            return this.PostJson(uri, id_json);
         }
 
         public string Update(string role)
         {
             string uri = "/api/role/update";
-            return this.PostJons(uri, role);
+            return this.PostJson(uri, role);
         }
 
         public string UpdateRoleMenus(string roleMenus_json)
         {
             string uri = "/api/role/rmenus";
-            return this.PostJons(uri, roleMenus_json);
+            return this.PostJson(uri, roleMenus_json);
         }
 
         public string UpdateRoleUsers(string roleUsers_json)
         {
             string uri = "/api/role/rusers";
-            return this.PostJons(uri, roleUsers_json);
+            return this.PostJson(uri, roleUsers_json);
         }
     }
 }

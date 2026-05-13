@@ -25,11 +25,12 @@ namespace Myself.PMS.Client.SystemModule.ViewModels
         IMenuService _menuService;
         IDialogService _dialogService;
         IEventAggregator _eventAggregator;
+       
         public MenuViewModel(
       IRegionManager regionManager,
       IMenuService menuService,
       IDialogService dialogService,
-      IEventAggregator eventAggregator) : base(regionManager)
+      IEventAggregator eventAggregator) : base(regionManager,eventAggregator)
         {
             PageTitle = "菜单数据维护";
 

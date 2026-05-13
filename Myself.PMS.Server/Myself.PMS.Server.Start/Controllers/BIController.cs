@@ -45,5 +45,89 @@ namespace Myself.PMS.Server.Start.Controllers
             }
             return Ok(result);
         }
+        [HttpPost("update")]
+        public ActionResult UpdateInfo(BaseInfo baseInfo)
+        {
+            Result<int> result = new Result<int>();
+            try
+            {
+                result.Data = _baseInfoService.UpdateBaseInfo(baseInfo);
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
+
+        [HttpPost("delete/{id}")]
+        public ActionResult DeleteInfo([FromRoute] int id)
+        {
+            Result<int> result = new Result<int>();
+            try
+            {
+                result.Data = _baseInfoService.DeleteBaseInfo(id);
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
+
+
+        [HttpPost("cancel/{id}")]
+        [Authorize]
+        public ActionResult CancelState([FromRoute] int id)
+        {
+            Result<int> result = new Result<int>();
+            try
+            {
+                var count = _baseInfoService.CancelState(id);
+                result.Data = count;
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
+        [HttpPost("publish/{id}")]
+        [Authorize]
+        public ActionResult PublishState([FromRoute]int id)
+        {
+            Result<int> result = new Result<int>();
+            try
+            {
+                var count = _baseInfoService.PublishState(id);
+                result.Data = count;
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
+        [HttpPost("revoke/{id}")]
+        [Authorize]
+        public ActionResult RevokeState([FromRoute]int id)
+        {
+            Result<int> result = new Result<int>();
+            try
+            {
+                var count = _baseInfoService.RevokeState(id);
+                result.Data = count;
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
     }
 }

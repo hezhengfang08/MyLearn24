@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Myself.PMS.Client.IDAL
+{
+    public interface IOwnerAccess
+    {
+        string GetOwners(string paramsJson, int index, int size);
+
+        string GetQuarters();
+        string GetBuildings();
+    }
+}

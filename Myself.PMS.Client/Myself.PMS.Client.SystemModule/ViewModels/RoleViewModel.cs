@@ -62,7 +62,7 @@ namespace Myself.PMS.Client.SystemModule.ViewModels
             IDialogService dialogService,
             IMenuService menuService,
             IUserService userService
-            ) : base(regionManager)
+            ) : base(regionManager,eventAggregator)
         {
             this.PageTitle = "角色权限组";
 
@@ -82,8 +82,7 @@ namespace Myself.PMS.Client.SystemModule.ViewModels
         {
             RoleList.Clear();
             Menus.Clear();
-            _eventAggregator.GetEvent<LoadingEvent>()
-                .Publish("正在加载用户....");
+           this.BeginLoading();
 
             Task.Run(() =>
             {
@@ -123,8 +122,7 @@ namespace Myself.PMS.Client.SystemModule.ViewModels
                 catch { }
                 finally
                 {
-                    _eventAggregator.GetEvent<LoadingEvent>()
-                        .Publish("");
+                    this.EndLoading();  
                 }
             });
         }

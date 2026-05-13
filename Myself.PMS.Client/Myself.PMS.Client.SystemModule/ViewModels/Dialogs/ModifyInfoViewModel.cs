@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Myself.PMS.Client.SystemModule.ViewModels.Dialogs
 {
@@ -111,7 +112,30 @@ namespace Myself.PMS.Client.SystemModule.ViewModels.Dialogs
 
         public override void DoSave()
         {
-            base.DoSave();
+            if (this.HasErrors) return;
+
+            try
+            {
+                BaseInfo baseInfo = new BaseInfo();
+                baseInfo.InfoId = InfoId;
+                baseInfo.InfoHeader = InfoTitle;
+                baseInfo.InfoType = InfoType;
+                baseInfo.InfoContent = Content;
+                baseInfo.InfoKey = Key;
+                baseInfo.ModifyTime = DateTime.Now;
+                baseInfo.UserId = _globalValues.UserId;
+                baseInfo.UserName = _globalValues.UserName;
+
+                var count = _baseInfoService.UpdateInfo(baseInfo);
+                if (count == 0)
+                    throw new Exception("信息更新失败");
+
+                base.DoSave();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

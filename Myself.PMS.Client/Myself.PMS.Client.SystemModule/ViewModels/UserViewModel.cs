@@ -32,7 +32,7 @@ namespace Myself.PMS.Client.SystemModule.ViewModels
             IUserService userService,
             IRoleService roleService,
             IDialogService dialogService
-            , IEventAggregator eventAggregator) : base(regionManager)
+            , IEventAggregator eventAggregator) : base(regionManager,eventAggregator)
         {
             PageTitle = "系统用户管理";
 
@@ -52,8 +52,7 @@ namespace Myself.PMS.Client.SystemModule.ViewModels
         {
             Users.Clear();
 
-            _eventAggregator.GetEvent<LoadingEvent>()
-               .Publish("正在加载用户....");
+            this.BeginLoading();
             Task.Run(async () =>
             {
                 // 这里只是测试耗时操作的效果
@@ -104,8 +103,7 @@ namespace Myself.PMS.Client.SystemModule.ViewModels
                 }
                 finally
                 {
-                    _eventAggregator.GetEvent<LoadingEvent>()
-                        .Publish("");
+                  this.EndLoading();
                 }
             });
         }

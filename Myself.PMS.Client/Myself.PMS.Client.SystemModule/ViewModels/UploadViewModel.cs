@@ -3,6 +3,7 @@ using Myself.PMS.Client.Common;
 using Myself.PMS.Client.IBLL;
 using Myself.PMS.Client.SystemModule.Models;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Regions;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,8 @@ namespace Myself.PMS.Client.SystemModule.ViewModels
         public DelegateCommand UploadCommand { get; set; }
         IFileService _fileService;
         public UploadViewModel(IRegionManager regionManager,
-            IFileService fileService) : base(regionManager)
+            IEventAggregator eventAggregator,
+            IFileService fileService) : base(regionManager,eventAggregator)
         {
             this.PageTitle = "更新文件上传";
 

@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Myself.PMS.Client.Entities
 {
-    public class GlobalValues
+    public class QuarterEntity
     {
-        public string Token { get; set; }
-        public int UserId { get; set; }
-        public string UserName { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

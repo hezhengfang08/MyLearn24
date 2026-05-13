@@ -1,4 +1,5 @@
 ﻿using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
@@ -22,9 +23,11 @@ namespace Myself.PMS.Client.Common
         public DelegateCommand<object> DeleteCommand { get; set; }
 
         IRegionManager _regionManager;
-        public PageViewModelBase(IRegionManager regionManager)
+        IEventAggregator _eventAggregator;
+        public PageViewModelBase(IRegionManager regionManager, IEventAggregator eventAggregator)
         {
             _regionManager = regionManager;
+            _eventAggregator = eventAggregator;
 
             CloseCommand = new DelegateCommand(DoClose);
 
@@ -62,6 +65,15 @@ namespace Myself.PMS.Client.Common
         {
 
         }
-
+        protected void BeginLoading(string tip = "正在加载....")
+        {
+            _eventAggregator.GetEvent<LoadingEvent>()
+                .Publish(tip);
+        }
+        protected void EndLoading()
+        {
+            _eventAggregator.GetEvent<LoadingEvent>()
+                        .Publish("");
+        }
     }
 }

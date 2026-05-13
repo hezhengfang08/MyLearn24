@@ -43,7 +43,8 @@ namespace Myself.PMS.Client.DAL
                 return result;
             }
         }
-        public string PostJons(string url, string json)
+        
+        public string PostJson(string url, string json)
         {
             StringContent content = new StringContent(json);
             content.Headers.ContentType =

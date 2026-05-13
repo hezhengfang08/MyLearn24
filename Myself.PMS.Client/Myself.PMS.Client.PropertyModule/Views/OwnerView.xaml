@@ -1,0 +1,239 @@
+﻿<UserControl x:Class="Myself.PMS.Client.PropertyModule.Views.OwnerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Myself.PMS.Client.PropertyModule.Views"
+               xmlns:zxc="clr-namespace:Myself.PMS.Client.Controls;assembly=Myself.PMS.Client.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <d:UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Myself.PMS.Client.Assets;component/Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="/Myself.PMS.Client.Assets;component/Styles/TextBoxStyles.xaml"/>
+                <ResourceDictionary Source="/Myself.PMS.Client.Assets;component/Styles/ViewTemplates.xaml"/>
+                <ResourceDictionary Source="/Myself.PMS.Client.Assets;component/Styles/ComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Myself.PMS.Client.Assets;component/Styles/ScrollViewerStyle.xaml"/>
+                <ResourceDictionary Source="/Myself.PMS.Client.Assets;component/Styles/CollectionStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <FontFamily x:Key="AliFont">/Myself.PMS.Client.Assets;component/Fonts/AlibabaPuHuiTi-3-45-Light.ttf#阿里巴巴普惠体 3.0 45 Light</FontFamily>
+            <FontFamily x:Key="DyhFont">/Myself.PMS.Client.Assets;component/Fonts/SmileySans-Oblique.ttf#得意黑</FontFamily>
+            <FontFamily x:Key="Iconfont">/Myself.PMS.Client.Assets;component/Fonts/iconfont.ttf#zx_icons</FontFamily>
+
+            <DropShadowEffect Color="#3E7FFF" ShadowDepth="0" Opacity="0.2" x:Key="shadowEffect"/>
+
+
+        </ResourceDictionary>
+    </d:UserControl.Resources>
+    <Grid Background="#F4F7FF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="| 朝夕物业 > 物业 " VerticalAlignment="Center" Margin="10,5,0,0" Foreground="#999"/>
+
+        <Border CornerRadius="5" Grid.Row="1" Grid.RowSpan="3" Margin="5">
+            <Border.Effect>
+                <DropShadowEffect Color="#DDD" ShadowDepth="2"
+     BlurRadius="5" Direction="-90" Opacity="0.2"/>
+            </Border.Effect>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#EFEFEF" Offset="0"/>
+                    <GradientStop Color="White" Offset="0.2"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <Border Grid.Row="2" Margin="5,0"
+       BorderBrush="#DEDEDE" BorderThickness="0,1"/>
+
+
+        <!--搜索输入框-->
+        <TextBlock Text="检索条件：" Grid.Row="1" Foreground="#888"
+             Margin="30,25" FontSize="14"/>
+        <ItemsControl ItemsSource="{Binding Conditions}" Grid.Row="1" Margin="100,10,180,10"
+                VerticalAlignment="Center">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="2"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="20,3" Height="30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Header}" VerticalAlignment="Center"
+                             Foreground="#888"/>
+                        <TextBox Text="{Binding Value}" Style="{DynamicResource NormalTextBoxStyle}"
+                           Grid.Column="1"/>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right"
+   Grid.Row="1" Margin="20,17">
+            <!--刷新按钮-->
+            <Button Content="刷新" Style="{DynamicResource NormalButtonStyle}" Foreground="White"
+   Command="{Binding RefreshCommand}"
+   Width="60" Margin="5,0"/>
+            <!--添加按钮-->
+            <Button Content="新建" Style="{DynamicResource IconWithContentButtonStyle}"
+   Command="{Binding ModifyCommand}"
+   Tag="&#xe603;" Width="80">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#FE582D" Offset="0"/>
+                        <GradientStop Color="#F1961A" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+
+
+
+        <Grid Grid.IsSharedSizeScope="True" Margin="5,5,5,10" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border Background="#EEE" Height="1" VerticalAlignment="Bottom"/>
+
+            <Grid TextBlock.FontSize="12" TextBlock.FontWeight="Bold" TextBlock.Foreground="#666">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition Width="80"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="序号" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="业主姓名" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="身份证号" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0"/>
+                <TextBlock Text="手机号" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0"/>
+                <TextBlock Text="房间信息" Grid.Column="4" VerticalAlignment="Center" Margin="5,0"/>
+                <TextBlock Text="性别" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="备注" Grid.Column="6" VerticalAlignment="Center"/>
+                <TextBlock Text="状态" Grid.Column="7" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="记录时间" Grid.Column="8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="操作" Grid.Column="9" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <!--编辑、分配权限、重置密码、删除-->
+            </Grid>
+
+            <ListBox ItemsSource="{Binding Owners}" Grid.Row="1" 
+            BorderThickness="0" Background="Transparent"
+            ItemContainerStyle="{DynamicResource NoramalListBoxItemStyle}">
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Background="Transparent" Name="root" Height="33">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="160"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="80"/>
+                            </Grid.ColumnDefinitions>
+                            <!--间隔线-->
+                            <Border BorderBrush="#EEE" BorderThickness="0,0,0,1" Height="1" VerticalAlignment="Bottom" Grid.ColumnSpan="10" SnapsToDevicePixels="True"/>
+
+                            <!--序号-->
+                            <TextBlock Text="{Binding Index}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                              Foreground="#888"/>
+
+                            <TextBlock Text="{Binding HouseHolder}" VerticalAlignment="Center"
+                              FontWeight="Bold" Foreground="#333" TextTrimming="WordEllipsis"
+                              Grid.Column="1" Margin="5,0" ToolTip="{Binding InfoHeader}"/>
+
+                            <TextBlock Text="{Binding IdNumber}" VerticalAlignment="Center"
+                              Foreground="#555"
+                              TextTrimming="WordEllipsis" ToolTip="{Binding InfoContent}"
+                              Grid.Column="2" Margin="5,0"/>
+                            <TextBlock Text="{Binding Phone}" VerticalAlignment="Center" TextAlignment="Center"
+                              TextTrimming="WordEllipsis" ToolTip="{Binding InfoKey}"
+                              Foreground="#555" Grid.Column="3" Margin="5,0"/>
+
+                            <TextBlock FontSize="12" Foreground="#888" 
+                              VerticalAlignment="Center" Margin="5,0"
+                              Grid.Column="4">
+                          <Run Text="{Binding Qname}"/>
+                          <Run Text="{Binding Bname}"/>
+                          <Run Text="{Binding RoomNum}"/>
+                            </TextBlock>
+                            <TextBlock Text="男" FontSize="12" Foreground="#888" TextAlignment="Center"
+                              VerticalAlignment="Center" Margin="5,0"
+                              Grid.Column="5" Name="tb_gender"/>
+                            <TextBlock Text="{Binding Description}" Grid.Column="6" Foreground="#888"
+                              VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12"/>
+                            <!--状态-->
+                            <TextBlock Text="未入住" Grid.Column="7" Foreground="#888"
+                              VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12"
+                                 Name="tb_state"/>
+                            <TextBlock Text="{Binding ModifyTime,StringFormat=yyyy-MM-dd HH:mm:ss}" FontSize="12" Foreground="#888" 
+                              VerticalAlignment="Center" Margin="5,0"
+                              Grid.Column="8"/>
+
+                            <!--操作-->
+                            <StackPanel Grid.Column="9" VerticalAlignment="Center" 
+                               HorizontalAlignment="Center"
+                               Orientation="Horizontal">
+                                <TextBlock VerticalAlignment="Center" Margin="3,0" Name="tb_edit">
+                           <Hyperlink Command="{Binding DataContext.ModifyCommand,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      CommandParameter="{Binding}"
+                                      TextDecorations="None" Foreground="#409EFE">编辑</Hyperlink>
+                                </TextBlock>
+                                <TextBlock VerticalAlignment="Center" Margin="3,0">
+                           <Hyperlink Command="{Binding DataContext.DeleteCommand,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      CommandParameter="{Binding}"
+                                      TextDecorations="None" Foreground="#409EFE">删除</Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+
+                        </Grid>
+                        <DataTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="root" Property="Background" Value="#F7F9FA"/>
+                            </Trigger>
+                            <DataTrigger Binding="{Binding Gender}" Value="0">
+                                <Setter TargetName="tb_gender" Property="Text" Value="女"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Gender}" Value="1">
+                                <Setter TargetName="tb_gender" Property="Text" Value="男"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding State}" Value="0">
+                                <Setter TargetName="tb_state" Property="Text" Value="未入住"/>
+                                <Setter TargetName="tb_state" Property="Foreground" Value="orange"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding State}" Value="1">
+                                <Setter TargetName="tb_state" Property="Text" Value="已入住"/>
+                                <Setter TargetName="tb_state" Property="Foreground" Value="#409EFE"/>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+        </Grid>
+
+        <zxc:Pagination HorizontalAlignment="Center" VerticalAlignment="Center"
+               Grid.Row="3" DataContext="{Binding PaginationModel}"/>
+
+    </Grid>
+</UserControl>
