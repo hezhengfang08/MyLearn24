@@ -12,5 +12,7 @@ namespace Myself.PMS.Client.Entities
         public string RoleName { get; set; }
         public string? RoleDesc { get; set; }
         public int State { get; set; }
+        public List<RoleMenu>? Menus { get; set; }
+        public List<RoleUser>? Users { get; set; }
     }
 }

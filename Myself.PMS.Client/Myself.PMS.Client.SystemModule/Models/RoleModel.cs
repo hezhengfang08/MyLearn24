@@ -14,7 +14,7 @@ namespace Myself.PMS.Client.SystemModule.Models
         public string RoleName { get; set; }
         public string RoleDesc { get; set; }
 
-        public List<int> MenuIds { get; set; }
+        public List<string> MenuIds { get; set; }
         public List<int> UserIds { get; set; }
     }
 }

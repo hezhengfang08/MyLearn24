@@ -43,6 +43,13 @@ namespace Myself.PMS.Client.DAL
                 return result;
             }
         }
+        public string PostJons(string url, string json)
+        {
+            StringContent content = new StringContent(json);
+            content.Headers.ContentType =
+                new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            return this.Post(url, content);
+        }
         public string Post(string url, HttpContent content)
         {
             using (HttpClient client = new HttpClient())

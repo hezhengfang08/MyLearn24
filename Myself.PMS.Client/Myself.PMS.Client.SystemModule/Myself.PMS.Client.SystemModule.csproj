@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Myself.PMS.Client.Assets\Myself.PMS.Client.Assets.csproj" />
     <ProjectReference Include="..\Myself.PMS.Client.Common\Myself.PMS.Client.Common.csproj" />
+    <ProjectReference Include="..\Myself.PMS.Client.Controls\Myself.PMS.Client.Controls.csproj" />
     <ProjectReference Include="..\Myself.PMS.Client.Entities\Myself.PMS.Client.Entities.csproj" />
     <ProjectReference Include="..\Myself.PMS.Client.IBLL\Myself.PMS.Client.IBLL.csproj" />
   </ItemGroup>

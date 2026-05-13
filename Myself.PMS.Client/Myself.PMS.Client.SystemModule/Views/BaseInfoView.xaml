@@ -1,0 +1,249 @@
+﻿<UserControl x:Class="Myself.PMS.Client.SystemModule.Views.BaseInfoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Myself.PMS.Client.SystemModule.Views"
+             xmlns:zxc="clr-namespace:Myself.PMS.Client.Controls;assembly=Myself.PMS.Client.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <d:UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Myself.PMS.Client.Assets;component/Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="/Myself.PMS.Client.Assets;component/Styles/TextBoxStyles.xaml"/>
+                <ResourceDictionary Source="/Myself.PMS.Client.Assets;component/Styles/ViewTemplates.xaml"/>
+                <ResourceDictionary Source="/Myself.PMS.Client.Assets;component/Styles/ComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Myself.PMS.Client.Assets;component/Styles/ScrollViewerStyle.xaml"/>
+                <ResourceDictionary Source="/Myself.PMS.Client.Assets;component/Styles/CollectionStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <FontFamily x:Key="AliFont">/Myself.PMS.Client.Assets;component/Fonts/AlibabaPuHuiTi-3-45-Light.ttf#阿里巴巴普惠体 3.0 45 Light</FontFamily>
+            <FontFamily x:Key="DyhFont">/Myself.PMS.Client.Assets;component/Fonts/SmileySans-Oblique.ttf#得意黑</FontFamily>
+            <FontFamily x:Key="Iconfont">/Myself.PMS.Client.Assets;component/Fonts/iconfont.ttf#zx_icons</FontFamily>
+
+            <DropShadowEffect Color="#3E7FFF" ShadowDepth="0" Opacity="0.2" x:Key="shadowEffect"/>
+
+
+        </ResourceDictionary>
+    </d:UserControl.Resources>
+    <Grid Background="#F4F7FF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="| 朝夕物业 > 系统 " VerticalAlignment="Center" Margin="10,5,0,0" Foreground="#999"/>
+
+        <Border CornerRadius="5" Grid.Row="1" Grid.RowSpan="3" Margin="5">
+            <Border.Effect>
+                <DropShadowEffect Color="#DDD" ShadowDepth="2"
+          BlurRadius="5" Direction="-90" Opacity="0.2"/>
+            </Border.Effect>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#EFEFEF" Offset="0"/>
+                    <GradientStop Color="White" Offset="0.2"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <Border Grid.Row="2" Margin="5,0"
+            BorderBrush="#DEDEDE" BorderThickness="0,1"/>
+
+
+        <!--搜索输入框-->
+        <TextBlock Text="检索" Grid.Row="1" VerticalAlignment="Center" Margin="20,0" 
+           HorizontalAlignment="Left" Foreground="#888"/>
+        <TextBox VerticalAlignment="Center" Width="300" HorizontalAlignment="Left" Grid.Row="1"
+         Text="{Binding SearchKey,UpdateSourceTrigger=PropertyChanged}" Margin="60,0,0,0"
+         Style="{DynamicResource SearchTextBoxStyle}" Name="tb_search">
+            <TextBox.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding RefreshCommand}"/>
+            </TextBox.InputBindings>
+        </TextBox>
+
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right"
+        Grid.Row="1" Margin="20,0">
+            <!--刷新按钮-->
+            <Button Content="刷新" Style="{DynamicResource NormalButtonStyle}" Foreground="White"
+        Command="{Binding RefreshCommand}"
+        Width="60" Margin="5,0"/>
+            <!--添加按钮-->
+            <Button Content="新建" Style="{DynamicResource IconWithContentButtonStyle}"
+        Command="{Binding ModifyCommand}"
+        Tag="&#xe603;" Width="80">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#FE582D" Offset="0"/>
+                        <GradientStop Color="#F1961A" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+
+        <Grid Grid.IsSharedSizeScope="True" Margin="5,5,5,0" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border Background="#EEE" Height="1" VerticalAlignment="Bottom"/>
+
+            <Grid TextBlock.FontSize="12" TextBlock.FontWeight="Bold" TextBlock.Foreground="#666">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="序号" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="类型" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="标题" Grid.Column="2" VerticalAlignment="Center" Margin="5,0"/>
+                <TextBlock Text="内容" Grid.Column="3" VerticalAlignment="Center" Margin="5,0"/>
+                <TextBlock Text="关键词" Grid.Column="4" VerticalAlignment="Center" Margin="5,0"/>
+                <TextBlock Text="创建时间" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="发布时间" Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="状态" Grid.Column="7" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="作者" Grid.Column="8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="操作" Grid.Column="9" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <!--编辑、分配权限、重置密码、删除-->
+            </Grid>
+
+            <ListBox ItemsSource="{Binding BaseInfoList}" Grid.Row="1" 
+                     BorderThickness="0" Background="Transparent"
+                     ItemContainerStyle="{DynamicResource NoramalListBoxItemStyle}">
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Background="Transparent" Name="root" Height="30">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="150"/>
+                            </Grid.ColumnDefinitions>
+                            <!--间隔线-->
+                            <Border BorderBrush="#EEE" BorderThickness="0,0,0,1" Height="1" VerticalAlignment="Bottom" Grid.ColumnSpan="10" SnapsToDevicePixels="True"/>
+
+                            <!--序号-->
+                            <TextBlock Text="{Binding Index}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                               Foreground="#888"/>
+
+                            <Border VerticalAlignment="Center"  HorizontalAlignment="Center" Grid.Column="1"
+                            Width="30" Height="16" CornerRadius="8" Name="bor_type">
+                                <TextBlock Text="公告" VerticalAlignment="Center" Foreground="White" FontSize="9"
+                                   HorizontalAlignment="Center" Name="tb_type"/>
+                            </Border>
+
+                            <TextBlock Text="{Binding InfoHeader}" VerticalAlignment="Center"
+                               Foreground="#555" TextTrimming="WordEllipsis"
+                               Grid.Column="2" Margin="5,0" ToolTip="{Binding InfoHeader}"/>
+
+                            <TextBlock Text="{Binding InfoContent}" VerticalAlignment="Center"
+                               FontWeight="Bold" Foreground="#333"
+                               TextTrimming="WordEllipsis" ToolTip="{Binding InfoContent}"
+                               Grid.Column="3" Margin="5,0"/>
+                            <TextBlock Text="{Binding InfoKey}" VerticalAlignment="Center"
+                               TextTrimming="WordEllipsis" ToolTip="{Binding InfoKey}"
+                               Foreground="#555" Grid.Column="4" Margin="5,0"/>
+                            <TextBlock Text="{Binding ModifyTime,StringFormat=yyyy-MM-dd HH:mm:ss}" FontSize="12" Foreground="#888" 
+                               VerticalAlignment="Center" Margin="5,0"
+                               Grid.Column="5"/>
+                            <TextBlock Text="{Binding PublishTime,StringFormat=yyyy-MM-dd HH:mm:ss}" FontSize="12" Foreground="#888" 
+                               VerticalAlignment="Center" Margin="5,0"
+                               Grid.Column="6"/>
+                            <!--状态-->
+                            <TextBlock Text="创建" Name="tb_status" Grid.Column="7" Foreground="#888"
+                               VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12"/>
+                            <TextBlock Text="{Binding UserName}" Grid.Column="8" Foreground="#888"
+                               VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12"/>
+
+                            <!--操作-->
+                            <StackPanel Grid.Column="9" VerticalAlignment="Center" 
+                                HorizontalAlignment="Center"
+                                Orientation="Horizontal">
+                                <TextBlock VerticalAlignment="Center" Name="hl_cancel" Margin="3,0">
+                            <Hyperlink Command="{Binding DataContext.CancelCommand,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                       CommandParameter="{Binding}"
+                                       TextDecorations="None" Foreground="#409EFE">作废</Hyperlink>
+                                </TextBlock>
+                                <TextBlock VerticalAlignment="Center" Name="hl_pub" Margin="3,0">
+                            <Hyperlink Command="{Binding DataContext.PublishCommand,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                       CommandParameter="{Binding}"
+                                       TextDecorations="None" Foreground="#409EFE">
+                                <Run Text="发布" Name="hl"/>
+                            </Hyperlink>
+                                </TextBlock>
+                                <TextBlock VerticalAlignment="Center" Margin="3,0" Name="tb_edit">
+                            <Hyperlink Command="{Binding DataContext.ModifyCommand,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                       CommandParameter="{Binding}"
+                                       TextDecorations="None" Foreground="#409EFE">编辑</Hyperlink>
+                                </TextBlock>
+                                <TextBlock VerticalAlignment="Center" Margin="3,0">
+                            <Hyperlink Command="{Binding DataContext.DeleteCommand,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                       CommandParameter="{Binding}"
+                                       TextDecorations="None" Foreground="#409EFE">删除</Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+
+                        </Grid>
+                        <DataTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="root" Property="Background" Value="#F7F9FA"/>
+                            </Trigger>
+                            <DataTrigger Binding="{Binding InfoType}" Value="1">
+                                <Setter TargetName="tb_type" Property="Text" Value="公告"/>
+                                <Setter TargetName="bor_type" Property="Background" Value="#409EFE"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding InfoType}" Value="2">
+                                <Setter TargetName="tb_type" Property="Text" Value="通知"/>
+                                <Setter TargetName="bor_type" Property="Background" Value="Orange"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding InfoType}" Value="3">
+                                <Setter TargetName="tb_type" Property="Text" Value="新闻"/>
+                                <Setter TargetName="bor_type" Property="Background" Value="Green"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding State}" Value="0">
+                                <Setter TargetName="tb_status" Property="Text" Value="创建"/>
+                                <Setter TargetName="hl" Property="Text" Value="发布"/>
+                                <Setter TargetName="hl_cancel" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="hl_pub" Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding State}" Value="1">
+                                <Setter TargetName="tb_status" Property="Text" Value="发布"/>
+                                <Setter TargetName="hl_cancel" Property="Visibility" Value="Collapsed"/>
+                                <Setter TargetName="hl" Property="Text" Value="撤销"/>
+                                <Setter TargetName="hl_pub" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="tb_edit" Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding State}" Value="-1">
+                                <Setter TargetName="tb_status" Property="Text" Value="作废"/>
+                                <Setter TargetName="hl_cancel" Property="Visibility" Value="Collapsed"/>
+                                <Setter TargetName="hl_pub" Property="Visibility" Value="Collapsed"/>
+                                <Setter TargetName="tb_edit" Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+        </Grid>
+
+        <zxc:Pagination HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Grid.Row="3"
+                        DataContext="{Binding PaginationModel}"/>
+    </Grid>
+</UserControl>

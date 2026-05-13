@@ -183,7 +183,7 @@ namespace Myself.PMS.Server.Start.Controllers
 
         [HttpPost("reset_pwd")]
         [Authorize]
-        public ActionResult ResetPassword(int id)
+        public ActionResult ResetPassword([FromBody]int id)
         {
             Result<int> result = new Result<int>();
             try
@@ -196,6 +196,23 @@ namespace Myself.PMS.Server.Start.Controllers
                 result.State = 500;
                 result.ExceptionMessage = ex.Message;
             }
+            return Ok(result);
+        }
+        [HttpPost("ids")]
+        [Authorize]
+        public ActionResult GetUsersByIds(int[] ids)
+        {
+            Result<SysEmployee[]> result = new Result<SysEmployee[]>();
+            try
+            {
+                result.Data = _userService.GetUsersByIds(ids);
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+
             return Ok(result);
         }
     }

@@ -16,9 +16,15 @@ namespace Myself.PMS.Client.SystemModule
             containerRegistry.RegisterForNavigation<Views.MenuView>();
             containerRegistry.RegisterDialog<Views.UploadView>();
             containerRegistry.RegisterDialog<Views.UserView>();
+            containerRegistry.RegisterDialog<Views.RoleView>();
+            containerRegistry.RegisterDialog<Views.BaseInfoView>();
 
             containerRegistry.RegisterDialog<Views.Dialogs.ModifyMenuView>();
             containerRegistry.RegisterDialog<Views.Dialogs.ModifyUserView>();
+            containerRegistry.RegisterDialog<Views.Dialogs.SelectRoleView>();
+            containerRegistry.RegisterDialog<Views.Dialogs.SelectUserView>();
+            containerRegistry.RegisterDialog<Views.Dialogs.ModifyRoleView>();
+            containerRegistry.RegisterDialog<Views.Dialogs.ModifyInfoView>();
         }
     }
 

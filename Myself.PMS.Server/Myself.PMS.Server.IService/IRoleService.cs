@@ -17,5 +17,10 @@ namespace Myself.PMS.Server.IService
         int Update(SysRole role);
 
         int DeleteRole(int id);
+        int UpdateRoleMenus(RoleMenu[] rms);
+
+        int UpdateRoleUsers(RoleUser[] users);
+
+        int DeleteRoleUser(int rid, int uid);
     }
 }

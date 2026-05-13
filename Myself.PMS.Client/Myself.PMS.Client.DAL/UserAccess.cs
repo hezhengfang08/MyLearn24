@@ -76,5 +76,42 @@ namespace Myself.PMS.Client.DAL
 
             return this.Post(uri, content);
         }
+
+        public string ResetPassword(string id)
+        {
+            string uri = "/api/user/reset_pwd";
+           
+            StringContent content = new StringContent(id);
+            content.Headers.ContentType =
+                new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+
+            return this.Post(uri, content);
+        }
+
+        public string CheckUserName(string username, int id)
+        {
+            string uri = $"/api/user/check/{id}/{username}";
+            return this.Get(uri);
+        }
+
+        public string GetUsersByIds(string ids_json)
+        {
+            string uri = "api/user/ids";
+
+            StringContent content = new StringContent(ids_json);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+
+            return this.Post(uri, content);
+        }
+
+        public string SaveUserRoles(string roles)
+        {
+            string uri = "api/user/save_roles";
+
+            StringContent content = new StringContent(roles);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+
+            return this.Post(uri, content);
+        }
     }
 }

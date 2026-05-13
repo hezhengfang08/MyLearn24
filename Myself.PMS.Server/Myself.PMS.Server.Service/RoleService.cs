@@ -57,5 +57,30 @@ namespace Myself.PMS.Server.Service
                 .Where(r => id.Contains(r.RoleId))
                 .ToArray();
         }
+
+        public int UpdateRoleMenus(RoleMenu[] rms)
+        {
+            _client.Deleteable<RoleMenu>()
+               .Where(rm => rm.RoleId == rms[0].RoleId)
+               .ExecuteCommand();
+
+            return _client.Insertable(rms).ExecuteCommand();
+        }
+
+        public int UpdateRoleUsers(RoleUser[] users)
+        {
+            _client.Deleteable<RoleUser>()
+               .Where(ru => ru.RoleId == users[0].RoleId)
+               .ExecuteCommand();
+
+            return _client.Insertable(users).ExecuteCommand();
+        }
+
+        public int DeleteRoleUser(int rid, int uid)
+        {
+            return _client.Deleteable<RoleUser>()
+                .Where(ru => ru.RoleId == rid && ru.UserId == uid)
+                .ExecuteCommand();
+        }
     }
 }

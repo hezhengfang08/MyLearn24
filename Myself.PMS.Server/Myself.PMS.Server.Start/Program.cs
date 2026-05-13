@@ -66,6 +66,7 @@ namespace Myself.PMS.Server.Start
             services.AddTransient<IFileService, FileService>();
             services.AddTransient<IMenuService, MenuService>();
             services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<IBaseInfoService, BaseInfoService>();
         }
 
         private static void ConfigAuthentication(IServiceCollection service)

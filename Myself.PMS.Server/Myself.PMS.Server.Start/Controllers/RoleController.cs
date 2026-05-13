@@ -103,5 +103,59 @@ namespace Myself.PMS.Server.Start.Controllers
             }
             return Ok(result);
         }
+
+        [HttpPost("rmenus")]
+        [Authorize]
+        public ActionResult UpdateRoleMenus(RoleMenu[] rms)
+        {
+            Result<int> result = new Result<int>();
+            try
+            {
+                var count = _roleService.UpdateRoleMenus(rms);
+                result.Data = count;
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
+
+        [HttpPost("rusers")]
+        [Authorize]
+        public ActionResult UpdateRoleUsers(RoleUser[] rms)
+        {
+            Result<int> result = new Result<int>();
+            try
+            {
+                var count = _roleService.UpdateRoleUsers(rms);
+                result.Data = count;
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
+
+        [HttpGet("del_user/{rid}/{uid}")]
+        [Authorize]
+        public ActionResult DeleteRoleUser(int rid, int uid)
+        {
+            Result<int> result = new Result<int>();
+            try
+            {
+                var count = _roleService.DeleteRoleUser(rid, uid);
+                result.Data = count;
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
     }
 }

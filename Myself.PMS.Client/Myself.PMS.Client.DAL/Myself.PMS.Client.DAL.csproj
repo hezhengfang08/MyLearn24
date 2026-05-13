@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Myself.PMS.Client.Entities\Myself.PMS.Client.Entities.csproj" />
     <ProjectReference Include="..\Myself.PMS.Client.IDAL\Myself.PMS.Client.IDAL.csproj" />
+    
   </ItemGroup>
 
 </Project>

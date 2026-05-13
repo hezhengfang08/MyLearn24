@@ -119,6 +119,12 @@ namespace Myself.PMS.Server.Service
                 })
                 .ToArray();
         }
+        public SysEmployee[] GetUsersByIds(int[] ids)
+        {
+            return _client.Queryable<SysEmployee>()
+                .Where(e => ids.Contains(e.EId))
+                .ToArray();
+        }
         private bool AuthentationToken(string username, out string token)
         {
             token = string.Empty;

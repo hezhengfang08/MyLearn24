@@ -25,6 +25,8 @@ namespace Myself.PMS.Client.SystemModule.ViewModels
         IDialogService _dialogService;
         IEventAggregator _eventAggregator;
         public DelegateCommand<object> LockUserCommand { get; set; }
+        public DelegateCommand<object> SelectRoleCommand { get; set; }
+        public DelegateCommand<object> ResetPasswordCommand { get; set; }
 
         public UserViewModel(IRegionManager regionManager,
             IUserService userService,
@@ -40,6 +42,8 @@ namespace Myself.PMS.Client.SystemModule.ViewModels
             _dialogService = dialogService;
 
             LockUserCommand = new DelegateCommand<object>(DoLockUser);
+            SelectRoleCommand = new DelegateCommand<object>(DoSelectRole);
+            ResetPasswordCommand = new DelegateCommand<object>(DoResetPassword);
 
             this.Refresh();
         }
@@ -163,6 +167,38 @@ namespace Myself.PMS.Client.SystemModule.ViewModels
                 MessageBox.Show("操作已完成！", "提示");
 
                 ui.Status = status;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "提示");
+            }
+        }
+        private void DoSelectRole(object model)
+        {
+            DialogParameters ps = new DialogParameters();
+            ps.Add("model", model);
+            _dialogService.ShowDialog("SelectRoleView", ps, result =>
+            {
+                // 判断子窗口的返回状态，如果OK，刷新当前页面，否则不管
+                if (result.Result == ButtonResult.OK)
+                {
+                    this.Refresh();
+                }
+            });
+        }
+
+        private void DoResetPassword(object model)
+        {
+            try
+            {
+                if (MessageBox.Show("是否确定重置当前用户密码？", "提示", MessageBoxButton.YesNo) ==
+                    MessageBoxResult.Yes)
+                {
+                    var m = model as UserModel;
+                    _userService.ResetPassword(m.UserId);
+
+                    MessageBox.Show("重置完成！", "提示");
+                }
             }
             catch (Exception ex)
             {

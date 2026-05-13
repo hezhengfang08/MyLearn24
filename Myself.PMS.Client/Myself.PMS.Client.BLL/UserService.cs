@@ -71,5 +71,26 @@ namespace Myself.PMS.Client.BLL
 
             return this.GetResult<int>(json);
         }
+
+        public int ResetPassword(int id)
+        {
+           
+             var json = _userAccess.ResetPassword(id.ToString());
+            return this.GetResult<int>(json);
+        }
+
+        public int SaveUserRoles(RoleUser[] roleUsers)
+        {
+            string json = roleUsers.Serialize();
+            json = _userAccess.SaveUserRoles(json);
+            return this.GetResult<int>(json);
+        }
+
+        public EmployeeEntity[] GetUsersByIds(int[] ids)
+        {
+            string json = ids.Serialize();
+            json = _userAccess.GetUsersByIds(json);
+            return this.GetResult<EmployeeEntity[]>(json);
+        }
     }
 }

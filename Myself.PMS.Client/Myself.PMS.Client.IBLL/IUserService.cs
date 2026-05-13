@@ -13,5 +13,9 @@ namespace Myself.PMS.Client.IBLL
         bool LockUser(int id, int status);
 
         int UpdateUser(EmployeeEntity entity);
+
+        int SaveUserRoles(RoleUser[] roleUsers);
+        EmployeeEntity[] GetUsersByIds(int[] ids);
+        int ResetPassword(int id);
     }
 }
