@@ -1,6 +1,7 @@
 ﻿using Myself.PMS.Client.Entities;
 using Myself.PMS.Client.IBLL;
 using Myself.PMS.Client.IDAL;
+using Myself.PMS.Client.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,22 @@ namespace Myself.PMS.Client.BLL
         {
             string json = _feeAccess.GetFeeModes();
             return this.GetResult<FeeModeEntity[]>(json);
+        }
+
+        public int UpdateFee(FeeEntity fee)
+        {
+            string json = _feeAccess.UpdateFee(fee.Serialize());
+            return this.GetResult<int>(json);
+        }
+
+        public int DeleteFee(int id)
+        {
+            return this.GetResult<int>(_feeAccess.DeleteFee(id));   
+        }
+
+        public int ChangeState(int id, int state)
+        {
+           return this.GetResult<int>(_feeAccess.ChangeState(id, state));
         }
     }
 }

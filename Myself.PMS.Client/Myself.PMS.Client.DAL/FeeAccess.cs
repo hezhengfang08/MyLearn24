@@ -26,5 +26,23 @@ namespace Myself.PMS.Client.DAL
             string uri = $"/api/fee/feemode";
             return this.Get(uri);
         }
+
+        public string UpdateFee(string feeJson)
+        {
+            string uri = "/api/fee/update";
+            return this.PostJson(uri, feeJson);
+        }
+
+        public string DeleteFee(int id)
+        {
+            string uri = $"/api/fee/delete/{id}";
+            return this.Get(uri);
+        }
+
+        public string ChangeState(int id, int state)
+        {
+            string uri = $"/api/fee/state/{id}/{state}";
+            return this.Get(uri);
+        }
     }
 }

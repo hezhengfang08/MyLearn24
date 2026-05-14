@@ -35,5 +35,30 @@ namespace Myself.PMS.Server.Service
         {
             return _client.Queryable<FeeModeEntity>().ToArray();
         }
+
+        public int UpdateFee(FeeEntity feeEntity)
+        {
+            if (feeEntity.FeeId == 0)
+            {
+                return _client.Insertable(feeEntity).ExecuteCommand();
+            }
+            else
+            {
+                return _client.Updateable(feeEntity).ExecuteCommand();
+            }
+        }
+
+        public int DeleteFee(int id)
+        {
+            return _client.Deleteable<FeeEntity>().In(id).ExecuteCommand();
+        }
+
+        public int ChangeFeeState(int id, int state)
+        {
+            return _client.Updateable<FeeEntity>()
+                .SetColumns(fe => new FeeEntity { State = state })
+                .Where(fe => fe.FeeId == id)
+                .ExecuteCommand();
+        }
     }
 }

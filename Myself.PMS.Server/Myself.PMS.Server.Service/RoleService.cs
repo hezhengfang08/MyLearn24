@@ -24,7 +24,22 @@ namespace Myself.PMS.Server.Service
         }
         public int DeleteRole(int id)
         {
-            return _client.Deleteable<SysRole>().In(id).ExecuteCommand();
+            // 删除RoleMenu、RoleUser
+            int count = 0;
+            try
+            {
+                _client.Ado.BeginTran();
+                _client.Deleteable<RoleMenu>().Where(rm => rm.RoleId == id).ExecuteCommand();
+                _client.Deleteable<RoleUser>().Where(ru => ru.RoleId == id).ExecuteCommand();
+                count = _client.Deleteable<SysRole>().In(id).ExecuteCommand();
+                _client.Ado.CommitTran();
+            }
+            catch (Exception ex)
+            {
+                _client.Ado.RollbackTran();
+                throw ex;
+            }
+            return count;
         }
         public SysRole[] GetAllRoles(string key)
         {

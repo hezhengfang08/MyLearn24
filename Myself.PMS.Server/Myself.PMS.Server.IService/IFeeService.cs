@@ -12,5 +12,10 @@ namespace Myself.PMS.Server.IService
         FeeEntity[] GetFees(string key, int pageIndex, int pageSize, ref int totalCount);
 
         FeeModeEntity[] GetFeeModes();
+        int UpdateFee(FeeEntity feeEntity);
+
+        int DeleteFee(int id);
+
+        int ChangeFeeState(int id, int state);
     }
 }

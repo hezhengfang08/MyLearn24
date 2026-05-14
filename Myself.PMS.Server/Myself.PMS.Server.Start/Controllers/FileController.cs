@@ -155,6 +155,12 @@ namespace Myself.PMS.Server.Start.Controllers
             return GetImage(name, "SystemFiles");
         }
 
+        [HttpGet("order_img/{name}")]
+        public IActionResult GetOrderImage(string name)
+        {
+            return GetImage(name, "OrderFiles");
+        }
+
         [HttpPost("id_upload")]
         [Authorize]
         public IActionResult UploadIdCards(

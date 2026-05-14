@@ -55,5 +55,55 @@ namespace Myself.PMS.Server.Start.Controllers
             }
             return Ok(result);
         }
+
+        [HttpPost("update")]
+        public IActionResult UpdateFeeInfo(FeeEntity fee)
+        {
+            Result<int> result = new Result<int>();
+            try
+            {
+                result.Data = _feeService.UpdateFee(fee);
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
+
+        [HttpGet("delete/{id}")]
+        public ActionResult Delete(int id)
+        {
+            Result<int> result = new Result<int>();
+            try
+            {
+                var count = _feeService.DeleteFee(id);
+                result.Data = count;
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
+
+        [HttpGet("state/{id}/{state}")]
+        public ActionResult ChangeState(int id, int state)
+        {
+            Result<int> result = new Result<int>();
+            try
+            {
+                var count = _feeService.ChangeFeeState(id, state);
+                result.Data = count;
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
     }
 }

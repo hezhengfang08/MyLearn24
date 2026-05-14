@@ -69,6 +69,7 @@ namespace Myself.PMS.Server.Start
             services.AddTransient<IBaseInfoService, BaseInfoService>();
             services.AddTransient<IOwnerService, OwnerService>();
             services.AddTransient<IFeeService, FeeService>();
+            services.AddTransient<IOrderService, OrderService>();
 
         }
 

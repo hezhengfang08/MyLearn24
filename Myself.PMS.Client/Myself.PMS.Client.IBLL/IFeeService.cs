@@ -12,5 +12,10 @@ namespace Myself.PMS.Client.IBLL
         PageEntity<FeeEntity[]> GetFeePage(string key, int index, int size);
 
         FeeModeEntity[] GetFeeModes();
+        int UpdateFee(FeeEntity fee);
+
+        int DeleteFee(int id);
+
+        int ChangeState(int id, int state);
     }
 }
