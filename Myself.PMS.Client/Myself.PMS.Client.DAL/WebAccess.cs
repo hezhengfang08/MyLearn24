@@ -13,7 +13,7 @@ namespace Myself.PMS.Client.DAL
     public class WebAccess : IWebAccess
     {
         public string HostName { get; set; } =
-             //"http://localhost:7299";
+             //"https://localhost:7299";
         "https://localhost:7299";
 
         GlobalValues _globalValues;
@@ -117,6 +117,19 @@ namespace Myself.PMS.Client.DAL
                 client.UploadFileCompleted += (se, ev) => completed?.Invoke(ev);
 
                 client.UploadFileAsync(new Uri(HostName + uri), file);
+            }
+        }
+        public void Upload(
+            string uri,
+            string file,
+            string fileName)
+        {
+            using (WebClient client = new WebClient())
+            {
+                client.Headers.Add("Authorization", "Bearer " + _globalValues.Token);
+
+                client.Headers.Add("file_name", fileName);
+                client.UploadFile(new Uri(HostName + uri), file);
             }
         }
     }

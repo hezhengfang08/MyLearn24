@@ -16,6 +16,12 @@ namespace Myself.PMS.Server.Service
         {
             _client = client;
         }
+
+        public int DeleteOwner(int id)
+        {
+            return _client.Deleteable<OwnerEntity>().In(id).ExecuteCommand();
+        }
+
         public BuildingEntity[] GetBuildings()
         {
             return _client.Queryable<BuildingEntity>().ToArray();
@@ -60,6 +66,18 @@ namespace Myself.PMS.Server.Service
         public QuarterEntity[] GetQuarters()
         {
             return _client.Queryable<QuarterEntity>().ToArray();
+        }
+
+        public int UpdateOwner(OwnerEntity owner)
+        {
+            if (owner.OwnerId == 0)
+            {
+                return _client.Insertable(owner).ExecuteCommand();
+            }
+            else
+            {
+                return _client.Updateable(owner).ExecuteCommand();
+            }
         }
     }
 }

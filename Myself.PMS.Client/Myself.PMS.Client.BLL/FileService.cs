@@ -49,5 +49,9 @@ namespace Myself.PMS.Client.BLL
         {
             _fileAccess.UploadFile(file, filePath, prograssChanged, completed);
         }
+        public void UploadIdCard(string file, string name)
+        {
+            _fileAccess.UploadIdCard(file, name);
+        }
     }
 }

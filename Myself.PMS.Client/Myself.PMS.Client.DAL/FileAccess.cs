@@ -1,5 +1,6 @@
 ﻿using Myself.PMS.Client.Entities;
 using Myself.PMS.Client.IDAL;
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Security.Cryptography;
@@ -54,6 +55,13 @@ namespace Myself.PMS.Client.DAL
 
             // 调用什么方法
             this.Upload(uri, file, progress, completed, datas);
+        }
+
+        public void UploadIdCard(string file, string fileName)
+        {
+            string uri = "/api/file/id_upload";
+
+            this.Upload(uri, file, fileName); ;
         }
 
         private string GetFileMd5(string fileName)

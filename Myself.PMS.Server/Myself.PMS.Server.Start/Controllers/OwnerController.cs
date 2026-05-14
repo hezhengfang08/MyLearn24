@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Myself.PMS.Server.Entities;
 using Myself.PMS.Server.IService;
@@ -69,6 +70,40 @@ namespace Myself.PMS.Server.Start.Controllers
             {
                 var list = _ownerService.GetBuildings();
                 result.Data = list;
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
+        [HttpPost("update")]
+        [Authorize]
+        public ActionResult UpdateOwner(OwnerEntity owner)
+        {
+            Result<int> result = new Result<int>();
+            try
+            {
+                var count = _ownerService.UpdateOwner(owner);
+                result.Data = count;
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
+        [HttpPost("delete/{id}")]
+        [Authorize]
+        public ActionResult DeleteOwner([FromRoute]int id)
+        {
+            Result<int> result = new Result<int>();
+            try
+            {
+                var count = _ownerService.DeleteOwner(id);
+                result.Data = count;
             }
             catch (Exception ex)
             {

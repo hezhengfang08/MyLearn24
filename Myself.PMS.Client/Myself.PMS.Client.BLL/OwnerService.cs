@@ -18,6 +18,12 @@ namespace Myself.PMS.Client.BLL
             _ownerAccess = ownerAccess;
         }
 
+        public int DeleteOwner(int id)
+        {
+            string json = _ownerAccess.DeleteOwner(id);
+            return this.GetResult<int>(json);
+        }
+
         public BuildingEntity[] GetBuildings()
         {
             string json = _ownerAccess.GetBuildings();
@@ -35,6 +41,12 @@ namespace Myself.PMS.Client.BLL
         {
             string json = _ownerAccess.GetQuarters();
             return this.GetResult<QuarterEntity[]>(json);
+        }
+
+        public int UpdateOwner(OwnerEntity owner)
+        {
+            string json = _ownerAccess.UpdateOwner(owner.Serialize());
+            return this.GetResult<int>(json);
         }
     }
 }

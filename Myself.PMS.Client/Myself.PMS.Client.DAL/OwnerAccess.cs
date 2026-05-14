@@ -29,5 +29,20 @@ namespace Myself.PMS.Client.DAL
             string uri = "/api/owner/quarters";
             return this.Get(uri);
         }
+        public string UpdateOwner(string ownerJson)
+        {
+            string uri = $"/api/owner/update";
+
+
+
+            return this.PostJson(uri, ownerJson);
+        }
+
+        public string DeleteOwner(int id)
+        {
+            string uri = $"/api/owner/delete/{id}";
+            var content = new StringContent(string.Empty);
+            return this.Post(uri, content);
+        }
     }
 }

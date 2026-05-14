@@ -63,8 +63,8 @@
         <TextBlock Text="备注" Grid.Row="11" VerticalAlignment="Top" Margin="0,8" Foreground="#888"/>
 
 
-        <TextBox Grid.Column="1" Style="{DynamicResource NormalTextBoxStyle}" Height="30"
- Text="{Binding OwnerInfo.HouseHolder}"/>
+        <TextBox Grid.Column="1" Style="{DynamicResource ValidationTextBoxStyle}" Height="30"
+ Text="{Binding OwnerInfo.HouseHolder,ValidatesOnNotifyDataErrors=True}"/>
 
         <ComboBox Grid.Column="1" Grid.Row="1" Height="30"
               ItemsSource="{Binding QuarterList}"
@@ -75,8 +75,8 @@
               DisplayMemberPath="Name"
               SelectedItem="{Binding CurrentBuilding}"/>
 
-        <TextBox Grid.Row="3" Grid.Column="1" Style="{DynamicResource NormalTextBoxStyle}" Height="30"
- Text="{Binding OwnerInfo.RoomNum}"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Style="{DynamicResource ValidationTextBoxStyle}" Height="30"
+ Text="{Binding OwnerInfo.RoomNum, ValidatesOnNotifyDataErrors=true}"/>
 
         <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1"
     VerticalAlignment="Center">
@@ -95,19 +95,26 @@
  Text="{Binding OwnerInfo.IdNumber}"/>
 
         <Border Grid.Column="1" Grid.Row="7" Grid.RowSpan="2" HorizontalAlignment="Left"
-    BorderBrush="#DDD" BorderThickness="2" Width="100" Height="100"
-    CornerRadius="3"
-    Background="{Binding OwnerInfo.CredentialImg1}"/>
+             BorderBrush="#DDD" BorderThickness="2" Width="150" Height="100"
+             CornerRadius="3">
+            <Border.Background>
+                <ImageBrush ImageSource="{Binding OwnerInfo.CredentialImg1}"/>
+            </Border.Background>
+        </Border>
         <TextBlock Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
-        <Hyperlink >选择</Hyperlink>
+    <Hyperlink Command="{Binding SelectCommand}" CommandParameter="1">选择</Hyperlink>
         </TextBlock>
         <Border Grid.Column="1" Grid.Row="9" Grid.RowSpan="2" HorizontalAlignment="Left"
-    BorderBrush="#DDD" BorderThickness="2" Width="100" Height="100"
-    CornerRadius="3"
-    Background="{Binding OwnerInfo.CredentialImg2}"/>
+                BorderBrush="#DDD" BorderThickness="2" Width="150" Height="100"
+                CornerRadius="3">
+        <Border.Background>
+            <ImageBrush ImageSource="{Binding OwnerInfo.CredentialImg2}"/>
+        </Border.Background>
+        </Border>
         <TextBlock Grid.Row="9" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
-        <Hyperlink >选择</Hyperlink>
+            <Hyperlink Command="{Binding SelectCommand}" CommandParameter="2">选择</Hyperlink>
         </TextBlock>
+
 
         <TextBox Grid.Row="11" Grid.Column="1" Style="{DynamicResource NormalTextBoxStyle}" TextWrapping="Wrap" Margin="0,5"
      VerticalContentAlignment="Top" Padding="5,5"

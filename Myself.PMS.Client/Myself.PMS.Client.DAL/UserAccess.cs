@@ -32,7 +32,7 @@ namespace Myself.PMS.Client.DAL
 
         public string UpdatePassword(int id, string opd, string npd)
         {
-            // http://localhost:5273/api/User/update_pwd
+            // https://localhost:7299/api/User/update_pwd
             string uri = $"/api/User/update_pwd";
 
             // 通过Post方式传两个数据进入接口：id  pwd

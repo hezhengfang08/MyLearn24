@@ -12,5 +12,7 @@ namespace Myself.PMS.Client.IDAL
 
         string GetQuarters();
         string GetBuildings();
+        string UpdateOwner(string ownerJson);
+        string DeleteOwner(int id);
     }
 }

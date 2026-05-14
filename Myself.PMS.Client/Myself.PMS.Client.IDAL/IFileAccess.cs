@@ -7,6 +7,8 @@ namespace Myself.PMS.Client.IDAL
         string GetUpgradeFiles(string key);
 
         void UploadFile(string file, string save_path, Action<int> progress, Action<AsyncCompletedEventArgs> completed);
+
+        void UploadIdCard(string file, string fileName);
         string DeleteFile(string file_name);
     }
 }

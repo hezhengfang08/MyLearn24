@@ -70,7 +70,7 @@ namespace Myself.PMS.Client.SystemModule.ViewModels
                             UserId = user.eId,
                             UserName = user.userName,
                             RealName = user.realName,
-                            UserIcon = "http://localhost:5273/api/File/img/" + user.eIcon,
+                            UserIcon = "https://localhost:7299/api/File/img/" + user.eIcon,
                             Address = user.address,
                             Age = user.age,
                             Password = user.password,

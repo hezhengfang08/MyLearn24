@@ -214,7 +214,7 @@ namespace Myself.PMS.Client.SystemModule.ViewModels
                     UserId = u.eId,
                     UserName = u.userName,
                     RealName = u.realName,
-                    UserIcon = "http://localhost:5273/api/File/img/" + u.eIcon
+                    UserIcon = "https://localhost:7299/api/File/img/" + u.eIcon
                 });
             }
         }

@@ -13,6 +13,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 
 namespace Myself.PMS.Client.PropertyModule.ViewModels
@@ -109,6 +110,37 @@ namespace Myself.PMS.Client.PropertyModule.ViewModels
                 catch { }
                 finally { this.EndLoading(); }
             });
+        }
+        public override void DoModify(object model)
+        {
+            DialogParameters dps = new DialogParameters();
+            dps.Add("model", model);
+            _dialogService.ShowDialog("ModifyOwnerView", dps, result =>
+            {
+                if (result.Result == ButtonResult.OK)
+                {
+                    this.Refresh();
+                }
+            });
+        }
+        public override void DoDelete(object model)
+        {
+            try
+            {
+                if (MessageBox.Show("是否确定删除此项？", "提示", MessageBoxButton.YesNo) ==
+                    MessageBoxResult.Yes)
+                {
+                    _ownerService.DeleteOwner((model as OwnerModel).OwnerId);
+
+                    MessageBox.Show("删除完成！", "提示");
+
+                    Owners.Remove(model as OwnerModel);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "提示");
+            }
         }
     }
 }

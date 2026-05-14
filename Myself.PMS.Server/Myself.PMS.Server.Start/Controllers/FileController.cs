@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Myself.PMS.Server.Entities;
 using Myself.PMS.Server.IService;
@@ -60,8 +61,12 @@ namespace Myself.PMS.Server.Start.Controllers
         [HttpGet("img/{img}")]
         public IActionResult GetImage([FromRoute(Name = "img")] string imgPath)
         {
+            return GetImage(imgPath, "UserAvatars");
+        }
+        private IActionResult GetImage(string imgPath, string subFolder)
+        {
             var root = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
-            string rootPath = Path.Combine(root, @"WebFiles\UserAvatars");
+            string rootPath = Path.Combine(root, @"WebFiles", subFolder);
             //获取图片的返回类型
             var contentTypDict = new Dictionary<string, string> {
                 {"jpg","image/jpeg"},
@@ -116,26 +121,9 @@ namespace Myself.PMS.Server.Start.Controllers
                 if (filelist.Count > 0)
                 {
                     // 文件名称
+                    string subFolder = "UpgradeFiles";
                     string fileName = filelist[0].FileName;
-
-                    var root = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
-                    string targetPath = Path.Combine(root, "WebFiles", "UpgradeFiles");
-                    if (!string.IsNullOrEmpty(save_path) && save_path != ".\\")
-                        targetPath = Path.Combine(targetPath, save_path);
-
-                    DirectoryInfo di = new DirectoryInfo(targetPath);
-                    if (!di.Exists) di.Create();
-
-
-
-
-                    using (FileStream fs = System.IO.File.Create(Path.Combine(targetPath, fileName)))
-                    {
-                        // 复制文件
-                        filelist[0].CopyToAsync(fs).GetAwaiter().GetResult();
-                        // 清空缓冲区数据
-                        fs.Flush();
-                    }
+                    UploadFile(fileName, save_path, filelist, subFolder);
 
 
 
@@ -160,6 +148,63 @@ namespace Myself.PMS.Server.Start.Controllers
             return Ok(result);
         }
 
+        // http://localhost:5273/api/File/idcard/002m.jpg
+        [HttpGet("idcard/{name}")]
+        public IActionResult GetIdCard(string name)
+        {
+            return GetImage(name, "SystemFiles");
+        }
+
+        [HttpPost("id_upload")]
+        [Authorize]
+        public IActionResult UploadIdCards(
+          [FromForm] IFormCollection formCollection,
+          [FromHeader] string file_name)
+        {
+            Result<long> result = new Result<long>();
+            try
+            {
+                FormFileCollection filelist = (FormFileCollection)formCollection.Files;
+                if (filelist.Count > 0)
+                {
+                    string subFolder = "SystemFiles";
+                    UploadFile(file_name, "", filelist, subFolder);
+                }
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName">需要保存在文件夹中的文件名称</param>
+        /// <param name="save_path">更新文件上传时的子目录，主要是指的Modules</param>
+        /// <param name="filelist">上传的文件列表</param>
+        /// <param name="sub_folder">指定上传文件存放的目录，区分更新文件与系统文件</param>
+        private static void UploadFile(string fileName, string save_path,
+            FormFileCollection filelist, string sub_folder)
+        {
+            var root = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+            string targetPath = Path.Combine(root, "WebFiles", sub_folder);
+            if (!string.IsNullOrEmpty(save_path) && save_path != ".\\")
+                targetPath = Path.Combine(targetPath, save_path);
+
+            DirectoryInfo di = new DirectoryInfo(targetPath);
+            if (!di.Exists) di.Create();
+
+            using (FileStream fs = System.IO.File.Create(Path.Combine(targetPath, fileName)))
+            {
+                // 复制文件
+                filelist[0].CopyToAsync(fs).GetAwaiter().GetResult();
+                // 清空缓冲区数据
+                fs.Flush();
+            }
+        }
         [HttpPost("delete")]
         //[Authorize]
         public ActionResult DeleteFile([FromForm] string fileName)

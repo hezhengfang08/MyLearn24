@@ -13,6 +13,8 @@ namespace Myself.PMS.Client.IBLL
 
         QuarterEntity[] GetQuarters();
         BuildingEntity[] GetBuildings();
+        int UpdateOwner(OwnerEntity owner);
+        int DeleteOwner(int id);
 
     }
 }
