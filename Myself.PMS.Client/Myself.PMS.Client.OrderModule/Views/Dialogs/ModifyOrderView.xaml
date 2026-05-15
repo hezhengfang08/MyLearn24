@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="Myself.PMS.Client.OrderModule.Views.Dialogs.ModifyOrderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Myself.PMS.Client.OrderModule.Views.Dialogs"
+             mc:Ignorable="d" 
+               Template="{DynamicResource DialogViewTemplate}"
+  Height="500" Width="600">
+    <Grid Margin="40,20,40,10" TextBlock.Foreground="#888">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition MinHeight="35" Height="auto"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="需求描述" VerticalAlignment="Center" Foreground="#888"/>
+        <TextBlock Text="需求拍照" Grid.Row="2" VerticalAlignment="Top" Margin="0,8" Foreground="#888"/>
+        <TextBlock Text="维修类型" Grid.Row="4" VerticalAlignment="Center" Foreground="#888"/>
+        <TextBlock Text="服务类型" Grid.Row="5" VerticalAlignment="Center" Foreground="#888"/>
+        <TextBlock Text="维修地址" Grid.Row="6" VerticalAlignment="Center" Foreground="#888"/>
+        <TextBlock Text="联系人" Grid.Row="7" VerticalAlignment="Center" Margin="0,8" Foreground="#888"/>
+        <TextBlock Text="联系电话" Grid.Row="8" VerticalAlignment="Center" Margin="0,8" Foreground="#888"/>
+        <TextBlock Text="加急工单" Grid.Row="9" VerticalAlignment="Center" Margin="0,8" Foreground="#888"/>
+        <TextBlock Text="预计完成" Grid.Row="10" VerticalAlignment="Center" Margin="0,8" Foreground="#888"/>
+
+        <TextBox Grid.Column="1" Grid.RowSpan="2" Style="{DynamicResource ValidationTextBoxStyle}"
+           VerticalContentAlignment="Top" Padding="0,4"
+       Text="{Binding OrderInfo.Description}" Margin="0,4"/>
+
+        <ItemsControl ItemsSource="{Binding OrderInfo.ImageList}" 
+                    Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" HorizontalAlignment="Left"
+                    VerticalAlignment="Top" Margin="-5,5,70,8">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="6"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Width="50" Height="40" CornerRadius="3" Margin="5,2"
+                          BorderBrush="#DDD" BorderThickness="1">
+                        <Border.InputBindings>
+                            <MouseBinding MouseAction="LeftClick"
+                                        Command="{Binding DataContext.DeleteImageCommand,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                        CommandParameter="{Binding ImageId}"/>
+                        </Border.InputBindings>
+                        <Border.Background>
+                            <ImageBrush ImageSource="{Binding ImageName}"/>
+                        </Border.Background>
+                        <Border Background="#7000" Name="border" CornerRadius="3"
+                              Visibility="Collapsed">
+                            <Path Data="M0 0 15 15M15 0 0 15"
+                                Stroke="White" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                StrokeThickness="1"/>
+                        </Border>
+                    </Border>
+                    <DataTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="border" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <ComboBox Grid.Column="1" Grid.Row="4" Height="30"
+                ItemsSource="{Binding OrderTypeList}"
+                SelectedItem="{Binding OrderInfo.OrderType}"/>
+        <ComboBox Grid.Column="1" Grid.Row="5" Height="30"
+                SelectedItem="{Binding OrderInfo.ServiceType}"
+                ItemsSource="{Binding ServiceList}"/>
+
+        <TextBox Grid.Row="6" Grid.Column="1" Style="{DynamicResource ValidationTextBoxStyle}" Height="30"
+               Text="{Binding OrderInfo.Address}" Padding="0"/>
+        <TextBox Grid.Row="7" Grid.Column="1" Style="{DynamicResource ValidationTextBoxStyle}"
+               Padding="0" Height="30" Text="{Binding OrderInfo.Contacts}"/>
+        <TextBox Grid.Row="8" Grid.Column="1" Style="{DynamicResource ValidationTextBoxStyle}" Height="30"
+               Text="{Binding OrderInfo.Phone}" Padding="0"/>
+        <CheckBox Grid.Row="9" Grid.Column="1" VerticalAlignment="Center"
+                IsChecked="{Binding OrderInfo.IsUrgent}"/>
+
+        <DatePicker Grid.Row="10" Grid.Column="1" Height="30" VerticalContentAlignment="Center"
+                  SelectedDate="{Binding OrderInfo.FinishTime}"/>
+
+
+        <TextBlock Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" 
+                 HorizontalAlignment="Right">
+          <Hyperlink Command="{Binding SelectImageCommand}">选择</Hyperlink>
+        </TextBlock>
+    </Grid>
+</UserControl>

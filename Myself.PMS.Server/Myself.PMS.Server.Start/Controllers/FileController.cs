@@ -161,6 +161,30 @@ namespace Myself.PMS.Server.Start.Controllers
             return GetImage(name, "OrderFiles");
         }
 
+        [HttpPost("issue_img")]
+        [Authorize]
+        public IActionResult UploadIssueImage(
+         [FromForm] IFormCollection formCollection,
+         [FromHeader] string file_name)
+        {
+            Result<long> result = new Result<long>();
+            try
+            {
+                FormFileCollection filelist = (FormFileCollection)formCollection.Files;
+                if (filelist.Count > 0)
+                {
+                    string subFolder = "OrderFiles";
+                    UploadFile(file_name, "", filelist, subFolder);
+                }
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
+
         [HttpPost("id_upload")]
         [Authorize]
         public IActionResult UploadIdCards(

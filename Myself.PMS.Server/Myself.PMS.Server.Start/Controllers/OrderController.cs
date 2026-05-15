@@ -44,5 +44,54 @@ namespace Myself.PMS.Server.Start.Controllers
             }
             return Ok(result);
         }
+        [HttpPost("update")]
+        public ActionResult UpdateInfo(OrderEntity order)
+        {
+            Result<int> result = new Result<int>();
+            try
+            {
+                result.Data = _orderService.UpdateOrder(order);
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
+
+        [HttpGet("delete/{id}")]
+        public ActionResult DeleteInfo(string id)
+        {
+            Result<int> result = new Result<int>();
+            try
+            {
+                result.Data = _orderService.DeleteOrder(id);
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
+
+
+        [HttpGet("state/{id}/{state}")]
+        public ActionResult CancelState(string id, int state)
+        {
+            Result<int> result = new Result<int>();
+            try
+            {
+                var count = _orderService.ChangeState(id, state);
+                result.Data = count;
+            }
+            catch (Exception ex)
+            {
+                result.State = 500;
+                result.ExceptionMessage = ex.Message;
+            }
+            return Ok(result);
+        }
     }
 }

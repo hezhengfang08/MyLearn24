@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Prism.Mvvm;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Myself.PMS.Client.OrderModule.Models
 {
-    public class OrderModel
+    public class OrderModel: BindableBase
     {
         public int Index { get; set; }
         public string OrderId { get; set; }
@@ -17,12 +19,21 @@ namespace Myself.PMS.Client.OrderModule.Models
         public string Contacts { get; set; }
         public string Phone { get; set; }
         public DateTime FinishTime { get; set; }
-        public int State { get; set; }
+
+        private int _state;
+
+        public int State
+        {
+            get { return _state; }
+            set { SetProperty<int>(ref _state, value); }
+        }
+
         public bool IsUrgent { get; set; }
         public DateTime ModifyTime { get; set; }
         public int UserId { get; set; }
         public string UserName { get; set; }
-
-        public List<OrderImageModel> ImageList { get; set; }
+        public string Title { get; set; }   
+        public ObservableCollection<OrderImageModel> ImageList { get; set; } =
+            new ObservableCollection<OrderImageModel>();
     }
 }

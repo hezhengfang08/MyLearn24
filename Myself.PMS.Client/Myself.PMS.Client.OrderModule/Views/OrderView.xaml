@@ -168,7 +168,7 @@
                                     </StackPanel>
 
                                     <ItemsControl ItemsSource="{Binding ImageList}" Grid.Column="1"
-                                                  Grid.RowSpan="2">
+                Grid.RowSpan="2" Name="ic">
                                         <ItemsControl.ItemsPanel>
                                             <ItemsPanelTemplate>
                                                 <StackPanel Orientation="Horizontal"/>
@@ -176,11 +176,29 @@
                                         </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Border Width="60" Height="45" CornerRadius="2" Margin="3">
+                                                <Border Width="60" Height="45" CornerRadius="2" Margin="3" Name="border">
                                                     <Border.Background>
                                                         <ImageBrush ImageSource="{Binding ImageName}"/>
                                                     </Border.Background>
+                                                    <Border.InputBindings>
+                                                        <MouseBinding MouseAction="LeftClick"
+                                    Command="{Binding DataContext.ImageCommand,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                    CommandParameter="{Binding ElementName=tb}"/>
+                                                    </Border.InputBindings>
+                                                    <ContentControl Tag="{Binding ImageName}" Visibility="Collapsed"
+                             Content="{Binding ElementName=ic,Path=DataContext.ImageList}" Name="tb"/>
                                                 </Border>
+                                                <DataTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="border" Property="BorderBrush" Value="#DDD"/>
+                                                        <Setter TargetName="border" Property="BorderThickness" Value="1"/>
+                                                        <Setter TargetName="border" Property="Effect">
+                                                            <Setter.Value>
+                                                                <DropShadowEffect Color="Gray" BlurRadius="5" ShadowDepth="0" Opacity="0.3"/>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Trigger>
+                                                </DataTemplate.Triggers>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
@@ -231,12 +249,12 @@
                                 <Setter TargetName="root" Property="Background" Value="#F7F9FA"/>
                             </Trigger>
 
-                            <DataTrigger Binding="{Binding State}" Value="0">
+                            <DataTrigger Binding="{Binding State}" Value="1">
                                 <Setter TargetName="hl" Property="Text" Value="发布"/>
                                 <Setter TargetName="hl_cancel" Property="Visibility" Value="Visible"/>
                                 <Setter TargetName="hl_pub" Property="Visibility" Value="Visible"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding State}" Value="1">
+                            <DataTrigger Binding="{Binding State}" Value="0">
                                 <Setter TargetName="hl_cancel" Property="Visibility" Value="Collapsed"/>
                                 <Setter TargetName="hl" Property="Text" Value="撤销"/>
                                 <Setter TargetName="hl_pub" Property="Visibility" Value="Visible"/>

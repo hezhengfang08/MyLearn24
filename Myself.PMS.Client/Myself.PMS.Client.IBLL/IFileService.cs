@@ -15,5 +15,6 @@ namespace Myself.PMS.Client.IBLL
         void UploadFile(string file, string filePath, Action<int> prograssChanged, Action<AsyncCompletedEventArgs> completed);
         void UploadIdCard(string file, string name);
         int DeleteFile(string fileName);
+        void UploadIssueImage(string file, string name);
     }
 }

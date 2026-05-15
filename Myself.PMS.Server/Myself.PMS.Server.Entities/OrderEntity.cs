@@ -49,7 +49,12 @@ namespace Myself.PMS.Server.Entities
         [SugarColumn(ColumnName = "user_name")]
         public string UserName { get; set; }
 
+        [SugarColumn(ColumnName = "title")]
+   
+        public string Title { get; set; }
+
         [SugarColumn(IsIgnore = true)]
         public List<OrderImageEntity> Images { get; set; }
+     
     }
 }

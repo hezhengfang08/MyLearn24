@@ -11,5 +11,7 @@ namespace Myself.PMS.Client.OrderModule.Models
         public string OrderId { get; set; }
         public string ImageId { get; set; }
         public string ImageName { get; set; }
+
+        public bool IsModified { get; set; }
     }
 }

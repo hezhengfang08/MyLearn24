@@ -64,6 +64,13 @@ namespace Myself.PMS.Client.DAL
             this.Upload(uri, file, fileName); ;
         }
 
+        public void UploadIssueImage(string file, string fileName)
+        {
+            string uri = "/api/file/issue_img";
+
+            this.Upload(uri, file, fileName);
+        }
+
         private string GetFileMd5(string fileName)
         {
             try

@@ -53,5 +53,10 @@ namespace Myself.PMS.Client.BLL
         {
             _fileAccess.UploadIdCard(file, name);
         }
+
+        public void UploadIssueImage(string file, string name)
+        {
+            _fileAccess.UploadIssueImage(file, name);
+        }
     }
 }

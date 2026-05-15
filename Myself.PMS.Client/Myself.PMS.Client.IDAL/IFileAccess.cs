@@ -10,5 +10,6 @@ namespace Myself.PMS.Client.IDAL
 
         void UploadIdCard(string file, string fileName);
         string DeleteFile(string file_name);
+        void UploadIssueImage(string file, string fileName);
     }
 }

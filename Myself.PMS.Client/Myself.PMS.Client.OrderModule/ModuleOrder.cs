@@ -14,6 +14,9 @@ namespace Myself.PMS.Client.OrderModule
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<Views.OrderView>();
+
+            containerRegistry.RegisterDialog<Views.Dialogs.ModifyOrderView>();
+            containerRegistry.RegisterDialog<Views.Dialogs.ImagePreviewView>();
         }
     }
 

@@ -10,5 +10,10 @@ namespace Myself.PMS.Server.IService
     public interface IOrderService
     {
         OrderEntity[] GetOrders(string key, int index, int size, ref int totalCount);
+        int UpdateOrder(OrderEntity order);
+
+        int DeleteOrder(string id);
+
+        int ChangeState(string id, int state);
     }
 }
