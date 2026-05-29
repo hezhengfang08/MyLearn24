@@ -1,0 +1,344 @@
+﻿<UserControl x:Class="Myself.PMS.Client.FinanceModule.Views.IEDetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Myself.PMS.Client.FinanceModule.Views"
+             xmlns:zxc="clr-namespace:Myself.PMS.Client.Controls;assembly=Myself.PMS.Client.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <d:UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Zhaoxi.PMS.Client.Assets;component/Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="/Zhaoxi.PMS.Client.Assets;component/Styles/TextBoxStyles.xaml"/>
+                <ResourceDictionary Source="/Zhaoxi.PMS.Client.Assets;component/Styles/ViewTemplates.xaml"/>
+                <ResourceDictionary Source="/Zhaoxi.PMS.Client.Assets;component/Styles/ComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Zhaoxi.PMS.Client.Assets;component/Styles/ScrollViewerStyle.xaml"/>
+                <ResourceDictionary Source="/Zhaoxi.PMS.Client.Assets;component/Styles/CollectionStyles.xaml"/>
+                <ResourceDictionary Source="/Zhaoxi.PMS.Client.Assets;component/Styles/DatePickerStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <FontFamily x:Key="AliFont">/Zhaoxi.PMS.Client.Assets;component/Fonts/AlibabaPuHuiTi-3-45-Light.ttf#阿里巴巴普惠体 3.0 45 Light</FontFamily>
+            <FontFamily x:Key="DyhFont">/Zhaoxi.PMS.Client.Assets;component/Fonts/SmileySans-Oblique.ttf#得意黑</FontFamily>
+            <FontFamily x:Key="Iconfont">/Zhaoxi.PMS.Client.Assets;component/Fonts/iconfont.ttf#zx_icons</FontFamily>
+
+            <DropShadowEffect Color="#3E7FFF" ShadowDepth="0" Opacity="0.2" x:Key="shadowEffect"/>
+
+
+        </ResourceDictionary>
+    </d:UserControl.Resources>
+    <Grid Background="#F4F7FF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="| 朝夕物业 > 财务 " VerticalAlignment="Center" Margin="10,5,0,0" Foreground="#999"/>
+
+        <Border CornerRadius="5" Grid.Row="1" Grid.RowSpan="3" Margin="5">
+            <Border.Effect>
+                <DropShadowEffect Color="#DDD" ShadowDepth="2"
+                           BlurRadius="5" Direction="-90" Opacity="0.2"/>
+            </Border.Effect>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#EFEFEF" Offset="0"/>
+                    <GradientStop Color="White" Offset="0.2"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <Border Grid.Row="2" Margin="5,0"
+         BorderBrush="#DEDEDE" BorderThickness="0,1"/>
+
+
+        <!--搜索输入框-->
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="1"
+                 Orientation="Horizontal" Margin="280,0">
+            <TextBlock Text="账款发生日期" Foreground="#888" VerticalAlignment="Center"/>
+            <DatePicker Height="30" VerticalContentAlignment="Center" Margin="10,0"
+                     Width="120" DisplayDateEnd="{Binding EndDate}"
+                     SelectedDate="{Binding StartDate}"/>
+            <TextBlock Text="-" VerticalAlignment="Center"/>
+            <DatePicker Height="30" VerticalContentAlignment="Center" Margin="10,0"
+                     Width="120" DisplayDateStart="{Binding StartDate}"
+                     SelectedDate="{Binding EndDate}"/>
+        </StackPanel>
+
+        <TextBlock Text="检索" Grid.Row="1" VerticalAlignment="Center" Margin="20,0" 
+                 HorizontalAlignment="Left" Foreground="#888"/>
+        <TextBox VerticalAlignment="Center" Width="200" HorizontalAlignment="Left" Grid.Row="1"
+              Text="{Binding SearchKey,UpdateSourceTrigger=PropertyChanged}" Margin="60,0,0,0"
+              Style="{DynamicResource SearchTextBoxStyle}" Name="tb_search">
+            <TextBox.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding RefreshCommand}"/>
+            </TextBox.InputBindings>
+        </TextBox>
+
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right"
+                 Grid.Row="1" Margin="20,0">
+            <!--刷新按钮-->
+            <Button Content="刷新" Style="{DynamicResource NormalButtonStyle}" Foreground="White"
+                 Command="{Binding RefreshCommand}"
+                 Width="60" Margin="5,0"/>
+            <!--添加按钮-->
+            <Button Content="新建" Style="{DynamicResource IconWithContentButtonStyle}"
+                 Command="{Binding ModifyCommand}"
+                 Tag="&#xe603;" Width="80">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#FE582D" Offset="0"/>
+                        <GradientStop Color="#F1961A" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+
+
+        <Grid  Margin="5,5,5,10" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border Background="#EEE" Height="1" VerticalAlignment="Bottom"/>
+
+            <ScrollViewer VerticalScrollBarVisibility="Disabled"
+                       HorizontalScrollBarVisibility="Hidden"
+                       Name="sv_header">
+                <Grid TextBlock.FontSize="12" TextBlock.FontWeight="Bold" TextBlock.Foreground="#666">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="序号" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="账款      发生日期" Grid.Column="1" TextWrapping="Wrap" TextAlignment="Center"
+                            VerticalAlignment="Center" HorizontalAlignment="Center" Margin="12,0"/>
+
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="120"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Height="1" Background="#EEE" VerticalAlignment="Bottom" Grid.ColumnSpan="3"/>
+                        <TextBlock Text="收入" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                Margin="5,0"/>
+
+                        <TextBlock Text="收入金额" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0"/>
+                        <TextBlock Text="收入类型" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0"/>
+                        <TextBlock Text="摘要" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center"
+                                HorizontalAlignment="Center" Margin="5,0"/>
+                    </Grid>
+
+                    <Grid Grid.Column="3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="120"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Height="1" Background="#EEE" VerticalAlignment="Bottom" Grid.ColumnSpan="3"/>
+                        <TextBlock Text="支出" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                Margin="5,0"/>
+
+                        <TextBlock Text="支出金额" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0"/>
+                        <TextBlock Text="支出类型" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0"/>
+                        <TextBlock Text="摘要" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center"
+                                HorizontalAlignment="Center" Margin="5,0"/>
+                    </Grid>
+                    <Grid Grid.Column="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="120"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Height="1" Background="#EEE" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
+                        <TextBlock Text="资金经办信息" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                Margin="5,0"/>
+
+                        <TextBlock Text="项目名称" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0"/>
+                        <TextBlock Text="经由账户" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0"/>
+                        <TextBlock Text="经办部门" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"
+                                HorizontalAlignment="Center" Margin="5,0"/>
+                        <TextBlock Text="经办人" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center"
+        HorizontalAlignment="Center" Margin="5,0"/>
+                        <TextBlock Text="备注" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center"
+        HorizontalAlignment="Center" Margin="5,0"/>
+                    </Grid>
+
+                    <Grid Grid.Column="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="120"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Height="1" Background="#EEE" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
+                        <TextBlock Text="建档信息" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center"
+                     Margin="5,0"/>
+
+                        <TextBlock Text="建档人" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0"/>
+                        <TextBlock Text="建档时间" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0"/>
+                    </Grid>
+                    <TextBlock Text="状态" Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="操作" Grid.Column="7" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <!--编辑、分配权限、重置密码、删除-->
+                </Grid>
+            </ScrollViewer>
+
+            <ListBox Grid.Row="1" ItemsSource="{Binding IEList}"
+                  BorderThickness="0" Background="Transparent"
+                  ItemContainerStyle="{DynamicResource NoramalListBoxItemStyle}"
+                  ScrollViewer.ScrollChanged="ListBox_ScrollChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Background="Transparent" Name="root" Height="30">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="150"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Background="#F7F9FA" Grid.Column="2"/>
+                            <Border Background="#F7F9FA" Grid.Column="5"/>
+                            <!--间隔线-->
+                            <Border BorderBrush="#EEE" BorderThickness="0,0,0,1" Height="1" VerticalAlignment="Bottom" Grid.ColumnSpan="20" SnapsToDevicePixels="True"/>
+
+                            <!--序号-->
+                            <TextBlock Text="{Binding Index}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                Foreground="#888"/>
+
+                            <TextBlock Text="{Binding HappendTime,StringFormat=yyyy/MM/dd}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                    Grid.Column="1"/>
+
+                            <TextBlock Text="{Binding IncomeAmount,StringFormat={}{0:F2}}" VerticalAlignment="Center" HorizontalAlignment="Right"
+                Foreground="#555" TextTrimming="WordEllipsis"
+                Grid.Column="2" Margin="3,0" ToolTip="{Binding InfoHeader}"/>
+                            <TextBlock Text="{Binding IncomeType}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                Foreground="#333" Grid.Column="3" Margin="3,0"/>
+                            <TextBlock Text="{Binding IncomeDesc}" VerticalAlignment="Center"
+                TextTrimming="WordEllipsis" ToolTip="{Binding IncomeDesc}"
+                Foreground="#555" Grid.Column="4" Margin="3,0"/>
+
+                            <TextBlock Text="{Binding ExpensesAmount,StringFormat={}{0:F2}}"
+                    FontSize="12" Foreground="#888" HorizontalAlignment="Right"
+                VerticalAlignment="Center" Margin="5,0" Grid.Column="5"/>
+                            <TextBlock Text="{Binding ExpensesType}" FontSize="12" Foreground="#888" 
+                VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0" Grid.Column="6"/>
+                            <TextBlock Text="{Binding ExpensesDesc}" VerticalAlignment="Center"
+                TextTrimming="WordEllipsis" ToolTip="{Binding ExpensesDesc}"
+                Foreground="#555" Grid.Column="7" Margin="3,0"/>
+
+                            <TextBlock Text="{Binding ProjectName}" FontSize="12" Foreground="#888" 
+                     TextTrimming="WordEllipsis" ToolTip="{Binding ProjectName}"
+                     VerticalAlignment="Center" Margin="5,0" Grid.Column="8"/>
+                            <TextBlock Text="{Binding Account}" FontSize="12" Foreground="#888" 
+                 VerticalAlignment="Center" HorizontalAlignment="Center"
+                    Margin="5,0" Grid.Column="9"/>
+                            <TextBlock Text="{Binding Department}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                    Foreground="#555" Grid.Column="10" Margin="3,0"/>
+                            <TextBlock Text="{Binding Operator}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                    Foreground="#555" Grid.Column="11" Margin="3,0"/>
+                            <TextBlock Text="{Binding Description}" VerticalAlignment="Center"
+                    TextTrimming="WordEllipsis" ToolTip="{Binding Description}"
+                    Foreground="#555" Grid.Column="12" Margin="3,0"/>
+
+                            <TextBlock Text="{Binding RecordName}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                    Foreground="#555" Grid.Column="13" Margin="3,0"/>
+                            <TextBlock Text="{Binding RecordTime,StringFormat=yyyy/MM/dd,TargetNullValue=''}"
+                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                    Foreground="#555" Grid.Column="14" Margin="3,0"/>
+
+                            <!--状态-->
+                            <TextBlock Text="创建" Name="tb_status" Grid.Column="15" Foreground="#888"
+                VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12"/>
+
+                            <!--操作-->
+                            <StackPanel Grid.Column="16" VerticalAlignment="Center" 
+                 HorizontalAlignment="Center"
+                 Orientation="Horizontal">
+                                <TextBlock VerticalAlignment="Center" Name="tb_revoke" Margin="3,0">
+                 <Hyperlink Command="{Binding DataContext.RevokeCommand,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            CommandParameter="{Binding}"
+                            TextDecorations="None" Foreground="#409EFE">撤销</Hyperlink>
+                                </TextBlock>
+                                <TextBlock VerticalAlignment="Center" Name="tb_pub" Margin="3,0">
+                 <Hyperlink Command="{Binding DataContext.ConfirmCommand,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            CommandParameter="{Binding}"
+                            TextDecorations="None" Foreground="#409EFE">建档</Hyperlink>
+                                </TextBlock>
+                                <TextBlock VerticalAlignment="Center" Margin="3,0" Name="tb_edit">
+                 <Hyperlink Command="{Binding DataContext.ModifyCommand,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            CommandParameter="{Binding}"
+                            TextDecorations="None" Foreground="#409EFE">编辑</Hyperlink>
+                                </TextBlock>
+                                <TextBlock VerticalAlignment="Center" Margin="3,0" Name="tb_delete">
+                     <Hyperlink Command="{Binding DataContext.DeleteCommand,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                CommandParameter="{Binding}"
+                                TextDecorations="None" Foreground="#409EFE">删除</Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+
+                        </Grid>
+                        <DataTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="root" Property="Background" Value="#F7F9FA"/>
+                            </Trigger>
+
+                            <DataTrigger Binding="{Binding State}" Value="0">
+                                <Setter TargetName="tb_status" Property="Text" Value="创建"/>
+                                <Setter TargetName="tb_revoke" Property="Visibility" Value="Collapsed"/>
+                                <Setter TargetName="tb_pub" Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding State}" Value="1">
+                                <Setter TargetName="tb_status" Property="Text" Value="已建档"/>
+                                <Setter TargetName="tb_revoke" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="tb_pub" Property="Visibility" Value="Collapsed"/>
+                                <Setter TargetName="tb_edit" Property="Visibility" Value="Collapsed"/>
+                                <Setter TargetName="tb_delete" Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+
+        <zxc:Pagination HorizontalAlignment="Center" VerticalAlignment="Center"
+         Grid.Row="3" DataContext="{Binding PaginationModel}"/>
+    </Grid>
+</UserControl>

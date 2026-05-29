@@ -41,6 +41,8 @@ namespace Myself.PMS.Client.Start
             containerRegistry.Register<IOwnerService, OwnerService>();
             containerRegistry.Register<IFeeService, FeeService>();
             containerRegistry.Register<IOrderService, OrderService>();
+            containerRegistry.Register<IFinanceService, FinanceService>();
+            containerRegistry.Register<IContractService, ContractService>();
 
             containerRegistry.Register<IUserAccess, UserAccess>();
             containerRegistry.Register<IFileAccess, FileAccess>();
@@ -50,7 +52,9 @@ namespace Myself.PMS.Client.Start
             containerRegistry.Register<IOwnerAccess, OwnerAccess>();
             containerRegistry.Register<IFeeAccess, FeeAccess>();
             containerRegistry.Register<IOrderAccess, OrderAccess>();
-        
+            containerRegistry.Register<IFinanceAccess, FinanceAccess>();
+            containerRegistry.Register<IContractAccess, ContractAccess>();
+
         }
 
         protected override IModuleCatalog CreateModuleCatalog()

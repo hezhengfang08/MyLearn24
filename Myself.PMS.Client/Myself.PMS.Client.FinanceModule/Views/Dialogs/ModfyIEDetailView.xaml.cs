@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Myself.PMS.Client.FeeModule.Views
+namespace Myself.PMS.Client.FinanceModule.Views.Dialogs
 {
     /// <summary>
-    /// FeeView.xaml 的交互逻辑
+    /// ModfyIEDetailView.xaml 的交互逻辑
     /// </summary>
-    public partial class FeeView : UserControl
+    public partial class ModfyIEDetailView : UserControl
     {
-        public FeeView()
+        public ModfyIEDetailView()
         {
             InitializeComponent();
         }

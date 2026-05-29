@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="Myself.PMS.Client.FileModule.Views.Dialogs.ExecuteView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Myself.PMS.Client.FileModule.Views.Dialogs"
+                      Template="{DynamicResource DialogViewTemplate}"
+         Height="400" Width="500">
+    <Grid Margin="40,20,40,10" TextBlock.Foreground="#888">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="合同编号" VerticalAlignment="Center" Foreground="#A888"/>
+        <TextBlock Text="合同名称" Grid.Row="1" VerticalAlignment="Center" Foreground="#A888"/>
+        <TextBlock Text="对方单位" Grid.Row="2" VerticalAlignment="Center" Foreground="#A888"/>
+        <TextBlock Text="经办人" Grid.Row="3" VerticalAlignment="Top" Margin="0,8" Foreground="#A888"/>
+        <TextBlock Text="当前执行金额" Grid.Row="5" VerticalAlignment="Top" Margin="0,8" Foreground="#A888"/>
+
+        <TextBlock Grid.Column="1" Text="{Binding ContractInfo.ContractNumber}"
+               VerticalAlignment="Center" FontWeight="Bold"/>
+        <TextBlock Grid.Row="1" Grid.Column="1"  Text="{Binding ContractInfo.ContractName}"
+               VerticalAlignment="Center" FontWeight="Bold"/>
+        <TextBlock Grid.Row="2" Grid.Column="1"  Text="{Binding ContractInfo.Opposite}"
+               VerticalAlignment="Center" FontWeight="Bold"/>
+        <TextBlock Grid.Row="3" Grid.Column="1"  Text="{Binding ContractInfo.Operator}"
+               VerticalAlignment="Center" FontWeight="Bold"/>
+
+        <Grid Grid.Row="4" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="合同金额" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#A888"/>
+            <TextBlock Text="已执行金额" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#A888"/>
+            <TextBlock Text="待执行金额" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#A888"/>
+
+            <TextBlock Text="{Binding ContractInfo.ContractAmount}" Grid.Row="1" 
+                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding ContractInfo.ExcuteAmount}" Grid.Row="1" Grid.Column="1" 
+                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding PendingAmount}" Grid.Row="1" Grid.Column="2" 
+                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+        </Grid>
+        <Border Height="1" Grid.Row="5" Grid.ColumnSpan="2" VerticalAlignment="Top" Background="#DDD"/>
+        <TextBox Grid.Row="6" Grid.ColumnSpan="2" TextWrapping="Wrap" Style="{DynamicResource NormalTextBoxStyle}"
+             HorizontalContentAlignment="Center"
+             Text="{Binding ExecuteAmount}"/>
+    </Grid>
+</UserControl>

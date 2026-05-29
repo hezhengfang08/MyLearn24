@@ -2,19 +2,20 @@
 using Prism.Ioc;
 using Prism.Modularity;
 
-namespace Myself.PMS.Client.FeeModule
+namespace Myself.PMS.Client.FinanceModule
 {
-    public class ModuleFee : IModule
+    public class ModuleFincance : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
+
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<Views.FeeView>();
+            containerRegistry.RegisterForNavigation<Views.IEDetailView>();
 
-            containerRegistry.RegisterDialog<Views.Dialogs.ModifyFeeView>();
+            containerRegistry.RegisterDialog<Views.Dialogs.ModfyIEDetailView>();
         }
     }
 

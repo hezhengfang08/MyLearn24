@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="Myself.PMS.Client.FileModule.Views.Dialogs.ModifyContractView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Myself.PMS.Client.FileModule.Views.Dialogs"
+             Template="{DynamicResource DialogViewTemplate}"
+             Height="330" Width="500">
+    <Grid Margin="40,20,40,10" TextBlock.Foreground="#888">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="合同编号" VerticalAlignment="Center" Foreground="#888"/>
+        <TextBlock Text="合同名称" Grid.Row="1" VerticalAlignment="Center" Foreground="#888"/>
+        <TextBlock Text="对方单位" Grid.Row="2" VerticalAlignment="Center" Foreground="#888"/>
+        <TextBlock Text="经办人" Grid.Row="3" VerticalAlignment="Top" Margin="0,8" Foreground="#888"/>
+        <TextBlock Text="合同金额" Grid.Row="4" VerticalAlignment="Top" Margin="0,8" Foreground="#888"/>
+        <TextBlock Text="合同时间" Grid.Row="5" VerticalAlignment="Top" Margin="0,8" Foreground="#888"/>
+
+        <TextBox Grid.Column="1" Style="{DynamicResource ValidationTextBoxStyle}" Height="30"
+                 Text="{Binding ContractInfo.ContractNumber,ValidatesOnNotifyDataErrors=True}"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Style="{DynamicResource ValidationTextBoxStyle}" Height="30"
+                 Text="{Binding ContractInfo.ContractName,ValidatesOnNotifyDataErrors=True}"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Style="{DynamicResource ValidationTextBoxStyle}"
+                 VerticalContentAlignment="Center" Height="30" Text="{Binding ContractInfo.Opposite,ValidatesOnNotifyDataErrors=True}"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Style="{DynamicResource ValidationTextBoxStyle}"
+                 VerticalContentAlignment="Center" Height="30" Text="{Binding ContractInfo.Operator,ValidatesOnNotifyDataErrors=True}"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Style="{DynamicResource ValidationTextBoxStyle}"
+                 VerticalContentAlignment="Center" Height="30"
+                 Text="{Binding ContractInfo.ContractAmount,ValidatesOnNotifyDataErrors=True}"/>
+
+        <DatePicker Grid.Row="5" Grid.Column="1" Height="30" VerticalContentAlignment="Center"
+                    Text="{Binding ContractInfo.SignTime}"/>
+
+    </Grid>
+</UserControl>
