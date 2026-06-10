@@ -1,0 +1,431 @@
+﻿namespace Myself.WinAlarmApp
+{
+    partial class FrmMain
+    {
+        /// <summary>
+        /// 必需的设计器变量。
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// 清理所有正在使用的资源。
+        /// </summary>
+        /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows 窗体设计器生成的代码
+
+        /// <summary>
+        /// 设计器支持所需的方法 - 不要修改
+        /// 使用代码编辑器修改此方法的内容。
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblState = new System.Windows.Forms.Label();
+            this.btnAlarmList = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.uPump1 = new Myself.WinAlarmApp.UControls.UPump();
+            this.paraTextBox1 = new Myself.WinAlarmApp.UControls.ParaTextBox();
+            this.ucAlarmControl1 = new Myself.WinAlarmApp.UControls.UCAlarmControl();
+            this.paraTextBox2 = new Myself.WinAlarmApp.UControls.ParaTextBox();
+            this.paraTextBox3 = new Myself.WinAlarmApp.UControls.ParaTextBox();
+            this.paraTextBox4 = new Myself.WinAlarmApp.UControls.ParaTextBox();
+            this.uPump2 = new Myself.WinAlarmApp.UControls.UPump();
+            this.uPump3 = new Myself.WinAlarmApp.UControls.UPump();
+            this.ucAlarmControl2 = new Myself.WinAlarmApp.UControls.UCAlarmControl();
+            this.ucAlarmControl3 = new Myself.WinAlarmApp.UControls.UCAlarmControl();
+            this.ucAlarmControl4 = new Myself.WinAlarmApp.UControls.UCAlarmControl();
+            this.ucAlarmControl5 = new Myself.WinAlarmApp.UControls.UCAlarmControl();
+            this.ucAlarmControl6 = new Myself.WinAlarmApp.UControls.UCAlarmControl();
+            this.paraTextBox5 = new Myself.WinAlarmApp.UControls.ParaTextBox();
+            this.paraTextBox6 = new Myself.WinAlarmApp.UControls.ParaTextBox();
+            this.SuspendLayout();
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.label4.Location = new System.Drawing.Point(668, 138);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(58, 19);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "3#水泵";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.label3.Location = new System.Drawing.Point(388, 138);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(58, 19);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "2#水泵";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label10.Location = new System.Drawing.Point(613, 401);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(39, 19);
+            this.label10.TabIndex = 9;
+            this.label10.Text = "功率";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label9.Location = new System.Drawing.Point(614, 359);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(39, 19);
+            this.label9.TabIndex = 10;
+            this.label9.Text = "频率";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label8.Location = new System.Drawing.Point(323, 401);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(39, 19);
+            this.label8.TabIndex = 11;
+            this.label8.Text = "功率";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.Location = new System.Drawing.Point(323, 359);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(39, 19);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "频率";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.Location = new System.Drawing.Point(57, 401);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(39, 19);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "功率";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.Location = new System.Drawing.Point(57, 359);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(39, 19);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "频率";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.label2.Location = new System.Drawing.Point(91, 138);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(58, 19);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "1#水泵";
+            // 
+            // lblState
+            // 
+            this.lblState.AutoSize = true;
+            this.lblState.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblState.Location = new System.Drawing.Point(207, 45);
+            this.lblState.Name = "lblState";
+            this.lblState.Size = new System.Drawing.Size(54, 20);
+            this.lblState.TabIndex = 16;
+            this.lblState.Text = "未启动";
+            // 
+            // btnAlarmList
+            // 
+            this.btnAlarmList.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnAlarmList.ForeColor = System.Drawing.Color.Brown;
+            this.btnAlarmList.Location = new System.Drawing.Point(655, 34);
+            this.btnAlarmList.Name = "btnAlarmList";
+            this.btnAlarmList.Size = new System.Drawing.Size(88, 42);
+            this.btnAlarmList.TabIndex = 5;
+            this.btnAlarmList.Text = "预警列表";
+            this.btnAlarmList.UseVisualStyleBackColor = true;
+            // 
+            // btnStart
+            // 
+            this.btnStart.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnStart.ForeColor = System.Drawing.Color.Blue;
+            this.btnStart.Location = new System.Drawing.Point(76, 31);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(88, 42);
+            this.btnStart.TabIndex = 6;
+            this.btnStart.Text = "启动";
+            this.btnStart.UseVisualStyleBackColor = true;
+            // 
+            // uPump1
+            // 
+            this.uPump1.ActualState = false;
+            this.uPump1.BtnBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.uPump1.BtnText = "OFF";
+            this.uPump1.LightImg = ((System.Drawing.Bitmap)(resources.GetObject("uPump1.LightImg")));
+            this.uPump1.Location = new System.Drawing.Point(76, 170);
+            this.uPump1.Name = "uPump1";
+            this.uPump1.PumpStateName = null;
+            this.uPump1.Size = new System.Drawing.Size(119, 151);
+            this.uPump1.TabIndex = 17;
+            // 
+            // paraTextBox1
+            // 
+            this.paraTextBox1.DataValue = "150";
+            this.paraTextBox1.Location = new System.Drawing.Point(112, 359);
+            this.paraTextBox1.Name = "paraTextBox1";
+            this.paraTextBox1.Size = new System.Drawing.Size(70, 20);
+            this.paraTextBox1.TabIndex = 18;
+            this.paraTextBox1.Unit = "HZ";
+            this.paraTextBox1.VarName = null;
+            // 
+            // ucAlarmControl1
+            // 
+            this.ucAlarmControl1.AlarmLightColors = new System.Drawing.Color[] {
+        System.Drawing.Color.Red,
+        System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))))};
+            this.ucAlarmControl1.IsOn = false;
+            this.ucAlarmControl1.Location = new System.Drawing.Point(171, 340);
+            this.ucAlarmControl1.Name = "ucAlarmControl1";
+            this.ucAlarmControl1.Size = new System.Drawing.Size(32, 37);
+            this.ucAlarmControl1.TabIndex = 19;
+            this.ucAlarmControl1.TwinkleInterval = 0;
+            this.ucAlarmControl1.VarName = null;
+            // 
+            // paraTextBox2
+            // 
+            this.paraTextBox2.DataValue = "110";
+            this.paraTextBox2.Location = new System.Drawing.Point(112, 400);
+            this.paraTextBox2.Name = "paraTextBox2";
+            this.paraTextBox2.Size = new System.Drawing.Size(70, 20);
+            this.paraTextBox2.TabIndex = 18;
+            this.paraTextBox2.Unit = "KW";
+            this.paraTextBox2.VarName = null;
+            // 
+            // paraTextBox3
+            // 
+            this.paraTextBox3.DataValue = "30";
+            this.paraTextBox3.Location = new System.Drawing.Point(376, 400);
+            this.paraTextBox3.Name = "paraTextBox3";
+            this.paraTextBox3.Size = new System.Drawing.Size(70, 20);
+            this.paraTextBox3.TabIndex = 20;
+            this.paraTextBox3.Unit = "KW";
+            this.paraTextBox3.VarName = null;
+            // 
+            // paraTextBox4
+            // 
+            this.paraTextBox4.DataValue = "50";
+            this.paraTextBox4.Location = new System.Drawing.Point(376, 358);
+            this.paraTextBox4.Name = "paraTextBox4";
+            this.paraTextBox4.Size = new System.Drawing.Size(70, 20);
+            this.paraTextBox4.TabIndex = 21;
+            this.paraTextBox4.Unit = "HZ";
+            this.paraTextBox4.VarName = null;
+            // 
+            // uPump2
+            // 
+            this.uPump2.ActualState = false;
+            this.uPump2.BtnBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.uPump2.BtnText = "OFF";
+            this.uPump2.LightImg = ((System.Drawing.Bitmap)(resources.GetObject("uPump2.LightImg")));
+            this.uPump2.Location = new System.Drawing.Point(618, 170);
+            this.uPump2.Name = "uPump2";
+            this.uPump2.PumpStateName = null;
+            this.uPump2.Size = new System.Drawing.Size(119, 151);
+            this.uPump2.TabIndex = 17;
+            // 
+            // uPump3
+            // 
+            this.uPump3.ActualState = false;
+            this.uPump3.BtnBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.uPump3.BtnText = "OFF";
+            this.uPump3.LightImg = ((System.Drawing.Bitmap)(resources.GetObject("uPump3.LightImg")));
+            this.uPump3.Location = new System.Drawing.Point(363, 170);
+            this.uPump3.Name = "uPump3";
+            this.uPump3.PumpStateName = null;
+            this.uPump3.Size = new System.Drawing.Size(119, 151);
+            this.uPump3.TabIndex = 17;
+            // 
+            // ucAlarmControl2
+            // 
+            this.ucAlarmControl2.AlarmLightColors = new System.Drawing.Color[] {
+        System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192))))),
+        System.Drawing.Color.Aqua};
+            this.ucAlarmControl2.IsOn = false;
+            this.ucAlarmControl2.Location = new System.Drawing.Point(171, 386);
+            this.ucAlarmControl2.Name = "ucAlarmControl2";
+            this.ucAlarmControl2.Size = new System.Drawing.Size(32, 37);
+            this.ucAlarmControl2.TabIndex = 19;
+            this.ucAlarmControl2.TwinkleInterval = 0;
+            this.ucAlarmControl2.VarName = null;
+            // 
+            // ucAlarmControl3
+            // 
+            this.ucAlarmControl3.AlarmLightColors = new System.Drawing.Color[] {
+        System.Drawing.Color.Red,
+        System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))))};
+            this.ucAlarmControl3.IsOn = false;
+            this.ucAlarmControl3.Location = new System.Drawing.Point(477, 342);
+            this.ucAlarmControl3.Name = "ucAlarmControl3";
+            this.ucAlarmControl3.Size = new System.Drawing.Size(32, 37);
+            this.ucAlarmControl3.TabIndex = 19;
+            this.ucAlarmControl3.TwinkleInterval = 0;
+            this.ucAlarmControl3.VarName = null;
+            // 
+            // ucAlarmControl4
+            // 
+            this.ucAlarmControl4.AlarmLightColors = new System.Drawing.Color[] {
+        System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192))))),
+        System.Drawing.Color.Aqua};
+            this.ucAlarmControl4.IsOn = false;
+            this.ucAlarmControl4.Location = new System.Drawing.Point(476, 385);
+            this.ucAlarmControl4.Name = "ucAlarmControl4";
+            this.ucAlarmControl4.Size = new System.Drawing.Size(32, 37);
+            this.ucAlarmControl4.TabIndex = 19;
+            this.ucAlarmControl4.TwinkleInterval = 0;
+            this.ucAlarmControl4.VarName = null;
+            // 
+            // ucAlarmControl5
+            // 
+            this.ucAlarmControl5.AlarmLightColors = new System.Drawing.Color[] {
+        System.Drawing.Color.Red,
+        System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))))};
+            this.ucAlarmControl5.IsOn = false;
+            this.ucAlarmControl5.Location = new System.Drawing.Point(748, 343);
+            this.ucAlarmControl5.Name = "ucAlarmControl5";
+            this.ucAlarmControl5.Size = new System.Drawing.Size(32, 37);
+            this.ucAlarmControl5.TabIndex = 19;
+            this.ucAlarmControl5.TwinkleInterval = 0;
+            this.ucAlarmControl5.VarName = null;
+            // 
+            // ucAlarmControl6
+            // 
+            this.ucAlarmControl6.AlarmLightColors = new System.Drawing.Color[] {
+        System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192))))),
+        System.Drawing.Color.Aqua};
+            this.ucAlarmControl6.IsOn = false;
+            this.ucAlarmControl6.Location = new System.Drawing.Point(748, 386);
+            this.ucAlarmControl6.Name = "ucAlarmControl6";
+            this.ucAlarmControl6.Size = new System.Drawing.Size(32, 37);
+            this.ucAlarmControl6.TabIndex = 19;
+            this.ucAlarmControl6.TwinkleInterval = 0;
+            this.ucAlarmControl6.VarName = null;
+            // 
+            // paraTextBox5
+            // 
+            this.paraTextBox5.DataValue = "30";
+            this.paraTextBox5.Location = new System.Drawing.Point(667, 399);
+            this.paraTextBox5.Name = "paraTextBox5";
+            this.paraTextBox5.Size = new System.Drawing.Size(70, 20);
+            this.paraTextBox5.TabIndex = 20;
+            this.paraTextBox5.Unit = "KW";
+            this.paraTextBox5.VarName = null;
+            // 
+            // paraTextBox6
+            // 
+            this.paraTextBox6.DataValue = "50";
+            this.paraTextBox6.Location = new System.Drawing.Point(667, 357);
+            this.paraTextBox6.Name = "paraTextBox6";
+            this.paraTextBox6.Size = new System.Drawing.Size(70, 20);
+            this.paraTextBox6.TabIndex = 21;
+            this.paraTextBox6.Unit = "HZ";
+            this.paraTextBox6.VarName = null;
+            // 
+            // FrmMain
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1020, 545);
+            this.Controls.Add(this.paraTextBox6);
+            this.Controls.Add(this.paraTextBox5);
+            this.Controls.Add(this.paraTextBox4);
+            this.Controls.Add(this.paraTextBox3);
+            this.Controls.Add(this.ucAlarmControl6);
+            this.Controls.Add(this.ucAlarmControl4);
+            this.Controls.Add(this.ucAlarmControl2);
+            this.Controls.Add(this.ucAlarmControl5);
+            this.Controls.Add(this.ucAlarmControl3);
+            this.Controls.Add(this.ucAlarmControl1);
+            this.Controls.Add(this.paraTextBox2);
+            this.Controls.Add(this.paraTextBox1);
+            this.Controls.Add(this.uPump3);
+            this.Controls.Add(this.uPump2);
+            this.Controls.Add(this.uPump1);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblState);
+            this.Controls.Add(this.btnAlarmList);
+            this.Controls.Add(this.btnStart);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Name = "FrmMain";
+            this.Text = "预警管理系统";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblState;
+        private System.Windows.Forms.Button btnAlarmList;
+        private System.Windows.Forms.Button btnStart;
+        private UControls.UPump uPump1;
+        private UControls.ParaTextBox paraTextBox1;
+        private UControls.UCAlarmControl ucAlarmControl1;
+        private UControls.ParaTextBox paraTextBox2;
+        private UControls.ParaTextBox paraTextBox3;
+        private UControls.ParaTextBox paraTextBox4;
+        private UControls.UPump uPump2;
+        private UControls.UPump uPump3;
+        private UControls.UCAlarmControl ucAlarmControl2;
+        private UControls.UCAlarmControl ucAlarmControl3;
+        private UControls.UCAlarmControl ucAlarmControl4;
+        private UControls.UCAlarmControl ucAlarmControl5;
+        private UControls.UCAlarmControl ucAlarmControl6;
+        private UControls.ParaTextBox paraTextBox5;
+        private UControls.ParaTextBox paraTextBox6;
+    }
+}
+
