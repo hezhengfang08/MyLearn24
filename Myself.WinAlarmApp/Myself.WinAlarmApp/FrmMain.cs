@@ -50,7 +50,23 @@ namespace Myself.WinAlarmApp
             timer.Interval = 1000;
             timer.AutoReset = true;//重复执行
             timer.Elapsed += Timer_Elapsed;
+            uPump1.ChangedStateClick += UPump_ChangedStateClick;
+            uPump2.ChangedStateClick += UPump_ChangedStateClick;
+            uPump3.ChangedStateClick += UPump_ChangedStateClick;
         }
+
+        private void UPump_ChangedStateClick(object sender, EventArgs e)
+        {
+            UPump pump = sender as UPump;
+            if (pump != null)
+            {
+                pump.ActualState  = !pump.ActualState;//切换状态
+                pump.BtnText = pump.ActualState ? "ON" : "OFF";//更新按钮文本
+
+                Start(pump.ActualState, pump.Name);
+            }
+        }
+
         /// <summary>
         /// 串口对象、主站设备
         /// </summary>
@@ -447,6 +463,32 @@ namespace Myself.WinAlarmApp
         {
             SlaveInfo slave01 = slaves.Find(s => s.SlaveId == 1);
             master.WriteMultipleCoils(slave01.SlaveId, slave01.StartAddress, new bool[] { bl, bl, bl, bl });
+        }
+        private void Start(bool bl, string index)
+        {
+            SlaveInfo slave01 = slaves.Find(s => s.SlaveId == 1);
+            master.ReadCoilsAsync(slave01.SlaveId, slave01.StartAddress, slave01.Count).ContinueWith(t =>
+             {
+                 if (t.Result != null && t.Result.Length > 0)
+                 {
+                     bool[] coilValues = t.Result;
+                     switch (index)
+                     {
+                         case "uPump1":
+                             coilValues[1] = bl;
+                             break;
+                         case "uPump2":
+                             coilValues[2] = bl;
+                             break;
+                         case "uPump3":
+                             coilValues[3] = bl;
+                             break;
+                     }
+                     master.WriteMultipleCoils(slave01.SlaveId, slave01.StartAddress, coilValues);
+                 }
+             });
+            //
+           // master.WriteMultipleCoils(slave01.SlaveId, slave01.StartAddress, new bool[] { bl, bl, bl, bl });
         }
 
         private void btnAlarmList_Click(object sender, EventArgs e)
