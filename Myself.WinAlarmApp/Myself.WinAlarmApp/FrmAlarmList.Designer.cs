@@ -101,6 +101,7 @@
             // colAlarmTime
             // 
             this.colAlarmTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colAlarmTime.DataPropertyName = "AlarmTime";
             this.colAlarmTime.FillWeight = 150F;
             this.colAlarmTime.Frozen = true;
             this.colAlarmTime.HeaderText = "报警时间";
@@ -164,6 +165,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FrmAlarmList";
             this.Text = "预警记录列表";
+            this.Load += new System.EventHandler(this.FrmAlarmList_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlarmList)).EndInit();
             this.ResumeLayout(false);
 

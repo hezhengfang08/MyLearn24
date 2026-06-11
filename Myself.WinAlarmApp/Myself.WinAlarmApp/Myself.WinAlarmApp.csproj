@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonClass.cs" />
     <Compile Include="FrmAlarmList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,9 +127,15 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="configFiles\XAlarmValueSet.xml" />
-    <Content Include="configFiles\XParas.xml" />
-    <Content Include="configFiles\XSlave.xml" />
+    <Content Include="configFiles\XAlarmValueSet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="configFiles\XParas.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="configFiles\XSlave.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\jdb.jpg" />
     <Content Include="Resources\light_off.jpg" />
     <Content Include="Resources\light_on.jpg" />

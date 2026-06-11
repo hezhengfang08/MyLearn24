@@ -41,21 +41,21 @@
             this.lblState = new System.Windows.Forms.Label();
             this.btnAlarmList = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
-            this.uPump1 = new Myself.WinAlarmApp.UControls.UPump();
-            this.paraTextBox1 = new Myself.WinAlarmApp.UControls.ParaTextBox();
-            this.ucAlarmControl1 = new Myself.WinAlarmApp.UControls.UCAlarmControl();
-            this.paraTextBox2 = new Myself.WinAlarmApp.UControls.ParaTextBox();
-            this.paraTextBox3 = new Myself.WinAlarmApp.UControls.ParaTextBox();
-            this.paraTextBox4 = new Myself.WinAlarmApp.UControls.ParaTextBox();
+            this.txtPump03Fre = new Myself.WinAlarmApp.UControls.ParaTextBox();
+            this.txtPump03Power = new Myself.WinAlarmApp.UControls.ParaTextBox();
+            this.txtPump02Fre = new Myself.WinAlarmApp.UControls.ParaTextBox();
+            this.txtPump02Power = new Myself.WinAlarmApp.UControls.ParaTextBox();
+            this.lightPump03Power = new Myself.WinAlarmApp.UControls.UCAlarmControl();
+            this.lightPump02Power = new Myself.WinAlarmApp.UControls.UCAlarmControl();
+            this.lightPump01Power = new Myself.WinAlarmApp.UControls.UCAlarmControl();
+            this.lightPump03Fre = new Myself.WinAlarmApp.UControls.UCAlarmControl();
+            this.lightPump02Fre = new Myself.WinAlarmApp.UControls.UCAlarmControl();
+            this.lightPump01Fre = new Myself.WinAlarmApp.UControls.UCAlarmControl();
+            this.txtPump01Power = new Myself.WinAlarmApp.UControls.ParaTextBox();
+            this.txtPump01Fre = new Myself.WinAlarmApp.UControls.ParaTextBox();
             this.uPump2 = new Myself.WinAlarmApp.UControls.UPump();
             this.uPump3 = new Myself.WinAlarmApp.UControls.UPump();
-            this.ucAlarmControl2 = new Myself.WinAlarmApp.UControls.UCAlarmControl();
-            this.ucAlarmControl3 = new Myself.WinAlarmApp.UControls.UCAlarmControl();
-            this.ucAlarmControl4 = new Myself.WinAlarmApp.UControls.UCAlarmControl();
-            this.ucAlarmControl5 = new Myself.WinAlarmApp.UControls.UCAlarmControl();
-            this.ucAlarmControl6 = new Myself.WinAlarmApp.UControls.UCAlarmControl();
-            this.paraTextBox5 = new Myself.WinAlarmApp.UControls.ParaTextBox();
-            this.paraTextBox6 = new Myself.WinAlarmApp.UControls.ParaTextBox();
+            this.uPump1 = new Myself.WinAlarmApp.UControls.UPump();
             this.SuspendLayout();
             // 
             // label4
@@ -171,6 +171,7 @@
             this.btnAlarmList.TabIndex = 5;
             this.btnAlarmList.Text = "预警列表";
             this.btnAlarmList.UseVisualStyleBackColor = true;
+            this.btnAlarmList.Click += new System.EventHandler(this.btnAlarmList_Click);
             // 
             // btnStart
             // 
@@ -182,71 +183,146 @@
             this.btnStart.TabIndex = 6;
             this.btnStart.Text = "启动";
             this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
-            // uPump1
+            // txtPump03Fre
             // 
-            this.uPump1.ActualState = false;
-            this.uPump1.BtnBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.uPump1.BtnText = "OFF";
-            this.uPump1.LightImg = ((System.Drawing.Bitmap)(resources.GetObject("uPump1.LightImg")));
-            this.uPump1.Location = new System.Drawing.Point(76, 170);
-            this.uPump1.Name = "uPump1";
-            this.uPump1.PumpStateName = null;
-            this.uPump1.Size = new System.Drawing.Size(119, 151);
-            this.uPump1.TabIndex = 17;
+            this.txtPump03Fre.DataValue = "50";
+            this.txtPump03Fre.Location = new System.Drawing.Point(667, 357);
+            this.txtPump03Fre.Name = "txtPump03Fre";
+            this.txtPump03Fre.Size = new System.Drawing.Size(70, 20);
+            this.txtPump03Fre.TabIndex = 21;
+            this.txtPump03Fre.Unit = "HZ";
+            this.txtPump03Fre.VarName = "Pump03Fre";
             // 
-            // paraTextBox1
+            // txtPump03Power
             // 
-            this.paraTextBox1.DataValue = "150";
-            this.paraTextBox1.Location = new System.Drawing.Point(112, 359);
-            this.paraTextBox1.Name = "paraTextBox1";
-            this.paraTextBox1.Size = new System.Drawing.Size(70, 20);
-            this.paraTextBox1.TabIndex = 18;
-            this.paraTextBox1.Unit = "HZ";
-            this.paraTextBox1.VarName = null;
+            this.txtPump03Power.DataValue = "30";
+            this.txtPump03Power.Location = new System.Drawing.Point(667, 399);
+            this.txtPump03Power.Name = "txtPump03Power";
+            this.txtPump03Power.Size = new System.Drawing.Size(70, 20);
+            this.txtPump03Power.TabIndex = 20;
+            this.txtPump03Power.Unit = "KW";
+            this.txtPump03Power.VarName = "Pump03Power";
             // 
-            // ucAlarmControl1
+            // txtPump02Fre
             // 
-            this.ucAlarmControl1.AlarmLightColors = new System.Drawing.Color[] {
+            this.txtPump02Fre.DataValue = "50";
+            this.txtPump02Fre.Location = new System.Drawing.Point(376, 358);
+            this.txtPump02Fre.Name = "txtPump02Fre";
+            this.txtPump02Fre.Size = new System.Drawing.Size(70, 20);
+            this.txtPump02Fre.TabIndex = 21;
+            this.txtPump02Fre.Unit = "HZ";
+            this.txtPump02Fre.VarName = "Pump02Fre";
+            // 
+            // txtPump02Power
+            // 
+            this.txtPump02Power.DataValue = "30";
+            this.txtPump02Power.Location = new System.Drawing.Point(376, 400);
+            this.txtPump02Power.Name = "txtPump02Power";
+            this.txtPump02Power.Size = new System.Drawing.Size(70, 20);
+            this.txtPump02Power.TabIndex = 20;
+            this.txtPump02Power.Unit = "KW";
+            this.txtPump02Power.VarName = "Pump02Power";
+            // 
+            // lightPump03Power
+            // 
+            this.lightPump03Power.AlarmLightColors = new System.Drawing.Color[] {
+        System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192))))),
+        System.Drawing.Color.Aqua};
+            this.lightPump03Power.IsOn = false;
+            this.lightPump03Power.Location = new System.Drawing.Point(748, 386);
+            this.lightPump03Power.Name = "lightPump03Power";
+            this.lightPump03Power.Size = new System.Drawing.Size(32, 37);
+            this.lightPump03Power.TabIndex = 19;
+            this.lightPump03Power.TwinkleInterval = 200;
+            this.lightPump03Power.VarName = null;
+            // 
+            // lightPump02Power
+            // 
+            this.lightPump02Power.AlarmLightColors = new System.Drawing.Color[] {
+        System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192))))),
+        System.Drawing.Color.Aqua};
+            this.lightPump02Power.IsOn = false;
+            this.lightPump02Power.Location = new System.Drawing.Point(476, 385);
+            this.lightPump02Power.Name = "lightPump02Power";
+            this.lightPump02Power.Size = new System.Drawing.Size(32, 37);
+            this.lightPump02Power.TabIndex = 19;
+            this.lightPump02Power.TwinkleInterval = 200;
+            this.lightPump02Power.VarName = null;
+            // 
+            // lightPump01Power
+            // 
+            this.lightPump01Power.AlarmLightColors = new System.Drawing.Color[] {
+        System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192))))),
+        System.Drawing.Color.Aqua};
+            this.lightPump01Power.IsOn = false;
+            this.lightPump01Power.Location = new System.Drawing.Point(171, 386);
+            this.lightPump01Power.Name = "lightPump01Power";
+            this.lightPump01Power.Size = new System.Drawing.Size(32, 37);
+            this.lightPump01Power.StandColor = System.Drawing.SystemColors.GrayText;
+            this.lightPump01Power.TabIndex = 19;
+            this.lightPump01Power.TwinkleInterval = 200;
+            this.lightPump01Power.VarName = null;
+            // 
+            // lightPump03Fre
+            // 
+            this.lightPump03Fre.AlarmLightColors = new System.Drawing.Color[] {
         System.Drawing.Color.Red,
         System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))))};
-            this.ucAlarmControl1.IsOn = false;
-            this.ucAlarmControl1.Location = new System.Drawing.Point(171, 340);
-            this.ucAlarmControl1.Name = "ucAlarmControl1";
-            this.ucAlarmControl1.Size = new System.Drawing.Size(32, 37);
-            this.ucAlarmControl1.TabIndex = 19;
-            this.ucAlarmControl1.TwinkleInterval = 0;
-            this.ucAlarmControl1.VarName = null;
+            this.lightPump03Fre.IsOn = false;
+            this.lightPump03Fre.Location = new System.Drawing.Point(748, 343);
+            this.lightPump03Fre.Name = "lightPump03Fre";
+            this.lightPump03Fre.Size = new System.Drawing.Size(32, 37);
+            this.lightPump03Fre.TabIndex = 19;
+            this.lightPump03Fre.TwinkleInterval = 200;
+            this.lightPump03Fre.VarName = null;
             // 
-            // paraTextBox2
+            // lightPump02Fre
             // 
-            this.paraTextBox2.DataValue = "110";
-            this.paraTextBox2.Location = new System.Drawing.Point(112, 400);
-            this.paraTextBox2.Name = "paraTextBox2";
-            this.paraTextBox2.Size = new System.Drawing.Size(70, 20);
-            this.paraTextBox2.TabIndex = 18;
-            this.paraTextBox2.Unit = "KW";
-            this.paraTextBox2.VarName = null;
+            this.lightPump02Fre.AlarmLightColors = new System.Drawing.Color[] {
+        System.Drawing.Color.Red,
+        System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))))};
+            this.lightPump02Fre.IsOn = false;
+            this.lightPump02Fre.Location = new System.Drawing.Point(477, 342);
+            this.lightPump02Fre.Name = "lightPump02Fre";
+            this.lightPump02Fre.Size = new System.Drawing.Size(32, 37);
+            this.lightPump02Fre.TabIndex = 19;
+            this.lightPump02Fre.TwinkleInterval = 200;
+            this.lightPump02Fre.VarName = null;
             // 
-            // paraTextBox3
+            // lightPump01Fre
             // 
-            this.paraTextBox3.DataValue = "30";
-            this.paraTextBox3.Location = new System.Drawing.Point(376, 400);
-            this.paraTextBox3.Name = "paraTextBox3";
-            this.paraTextBox3.Size = new System.Drawing.Size(70, 20);
-            this.paraTextBox3.TabIndex = 20;
-            this.paraTextBox3.Unit = "KW";
-            this.paraTextBox3.VarName = null;
+            this.lightPump01Fre.AlarmLightColors = new System.Drawing.Color[] {
+        System.Drawing.Color.Red,
+        System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))))};
+            this.lightPump01Fre.IsOn = true;
+            this.lightPump01Fre.Location = new System.Drawing.Point(171, 340);
+            this.lightPump01Fre.Name = "lightPump01Fre";
+            this.lightPump01Fre.Size = new System.Drawing.Size(32, 37);
+            this.lightPump01Fre.TabIndex = 19;
+            this.lightPump01Fre.TwinkleInterval = 200;
+            this.lightPump01Fre.VarName = null;
             // 
-            // paraTextBox4
+            // txtPump01Power
             // 
-            this.paraTextBox4.DataValue = "50";
-            this.paraTextBox4.Location = new System.Drawing.Point(376, 358);
-            this.paraTextBox4.Name = "paraTextBox4";
-            this.paraTextBox4.Size = new System.Drawing.Size(70, 20);
-            this.paraTextBox4.TabIndex = 21;
-            this.paraTextBox4.Unit = "HZ";
-            this.paraTextBox4.VarName = null;
+            this.txtPump01Power.DataValue = "110";
+            this.txtPump01Power.Location = new System.Drawing.Point(112, 400);
+            this.txtPump01Power.Name = "txtPump01Power";
+            this.txtPump01Power.Size = new System.Drawing.Size(70, 20);
+            this.txtPump01Power.TabIndex = 18;
+            this.txtPump01Power.Unit = "KW";
+            this.txtPump01Power.VarName = "Pump01Power";
+            // 
+            // txtPump01Fre
+            // 
+            this.txtPump01Fre.DataValue = "150";
+            this.txtPump01Fre.Location = new System.Drawing.Point(102, 357);
+            this.txtPump01Fre.Name = "txtPump01Fre";
+            this.txtPump01Fre.Size = new System.Drawing.Size(70, 20);
+            this.txtPump01Fre.TabIndex = 18;
+            this.txtPump01Fre.Unit = "HZ";
+            this.txtPump01Fre.VarName = "Pump01Fre";
             // 
             // uPump2
             // 
@@ -254,9 +330,9 @@
             this.uPump2.BtnBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.uPump2.BtnText = "OFF";
             this.uPump2.LightImg = ((System.Drawing.Bitmap)(resources.GetObject("uPump2.LightImg")));
-            this.uPump2.Location = new System.Drawing.Point(618, 170);
+            this.uPump2.Location = new System.Drawing.Point(363, 170);
             this.uPump2.Name = "uPump2";
-            this.uPump2.PumpStateName = null;
+            this.uPump2.PumpStateName = "Pump02State";
             this.uPump2.Size = new System.Drawing.Size(119, 151);
             this.uPump2.TabIndex = 17;
             // 
@@ -266,116 +342,43 @@
             this.uPump3.BtnBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.uPump3.BtnText = "OFF";
             this.uPump3.LightImg = ((System.Drawing.Bitmap)(resources.GetObject("uPump3.LightImg")));
-            this.uPump3.Location = new System.Drawing.Point(363, 170);
+            this.uPump3.Location = new System.Drawing.Point(618, 170);
             this.uPump3.Name = "uPump3";
-            this.uPump3.PumpStateName = null;
+            this.uPump3.PumpStateName = "Pump03State";
             this.uPump3.Size = new System.Drawing.Size(119, 151);
             this.uPump3.TabIndex = 17;
             // 
-            // ucAlarmControl2
+            // uPump1
             // 
-            this.ucAlarmControl2.AlarmLightColors = new System.Drawing.Color[] {
-        System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192))))),
-        System.Drawing.Color.Aqua};
-            this.ucAlarmControl2.IsOn = false;
-            this.ucAlarmControl2.Location = new System.Drawing.Point(171, 386);
-            this.ucAlarmControl2.Name = "ucAlarmControl2";
-            this.ucAlarmControl2.Size = new System.Drawing.Size(32, 37);
-            this.ucAlarmControl2.TabIndex = 19;
-            this.ucAlarmControl2.TwinkleInterval = 0;
-            this.ucAlarmControl2.VarName = null;
-            // 
-            // ucAlarmControl3
-            // 
-            this.ucAlarmControl3.AlarmLightColors = new System.Drawing.Color[] {
-        System.Drawing.Color.Red,
-        System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))))};
-            this.ucAlarmControl3.IsOn = false;
-            this.ucAlarmControl3.Location = new System.Drawing.Point(477, 342);
-            this.ucAlarmControl3.Name = "ucAlarmControl3";
-            this.ucAlarmControl3.Size = new System.Drawing.Size(32, 37);
-            this.ucAlarmControl3.TabIndex = 19;
-            this.ucAlarmControl3.TwinkleInterval = 0;
-            this.ucAlarmControl3.VarName = null;
-            // 
-            // ucAlarmControl4
-            // 
-            this.ucAlarmControl4.AlarmLightColors = new System.Drawing.Color[] {
-        System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192))))),
-        System.Drawing.Color.Aqua};
-            this.ucAlarmControl4.IsOn = false;
-            this.ucAlarmControl4.Location = new System.Drawing.Point(476, 385);
-            this.ucAlarmControl4.Name = "ucAlarmControl4";
-            this.ucAlarmControl4.Size = new System.Drawing.Size(32, 37);
-            this.ucAlarmControl4.TabIndex = 19;
-            this.ucAlarmControl4.TwinkleInterval = 0;
-            this.ucAlarmControl4.VarName = null;
-            // 
-            // ucAlarmControl5
-            // 
-            this.ucAlarmControl5.AlarmLightColors = new System.Drawing.Color[] {
-        System.Drawing.Color.Red,
-        System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))))};
-            this.ucAlarmControl5.IsOn = false;
-            this.ucAlarmControl5.Location = new System.Drawing.Point(748, 343);
-            this.ucAlarmControl5.Name = "ucAlarmControl5";
-            this.ucAlarmControl5.Size = new System.Drawing.Size(32, 37);
-            this.ucAlarmControl5.TabIndex = 19;
-            this.ucAlarmControl5.TwinkleInterval = 0;
-            this.ucAlarmControl5.VarName = null;
-            // 
-            // ucAlarmControl6
-            // 
-            this.ucAlarmControl6.AlarmLightColors = new System.Drawing.Color[] {
-        System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192))))),
-        System.Drawing.Color.Aqua};
-            this.ucAlarmControl6.IsOn = false;
-            this.ucAlarmControl6.Location = new System.Drawing.Point(748, 386);
-            this.ucAlarmControl6.Name = "ucAlarmControl6";
-            this.ucAlarmControl6.Size = new System.Drawing.Size(32, 37);
-            this.ucAlarmControl6.TabIndex = 19;
-            this.ucAlarmControl6.TwinkleInterval = 0;
-            this.ucAlarmControl6.VarName = null;
-            // 
-            // paraTextBox5
-            // 
-            this.paraTextBox5.DataValue = "30";
-            this.paraTextBox5.Location = new System.Drawing.Point(667, 399);
-            this.paraTextBox5.Name = "paraTextBox5";
-            this.paraTextBox5.Size = new System.Drawing.Size(70, 20);
-            this.paraTextBox5.TabIndex = 20;
-            this.paraTextBox5.Unit = "KW";
-            this.paraTextBox5.VarName = null;
-            // 
-            // paraTextBox6
-            // 
-            this.paraTextBox6.DataValue = "50";
-            this.paraTextBox6.Location = new System.Drawing.Point(667, 357);
-            this.paraTextBox6.Name = "paraTextBox6";
-            this.paraTextBox6.Size = new System.Drawing.Size(70, 20);
-            this.paraTextBox6.TabIndex = 21;
-            this.paraTextBox6.Unit = "HZ";
-            this.paraTextBox6.VarName = null;
+            this.uPump1.ActualState = false;
+            this.uPump1.BtnBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.uPump1.BtnText = "OFF";
+            this.uPump1.LightImg = ((System.Drawing.Bitmap)(resources.GetObject("uPump1.LightImg")));
+            this.uPump1.Location = new System.Drawing.Point(76, 170);
+            this.uPump1.Name = "uPump1";
+            this.uPump1.PumpStateName = "Pump01State";
+            this.uPump1.Size = new System.Drawing.Size(119, 151);
+            this.uPump1.TabIndex = 17;
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1020, 545);
-            this.Controls.Add(this.paraTextBox6);
-            this.Controls.Add(this.paraTextBox5);
-            this.Controls.Add(this.paraTextBox4);
-            this.Controls.Add(this.paraTextBox3);
-            this.Controls.Add(this.ucAlarmControl6);
-            this.Controls.Add(this.ucAlarmControl4);
-            this.Controls.Add(this.ucAlarmControl2);
-            this.Controls.Add(this.ucAlarmControl5);
-            this.Controls.Add(this.ucAlarmControl3);
-            this.Controls.Add(this.ucAlarmControl1);
-            this.Controls.Add(this.paraTextBox2);
-            this.Controls.Add(this.paraTextBox1);
-            this.Controls.Add(this.uPump3);
+            this.Controls.Add(this.txtPump03Fre);
+            this.Controls.Add(this.txtPump03Power);
+            this.Controls.Add(this.txtPump02Fre);
+            this.Controls.Add(this.txtPump02Power);
+            this.Controls.Add(this.lightPump03Power);
+            this.Controls.Add(this.lightPump02Power);
+            this.Controls.Add(this.lightPump01Power);
+            this.Controls.Add(this.lightPump03Fre);
+            this.Controls.Add(this.lightPump02Fre);
+            this.Controls.Add(this.lightPump01Fre);
+            this.Controls.Add(this.txtPump01Power);
+            this.Controls.Add(this.txtPump01Fre);
             this.Controls.Add(this.uPump2);
+            this.Controls.Add(this.uPump3);
             this.Controls.Add(this.uPump1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -392,6 +395,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FrmMain";
             this.Text = "预警管理系统";
+            this.Load += new System.EventHandler(this.FrmMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -412,20 +416,20 @@
         private System.Windows.Forms.Button btnAlarmList;
         private System.Windows.Forms.Button btnStart;
         private UControls.UPump uPump1;
-        private UControls.ParaTextBox paraTextBox1;
-        private UControls.UCAlarmControl ucAlarmControl1;
-        private UControls.ParaTextBox paraTextBox2;
-        private UControls.ParaTextBox paraTextBox3;
-        private UControls.ParaTextBox paraTextBox4;
-        private UControls.UPump uPump2;
+        private UControls.ParaTextBox txtPump01Fre;
+        private UControls.UCAlarmControl lightPump01Fre;
+        private UControls.ParaTextBox txtPump01Power;
+        private UControls.ParaTextBox txtPump02Power;
+        private UControls.ParaTextBox txtPump02Fre;
         private UControls.UPump uPump3;
-        private UControls.UCAlarmControl ucAlarmControl2;
-        private UControls.UCAlarmControl ucAlarmControl3;
-        private UControls.UCAlarmControl ucAlarmControl4;
-        private UControls.UCAlarmControl ucAlarmControl5;
-        private UControls.UCAlarmControl ucAlarmControl6;
-        private UControls.ParaTextBox paraTextBox5;
-        private UControls.ParaTextBox paraTextBox6;
+        private UControls.UPump uPump2;
+        private UControls.UCAlarmControl lightPump01Power;
+        private UControls.UCAlarmControl lightPump02Fre;
+        private UControls.UCAlarmControl lightPump02Power;
+        private UControls.UCAlarmControl lightPump03Fre;
+        private UControls.UCAlarmControl lightPump03Power;
+        private UControls.ParaTextBox txtPump03Power;
+        private UControls.ParaTextBox txtPump03Fre;
     }
 }
 

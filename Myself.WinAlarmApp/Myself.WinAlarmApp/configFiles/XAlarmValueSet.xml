@@ -35,15 +35,5 @@
     <AlarmValue>160</AlarmValue>
   </AlarmInfo>
 
-  <!--<AlarmInfo>
-		-->
-  <!--类别-->
-  <!--
-		<ParaType>Power</ParaType>
-		<AlarmLValue>30</AlarmLValue>
-		-->
-  <!--高值临界值  >最高值就发出高值报警-->
-  <!--
-		<AlarmHValue>160</AlarmHValue>
-	</AlarmInfo>-->
+  
 </AlarmSetList>

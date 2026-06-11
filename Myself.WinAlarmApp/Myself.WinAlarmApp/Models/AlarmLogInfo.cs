@@ -17,9 +17,9 @@ namespace Myself.WinAlarmApp.Models
         public int AlarmType { get; set; }
         public string AlarmState { get; set; }
         public int Value { get; set; }
-        public int AlarmNote { get; set; }
+        public string AlarmNote { get; set; }
 
-        public AlarmLogInfo(int id, DateTime alarmTime, string paraName, int alarmType, string alarmState, int value, int alarmNote)
+        public AlarmLogInfo(int id, DateTime alarmTime, string paraName, int alarmType, string alarmState, int value, string alarmNote)
         {
             Id = id;
             AlarmTime = alarmTime;
