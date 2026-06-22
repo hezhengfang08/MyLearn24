@@ -14,6 +14,15 @@ namespace Myself.WinAlarmApp
         [STAThread]
         static void Main()
         {
+
+            ushort addr2 = 3;
+            // BitConverter      /256    %256
+            var tt = (byte)(addr2 / 256);// BitConverter.GetBytes(addr)[1];
+            var tt2 = addr2 % 256;// BitConverter.GetBytes(addr)[0]; ushort addr = 3;
+            // BitConverter      /256    %256
+            addr2 = 278;
+            var tt3 = (byte)(addr2 / 256);// BitConverter.GetBytes(addr)[1];
+            var tt4 = (byte)addr2 % 256;// BitConverter.GetBytes(addr)[0];
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FrmMain());

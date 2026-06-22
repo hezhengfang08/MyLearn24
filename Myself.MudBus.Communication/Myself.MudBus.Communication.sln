@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37328.6 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mysefl.MudBus.Communication.Test", "Mysefl.MudBus.Communication.Test\Mysefl.MudBus.Communication.Test.csproj", "{47A9ECF8-7874-4A79-9708-2A62978B51FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myself.MudBus.Communication.Labary", "Myself.MudBus.Communication.Labary\Myself.MudBus.Communication.Labary.csproj", "{13B8850B-BC67-4732-AACA-553311E50A98}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{47A9ECF8-7874-4A79-9708-2A62978B51FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47A9ECF8-7874-4A79-9708-2A62978B51FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47A9ECF8-7874-4A79-9708-2A62978B51FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47A9ECF8-7874-4A79-9708-2A62978B51FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13B8850B-BC67-4732-AACA-553311E50A98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13B8850B-BC67-4732-AACA-553311E50A98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13B8850B-BC67-4732-AACA-553311E50A98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13B8850B-BC67-4732-AACA-553311E50A98}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1018FB20-0690-4D0D-8526-C637713C9A0C}
+	EndGlobalSection
+EndGlobal
